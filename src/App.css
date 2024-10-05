@@ -12,6 +12,10 @@
     --lightColor: white;
 }
 
+a {
+    color: var(--darkColor);
+}
+
 ul {
     display: flex;
     justify-content: space-evenly;
@@ -67,7 +71,8 @@ section {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 80vw;
+    max-width: 1264px;
+    width: 100%;
     margin: 0 auto;
 }
 
@@ -144,6 +149,15 @@ section {
     padding: 10px 0;
 }
 
+.sidebar-header p:hover,
+.sidebar-body p:hover {
+    opacity: 0.7;
+}
+
+.sidebar-header a {
+    color: var(--lightColor);
+}
+
 .sidebar-body p {
     border-bottom: 1px solid black;
 }
@@ -154,7 +168,8 @@ section {
 /* SIDEBAR ENDS */
 
 @media screen and (max-width: 1023px) {
-    main {
+    main,
+    .top-nav {
         width: 100vw;
     }
 
