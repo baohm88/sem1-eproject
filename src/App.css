@@ -10,6 +10,7 @@
     --secondaryColor: rgb(244, 239, 235);
     --darkColor: black;
     --lightColor: white;
+    --dangerColor: red;
 }
 
 a {
@@ -60,6 +61,11 @@ main {
 input {
     width: 100%;
     line-height: 2rem;
+    margin-bottom: 10px;
+}
+
+button {
+    padding: 5px 10px;
 }
 
 section {
@@ -102,6 +108,16 @@ section {
 }
 .menu-icon:hover {
     background-color: antiquewhite;
+}
+
+.search-bar input {
+    margin: 0;
+}
+.search-button {
+    background-color: antiquewhite;
+    padding: 4px;
+    border-radius: 5px;
+    margin: 5px;
 }
 /* TOP-NAV ENDS */
 
@@ -167,6 +183,13 @@ section {
 }
 /* SIDEBAR ENDS */
 
+/* ERROR-MESSAGE STARTS */
+.error-message {
+    color: var(--dangerColor);
+}
+/* ERROR-MESSAGE ENDS */
+
+/* MOBILE */
 @media screen and (max-width: 1023px) {
     main,
     .top-nav {

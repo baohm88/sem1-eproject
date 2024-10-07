@@ -1,39 +1,38 @@
 import "./App.css";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { routes } from "./components/router";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export const UserContext = createContext({
-    isAdmin: false,
-    isLoggedin: false,
-    setAdmin: () => {},
-    setLoggedin: () => {},
-    setLoggedout: () => {},
+    user: null,
+    setUser: () => {},
+    handleLogOut: () => {},
 });
 
 function App() {
-    const [isAdmin, setIsAdmin] = useState(false);
-    const [isLoggedin, setLoggedin] = useState(false);
+    const navigate = useNavigate();
+    const [user, setUser] = useState(() => {
+        const savedUser = localStorage.getItem("user");
+        return savedUser ? savedUser : null;
+    });
 
-    function updateAdminStatus() {
-        setIsAdmin((state) => !state);
-    }
+    useEffect(() => {
+        if (user) {
+            localStorage.setItem("user", user);
+        } else {
+            localStorage.removeItem("user");
+        }
+    }, [user]);
 
-    function handleLogin() {
-        setLoggedin((state) => !state);
-    }
-
-    function handleLogout() {
-        setIsAdmin(false);
-        setLoggedin(false);
+    function handleLogOut() {
+        setUser(null);
+        navigate("/");
     }
 
     const ctxValue = {
-        isAdmin: isAdmin,
-        isLoggedin: isLoggedin,
-        setAdmin: updateAdminStatus,
-        setLoggedin: handleLogin,
-        setLoggedout: handleLogout,
+        user: user,
+        setUser: setUser,
+        handleLogOut: handleLogOut,
     };
 
     return (

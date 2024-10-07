@@ -1,6 +1,18 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { UserContext } from "../App";
+import { useContext, useEffect } from "react";
+import { IoPersonOutline } from "react-icons/io5";
 
 export default function AdminLayout({ children }) {
+    const navigate = useNavigate();
+    const { user, handleLogOut } = useContext(UserContext);
+
+    useEffect(() => {
+        if (!user || user.isAdmin !== 1) {
+            navigate("/unauthorized");
+        }
+    }, [user, navigate]);
+
     return (
         <>
             <header>
@@ -17,9 +29,19 @@ export default function AdminLayout({ children }) {
                     <li className="nav-link">
                         <NavLink to={"/users"}>Users</NavLink>
                     </li>
-                    <li className="nav-link">
-                        <NavLink to={"/logout"}>Logout</NavLink>
+                    <li>
+                        {/* <button onClick={() => setUser(null)}>LOGOUT</button> */}
+                        <button onClick={handleLogOut}>LOGOUT</button>
                     </li>
+
+                    {user !== null && (
+                        <li>
+                            <span>
+                                <span>Hi, {user.userName}</span>
+                                <IoPersonOutline />
+                            </span>
+                        </li>
+                    )}
                 </ul>
             </header>
             <hr />

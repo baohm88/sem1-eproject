@@ -14,7 +14,9 @@ import { useContext } from "react";
 import { UserContext } from "../App";
 
 export default function ClientLayout({ children }) {
-    const { isLoggedin, isAdmin } = useContext(UserContext);
+    const { user, handleLogOut } = useContext(UserContext);
+    const isLoggedIn = user !== null;
+
     function openSidebar() {
         document.getElementById("mySideBar").style.width = "25rem";
         document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
@@ -36,15 +38,18 @@ export default function ClientLayout({ children }) {
                         <span className="search-bar">
                             <form method="get">
                                 <p className="row">
-                                    <input
-                                        type="text"
-                                        name="q"
-                                        id="q"
-                                        placeholder="Search"
-                                    />
-                                    <button type="button">
+                                    <span>
+                                        <input
+                                            type="text"
+                                            name="q"
+                                            id="q"
+                                            placeholder="Search"
+                                        />
+                                    </span>
+
+                                    <span className="search-button">
                                         <IoSearch />
-                                    </button>
+                                    </span>
                                 </p>
                             </form>
                         </span>
@@ -54,7 +59,10 @@ export default function ClientLayout({ children }) {
                     </li>
                     <li className="row">
                         <span className="nav-icons">
-                            <IoPersonOutline />
+                            <span>
+                                {isLoggedIn && <span>Hi, {user.userName}</span>}
+                                <IoPersonOutline />
+                            </span>
                         </span>
                         <span>
                             <IoBagAddOutline />
@@ -74,12 +82,17 @@ export default function ClientLayout({ children }) {
                     <li className="nav-link">
                         <NavLink to={"/makeup"}>Makeup</NavLink>
                     </li>
-                    <li className="nav-link">
-                        <NavLink to={"/login"}>Login</NavLink>
-                    </li>
-                    <li className="nav-link">
-                        <NavLink to={"/register"}>Register</NavLink>
-                    </li>
+                    {!isLoggedIn && (
+                        <li className="nav-link">
+                            <NavLink to={"/login"}>Login</NavLink>
+                        </li>
+                    )}
+
+                    {isLoggedIn && (
+                        <li>
+                            <button onClick={handleLogOut}>LOGOUT</button>
+                        </li>
+                    )}
                 </ul>
             </header>
 

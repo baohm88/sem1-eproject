@@ -10,6 +10,7 @@ import NewProducts from "./client/NewProducts";
 import SkincareProducts from "./client/SkincareProducts";
 import Login from "./Login";
 import Register from "./Register";
+import UnauthorizedAccess from "./UnauthorizedAccess";
 
 const routes = [
     { path: "/", component: Home, layout: ClientLayout },
@@ -22,6 +23,11 @@ const routes = [
     { path: "/orders", component: Orders, layout: AdminLayout },
     { path: "/categories", component: Categories, layout: AdminLayout },
     { path: "/users", component: Users, layout: AdminLayout },
+    {
+        path: "/unauthorized",
+        component: UnauthorizedAccess,
+        layout: ClientLayout,
+    },
 ];
 
 export { routes };

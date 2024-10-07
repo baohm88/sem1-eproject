@@ -32,103 +32,112 @@ export default function Register() {
     async function handleSubmit(e) {
         e.preventDefault();
 
-        const fd = new FormData(e.target);
-        const userData = Object.fromEntries(fd.entries());
+        const fd = new FormData(); // Use FormData to handle multipart data
 
-        console.log(userData);
-
-        // validate user inputs
-        if (isEmpty(userData.first_name)) {
+        const first_name = e.target.first_name.value;
+        if (isEmpty(first_name)) {
             setFirstNameError("First name is required");
             document.getElementById("firstName").focus();
             return;
         }
         setFirstNameError(false);
+        fd.append("first_name", first_name);
 
-        if (isEmpty(userData.first_name)) {
-            setFirstNameError("First name is required");
-            document.getElementById("firstName").focus();
-            return;
-        }
-        setFirstNameError(false);
-
-        if (isEmpty(userData.last_name)) {
+        const last_name = e.target.last_name.value;
+        if (isEmpty(last_name)) {
             setLastNameError("Last name is required");
             document.getElementById("lastName").focus();
             return;
         }
         setLastNameError(false);
+        fd.append("last_name", last_name);
 
-        if (isEmpty(userData.email) || !isEmail(userData.email)) {
+        const email = e.target.email.value;
+        if (isEmpty(email) || !isEmail(email)) {
             setEmailError("Please enter a valid email");
             document.getElementById("email").focus();
             return;
         }
         setEmailError(false);
+        fd.append("email", email);
 
-        if (isEmpty(userData.username)) {
+        const username = e.target.username.value;
+        if (isEmpty(username)) {
             setUsernameError("Last name is required");
             document.getElementById("username").focus();
             return;
         }
         setUsernameError(false);
+        fd.append("username", username);
 
-        if (isEmpty(userData.password)) {
+        const password = e.target.password.value;
+        if (isEmpty(password)) {
             setPasswordError("Last name is required");
             document.getElementById("password").focus();
             return;
         }
         setPasswordError(false);
+        fd.append("password", password);
 
-        if (isEmpty(userData.password2)) {
+        const password2 = e.target.password2.value;
+        if (isEmpty(password2)) {
             setPassword2Error("Last name is required");
             document.getElementById("password2").focus();
             return;
         }
         setPassword2Error(false);
 
-        if (!isEqualsToOtherValue(userData.password, userData.password2)) {
+        if (!isEqualsToOtherValue(password, password2)) {
             setPassword2Error("Passwords must match");
             document.getElementById("password2").focus();
             return;
         }
         setPassword2Error(false);
 
-        if (isEmpty(userData.dob)) {
+        const dob = e.target.dob.value;
+        if (isEmpty(dob)) {
             setDobError("Date of birth is required");
             document.getElementById("dob").focus();
             return;
         }
         setDobError(false);
+        fd.append("dob", dob);
 
-        if (isEmpty(userData.phone) || !hasMinLength(userData.phone, 9)) {
+        const phone = e.target.phone.value;
+        if (isEmpty(phone) || !hasMinLength(phone, 9)) {
             setPhoneError("Please enter a valid phone number");
             document.getElementById("phone").focus();
             return;
         }
         setPhoneError(false);
+        fd.append("phone", phone);
 
-        if (isEmpty(userData.address)) {
+        const address = e.target.address.value;
+        if (isEmpty(address)) {
             setAddressError("Address is required");
             document.getElementById("address").focus();
             return;
         }
         setAddressError(false);
+        fd.append("address", address);
 
-        // if (!avatar) {
-        //     setImageError("Image is required");
-        //     document.getElementById("image").focus();
-        //     return;
-        // }
-        // setImageError(false);
+        if (!avatar) {
+            setImageError("Image is required");
+            document.getElementById("image").focus();
+            return;
+        }
+        setImageError(false);
+        fd.append("image", avatar);
+
+        // console.log(fd);
 
         try {
             const response = await axios.post(
                 "http://localhost/project/user/register",
-                userData,
+                fd, // Pass the FormData directly
                 {
                     headers: {
-                        "Content-Type": "application/json", // Sending data as JSON
+                        "Content-Type": "multipart/form-data", // Make sure the content type is correct for file uploads
                     },
                 }
             );
@@ -138,8 +147,6 @@ export default function Register() {
             if (response.data.type === "success") {
                 navigate("/login");
             } else {
-                // type = Error
-                console.log("Registration failed: ", response.data.message);
                 setServerError(response.data.message);
             }
         } catch (error) {
