@@ -38,6 +38,7 @@ main {
     width: 90vw;
     height: 90vh;
     margin: 0 auto;
+    padding: 0 1rem;
 }
 
 .center {

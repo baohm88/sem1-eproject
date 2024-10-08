@@ -9,6 +9,8 @@ import MakeupProducts from "./client/MakeupProducts";
 import NewProducts from "./client/NewProducts";
 import SkincareProducts from "./client/SkincareProducts";
 import Login from "./Login";
+import Profile from "./Profile";
+import UpdateProfile from "./UpdateProfile";
 import Register from "./Register";
 import UnauthorizedAccess from "./UnauthorizedAccess";
 
@@ -19,6 +21,8 @@ const routes = [
     { path: "/makeup", component: MakeupProducts, layout: ClientLayout },
     { path: "/register", component: Register, layout: ClientLayout },
     { path: "/login", component: Login, layout: ClientLayout },
+    { path: "/profile", component: Profile, layout: ClientLayout },
+    { path: "/update_profile", component: UpdateProfile, layout: ClientLayout },
     { path: "/products", component: Products, layout: AdminLayout },
     { path: "/orders", component: Orders, layout: AdminLayout },
     { path: "/categories", component: Categories, layout: AdminLayout },

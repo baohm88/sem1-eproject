@@ -16,7 +16,6 @@ export default function Register() {
     const [emailError, setEmailError] = useState();
     const [usernameError, setUsernameError] = useState();
     const [passwordError, setPasswordError] = useState();
-    const [password2Error, setPassword2Error] = useState();
     const [dobError, setDobError] = useState();
     const [phoneError, setPhoneError] = useState();
     const [addressError, setAddressError] = useState();
@@ -24,7 +23,10 @@ export default function Register() {
     const [serverError, setServerError] = useState();
     const [avatarBase64, setAvatarBase64] = useState(""); // Store Base64 encoded image
 
+    const { user } = useContext(UserContext);
     const navigate = useNavigate();
+
+    // console.log(user);
 
     // Function to convert image to Base64
     const handleImageChange = (e) => {
@@ -87,20 +89,6 @@ export default function Register() {
         }
         setPasswordError(false);
 
-        if (isEmpty(userData.password2)) {
-            setPassword2Error("Last name is required");
-            document.getElementById("password2").focus();
-            return;
-        }
-        setPassword2Error(false);
-
-        if (!isEqualsToOtherValue(userData.password, userData.password2)) {
-            setPassword2Error("Passwords must match");
-            document.getElementById("password2").focus();
-            return;
-        }
-        setPassword2Error(false);
-
         if (isEmpty(userData.dob)) {
             setDobError("Date of birth is required");
             document.getElementById("dob").focus();
@@ -129,17 +117,14 @@ export default function Register() {
         // }
         // setImageError(false);
 
-        delete userData.password2;
-        delete userData.image;
-
         // Include the Base64 encoded image in userData
-        // userData.image = avatarBase64; // Set the Base64 encoded image
+        userData.buyer_image = avatarBase64; // Set the Base64 encoded image
 
         console.log(userData);
 
         try {
             const response = await axios.post(
-                `http://localhost/project/user/register`,
+                `http://localhost/project/user/profile`,
                 userData,
                 {
                     headers: {
@@ -153,7 +138,7 @@ export default function Register() {
             if (response.data.type === "success") {
                 navigate("/login");
             } else {
-                // type = Error
+                //         // type = Error
                 console.log("Registration failed: ", response.data.message);
                 setServerError(response.data.message);
             }
@@ -165,13 +150,19 @@ export default function Register() {
     return (
         <>
             <form className="user-form" onSubmit={handleSubmit}>
-                <h1 className="center">Register a new account</h1>
+                <h1 className="center">Update account</h1>
 
                 {serverError && (
                     <span className="error-message">({serverError})</span>
                 )}
                 <br />
-
+                <Input
+                    label="user_id*"
+                    id="user_id"
+                    type="hidden"
+                    name="user_id"
+                    defaultValue={user.buyerId}
+                />
                 <Input
                     label="First Name*"
                     id="firstName"
@@ -179,6 +170,7 @@ export default function Register() {
                     name="first_name"
                     autoFocus
                     error={firstNameError}
+                    defaultValue={user.firstName ? user.firstName : ""}
                 />
 
                 <Input
@@ -187,6 +179,7 @@ export default function Register() {
                     type="text"
                     name="last_name"
                     error={lastNameError}
+                    defaultValue={user.lastName ? user.lastName : ""}
                 />
 
                 <Input
@@ -195,6 +188,7 @@ export default function Register() {
                     type="email"
                     name="email"
                     error={emailError}
+                    defaultValue={user.email ? user.email : ""}
                 />
 
                 <Input
@@ -203,20 +197,15 @@ export default function Register() {
                     type="text"
                     name="username"
                     error={usernameError}
+                    defaultValue={user.userName ? user.userName : ""}
                 />
                 <Input
-                    label="Password*"
+                    label="New Password*"
                     id="password"
                     type="password"
                     name="password"
                     error={passwordError}
-                />
-                <Input
-                    label="Confirm Password*"
-                    id="password2"
-                    type="password"
-                    name="password2"
-                    error={password2Error}
+                    defaultValue={user.password ? user.password : ""}
                 />
 
                 <Input
@@ -225,6 +214,7 @@ export default function Register() {
                     type="date"
                     name="dob"
                     error={dobError}
+                    defaultValue={user.dob ? user.dob : ""}
                 />
 
                 <Input
@@ -233,6 +223,7 @@ export default function Register() {
                     type="number"
                     name="phone"
                     error={phoneError}
+                    defaultValue={user.phone ? user.phone : ""}
                 />
 
                 <Input
@@ -241,6 +232,7 @@ export default function Register() {
                     type="text"
                     name="address"
                     error={addressError}
+                    defaultValue={user.address ? user.address : ""}
                 />
 
                 <Input
@@ -248,13 +240,13 @@ export default function Register() {
                     id="image"
                     type="file"
                     accept="image/*"
-                    name="image"
+                    name="buyer_image"
                     error={imageError}
                     onChange={handleImageChange}
                 />
 
                 <p className="form-actions">
-                    <button>REGISTER</button>
+                    <button>{user ? "UPDATE" : "REGISTER"}</button>
                 </p>
 
                 <p>

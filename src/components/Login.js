@@ -17,8 +17,6 @@ export default function Login() {
 
         const userData = { username, password };
 
-        console.log(userData);
-
         try {
             const response = await axios.post(
                 "http://localhost/project/user/login",
@@ -31,15 +29,18 @@ export default function Login() {
             );
 
             const resData = await response.data;
-            console.log(response);
 
             if (resData.type === "success") {
                 const user = resData.data;
+
                 // Set user in the context
                 setUser(user);
                 setError(false);
 
-                localStorage.setItem("user", user);
+                // Save the user object to localStorage as a JSON string
+                localStorage.setItem("user", JSON.stringify(user));
+
+                // Navigate to different routes based on user role
                 if (user.isAdmin === 1) {
                     navigate("/products");
                 } else {

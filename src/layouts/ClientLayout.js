@@ -7,6 +7,7 @@ import { IoPersonOutline } from "react-icons/io5";
 import { IoMenuSharp } from "react-icons/io5";
 import { IoSearch } from "react-icons/io5";
 import { TfiClose } from "react-icons/tfi";
+import { IoLogOutOutline } from "react-icons/io5";
 import { GiHeartBeats } from "react-icons/gi";
 import { IoChevronForwardOutline } from "react-icons/io5";
 
@@ -15,6 +16,8 @@ import { UserContext } from "../App";
 
 export default function ClientLayout({ children }) {
     const { user, handleLogOut } = useContext(UserContext);
+    console.log(user);
+
     const isLoggedIn = user !== null;
 
     function openSidebar() {
@@ -55,13 +58,27 @@ export default function ClientLayout({ children }) {
                         </span>
                     </li>
                     <li>
-                        <img src={logo} alt="Clarins logo" className="logo" />
+                        <NavLink to={"/"}>
+                            <img
+                                src={logo}
+                                alt="Clarins logo"
+                                className="logo"
+                            />
+                        </NavLink>
                     </li>
                     <li className="row">
                         <span className="nav-icons">
                             <span>
-                                {isLoggedIn && <span>Hi, {user.userName}</span>}
-                                <IoPersonOutline />
+                                {isLoggedIn && (
+                                    <>
+                                        <span>Hi, {user.firstName}</span>
+                                    </>
+                                )}
+                                <NavLink
+                                    to={isLoggedIn ? "/profile" : "/login"}
+                                >
+                                    <IoPersonOutline />
+                                </NavLink>
                             </span>
                         </span>
                         <span>
@@ -90,6 +107,11 @@ export default function ClientLayout({ children }) {
 
                     {isLoggedIn && (
                         <li>
+                            <NavLink to={"/profile"}>Profile</NavLink>
+                        </li>
+                    )}
+                    {isLoggedIn && (
+                        <li>
                             <button onClick={handleLogOut}>LOGOUT</button>
                         </li>
                     )}
@@ -102,11 +124,20 @@ export default function ClientLayout({ children }) {
                         <TfiClose /> Menu
                     </p>
 
-                    <p onClick={closeSidebar}>
-                        <NavLink to={"/login"}>
-                            <IoPersonOutline /> Login
-                        </NavLink>
-                    </p>
+                    {!isLoggedIn && (
+                        <p onClick={closeSidebar}>
+                            <NavLink to={"/login"}>
+                                <IoPersonOutline /> Login
+                            </NavLink>
+                        </p>
+                    )}
+                    {isLoggedIn && (
+                        <p onClick={handleLogOut}>
+                            <NavLink>
+                                <IoLogOutOutline /> Logout
+                            </NavLink>
+                        </p>
+                    )}
                     <p onClick={closeSidebar}>
                         <GiHeartBeats /> Club Clarins
                     </p>
