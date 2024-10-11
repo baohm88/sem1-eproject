@@ -37,8 +37,14 @@ class App
                 $explodedURI = array_values(array_filter($explodedURI));
             }
             if (!empty($explodedURI[0])) {
-                $this->__params["data"] = ucfirst($explodedURI[0]);
-                unset($explodedURI[0]);
+                $data = str_replace("?", "", $explodedURI[0]);
+                $data = explode("&", $data);
+                $a_data = [];
+                foreach ($data as $key => $value) {
+                    $exploded_data = explode("=", $data[$key]);
+                    $a_data[$exploded_data[0]] = $exploded_data[1];
+                }
+                $this->__params[0] = $a_data;
             }
             $filePath = "./app/controllers/" . $this->__controller . ".php";
             if (file_exists($filePath)) {
@@ -47,7 +53,8 @@ class App
 
                     $this->__instanceController = new $this->__controller($this->__conn);
                     if (method_exists($this->__instanceController, $this->__action)) {
-
+                        // var_dump($this->__params);
+                        // die();
                         call_user_func_array([$this->__instanceController, $this->__action],  $this->__params);
                     } else {
                         echo "method not exist";

@@ -2,34 +2,38 @@
 class ProductController extends ValidateController
 {
 
-    private $__instanceModel, $__productName, $__price, $__quantityInStock, $__category, $__dateListed = null;
-    public function __construct($conn) {}
-    public function setProductName($name)
+    private $__instance_model, $__conn, $__product_id, $__product_name, $__price, $__quantity_in_stock, $__category, $__date_listed = null, $__product_images;
+    public function __construct($conn)
+    {
+        $this->__conn = $conn;
+    }
+
+
+
+    public function set_product_name($name)
     {
         if ($this->validate('productname', $name) != null) {
-            $this->__productName = $name;
-            return $this->getProductName();
+            $this->__product_name = $name;
+            return $this->get_product_name();
         }
     }
 
-    public function getProductName()
+    public function get_product_name()
     {
-        if ($this->__productName != null) {
-            return $this->__productName;
+        if ($this->__product_name != null) {
+            return $this->__product_name;
         }
         return null;
     }
-    public function setPrice($price)
+    public function set_price($price)
     {
-        var_dump($this->validate('price', $price));
-        die();
         if ($this->validate('price', $price) != null) {
             $this->__price = $price;
-            return $this->getPrice();
+            return $this->get_price();
         }
     }
 
-    public function getPrice()
+    public function get_price()
     {
         if ($this->__price != null) {
             return $this->__price;
@@ -37,34 +41,34 @@ class ProductController extends ValidateController
         return null;
     }
 
-    public function setQuantityInStock($qty)
+    public function set_quantity_in_stock($qty)
     {
         if ($this->validate('qty', $qty) != null) {
-            $this->__quantityInStock = $qty;
-            return $this->getQuantityInStock();
+            $this->__quantity_in_stock = $qty;
+            return $this->get_quantity_in_stock();
         }
         return null;
     }
 
-    public function getQuantityInStock()
+    public function get_quantity_in_stock()
     {
-        if ($this->__quantityInStock != null) {
-            return $this->__quantityInStock;
+        if ($this->__quantity_in_stock != null) {
+            return $this->__quantity_in_stock;
         }
         return null;
     }
 
-    public function setCategory($category)
+    public function set_category($category)
     {
         if ($this->validate('qty', $category) != null) {
             $this->__category = $category;
-            return $this->getCategory();
+            return $this->get_category();
         }
         return null;
     }
 
 
-    public function getCategory()
+    public function get_category()
     {
         if ($this->__category != null) {
             return $this->__category;
@@ -72,19 +76,30 @@ class ProductController extends ValidateController
         return null;
     }
 
-    public function setDateListed($date)
+
+    public function set_product_images($images)
+    {
+        $this->__product_images = $images;
+        return $this->get_product_images();
+    }
+    public function get_product_images()
+    {
+        return $this->__product_images;
+    }
+
+    public function set_date_listed($date)
     {
         if ($this->validate('timestamp', $date) != null) {
-            $this->__dateListed = $date;
-            return $this->getDateListed();
+            $this->__date_listed = $date;
+            return $this->get_date_listed();
         }
         return null;
     }
 
-    public function getDateListed()
+    public function get_date_listed()
     {
-        if ($this->__dateListed != null) {
-            return $this->__dateListed;
+        if ($this->__date_listed != null) {
+            return $this->__date_listed;
         }
         return null;
     }

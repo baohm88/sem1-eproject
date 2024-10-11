@@ -1,8 +1,8 @@
 <?php
-include_once("./app/controllers/ValidateController.php");
+
 class BuyerController extends ValidateController
 {
-    private $__id, $__email, $__firstName, $__isActive, $__password, $__userName, $__lastName, $__dob, $__phone, $__address, $__buyerImage;
+    private $__id, $__email, $__first_name = null, $__old_password = null, $__new_password = null, $__is_active, $__password = null, $__userName, $__last_name = null, $__dob = null, $__phone = null, $__address = null, $__user_image = null;
 
     public function __construct()
     {
@@ -45,7 +45,7 @@ class BuyerController extends ValidateController
     public function set_is_active($active)
     {
         if ($active != null) {
-            $this->__isActive = $active;
+            $this->__is_active = $active;
             return $this->get_username();
         } else {
             return null;
@@ -54,7 +54,7 @@ class BuyerController extends ValidateController
 
     public function get_is_active()
     {
-        return $this->__isActive;
+        return $this->__is_active;
     }
 
 
@@ -90,7 +90,7 @@ class BuyerController extends ValidateController
     {
         $validatedName = $this->validate("name", $name);
         if ($validatedName != null) {
-            $this->__firstName = $name;
+            $this->__first_name = $name;
             return $this->get_first_name();
         } else {
             return null;
@@ -99,14 +99,14 @@ class BuyerController extends ValidateController
 
     public function get_first_name()
     {
-        return $this->__firstName;
+        return $this->__first_name;
     }
 
     public function set_last_name($name)
     {
         $validatedName = $this->validate("name", $name);
         if ($validatedName != null) {
-            $this->__lastName = $name;
+            $this->__last_name = $name;
             return $this->get_last_name();
         }
         return null;
@@ -114,18 +114,14 @@ class BuyerController extends ValidateController
 
     public function get_last_name()
     {
-        return $this->__lastName;
+        return $this->__last_name;
     }
 
     public function set_dob($dob)
     {
-        $validatedDob = $this->validate("age", $dob);
-        if ($validatedDob != null) {
-            $this->__dob = $dob;
-            return $this->get_dob();
-        } else {
-            return null;
-        }
+        $this->__dob = $dob;
+        // var_dump($this->__dob);
+        return $this->get_dob();
     }
 
     public function get_dob()
@@ -161,14 +157,46 @@ class BuyerController extends ValidateController
     {
         return $this->__address;
     }
-    public function set_buyer_image($picture)
+    public function set_user_image($picture)
     {
 
-        $this->__buyerImage = $picture;
-        return $this->get_buyer_image();
+        $this->__user_image = $picture;
+        return $this->get_user_image();
     }
-    public function get_buyer_image()
+    public function get_user_image()
     {
-        return $this->__buyerImage;
+        return $this->__user_image;
+    }
+
+
+    public function set_old_password($password)
+    {
+        $this->__old_password = $password;
+        return $this->get_old_password();
+    }
+
+    public function get_old_password()
+    {
+        return $this->__old_password;
+    }
+
+
+    public function set_new_password($password)
+    {
+        $this->__new_password = $password;
+        return $this->get_new_password();
+    }
+
+    public function get_new_password()
+    {
+        return $this->__new_password;
+    }
+
+    public function reset_properties()
+    {
+        $properties = get_object_vars($this);
+        foreach ($properties as $key => $value) {
+            $this->$key = null;
+        }
     }
 }

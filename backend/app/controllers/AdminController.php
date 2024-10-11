@@ -1,18 +1,24 @@
 <?php
 
-class AdminController
+class AdminController extends BaseController
 {
+    private $__conn, $__instanceBaseModel, $__instanceProductModel;
 
-
+    public function __construct($conn)
+    {
+        $this->__conn = $conn;
+        $this->__instanceBaseModel = $this->initModel("BaseModel", $this->__conn);
+        $this->__instanceProductModel = $this->initModel("ProductModel", $this->__conn);
+    }
     /**
-     * Summary of Buyers
+     * Summary of Users
      * go to the adminBuyerController class
      * @return void
      */
-    public function Buyers() {}
+    public function Users() {}
 
 
-    /**
+    /**‚
      * Summary of Coupons
      * go to the adminCouponsController
      * @return void
@@ -62,7 +68,26 @@ class AdminController
      * go to the Products class 
      * @return void
      */
-    public function Products() {}
+    public function Products()
+    {
+        if ($_SERVER["REQUEST_METHOD"] === "GET") {
+            $product = new CollectionsController($this->__conn);
+            $product->all();
+        } else if ($_SERVER["REQUEST_METHOD"] === "POST") {
+            $input = json_decode(file_get_contents('php://input'), true);
+            if (!empty($this->__instanceBaseModel->checkSomethingExist("Products", "productName", $input["product_name"]))) {
+                $this->FactoryMessage("Error", "Product has the same name already exist");
+            } else if (empty($this->__instanceBaseModel->checkSomethingExist("ProductsCategories", "id", $input["category"]))) {
+                $this->FactoryMessage("Error", "Category doesn't exist");
+            } else {
+                include_once "./app/controllers/ProductController.php";
+                $o_product = new ProductController($this->__conn);
+                $o_product = $this->insert_data_to_instance($o_product, $input);
+            }
+        }
+    }
+
+    // public function addNew
 
 
     /**

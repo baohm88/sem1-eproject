@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 07, 2024 at 04:48 AM
+-- Generation Time: Oct 11, 2024 at 12:16 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -20,39 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `project`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `Buyers`
---
-
-CREATE TABLE `Buyers` (
-  `buyerId` int(11) NOT NULL,
-  `userName` varchar(30) NOT NULL,
-  `password` char(255) NOT NULL,
-  `email` varchar(200) DEFAULT NULL,
-  `isAdmin` tinyint(1) NOT NULL DEFAULT 0,
-  `isActive` tinyint(4) DEFAULT 1,
-  `firstName` varchar(255) DEFAULT NULL,
-  `lastName` varchar(255) DEFAULT NULL,
-  `dob` date DEFAULT NULL,
-  `phone` varchar(15) DEFAULT NULL,
-  `address` varchar(255) DEFAULT NULL,
-  `BuyerImage` longblob DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `Buyers`
---
-
-INSERT INTO `Buyers` (`buyerId`, `userName`, `password`, `email`, `isAdmin`, `isActive`, `firstName`, `lastName`, `dob`, `phone`, `address`, `BuyerImage`) VALUES
-(82, 'admin', '$2y$10$CCNwMMwgUQOHvsnkOMUBcetAPG0cVjzk9wDjhFG0SeuGVue3l.ilm', '', 0, 1, 'quandoan', 'quandoan', '2000-09-08', '1029381', 'askldjsla', ''),
-(83, 'admin', '$2y$10$XLjXHBztqnewhJ4HW67WhOAJJYIH93EkKqG1LULs1XzQQgRx8LUwa', '', 0, 1, 'quan', 'doan', '2000-10-08', '1230', 'lskjdalsjs', ''),
-(84, 'admin', '$2y$10$tQ2t.YNfbaeoOxLwiKqFK.7bzpeStH1v9kaYx5PLK7RMhlDjC6/ai', '', 0, 1, 'sdaksh', 'dkjsahkdsh', '2000-10-07', '1023091', 'sjhdkajskjda', ''),
-(85, 'john_doe', '$2y$10$hTSfm0kybxZ/P1NXZjVS3OHB5ikxNdQ5kfWtHW4p0wXyhxbTOr9B2', '', 0, 1, 'John', 'Doe', '1990-01-01', '+1234567890', '1234 Elm Street, Springfield, USA', NULL),
-(86, 'john123', '$2y$10$JYVSomn.3Jg9k/N5gDb7zuXww8EjfgmdkLmwrEzHC0p5O8B8C5khy', '', 0, 1, 'John', 'Doe', '1990-01-01', '+1234567890', '1234 Elm Street, Springfield, USA', 0x6956424f5277304b47676f414141414e5355684555674141414751414141426b434149414141442f6741494441414141356b6c45515652346e4f335151516b4149414441514c562f5a36336758694c634a526962653342727651373469566d425759465a2e2e2e),
-(87, 'johnsadlkjasld', '$2y$10$X1SuJhUtGGPp8CYnr3mcjegCmOCII4YupiWdTdj/8oqz5mk4LzTue', NULL, 0, 1, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -948,116 +915,74 @@ INSERT INTO `OrderStatus` (`statusId`, `status`) VALUES
 --
 
 CREATE TABLE `ProductImage` (
-  `imageId` int(11) NOT NULL,
-  `productImage` longblob NOT NULL,
-  `productId` int(11) NOT NULL
+  `image_id` int(11) NOT NULL,
+  `product_image` varchar(255) NOT NULL,
+  `product_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `ProductImage`
 --
 
-INSERT INTO `ProductImage` (`imageId`, `productImage`, `productId`) VALUES
-(1, 0x2f33356137653431663530333865383230376365333538303864306230393862342e6a7067, 1),
-(2, 0x2f36306437356362333838383839316531353235396531643436366564636133332e6a7067, 2),
-(3, 0x2f30636432306236303536646163623636343063333437316638353766343134392e6a7067, 3),
-(4, 0x2f37313339313134313334323663383664323632626136326531393932633235302e6a7067, 4),
-(5, 0x2f63323365666464366564653030383562363661633833623935636162396663342e6a7067, 5),
-(6, 0x2f63313736323737363839303438643037633663633332613337393664326539612e6a7067, 6),
-(7, 0x2f63323532643532343264323338613639333465663735373165396130656331632e6a7067, 7),
-(8, 0x2f63656264663038663763623737313639373231623663663734363834363762362e6a7067, 8),
-(9, 0x2f32656264643639376234396530656333616137653538343932316236366631392e6a7067, 9),
-(10, 0x2f66393833333438643161323637663061306631313930313831653763316234622e6a7067, 10),
-(11, 0x2f37663134316263316163323239323362383236653630663764373563363462372e6a7067, 11),
-(12, 0x2f66623730613338303164373433383266636436663831383061666162656365622e6a7067, 12),
-(13, 0x2f66386533656332346336376230646435316364356466643939653963376130322e6a7067, 13),
-(14, 0x2f34656563353638633934353162623864356366616163363432613465656335622e6a7067, 14),
-(15, 0x2f30623834383830623766613039386232306465343332656133306266636666332e6a7067, 15),
-(16, 0x2f64393337363261343363316165313532646437343438366362643133623536322e6a7067, 16),
-(17, 0x2f61346132393334623637313864643534363733656536326266643933653165342e6a7067, 17),
-(18, 0x2f30313834316264376533383837346233326431656566633033336537363165652e6a7067, 18),
-(19, 0x2f38316135656634653736346238666338383533656233663637613831376437312e6a7067, 19),
-(20, 0x2f36356232636530383134653762326436336463326266316333383735646630302e6a7067, 20),
-(21, 0x2f66366633633534366462303365376231613936343031653630373239383434662e6a7067, 21),
-(22, 0x2f65653638323563343866623834336139646365623261303538663261666633322e6a7067, 22),
-(23, 0x2f61613562626165343566633266643265356531663333653665356664303766362e6a7067, 23),
-(24, 0x2f63356334616661336434363934613862336438376436373330643864333035312e6a7067, 24),
-(25, 0x2f61313336333331613666383631653430663764343861656635383663623834642e6a7067, 25),
-(26, 0x2f32643333616535393936636439363465653431396164366132643237653131352e6a7067, 26),
-(27, 0x2f32313138333939306537383536383465366436363734666534653539343563322e6a7067, 27),
-(28, 0x2f34663033366338356162313738623838383763616265373966323339633864662e6a7067, 28),
-(29, 0x2f34643563303031623762393335316336313634313232323637633236626437382e6a7067, 29),
-(30, 0x2f33383136666432643165313265393464333263343261353563666131646637342e6a7067, 30),
-(31, 0x2f61616332663038363836303532356163613636333931313237343536303362652e6a7067, 31),
-(32, 0x2f34626637383431383265343635306630396232303739623035613636363365382e6a7067, 32),
-(33, 0x2f34393138663836373532316262646437643061636437653838313764346262312e6a7067, 33),
-(34, 0x2f38653962623265653364643263363461386331306635633264366430326331302e6a7067, 34),
-(35, 0x2f61346563326531323863336630323739643837643932326665373437386632642e6a7067, 35),
-(36, 0x2f61653330393031616365333561343961393265366566626636386333303035352e6a7067, 36),
-(37, 0x2f37386166633333636536613361616330303961393263666631663038333837612e6a7067, 37),
-(38, 0x2f36636434353665366263646361383766323330636362383130396338373365392e6a7067, 38),
-(39, 0x2f62383765323366616561386262353531363537336434653931653161613766392e6a7067, 39),
-(40, 0x2f34363937623562623364346262633234363937336337366331343038663433632e6a7067, 40),
-(41, 0x2f63363830663563343666633531653162303238326461383537643364393966612e6a7067, 41),
-(42, 0x2f36376631303434356530376430333565343066346231343565353035303864642e6a7067, 42),
-(43, 0x2f38393465333639363234623634636434353765666538333864316335343366662e6a7067, 43),
-(44, 0x2f32616135333537613763383033663638653964393730326332653034356630612e6a7067, 44),
-(45, 0x2f36646334613963646230336331343064653064376432303266383266356233352e6a7067, 45),
-(46, 0x2f37366332643130356339356332366663643132306436373933313961623935362e6a7067, 46),
-(47, 0x2f64343564626436306638316534643734343261313263353764363861306666612e6a7067, 47),
-(48, 0x2f35303562616534313433396438363939636233313737383262343930646237372e6a7067, 48),
-(49, 0x2f35343535343364326366356237376434333534326165653438333765646661342e6a7067, 49),
-(50, 0x2f35643364313131323436323035323032393162393334363163663630653734302e6a7067, 50),
-(51, 0x2f33386362326338353730383533323863633537373931643665333539643331642e6a7067, 51),
-(52, 0x2f65326331336161346439623137306130313430646130396130373361323434302e6a7067, 52),
-(53, 0x2f33626366353162386337366363663664633437616263623339356166323139392e6a7067, 53),
-(54, 0x2f39613435393330336461343664656266323137643462373138613466623039642e6a7067, 54),
-(55, 0x2f33613666633463633133393030353266613564613365313734383964666661392e6a7067, 55),
-(56, 0x2f66303230666566346433343864663066643336353339313264343965653463342e6a7067, 56),
-(57, 0x2f32313133326562616236636133623262616561613835393635346534333939632e6a7067, 57),
-(58, 0x2f63646238306437376434383835656363393735396665393834396435316363662e6a7067, 58),
-(59, 0x2f31656330333836393066303263326236336135333866623137343038333063332e6a7067, 59),
-(60, 0x2f31373266656564656438663239376235343931633838323239323130626330662e6a7067, 60),
-(61, 0x2f32356436303165343166633531333230363861633037356637613164353930632e6a7067, 61),
-(62, 0x2f33643031626337396230623666373937646537316235633431363830643931652e6a7067, 62),
-(63, 0x2f31383261386662363237363064383863366333383330396331326261666235642e6a7067, 63),
-(64, 0x2f65663762613932363937343732376436623664643661633562613236383136352e6a7067, 64),
-(65, 0x2f35616133666465303063646565613733643437366637336233666636636132382e6a7067, 65),
-(66, 0x2f34353562646639626434393438623166393163663436643337356664636261342e6a7067, 66),
-(67, 0x2f64333032636436333735323930316130633638363766396132333566326266662e6a7067, 67),
-(68, 0x2f63623530663533346630353037323834363935663230643639623466343234302e6a7067, 68),
-(69, 0x2f62303232633832643663303139636236343163663438636365636230633030372e6a7067, 69),
-(70, 0x2f34653664613866363265316230316235356235306266626563646165386537372e6a7067, 70),
-(71, 0x2f36616363633162666336306632643662633738633136323231376439393434382e6a7067, 71),
-(72, 0x2f63346531346233393263396430373262336163643739313166633366343164392e6a7067, 72),
-(73, 0x2f34633164313461383732653866626534376336323232346334393837653166662e6a7067, 73),
-(74, 0x2f31623030363963653637303763303964393965386265616461363931326261342e6a7067, 74),
-(75, 0x2f62653734346636643831666432353964303330626136373334306632353463652e6a7067, 75),
-(76, 0x2f62393163383435646166613534623036613738363635636265313233633535352e6a7067, 76),
-(77, 0x2f66323736313335386336376630613266653962633938376336656366666134312e6a7067, 77),
-(78, 0x2f35316436306134393964626436356439623130393466333163313631626664652e6a7067, 78),
-(79, 0x2f66336439663234656337386337346664663437663834633835616237646534342e6a7067, 79),
-(80, 0x2f33623564663931333037316464323238333161363464336537636335663738382e6a7067, 80),
-(81, 0x2f65383536363464346531613339633762633831373335313236383337396332612e6a7067, 81),
-(82, 0x2f39393439303734396534663036663232306138333036623565363539616137662e6a7067, 82),
-(83, 0x2f65333765393064656266633766393966383630353462316362653962313535352e6a7067, 83),
-(84, 0x2f62623463653437313938643063386665373232643766623664653463333163312e6a7067, 84),
-(85, 0x2f35303863386562623230336333633635313763343638666236393562353331342e6a7067, 85),
-(86, 0x2f39663532336633366361303833376462623361373262633439646330616461322e6a7067, 86),
-(87, 0x2f33636535633964653038656166666235373930666263323966343435373361352e6a7067, 87),
-(88, 0x2f61303937316335376539626135363431393863666166663932343536616261302e6a7067, 88),
-(89, 0x2f61653330303738613964366231626339363636373931306234343635653066312e6a7067, 89),
-(90, 0x2f35376434643032626432356335613235633964343730333439663339663766302e6a7067, 90),
-(91, 0x2f62313233343036626339306233353264633439376639356666356137623331382e6a7067, 91),
-(92, 0x2f32363233343630373530356236393233303162316461363339376238363837652e6a7067, 92),
-(93, 0x2f61383064613838653739643234373130373964643362373736633135323938652e6a7067, 93),
-(94, 0x2f34356364303837393030303466326539613035383763363334636331613665332e6a7067, 94),
-(95, 0x2f35623761313637333536393162336334623864666434626263613432626630362e6a7067, 95),
-(96, 0x2f63626564383933626632353636316332366365346230383938386638656231312e6a7067, 96),
-(97, 0x2f63636434353639363031393236376536363434663636396530636165353234332e6a7067, 97),
-(98, 0x2f62386538656230396437356631616466633935363962363534626230623537632e6a7067, 98),
-(99, 0x2f62346538666561643065623566323966396166386563326434316466356637652e6a7067, 99),
-(100, 0x2f34646336626135396234386432346237363136353033383761386666383165322e6a7067, 100);
+INSERT INTO `ProductImage` (`image_id`, `product_image`, `product_id`) VALUES
+(101, 'https://www.clarinsusa.com/dw/image/v2/AAFS_PRD/on/demandware.static/-/Sites-clarins-master-products/default/dw6fa700a4/original/80104492_original_original_A.jpg?sw=680&sh=680', 1),
+(106, 'https://www.clarinsusa.com/dw/image/v2/AAFS_PRD/on/demandware.static/-/Sites-clarins-master-products/default/dw6fa700a4/original/80104492_original_original_A.jpg?sw=680&sh=680', 1),
+(107, 'https://www.clarinsusa.com/dw/image/v2/AAFS_PRD/on/demandware.static/-/Sites-clarins-master-products/en_US/dw369b038c/original/80104492_original_original_C.jpg?sw=1000&sh=1000', 1),
+(108, 'https://www.clarinsusa.com/dw/image/v2/AAFS_PRD/on/demandware.static/-/Sites-clarins-master-products/en_US/dwbf74d90f/original/80104492_original_original_E.jpg?sw=1000&sh=1000', 1),
+(109, 'https://www.clarinsusa.com/dw/image/v2/AAFS_PRD/on/demandware.static/-/Sites-clarins-master-products/en_US/dwf36d66a7/original/80107455_original_original_A.jpg?sw=680&sh=680', 2),
+(110, 'https://www.clarinsusa.com/dw/image/v2/AAFS_PRD/on/demandware.static/-/Sites-clarins-master-products/en_US/dwa7b4dc47/original/80107455_original_original_B.jpg?sw=680&sh=680', 2),
+(111, 'https://www.clarinsusa.com/dw/image/v2/AAFS_PRD/on/demandware.static/-/Sites-clarins-master-products/en_US/dw1c309f65/original/80107455_original_original_D.jpg?sw=680&sh=680', 2),
+(112, 'https://www.clarinsusa.com/dw/image/v2/AAFS_PRD/on/demandware.static/-/Sites-clarins-master-products/en_US/dwdd195252/original/80107455_original_original_E.jpg?sw=680&sh=680', 2),
+(113, 'https://www.clarinsusa.com/dw/image/v2/AAFS_PRD/on/demandware.static/-/Sites-clarins-master-products/default/dwbdbfab71/original/80095098_original_original_X.jpg?sw=680&sh=680', 3),
+(114, 'https://www.clarinsusa.com/dw/image/v2/AAFS_PRD/on/demandware.static/-/Sites-clarins-master-products/en_US/dwae2a9804/original/80095098_original_original_2.jpg?sw=680&sh=680', 3),
+(115, 'https://www.clarinsusa.com/dw/image/v2/AAFS_PRD/on/demandware.static/-/Sites-clarins-master-products/default/dwe5c55ac9/original/80095098_original_original_3.jpg?sw=680&sh=680', 3),
+(116, 'https://www.clarinsusa.com/dw/image/v2/AAFS_PRD/on/demandware.static/-/Sites-clarins-master-products/en_US/dwdd843c7a/original/80095098_original_original_4.jpg?sw=680&sh=680', 3),
+(117, 'https://www.clarinsusa.com/dw/image/v2/AAFS_PRD/on/demandware.static/-/Sites-clarins-master-products/default/dwa8b1af34/original/80083849_original_original_A.jpg?sw=680&sh=680', 4),
+(118, 'https://www.clarinsusa.com/dw/image/v2/AAFS_PRD/on/demandware.static/-/Sites-clarins-master-products/en_US/dw59cd6f47/original/80083849_original_original_B.jpg?sw=680&sh=680', 4),
+(119, 'https://www.clarinsusa.com/dw/image/v2/AAFS_PRD/on/demandware.static/-/Sites-clarins-master-products/en_US/dwde4b22e6/original/80083849_original_original_C.jpg?sw=680&sh=680', 4),
+(120, 'https://www.clarinsusa.com/dw/image/v2/AAFS_PRD/on/demandware.static/-/Sites-clarins-master-products/en_US/dw73dc1b01/original/80083849_original_original_D.jpg?sw=680&sh=680', 4),
+(121, 'https://www.clarinsusa.com/dw/image/v2/AAFS_PRD/on/demandware.static/-/Sites-clarins-master-products/en_US/dw4a290d40/original/0129521_original_original_1.jpg?sw=680&sh=680', 5),
+(122, 'https://www.clarinsusa.com/dw/image/v2/AAFS_PRD/on/demandware.static/-/Sites-clarins-master-products/en_US/dw63c83dc3/original/80106602_original_original_2.jpg?sw=680&sh=680', 5),
+(123, 'https://www.clarinsusa.com/dw/image/v2/AAFS_PRD/on/demandware.static/-/Sites-clarins-master-products/en_US/dw00f5e20d/original/80106602_original_original_3.jpg?sw=680&sh=680', 5),
+(124, 'https://www.clarinsusa.com/dw/image/v2/AAFS_PRD/on/demandware.static/-/Sites-clarins-master-products/en_US/dw3911eb97/original/80106602_original_original_5.jpg?sw=680&sh=680', 5),
+(125, 'https://www.clarinsusa.com/dw/image/v2/AAFS_PRD/on/demandware.static/-/Sites-clarins-master-products/default/dwfc02f733/original/80099349_original_original_A.jpg?sw=680&sh=680', 6),
+(126, 'https://www.clarinsusa.com/dw/image/v2/AAFS_PRD/on/demandware.static/-/Sites-clarins-master-products/en_US/dw341081cc/original/80099349_original_original_B.jpg?sw=680&sh=680', 6),
+(127, 'https://www.clarinsusa.com/dw/image/v2/AAFS_PRD/on/demandware.static/-/Sites-clarins-master-products/en_US/dw854fca1d/original/80099349_original_original_C.jpg?sw=680&sh=680', 6),
+(128, 'https://www.clarinsusa.com/dw/image/v2/AAFS_PRD/on/demandware.static/-/Sites-clarins-master-products/en_US/dwdb0150c6/original/80099349_original_original_F.jpg?sw=680&sh=680', 6),
+(129, 'https://www.clarinsusa.com/dw/image/v2/AAFS_PRD/on/demandware.static/-/Sites-clarins-master-products/default/dwc846db4b/original/80102843_original_original_A.jpg?sw=680&sh=680', 7),
+(130, 'https://www.clarinsusa.com/dw/image/v2/AAFS_PRD/on/demandware.static/-/Sites-clarins-master-products/en_US/dw7ce659ab/original/80102843_original_original_B.jpg?sw=680&sh=680', 7),
+(131, 'https://www.clarinsusa.com/dw/image/v2/AAFS_PRD/on/demandware.static/-/Sites-clarins-master-products/en_US/dwcf4b1b1c/original/80102843_original_original_C.jpg?sw=680&sh=680', 7),
+(132, 'https://www.clarinsusa.com/dw/image/v2/AAFS_PRD/on/demandware.static/-/Sites-clarins-master-products/en_US/dw22481c8b/original/80102843_original_original_D.jpg?sw=680&sh=680', 7),
+(133, 'https://www.clarinsusa.com/dw/image/v2/AAFS_PRD/on/demandware.static/-/Sites-clarins-master-products/default/dw9abb819a/original/80027223_original_original_X.jpg?sw=680&sh=680', 8),
+(134, 'https://www.clarinsusa.com/dw/image/v2/AAFS_PRD/on/demandware.static/-/Sites-clarins-master-products/default/dwf1bee239/original/0158010_original_original_3.jpg?sw=680&sh=680', 8),
+(135, 'https://www.clarinsusa.com/dw/image/v2/AAFS_PRD/on/demandware.static/-/Sites-clarins-master-products/default/dw1494c743/original/80027223_original_original_3.jpg?sw=680&sh=680', 8),
+(136, 'https://www.clarinsusa.com/dw/image/v2/AAFS_PRD/on/demandware.static/-/Sites-clarins-master-products/default/dwd6517d4d/original/80027223_original_original_4.jpg?sw=680&sh=680', 8),
+(137, 'https://www.clarinsusa.com/dw/image/v2/AAFS_PRD/on/demandware.static/-/Sites-clarins-master-products/default/dwb5b4fd7e/original/80094249_original_original_X.jpg?sw=680&sh=680', 9),
+(138, 'https://www.clarinsusa.com/dw/image/v2/AAFS_PRD/on/demandware.static/-/Sites-clarins-master-products/default/dw8d267063/original/80094249_original_original_2.jpg?sw=680&sh=680', 9),
+(139, 'https://www.clarinsusa.com/dw/image/v2/AAFS_PRD/on/demandware.static/-/Sites-clarins-master-products/en_US/dwd6db83d0/original/80094249_original_original_3.jpg?sw=680&sh=680', 9),
+(140, 'https://www.clarinsusa.com/dw/image/v2/AAFS_PRD/on/demandware.static/-/Sites-clarins-master-products/en_US/dw7e11567d/original/80094249_original_original_8.jpg?sw=680&sh=680', 9),
+(141, 'https://www.clarinsusa.com/dw/image/v2/AAFS_PRD/on/demandware.static/-/Sites-clarins-master-products/default/dw2ac0b768/original/80104068_original_original_A.jpg?sw=680&sh=680', 10),
+(142, 'https://www.clarinsusa.com/dw/image/v2/AAFS_PRD/on/demandware.static/-/Sites-clarins-master-products/default/dw8b96d213/original/80104068_original_original_B.jpg?sw=680&sh=680', 10),
+(143, 'https://www.clarinsusa.com/dw/image/v2/AAFS_PRD/on/demandware.static/-/Sites-clarins-master-products/default/dwb8b68c12/original/80104068_original_original_C.jpg?sw=680&sh=680', 10),
+(144, 'https://www.clarinsusa.com/dw/image/v2/AAFS_PRD/on/demandware.static/-/Sites-clarins-master-products/default/dwdd9ffa6b/original/80104068_original_original_D.jpg?sw=680&sh=680', 10),
+(145, 'https://www.clarinsusa.com/dw/image/v2/AAFS_PRD/on/demandware.static/-/Sites-clarins-master-products/default/dwc0667642/original/80087595_original_original_A.jpg?sw=680&sh=680', 11),
+(146, 'https://www.clarinsusa.com/dw/image/v2/AAFS_PRD/on/demandware.static/-/Sites-clarins-master-products/en_US/dwb1579ba1/original/80087595_original_original_B.jpg?sw=680&sh=680', 11),
+(147, 'https://www.clarinsusa.com/dw/image/v2/AAFS_PRD/on/demandware.static/-/Sites-clarins-master-products/en_US/dw21d41a0b/original/80087595_original_original_C.jpg?sw=680&sh=680', 11),
+(148, 'https://www.clarinsusa.com/dw/image/v2/AAFS_PRD/on/demandware.static/-/Sites-clarins-master-products/en_US/dw2ddd3929/original/80087595_original_original_E.jpg?sw=680&sh=680', 11),
+(153, 'https://www.clarinsusa.com/dw/image/v2/AAFS_PRD/on/demandware.static/-/Sites-clarins-master-products/default/dw9c53fc23/original/80044967_original_original_x.jpg?sw=680&sh=680', 12),
+(154, 'https://www.clarinsusa.com/dw/image/v2/AAFS_PRD/on/demandware.static/-/Sites-clarins-master-products/default/dw6b4a4b4c/original/80044967_original_original_B.jpg?sw=680&sh=680', 12),
+(155, 'https://www.clarinsusa.com/dw/image/v2/AAFS_PRD/on/demandware.static/-/Sites-clarins-master-products/default/dw97e4b588/original/80044967_original_original_C.jpg?sw=680&sh=680', 12),
+(156, 'https://www.clarinsusa.com/dw/image/v2/AAFS_PRD/on/demandware.static/-/Sites-clarins-master-products/default/dwf372c13e/original/80044967_original_original_D.jpg?sw=680&sh=680', 12),
+(157, 'https://www.clarinsusa.com/dw/image/v2/AAFS_PRD/on/demandware.static/-/Sites-clarins-master-products/en_US/dwa8791d35/original/80088226_original_original_A.jpg?sw=680&sh=680', 13),
+(158, 'https://www.clarinsusa.com/dw/image/v2/AAFS_PRD/on/demandware.static/-/Sites-clarins-master-products/en_US/dwaf2f20df/original/80088226_original_original_B.jpg?sw=680&sh=680', 13),
+(159, 'https://www.clarinsusa.com/dw/image/v2/AAFS_PRD/on/demandware.static/-/Sites-clarins-master-products/en_US/dw7c51b8a8/original/80088226_original_original_C.jpg?sw=680&sh=680', 13),
+(160, 'https://www.clarinsusa.com/dw/image/v2/AAFS_PRD/on/demandware.static/-/Sites-clarins-master-products/en_US/dwf943694d/original/80088226_original_original_D.jpg?sw=680&sh=680', 13),
+(161, 'https://www.clarinsusa.com/dw/image/v2/AAFS_PRD/on/demandware.static/-/Sites-clarins-master-products/default/dwf17e730a/original/80098705_original_original_X.jpg?sw=680&sh=680', 14),
+(162, 'https://www.clarinsusa.com/dw/image/v2/AAFS_PRD/on/demandware.static/-/Sites-clarins-master-products/en_US/dwd6a6f5c2/original/80098705_original_original_2.jpg?sw=680&sh=680', 14),
+(163, 'https://www.clarinsusa.com/dw/image/v2/AAFS_PRD/on/demandware.static/-/Sites-clarins-master-products/en_US/dw24df10b2/original/80098705_original_original_3.jpg?sw=680&sh=680', 14),
+(164, 'https://www.clarinsusa.com/dw/image/v2/AAFS_PRD/on/demandware.static/-/Sites-clarins-master-products/en_US/dwd9e9e28e/original/80098705_original_original_9.jpg?sw=680&sh=680', 14),
+(165, 'https://www.clarinsusa.com/dw/image/v2/AAFS_PRD/on/demandware.static/-/Sites-clarins-master-products/default/dw22498a58/original/80026978_original_original_1.jpg?sw=680&sh=680', 15),
+(166, 'https://www.clarinsusa.com/dw/image/v2/AAFS_PRD/on/demandware.static/-/Sites-clarins-master-products/default/dwba3a66e0/original/80026978_original_original_3.jpg?sw=680&sh=680', 15);
 
 -- --------------------------------------------------------
 
@@ -1066,19 +991,19 @@ INSERT INTO `ProductImage` (`imageId`, `productImage`, `productId`) VALUES
 --
 
 CREATE TABLE `ProductRating` (
-  `productRatingId` int(11) NOT NULL,
-  `productId` int(11) NOT NULL,
-  `buyerId` int(11) NOT NULL,
-  `reviewDate` date NOT NULL,
+  `product_rating_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `review_date` date NOT NULL,
   `rating` int(11) NOT NULL,
-  `ratingComment` varchar(255) NOT NULL
+  `rating_comment` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `ProductRating`
 --
 
-INSERT INTO `ProductRating` (`productRatingId`, `productId`, `buyerId`, `reviewDate`, `rating`, `ratingComment`) VALUES
+INSERT INTO `ProductRating` (`product_rating_id`, `product_id`, `user_id`, `review_date`, `rating`, `rating_comment`) VALUES
 (1, 1, 1, '1976-07-09', 1, 'Quia libero nihil eum perferendis eaque similique non ipsa. Asperiores dolor autem nulla rerum possimus error. Consequatur tempora dolorem officiis est laudantium eos. Sint voluptas facilis qui similique ea quidem quibusdam. Mollitia harum id ea facere. E'),
 (2, 2, 2, '2024-03-18', 3, 'Perspiciatis aut cupiditate quis porro eligendi. Ut qui ea sunt et laboriosam itaque libero. Laboriosam ut est qui aut exercitationem. Provident dignissimos reiciendis quia vel rerum. Mollitia qui non dolor accusamus. Quam ut ea voluptate.'),
 (3, 3, 3, '2012-02-28', 4, 'Tempore aut consequuntur quas. Explicabo laborum aliquid voluptas non laboriosam. Dolor qui vel deserunt sed tempora eaque. Voluptate aliquam perspiciatis suscipit cupiditate. Facilis corrupti odio quo in nihil. Minus provident veniam eum nihil quaerat ex'),
@@ -1291,7 +1216,7 @@ INSERT INTO `ProductRating` (`productRatingId`, `productId`, `buyerId`, `reviewD
 (210, 10, 10, '2007-10-06', 0, 'Culpa hic dolores quam fuga aliquid quod. Suscipit veritatis delectus debitis alias atque iure. Repellendus autem consectetur eos sed ut. Pariatur et harum illo.'),
 (211, 11, 11, '1994-02-19', 2, 'Animi aut aliquam molestiae repellat unde. Non et officiis corporis et. Assumenda occaecati sit velit quia. Velit delectus voluptatem quibusdam asperiores id.'),
 (212, 12, 12, '2016-01-06', 1, 'Odio ea accusamus sed tenetur sapiente quidem quia. Quia sit non et qui tenetur. Quis quisquam ut temporibus magnam sed. Officiis neque inventore aut perspiciatis consequuntur.');
-INSERT INTO `ProductRating` (`productRatingId`, `productId`, `buyerId`, `reviewDate`, `rating`, `ratingComment`) VALUES
+INSERT INTO `ProductRating` (`product_rating_id`, `product_id`, `user_id`, `review_date`, `rating`, `rating_comment`) VALUES
 (213, 13, 13, '1974-10-04', 2, 'Harum consequatur enim voluptatem voluptatibus ipsa dolores. Inventore ut necessitatibus quia corrupti totam. Corporis nihil quo ut. Inventore at consequatur magnam ipsam architecto eos dicta. Cumque a velit aspernatur qui eos.'),
 (214, 14, 14, '1975-10-17', 2, 'Aut magnam voluptates unde sed similique. Dolorum sunt vel ea et maiores eos. Similique officia repellendus ullam odio quam. Dolores ex ex autem. Sint asperiores ipsum dolores alias enim qui.'),
 (215, 15, 15, '1993-02-22', 4, 'Sed tenetur nihil quis odio dolorem provident. Nulla error impedit est vero. Consequuntur nisi architecto vel perspiciatis blanditiis repudiandae. In recusandae enim veniam neque molestias blanditiis vero. Perspiciatis ducimus omnis quia quisquam.'),
@@ -1388,119 +1313,35 @@ INSERT INTO `ProductRating` (`productRatingId`, `productId`, `buyerId`, `reviewD
 --
 
 CREATE TABLE `Products` (
-  `productId` int(11) NOT NULL,
-  `productName` varchar(255) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `product_name` varchar(255) NOT NULL,
   `price` decimal(21,9) NOT NULL,
-  `quantityInStock` int(11) NOT NULL,
-  `category` int(11) NOT NULL,
-  `dateListed` date NOT NULL
+  `quantity_in_stock` int(11) NOT NULL,
+  `main_category` enum('Skincare','Makeup') NOT NULL DEFAULT 'Skincare',
+  `sub_category` enum('Face','Body','Sun','Men','Eyes','Lips') NOT NULL DEFAULT 'Face',
+  `date_listed` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `Products`
 --
 
-INSERT INTO `Products` (`productId`, `productName`, `price`, `quantityInStock`, `category`, `dateListed`) VALUES
-(1, 'Cum deleniti quidem.', 446995714.903180000, 22471, 1, '1974-05-07'),
-(2, 'Explicabo assumenda aliquam et ut.', 58739.496497138, 3751, 2, '2024-01-12'),
-(3, 'Fuga inventore suscipit et recusandae.', 426043.702451090, 2251, 3, '1976-08-31'),
-(4, 'Quasi sequi consequuntur.', 5.113460096, 1607, 4, '2009-04-21'),
-(5, 'Sunt alias mollitia consequatur.', 2586.107956519, 19425654, 5, '2011-05-16'),
-(6, 'Sint aliquam dolorum ut.', 0.000000000, 60900, 6, '1990-05-11'),
-(7, 'Nostrum sit laborum assumenda.', 0.102650961, 76635, 7, '2011-07-19'),
-(8, 'Aut omnis eaque.', 1203.889573559, 133029702, 8, '2017-03-07'),
-(9, 'Sint aspernatur tempore minima unde.', 315798.366479480, 7073, 9, '1985-01-11'),
-(10, 'In provident tempora quia rerum.', 15721736.240822000, 6, 10, '2005-03-30'),
-(11, 'Quisquam ut atque autem ad.', 2.141619199, 5, 11, '1991-04-23'),
-(12, 'Sapiente et laboriosam adipisci.', 45905673.788074000, 10656794, 12, '2014-01-25'),
-(13, 'Quaerat dolore sit reprehenderit quos vero.', 579731.076046340, 66323, 13, '2021-12-03'),
-(14, 'Id quaerat laboriosam voluptatem aperiam sed.', 4583013.445831900, 8, 14, '2007-05-27'),
-(15, 'Eum est necessitatibus nostrum tenetur autem.', 22889.552042861, 54850, 15, '2022-11-22'),
-(16, 'Dolores ducimus facere dolorem voluptatibus aspernatur.', 0.000000000, 31211, 16, '1988-05-11'),
-(17, 'Nihil animi dicta.', 0.000000000, 0, 17, '2013-06-19'),
-(18, 'Quas recusandae velit nihil praesentium.', 1.132822812, 1732, 18, '1999-11-13'),
-(19, 'Rerum illo sapiente.', 200.472391298, 0, 19, '2022-10-10'),
-(20, 'Repudiandae voluptatibus omnis odio et.', 16025032.449766000, 15782836, 20, '2002-07-27'),
-(21, 'Tenetur veritatis facilis aut.', 4118291.264958200, 52040, 21, '1974-10-26'),
-(22, 'Numquam dolor dolore reprehenderit architecto.', 610117394.399630000, 25132295, 22, '1973-09-08'),
-(23, 'Fugit voluptas ab consectetur.', 0.000000000, 78, 23, '2014-05-20'),
-(24, 'Corrupti inventore ipsam earum ratione voluptatibus.', 26183.362297892, 184857, 24, '2015-05-29'),
-(25, 'Dolor ad iure minima omnis aut.', 0.194574631, 142255556, 25, '2023-04-27'),
-(26, 'Numquam saepe non.', 3001858.217044300, 3299320, 26, '2022-09-05'),
-(27, 'Animi atque voluptas impedit omnis.', 345.234187588, 53, 27, '1995-12-21'),
-(28, 'Consectetur rerum dicta tenetur eos.', 103.165174346, 11153, 28, '1989-12-03'),
-(29, 'Beatae sequi deserunt qui et repellendus.', 0.218010936, 15, 29, '1973-11-21'),
-(30, 'Ducimus maxime voluptate ipsa.', 1941912.404512500, 850, 30, '2021-02-11'),
-(31, 'Rerum eveniet officiis rem nobis.', 258774318.283830000, 397, 1, '2022-10-11'),
-(32, 'Quas velit sunt dolores minima.', 4.303447844, 21, 2, '2005-03-26'),
-(33, 'Rem et sed.', 4410.595349106, 6, 3, '1991-02-03'),
-(34, 'Sunt minima sint ullam reprehenderit omnis.', 5054336.341008600, 91841731, 4, '2007-01-18'),
-(35, 'Optio voluptatem deserunt.', 1.289432740, 133030, 5, '1981-10-20'),
-(36, 'Aut nihil dolorem ea.', 3327.854242929, 341773, 6, '1993-12-13'),
-(37, 'Non ut error dicta molestiae.', 592.422722105, 1672547, 7, '1976-03-19'),
-(38, 'Minima optio iste nulla.', 3896269.732919900, 2380, 8, '1989-02-15'),
-(39, 'Eos cupiditate non.', 682640.281937670, 19, 9, '2018-05-03'),
-(40, 'Quia non molestias iste.', 2.604503323, 893383604, 10, '2014-12-21'),
-(41, 'Perspiciatis natus libero ut blanditiis dolor.', 58498228.120428000, 0, 11, '1970-07-23'),
-(42, 'Nam veniam quisquam voluptates repellat quasi.', 97517.598821631, 2977, 12, '1971-08-19'),
-(43, 'Voluptas vitae in sed.', 2.757209079, 82395938, 13, '1971-01-28'),
-(44, 'Culpa sequi rem odit et.', 372531.703091830, 79, 14, '2004-02-09'),
-(45, 'Exercitationem ipsum magni sint.', 413329.210617140, 3193658, 15, '2008-10-01'),
-(46, 'Labore laborum explicabo labore ipsa.', 0.000000000, 16708465, 16, '2009-12-22'),
-(47, 'Dignissimos ut harum.', 14558.438811342, 17634, 17, '1979-06-22'),
-(48, 'Non est ut odio.', 427.469507748, 233, 18, '1984-09-04'),
-(49, 'Magni harum aut mollitia rerum.', 76.586134266, 107971, 19, '1974-06-13'),
-(50, 'Hic eius nulla autem numquam.', 0.000000000, 3, 20, '2022-09-18'),
-(51, 'Vel harum voluptas consequatur nihil.', 15522692.209272000, 33130, 21, '1983-05-04'),
-(52, 'Est rerum veniam eaque labore.', 1901075.361704900, 677, 22, '1976-08-16'),
-(53, 'Minus fugit amet occaecati.', 0.000000000, 342, 23, '2022-09-18'),
-(54, 'Impedit ea facilis.', 11.898658628, 380, 24, '1997-10-26'),
-(55, 'Aut atque eum dolorem.', 12669549.469561000, 0, 25, '2001-03-05'),
-(56, 'Maxime ea deleniti.', 48401.573877915, 2134105, 26, '1985-01-31'),
-(57, 'Cumque temporibus qui enim quidem quis.', 39.432749767, 4245622, 27, '1972-01-20'),
-(58, 'Nihil vel nulla voluptatem praesentium.', 703462.014041380, 4523371, 28, '2000-02-05'),
-(59, 'Quod ut blanditiis.', 33205.900391130, 2, 29, '1976-07-01'),
-(60, 'Et ipsam similique asperiores veniam.', 923.033415569, 26360, 30, '2015-05-03'),
-(61, 'Recusandae iusto perspiciatis ad harum.', 7714.093745346, 5588, 1, '1994-03-21'),
-(62, 'Qui libero sapiente impedit rerum laudantium.', 2407586.070686100, 10324493, 2, '1986-08-19'),
-(63, 'Est facilis architecto recusandae.', 39.408301676, 79, 3, '2005-12-04'),
-(64, 'Sequi asperiores assumenda sapiente officiis.', 0.733865854, 37647894, 4, '2011-02-01'),
-(65, 'Vel dignissimos ut praesentium tempora voluptatem.', 4025773.929477400, 3981, 5, '2001-10-29'),
-(66, 'Qui veritatis quibusdam.', 0.000000000, 14883, 6, '2020-04-17'),
-(67, 'Et qui tempora consectetur.', 91.792487567, 2339637, 7, '1971-05-14'),
-(68, 'Id eaque porro error molestiae magnam.', 39.307774181, 40108375, 8, '1971-12-18'),
-(69, 'Maiores autem qui placeat dolor.', 2095.602786545, 1327, 9, '2016-12-31'),
-(70, 'Commodi vitae officiis molestias inventore.', 28810.307924950, 8, 10, '1979-09-10'),
-(71, 'Dolore vel exercitationem dolor quia aspernatur.', 38946.435484986, 0, 11, '1992-08-09'),
-(72, 'Quia hic qui autem nihil.', 6364068.973273100, 3997, 12, '1976-12-30'),
-(73, 'Assumenda ducimus placeat voluptatibus.', 17831.734326666, 90526329, 13, '1999-05-20'),
-(74, 'Cumque est ducimus vitae dolor.', 28.445357454, 31, 14, '2001-08-30'),
-(75, 'Qui earum maxime possimus sint.', 930185.932988390, 51, 15, '1982-09-26'),
-(76, 'Possimus ullam accusamus et et quia.', 6886514.932207700, 244, 16, '1975-02-06'),
-(77, 'Et laudantium molestias ipsum odio aut.', 4.234055519, 861249, 17, '2004-10-31'),
-(78, 'Dolorem ex repellat est rerum vel.', 5285.366967751, 230744778, 18, '1995-09-15'),
-(79, 'Vel fugit voluptatum quod.', 1791957.438617400, 18132, 19, '2016-07-03'),
-(80, 'Eum hic atque quo similique sequi.', 778415.839857690, 178427685, 20, '1977-11-01'),
-(81, 'Fugit fugiat error id placeat.', 230046.277479590, 7245240, 21, '2021-06-12'),
-(82, 'Laboriosam saepe amet dolore.', 65577857.587337000, 94473311, 22, '2014-06-09'),
-(83, 'Voluptatem iure repellat fuga aut.', 135.402561161, 5189, 23, '2012-08-14'),
-(84, 'Nisi ut rerum ea similique.', 38.212540477, 12149, 24, '1981-03-02'),
-(85, 'Officiis molestiae possimus eum.', 39894046.581665000, 327, 25, '1983-01-11'),
-(86, 'Et architecto odit et.', 53139.679893050, 772, 26, '1988-07-05'),
-(87, 'Enim et quibusdam harum eius magnam.', 49.179438364, 26894915, 27, '1978-01-24'),
-(88, 'Reiciendis voluptas voluptatum voluptas vitae est.', 34254.326437898, 30, 28, '2010-04-08'),
-(89, 'Atque pariatur quia.', 8701779.740050300, 0, 29, '2012-10-17'),
-(90, 'Dolores sit pariatur eum.', 47.387335874, 173576, 30, '2017-06-15'),
-(91, 'Exercitationem et reprehenderit aut vel.', 0.000000000, 500694993, 1, '1974-09-07'),
-(92, 'Vero debitis accusantium enim doloribus.', 180.116698905, 2890688, 2, '1998-09-30'),
-(93, 'Tempore nisi dolorum.', 1.253797350, 13717056, 3, '1981-11-12'),
-(94, 'Quidem sit modi.', 15036.390452095, 2703454, 4, '1989-01-05'),
-(95, 'Soluta qui et placeat aperiam.', 25.402975750, 80, 5, '1976-05-19'),
-(96, 'Aliquid consequuntur asperiores qui placeat impedit.', 112.748681912, 9495, 6, '2001-04-16'),
-(97, 'Nam exercitationem facere eligendi laudantium repellendus.', 0.000000000, 14032, 7, '2019-12-07'),
-(98, 'Sapiente voluptatem rerum optio.', 618624.512411750, 0, 8, '1995-11-19'),
-(99, 'Nihil est voluptatem.', 6111914.944393500, 7993, 9, '2015-03-21'),
-(100, 'Delectus dolores magnam fuga rem.', 0.000000000, 4, 10, '1998-12-05');
+INSERT INTO `Products` (`product_id`, `product_name`, `price`, `quantity_in_stock`, `main_category`, `sub_category`, `date_listed`) VALUES
+(1, 'Hydrating Gentle Foaming Face Cleanser for Normal to Dry Skin', 31.000000000, 100, 'Skincare', 'Body', '1974-05-07'),
+(2, 'Dry Touch Facial Sunscreen - Broad Spectrum SPF 50+', 40.000000000, 123, 'Skincare', 'Sun', '2024-01-12'),
+(3, 'ClarinsMen Smooth Shave Foaming Gel', 25.000000000, 99, 'Skincare', 'Men', '1976-08-31'),
+(4, 'Blue Orchid Face Treatment Oil', 67.000000000, 90, 'Skincare', 'Face', '2009-04-21'),
+(5, 'UV Plus SPF 50 Anti Pollution Face Sunscreen', 46.000000000, 30, 'Skincare', 'Face', '2011-05-16'),
+(6, 'Wonder Volume Mascara XXL', 30.000000000, 20, 'Makeup', 'Eyes', '1990-05-11'),
+(7, 'Hydra-Essentiel Mask', 39.000000000, 75, 'Skincare', 'Face', '2011-07-19'),
+(8, 'Exfoliating Gentle Body-Scrub For Smooth Skin', 43.000000000, 133, 'Skincare', 'Body', '2017-03-07'),
+(9, 'Joli Rouge Satin Lipstick', 37.000000000, 73, 'Makeup', 'Lips', '1985-01-11'),
+(10, 'Instant Concealer Long Wearing + Crease Free', 35.000000000, 66, 'Makeup', 'Face', '2005-03-30'),
+(11, 'Beauty Flash Balm', 52.000000000, 50, 'Makeup', 'Face', '1991-04-23'),
+(12, 'Wonder Perfect Mascara 4D', 30.000000000, 94, 'Makeup', 'Eyes', '2014-01-25'),
+(13, 'Super Restorative Night Cream - All Skin Types', 142.000000000, 66, 'Skincare', 'Face', '2021-12-03'),
+(14, 'Lip Perfector 2-in-1 Lip and Cheek Color Balm', 30.000000000, 80, 'Makeup', 'Lips', '2007-05-27'),
+(15, 'Graphik Ink Liner Liquid Eyeliner Pen', 33.000000000, 54, 'Makeup', 'Eyes', '2022-11-22');
 
 -- --------------------------------------------------------
 
@@ -1510,6 +1351,7 @@ INSERT INTO `Products` (`productId`, `productName`, `price`, `quantityInStock`, 
 
 CREATE TABLE `ProductsCategories` (
   `id` int(11) NOT NULL,
+  `MainCategory` text NOT NULL,
   `categoryName` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -1517,47 +1359,45 @@ CREATE TABLE `ProductsCategories` (
 -- Dumping data for table `ProductsCategories`
 --
 
-INSERT INTO `ProductsCategories` (`id`, `categoryName`) VALUES
-(1, 'autem'),
-(2, 'error'),
-(3, 'aperiam'),
-(4, 'reiciendis'),
-(5, 'exercitationem'),
-(6, 'accusantium'),
-(7, 'officia'),
-(8, 'itaque'),
-(9, 'blanditiis'),
-(10, 'ad'),
-(11, 'earum'),
-(12, 'nihil'),
-(13, 'et'),
-(14, 'illum'),
-(15, 'asperiores'),
-(16, 'eos'),
-(17, 'neque'),
-(18, 'veniam'),
-(19, 'expedita'),
-(20, 'ullam'),
-(21, 'autem'),
-(22, 'animi'),
-(23, 'est'),
-(24, 'sit'),
-(25, 'deserunt'),
-(26, 'earum'),
-(27, 'rerum'),
-(28, 'aliquam'),
-(29, 'in'),
-(30, 'est');
+INSERT INTO `ProductsCategories` (`id`, `MainCategory`, `categoryName`) VALUES
+(1, 'Skincare', 'Face'),
+(2, 'Skincare', 'Body'),
+(3, 'Skincare', 'Sunscreen'),
+(4, 'Makeup', 'Hair'),
+(5, 'Makeup', 'Makeup'),
+(6, 'Makeup', 'Perfurme');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Users`
+--
+
+CREATE TABLE `Users` (
+  `user_id` int(11) NOT NULL,
+  `username` varchar(30) NOT NULL,
+  `password` char(255) NOT NULL,
+  `email` varchar(200) DEFAULT NULL,
+  `is_admin` tinyint(1) NOT NULL DEFAULT 0,
+  `is_active` tinyint(4) DEFAULT 1,
+  `first_name` varchar(255) DEFAULT NULL,
+  `last_name` varchar(255) DEFAULT NULL,
+  `dob` date DEFAULT NULL,
+  `phone` varchar(15) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `user_image` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `Users`
+--
+
+INSERT INTO `Users` (`user_id`, `username`, `password`, `email`, `is_admin`, `is_active`, `first_name`, `last_name`, `dob`, `phone`, `address`, `user_image`) VALUES
+(121, 'bao', '$2y$10$qFXM59mZYq2UGXT1ya3CAe/azVZ6y3up3r8YE20.2t9GAzdcGeL0S', 'baohm88@hotmail.com', 1, 1, 'Bao edited', 'Ha', '2020-01-01', '0988666281', 'Al Ruwais', 'https://res.cloudinary.com/dppk10edk/image/upload/v1728555503/pho_bo_ybx6qj.jpg');
 
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `Buyers`
---
-ALTER TABLE `Buyers`
-  ADD PRIMARY KEY (`buyerId`);
 
 --
 -- Indexes for table `Coupons`
@@ -1587,19 +1427,19 @@ ALTER TABLE `OrderStatus`
 -- Indexes for table `ProductImage`
 --
 ALTER TABLE `ProductImage`
-  ADD PRIMARY KEY (`imageId`);
+  ADD PRIMARY KEY (`image_id`);
 
 --
 -- Indexes for table `ProductRating`
 --
 ALTER TABLE `ProductRating`
-  ADD PRIMARY KEY (`productRatingId`);
+  ADD PRIMARY KEY (`product_rating_id`);
 
 --
 -- Indexes for table `Products`
 --
 ALTER TABLE `Products`
-  ADD PRIMARY KEY (`productId`);
+  ADD PRIMARY KEY (`product_id`);
 
 --
 -- Indexes for table `ProductsCategories`
@@ -1608,14 +1448,14 @@ ALTER TABLE `ProductsCategories`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- Indexes for table `Users`
 --
+ALTER TABLE `Users`
+  ADD PRIMARY KEY (`user_id`);
 
 --
--- AUTO_INCREMENT for table `Buyers`
+-- AUTO_INCREMENT for dumped tables
 --
-ALTER TABLE `Buyers`
-  MODIFY `buyerId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
 
 --
 -- AUTO_INCREMENT for table `Coupons`
@@ -1639,25 +1479,31 @@ ALTER TABLE `OrderStatus`
 -- AUTO_INCREMENT for table `ProductImage`
 --
 ALTER TABLE `ProductImage`
-  MODIFY `imageId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
+  MODIFY `image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=167;
 
 --
 -- AUTO_INCREMENT for table `ProductRating`
 --
 ALTER TABLE `ProductRating`
-  MODIFY `productRatingId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=301;
+  MODIFY `product_rating_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=301;
 
 --
 -- AUTO_INCREMENT for table `Products`
 --
 ALTER TABLE `Products`
-  MODIFY `productId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
 --
 -- AUTO_INCREMENT for table `ProductsCategories`
 --
 ALTER TABLE `ProductsCategories`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+
+--
+-- AUTO_INCREMENT for table `Users`
+--
+ALTER TABLE `Users`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

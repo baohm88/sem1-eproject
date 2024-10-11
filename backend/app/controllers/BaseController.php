@@ -51,4 +51,15 @@ class BaseController
         }
         echo json_encode($arr);
     }
+
+    public function insert_data_to_instance($instance, $inputs)
+    {
+        // $this->viewData($inputs);
+        // die();
+        foreach ($inputs as $key => $value) {
+            $method_name = "set_" . $key;
+            $instance->$method_name($value);
+        }
+        return $instance;
+    }
 }
