@@ -29,6 +29,7 @@ export default function Login() {
             );
 
             const resData = await response.data;
+            console.log(resData);
 
             if (resData.type === "success") {
                 const user = resData.data;
@@ -41,7 +42,7 @@ export default function Login() {
                 localStorage.setItem("user", JSON.stringify(user));
 
                 // Navigate to different routes based on user role
-                if (user.isAdmin === 1) {
+                if (user.is_admin === 1) {
                     navigate("/products");
                 } else {
                     navigate("/");

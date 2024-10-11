@@ -36,8 +36,8 @@ li a.active {
 
 main {
     width: 90vw;
-    height: 90vh;
-    margin: 0 auto;
+    min-height: 90vh;
+    margin: 1rem auto;
     padding: 0 1rem;
 }
 
@@ -73,6 +73,35 @@ section {
     min-height: 30vh;
 }
 
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 5px;
+}
+
+th,
+td {
+    border: 1px solid black;
+}
+
+.items-container {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.item-card {
+    background-color: var(--secondaryColor);
+    width: 20rem;
+    height: 25rem;
+}
+
+.item-image {
+    width: 90%;
+    height: 90%;
+}
 /* TOP-NAV STARTS */
 .top-nav {
     display: flex;
@@ -189,6 +218,17 @@ section {
     color: var(--dangerColor);
 }
 /* ERROR-MESSAGE ENDS */
+
+/* tabs-container START */
+.tabs-container {
+    display: flex;
+    max-width: 20rem;
+    margin: 0 auto;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+}
+/* tabs-container START */
 
 /* MOBILE */
 @media screen and (max-width: 1023px) {

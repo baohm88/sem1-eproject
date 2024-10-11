@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import Input from "./Input.js";
 import {
     hasMinLength,
@@ -8,7 +8,8 @@ import {
 } from "../util/validation.js";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import { UserContext } from "../App.js";
+import CryptoJS from "crypto-js";
+import classes from "./Register.module.css";
 
 export default function Register() {
     const [firstNameError, setFirstNameError] = useState();
@@ -22,19 +23,81 @@ export default function Register() {
     const [addressError, setAddressError] = useState();
     const [imageError, setImageError] = useState();
     const [serverError, setServerError] = useState();
-    const [avatarBase64, setAvatarBase64] = useState(""); // Store Base64 encoded image
+    const [imageFile, setImageFile] = useState(null);
+    const [imageURL, setImageURL] = useState("");
+    const [publicId, setPublicId] = useState("");
+    console.log(publicId);
 
     const navigate = useNavigate();
 
-    // Function to convert image to Base64
     const handleImageChange = (e) => {
-        const file = e.target.files[0]; // Get the selected file
-        if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setAvatarBase64(reader.result); // Set the Base64 encoded image
-            };
-            reader.readAsDataURL(file); // Read file as Base64
+        setImageFile(e.target.files[0]);
+    };
+
+    const handleUpload = async () => {
+        if (!imageFile) {
+            alert("Please select an image first.");
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append("file", imageFile);
+        formData.append("upload_preset", "ml_default");
+
+        try {
+            const response = await axios.post(
+                "https://api.cloudinary.com/v1_1/dppk10edk/image/upload",
+                formData
+            );
+
+            console.log(response);
+
+            console.log("Image Uploaded:", response.data.secure_url);
+            setImageURL(response.data.secure_url);
+            setPublicId(response.data.public_id);
+        } catch (error) {
+            console.error("Error uploading the image:", error);
+        }
+    };
+
+    const handleDelete = async () => {
+        if (!publicId) {
+            alert("No image to delete.");
+            return;
+        }
+
+        try {
+            const timestamp = Math.round(new Date().getTime() / 1000);
+            const apiKey = "111519175462964";
+            const apiSecret = "TZGo3zPKni0ORmSRQPzVt68f1sI";
+
+            // Create the string to sign
+            const stringToSign = `public_id=${publicId}&timestamp=${timestamp}`;
+
+            // Generate the SHA1 signature using CryptoJS
+            const signature = CryptoJS.SHA1(stringToSign + apiSecret).toString(
+                CryptoJS.enc.Hex
+            );
+
+            const response = await axios.post(
+                "https://api.cloudinary.com/v1_1/dppk10edk/image/destroy",
+                {
+                    public_id: publicId,
+                    timestamp: timestamp,
+                    signature: signature,
+                    api_key: apiKey,
+                }
+            );
+
+            if (response.data.result === "ok") {
+                console.log("Image deleted successfully");
+                setImageURL("");
+                setPublicId("");
+            } else {
+                console.error("Error deleting image:", response.data);
+            }
+        } catch (error) {
+            console.error("Error deleting the image:", error);
         }
     };
 
@@ -122,19 +185,15 @@ export default function Register() {
         }
         setAddressError(false);
 
-        // if (!avatar) {
-        //     setImageError("Image is required");
-        //     document.getElementById("image").focus();
-        //     return;
-        // }
-        // setImageError(false);
+        if (!imageFile) {
+            setImageError("Image is required");
+            document.getElementById("image").focus();
+            return;
+        }
+        setImageError(false);
 
         delete userData.password2;
-        delete userData.image;
-
-        // Include the Base64 encoded image in userData
-        // userData.image = avatarBase64; // Set the Base64 encoded image
-
+        userData.user_image = imageURL;
         console.log(userData);
 
         try {
@@ -248,10 +307,36 @@ export default function Register() {
                     id="image"
                     type="file"
                     accept="image/*"
-                    name="image"
+                    name="user_image"
                     error={imageError}
                     onChange={handleImageChange}
                 />
+
+                {imageFile && !imageURL ? (
+                    <button type="button" onClick={handleUpload}>
+                        Upload Image
+                    </button>
+                ) : (
+                    ""
+                )}
+
+                {imageURL && (
+                    <button type="button" onClick={handleDelete}>
+                        Delete Image
+                    </button>
+                )}
+                <br />
+                <br />
+
+                {imageURL && (
+                    <div>
+                        <img
+                            src={imageURL}
+                            alt="Uploaded"
+                            style={{ width: "300px" }}
+                        />
+                    </div>
+                )}
 
                 <p className="form-actions">
                     <button>REGISTER</button>

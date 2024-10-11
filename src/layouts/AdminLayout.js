@@ -8,7 +8,7 @@ export default function AdminLayout({ children }) {
     const { user, handleLogOut } = useContext(UserContext);
 
     useEffect(() => {
-        if (!user || user.isAdmin !== 1) {
+        if (!user || user.is_admin !== 1) {
             navigate("/unauthorized");
         }
     }, [user, navigate]);
@@ -37,7 +37,7 @@ export default function AdminLayout({ children }) {
                     {user !== null && (
                         <li>
                             <span>
-                                <span>Hi, {user.userName}</span>
+                                <span>Hi, {user.first_name}</span>
                                 <IoPersonOutline />
                             </span>
                         </li>
