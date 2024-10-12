@@ -12,7 +12,7 @@ import {
 } from "react-icons/io5";
 import { TfiClose } from "react-icons/tfi";
 import { GiHeartBeats } from "react-icons/gi";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect, useRef } from "react";
 import { UserContext } from "../App";
 
 export default function ClientLayout({ children }) {
@@ -22,6 +22,8 @@ export default function ClientLayout({ children }) {
     const [searchText, setSearchText] = useState("");
     const navigate = useNavigate();
     const location = useLocation();
+
+    const sidebarRef = useRef(); // Reference for sidebar
 
     function openSidebar() {
         document.getElementById("mySideBar").style.width = "25rem";
@@ -33,6 +35,27 @@ export default function ClientLayout({ children }) {
         document.body.style.backgroundColor = "white";
     }
 
+    // Close sidebar when clicking outside
+    useEffect(() => {
+        function handleClickOutside(event) {
+            // If the click is outside the sidebar, close it
+            if (
+                sidebarRef.current && // Check if ref is set
+                !sidebarRef.current.contains(event.target) // If click is outside sidebar
+            ) {
+                closeSidebar();
+            }
+        }
+
+        // Attach the event listener
+        document.addEventListener("mousedown", handleClickOutside);
+
+        // Cleanup the event listener on unmount
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [sidebarRef]);
+
     // Handle search form submission
     function handleSearch(e) {
         e.preventDefault();
@@ -40,14 +63,6 @@ export default function ClientLayout({ children }) {
         const currentPath = location.pathname;
         const params = new URLSearchParams(location.search);
         const category = params.get("category") || "";
-
-        // if (currentPath === "/") {
-        //     navigate(`/?q=${searchText}`);
-        // } else if (currentPath.includes("/skincare")) {
-        //     navigate(`/skincare?category=${category}&q=${searchText}`);
-        // } else if (currentPath.includes("/makeup")) {
-        //     navigate(`/makeup?category=${category}&q=${searchText}`);
-        // }
 
         if (currentPath.includes("/skincare")) {
             navigate(`/skincare?category=${category}&q=${searchText}`);
@@ -139,19 +154,22 @@ export default function ClientLayout({ children }) {
                         </li>
                     )}
                     {isLoggedIn && (
-                        <li>
-                            <NavLink to={"/profile"}>Profile</NavLink>
-                        </li>
-                    )}
-                    {isLoggedIn && (
-                        <li>
-                            <button onClick={handleLogOut}>LOGOUT</button>
-                        </li>
+                        <>
+                            <li>
+                                <NavLink to={"/profile"}>Profile</NavLink>
+                            </li>
+                            <li>
+                                <NavLink to={"/user/orders"}>Orders</NavLink>
+                            </li>
+                            <li>
+                                <button onClick={handleLogOut}>LOGOUT</button>
+                            </li>
+                        </>
                     )}
                 </ul>
             </header>
 
-            <div id="mySideBar">
+            <div id="mySideBar" ref={sidebarRef}>
                 <div className="sidebar-header">
                     <p onClick={closeSidebar}>
                         <TfiClose /> Menu
@@ -177,7 +195,7 @@ export default function ClientLayout({ children }) {
                 </div>
                 <div className="sidebar-body">
                     <p className="row-space-between" onClick={closeSidebar}>
-                        <NavLink to={"/new_product"}>What's new</NavLink>
+                        <NavLink to={"/"}>What's new</NavLink>
                         <span>
                             <IoChevronForwardOutline />
                         </span>

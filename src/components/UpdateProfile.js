@@ -5,6 +5,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../App.js";
 import CryptoJS from "crypto-js";
+import { upload } from "@testing-library/user-event/dist/upload.js";
 
 export default function Register() {
     const [firstNameError, setFirstNameError] = useState();
@@ -28,14 +29,26 @@ export default function Register() {
         setImageURL(user.user_image);
         const image_publicId = user.user_image.split("/").pop().split(".")[0];
         console.log(image_publicId);
-        setPublicId(image_publicId)
+        setPublicId(image_publicId);
     }, [user]);
 
-    const handleImageChange = (e) => {
-        setImageFile(e.target.files[0]);
-    };
+    function handleImageChange(event) {
+        const file = event.target.files[0];
 
-    const handleUpload = async () => {
+        if (!file) {
+            return;
+        }
+
+        const fileReader = new FileReader();
+
+        fileReader.onload = () => {
+            setImageFile(fileReader.result);
+        };
+
+        fileReader.readAsDataURL(file);
+    }
+
+    const handleUploadImage = async () => {
         if (!imageFile) {
             alert("Please select an image first.");
             return;
@@ -51,54 +64,13 @@ export default function Register() {
                 formData
             );
 
-            console.log(response);
-
+            const imageUrl = response.data.secure_url;
             console.log("Image Uploaded:", response.data.secure_url);
-            setImageURL(response.data.secure_url);
+            setImageURL(imageUrl);
             setPublicId(response.data.public_id);
+            return imageUrl; // Return the image URL for use in handleSubmit
         } catch (error) {
             console.error("Error uploading the image:", error);
-        }
-    };
-
-    const handleDelete = async () => {
-        if (!publicId) {
-            alert("No image to delete.");
-            return;
-        }
-
-        try {
-            const timestamp = Math.round(new Date().getTime() / 1000);
-            const apiKey = "111519175462964";
-            const apiSecret = "TZGo3zPKni0ORmSRQPzVt68f1sI";
-
-            // Create the string to sign
-            const stringToSign = `public_id=${publicId}&timestamp=${timestamp}`;
-
-            // Generate the SHA1 signature using CryptoJS
-            const signature = CryptoJS.SHA1(stringToSign + apiSecret).toString(
-                CryptoJS.enc.Hex
-            );
-
-            const response = await axios.post(
-                "https://api.cloudinary.com/v1_1/dppk10edk/image/destroy",
-                {
-                    public_id: publicId,
-                    timestamp: timestamp,
-                    signature: signature,
-                    api_key: apiKey,
-                }
-            );
-
-            if (response.data.result === "ok") {
-                console.log("Image deleted successfully");
-                setImageURL("");
-                setPublicId("");
-            } else {
-                console.error("Error deleting image:", response.data);
-            }
-        } catch (error) {
-            console.error("Error deleting the image:", error);
         }
     };
 
@@ -172,10 +144,10 @@ export default function Register() {
         }
         setImageError(false);
 
-        userData.user_image = imageURL;
-        console.log(userData);
-
         try {
+            const uploadedImageUrl = await handleUploadImage(); // Wait for the image to be uploaded
+            userData.user_image = uploadedImageUrl; // Set the uploaded image URL to userData
+
             const response = await axios.post(
                 "http://localhost/project/user/profile",
                 userData,
@@ -185,8 +157,6 @@ export default function Register() {
                     },
                 }
             );
-
-            console.log(response);
 
             if (response.data.type === "success") {
                 setUser(userData);
@@ -209,76 +179,78 @@ export default function Register() {
                     <span className="error-message">({serverError})</span>
                 )}
                 <br />
-                <Input
-                    label="user_id*"
-                    id="user_id"
-                    type="int"
-                    name="user_id"
-                    defaultValue={user.user_id}
-                />
-                <Input
-                    label="First Name*"
-                    id="firstName"
-                    type="text"
-                    name="first_name"
-                    autoFocus
-                    error={firstNameError}
-                    defaultValue={user.first_name}
-                />
+                <div>
+                    <Input
+                        label="user_id*"
+                        id="user_id"
+                        type="int"
+                        name="user_id"
+                        defaultValue={user.user_id}
+                    />
+                    <Input
+                        label="First Name*"
+                        id="firstName"
+                        type="text"
+                        name="first_name"
+                        autoFocus
+                        error={firstNameError}
+                        defaultValue={user.first_name}
+                    />
 
-                <Input
-                    label="Last Name*"
-                    id="lastName"
-                    type="text"
-                    name="last_name"
-                    error={lastNameError}
-                    defaultValue={user.last_name}
-                />
+                    <Input
+                        label="Last Name*"
+                        id="lastName"
+                        type="text"
+                        name="last_name"
+                        error={lastNameError}
+                        defaultValue={user.last_name}
+                    />
 
-                <Input
-                    label="Email*"
-                    id="email"
-                    type="email"
-                    name="email"
-                    error={emailError}
-                    defaultValue={user.email ? user.email : ""}
-                />
+                    <Input
+                        label="Email*"
+                        id="email"
+                        type="email"
+                        name="email"
+                        error={emailError}
+                        defaultValue={user.email ? user.email : ""}
+                    />
 
-                <Input
-                    label="Username*"
-                    id="username"
-                    type="text"
-                    name="username"
-                    error={usernameError}
-                    defaultValue={user.username}
-                />
+                    <Input
+                        label="Username*"
+                        id="username"
+                        type="text"
+                        name="username"
+                        error={usernameError}
+                        defaultValue={user.username}
+                    />
 
-                <Input
-                    label="Date of Birth*"
-                    id="dob"
-                    type="date"
-                    name="dob"
-                    error={dobError}
-                    defaultValue={user.dob ? user.dob : ""}
-                />
+                    <Input
+                        label="Date of Birth*"
+                        id="dob"
+                        type="date"
+                        name="dob"
+                        error={dobError}
+                        defaultValue={user.dob ? user.dob : ""}
+                    />
 
-                <Input
-                    label="Phone*"
-                    id="phone"
-                    type="number"
-                    name="phone"
-                    error={phoneError}
-                    defaultValue={user.phone ? user.phone : ""}
-                />
+                    <Input
+                        label="Phone*"
+                        id="phone"
+                        type="number"
+                        name="phone"
+                        error={phoneError}
+                        defaultValue={user.phone ? user.phone : ""}
+                    />
 
-                <Input
-                    label="Address*"
-                    id="address"
-                    type="text"
-                    name="address"
-                    error={addressError}
-                    defaultValue={user.address ? user.address : ""}
-                />
+                    <Input
+                        label="Address*"
+                        id="address"
+                        type="text"
+                        name="address"
+                        error={addressError}
+                        defaultValue={user.address ? user.address : ""}
+                    />
+                </div>
 
                 <Input
                     label="Image*"
@@ -290,30 +262,13 @@ export default function Register() {
                     onChange={handleImageChange}
                 />
 
-                {imageFile && !imageURL ? (
-                    <button type="button" onClick={handleUpload}>
-                        Upload Image
-                    </button>
-                ) : (
-                    ""
-                )}
-
-                {imageURL && (
-                    <button type="button" onClick={handleDelete}>
-                        Delete Image
-                    </button>
-                )}
-                <br />
-                <br />
-
-                {imageURL && (
-                    <div>
-                        <img
-                            src={imageURL}
-                            alt="Uploaded"
-                            style={{ width: "300px" }}
-                        />
-                    </div>
+                {!imageFile && <p>No image picked yet.</p>}
+                {imageFile && (
+                    <img
+                        src={imageFile}
+                        alt={`${user.full_name}`}
+                        style={{ width: "200px" }}
+                    />
                 )}
 
                 <p className="form-actions">

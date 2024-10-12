@@ -1,6 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom"; // Import useNavigate instead of useHistory
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { IoChevronBackOutline } from "react-icons/io5";
+import { IoChevronForward } from "react-icons/io5";
+import { formatter } from "../../util/formatter";
 
 export default function SkincareProducts() {
     const [items, setItems] = useState([]);
@@ -95,11 +98,6 @@ export default function SkincareProducts() {
             </p>
             <div className="items-container">
                 {currentProducts.map((item) => {
-                    const formatter = new Intl.NumberFormat("en-US", {
-                        style: "currency",
-                        currency: "USD",
-                    });
-
                     return (
                         <div className="item-card center" key={item.product_id}>
                             <Link to={"/products/" + item.product_id}>
@@ -135,7 +133,7 @@ export default function SkincareProducts() {
                     onClick={() => paginate(currentPage - 1)}
                     disabled={currentPage === 1}
                 >
-                    Previous
+                    <IoChevronBackOutline />
                 </button>
                 {Array.from({ length: totalPages }, (_, i) => (
                     <button
@@ -150,7 +148,7 @@ export default function SkincareProducts() {
                     onClick={() => paginate(currentPage + 1)}
                     disabled={currentPage === totalPages}
                 >
-                    Next
+                    <IoChevronForward />
                 </button>
             </div>
         </>

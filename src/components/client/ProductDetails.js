@@ -2,6 +2,7 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { UserContext } from "../../App";
+import { formatter } from "../../util/formatter";
 
 export default function ProductDetails() {
     const [product, setProduct] = useState("");
@@ -34,7 +35,7 @@ export default function ProductDetails() {
                 <p>Main cat: {product.main_category}</p>
                 <p>Sub cat: {product.sub_category}</p>
                 <p>Qty available: {product.quantity_in_stock}</p>
-                <p>Price: {product.price}</p>
+                <p>Price: {formatter.format(product.price)}</p>
                 <div>
                     <h3>Product Images:</h3>
                     {product.product_images &&

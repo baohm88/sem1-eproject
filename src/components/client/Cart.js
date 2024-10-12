@@ -1,10 +1,19 @@
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../App";
+import { formatter } from "../../util/formatter";
+import axios from "axios";
 
 export default function Cart() {
-    const { cart, incrementQuantity, decrementQuantity, removeItem } =
-        useContext(UserContext); // Access cart from UserContext
+    const {
+        cart,
+        incrementQuantity,
+        decrementQuantity,
+        removeItem,
+        clearCart,
+    } = useContext(UserContext); // Access cart from UserContext
     const [totalAmount, setTotalAmount] = useState(0); // State to store the total amount
+    const [serverError, setServerError] = useState();
+    const { user } = useContext(UserContext);
 
     // Function to calculate the total amount
     useEffect(() => {
@@ -19,6 +28,42 @@ export default function Cart() {
         calculateTotalAmount(); // Calculate total whenever cart changes
     }, [cart]);
 
+    // Function to handle the checkout
+    const handleCheckout = async () => {
+        try {
+            // Create an object to hold the data to be sent
+            const orderData = {
+                user_id: user.user_id, // Assuming `user.id` holds the logged-in user ID
+                order_value: totalAmount,
+                cart_items: cart, // Sending the entire cart as an array of items
+            };
+
+            // Send a POST request to the backend to create the order
+            const response = await axios.post(
+                `http://localhost/project/user/orders/user_idd=${user.user_id}`,
+                orderData
+            );
+
+            console.log(response.data.type);
+
+            // Handle the response, e.g., redirect to a success page or show confirmation
+            if (response.data.type === "success") {
+                alert("Order created successfully!");
+                // Optionally, you could redirect or clear the cart here
+                // e.g., clearCart();
+                clearCart();
+            } else {
+                console.log("Creating order failed: ", response.data.message);
+                setServerError(response.data.message);
+            }
+        } catch (error) {
+            console.error("Error creating the order:", error);
+            alert(
+                "An error occurred during checkout. Please try again.\n" + error
+            );
+        }
+    };
+
     if (!cart || cart.length === 0) {
         return <p>Your cart is empty</p>; // Safely check if cart is empty or undefined
     }
@@ -27,6 +72,10 @@ export default function Cart() {
 
     return (
         <div id="cart">
+            {serverError && (
+                <span className="error-message">({serverError})</span>
+            )}
+            <br />
             <div id="cart-container">
                 <h1>Your products</h1>
                 <table>
@@ -43,11 +92,6 @@ export default function Cart() {
                     </thead>
                     <tbody>
                         {cart.map((item) => {
-                            const formatter = new Intl.NumberFormat("en-US", {
-                                style: "currency",
-                                currency: "USD",
-                            });
-
                             return (
                                 <tr key={item.product_id}>
                                     <td>{item.product_id}</td>
@@ -125,7 +169,7 @@ export default function Cart() {
                 <p className="flex-container-between">
                     <span>Estimated Total</span> <span>${totalAmount}</span>
                 </p>
-                <button>Checkout</button>
+                <button onClick={handleCheckout}>Checkout</button>
             </div>
         </div>
     );

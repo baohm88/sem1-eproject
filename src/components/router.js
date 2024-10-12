@@ -16,6 +16,7 @@ import ProductForm from "./admin/ProductForm";
 import ProductDetails from "./client/ProductDetails";
 import Cart from "./client/Cart";
 import UpdatePassword from "./client/UpdatePassword";
+import UserOrders from "./client/UserOrders";
 
 const routes = [
     { path: "/", component: Home, layout: ClientLayout },
@@ -25,6 +26,7 @@ const routes = [
     { path: "/login", component: Login, layout: ClientLayout },
     { path: "/profile", component: Profile, layout: ClientLayout },
     { path: "/update_profile", component: UpdateProfile, layout: ClientLayout },
+    { path: "/user/orders", component: UserOrders, layout: ClientLayout },
     {
         path: "/update_password",
         component: UpdatePassword,

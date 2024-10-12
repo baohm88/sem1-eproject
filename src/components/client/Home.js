@@ -1,6 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { formatter } from "../../util/formatter";
+import { IoChevronBackOutline } from "react-icons/io5";
+import { IoChevronForward } from "react-icons/io5";
 
 export default function Home() {
     const [products, setProducts] = useState([]);
@@ -59,36 +62,27 @@ export default function Home() {
         <>
             <h1 className="center">All products</h1>
             <div className="items-container">
-                {currentProducts.map((item) => {
-                    const formatter = new Intl.NumberFormat("en-US", {
-                        style: "currency",
-                        currency: "USD",
-                    });
+                {currentProducts.map((item) => (
+                    <div className="item-card center" key={item.product_id}>
+                        <Link to={"/products/" + item.product_id}>
+                            <img
+                                src={
+                                    item.product_images
+                                        ? item.product_images.split(",")[0]
+                                        : ""
+                                }
+                                alt={item.product_name}
+                                className="item-image"
+                            />
+                            <h4 className="item-title">{item.product_name}</h4>
+                        </Link>
 
-                    return (
-                        <div className="item-card center" key={item.product_id}>
-                            <Link to={"/products/" + item.product_id}>
-                                <img
-                                    src={
-                                        item.product_images
-                                            ? item.product_images.split(",")[0]
-                                            : ""
-                                    }
-                                    alt={item.product_name}
-                                    className="item-image"
-                                />
-                                <h4 className="item-title">
-                                    {item.product_name}
-                                </h4>
-                            </Link>
-
-                            <p className="item-price">
-                                {formatter.format(item.price)}
-                            </p>
-                            <button className="cart-button">Quick View</button>
-                        </div>
-                    );
-                })}
+                        <p className="item-price">
+                            {formatter.format(item.price)}
+                        </p>
+                        <button className="cart-button">Quick View</button>
+                    </div>
+                ))}
             </div>
 
             <br />
@@ -100,7 +94,7 @@ export default function Home() {
                     onClick={() => paginate(currentPage - 1)}
                     disabled={currentPage === 1}
                 >
-                    Previous
+                    <IoChevronBackOutline />
                 </button>
                 {Array.from({ length: totalPages }, (_, i) => (
                     <button
@@ -115,7 +109,7 @@ export default function Home() {
                     onClick={() => paginate(currentPage + 1)}
                     disabled={currentPage === totalPages}
                 >
-                    Next
+                    <IoChevronForward />
                 </button>
             </div>
         </>

@@ -9,6 +9,10 @@ export const UserContext = createContext({
     handleLogOut: () => {},
     cart: [],
     addToCart: () => {},
+    incrementQuantity: () => {},
+    decrementQuantity: () => {},
+    removeItem: () => {},
+    clearCart: () => {},
 });
 
 function App() {
@@ -57,7 +61,7 @@ function App() {
                         ? {
                               ...item,
                               quantity: item.quantity + 1,
-                              total: item.price + item.price,
+                              total: item.price * (item.quantity + 1),
                           }
                         : item
                 );
@@ -83,7 +87,7 @@ function App() {
                 ? {
                       ...item,
                       quantity: item.quantity + 1,
-                      total: item.price + item.price,
+                      total: item.price * (item.quantity + 1),
                   }
                 : item
         );
@@ -93,19 +97,25 @@ function App() {
         localStorage.setItem("cart", JSON.stringify(updatedCart));
     };
 
-    // Decrement the quantity of a specific product
     const decrementQuantity = (productId) => {
         const updatedCart = cart
-            .map((item) =>
-                item.product_id === productId && item.quantity > 1
-                    ? {
-                          ...item,
-                          quantity: item.quantity - 1,
-                          total: item.price - item.price,
-                      }
-                    : item
-            )
-            .filter((item) => item.quantity > 0); // Remove item if quantity becomes 0
+            .map((item) => {
+                if (item.product_id === productId) {
+                    // Decrement quantity if greater than 1
+                    if (item.quantity > 1) {
+                        return {
+                            ...item,
+                            quantity: item.quantity - 1,
+                            total: item.price * (item.quantity - 1),
+                        };
+                    } else {
+                        // Return null for items to be removed
+                        return null;
+                    }
+                }
+                return item;
+            })
+            .filter((item) => item !== null); // Remove items where we returned null
 
         // Update cart state and localStorage
         setCart(updatedCart);

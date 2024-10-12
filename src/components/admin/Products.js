@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { formatter } from "../../util/formatter";
 
 export default function Products() {
     const [items, setItems] = useState([]);
@@ -39,11 +40,6 @@ export default function Products() {
 
                     <tbody>
                         {items.map((item) => {
-                            const formatter = new Intl.NumberFormat("en-US", {
-                                style: "currency",
-                                currency: "USD",
-                            });
-
                             return (
                                 <tr key={item.product_id}>
                                     <td>{item.product_id}</td>

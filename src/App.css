@@ -65,8 +65,14 @@ input {
     margin-bottom: 10px;
 }
 
+.danger {
+    background-color: var(--dangerColor);
+    color: var(--lightColor);
+    border-radius: 5px;
+    padding: 3px;
+}
 /* button { */
-    /* padding: 5px 10px; */
+/* padding: 5px 10px; */
 /* } */
 
 section {
@@ -82,6 +88,7 @@ table {
 th,
 td {
     border: 1px solid black;
+    line-height: 2rem;
 }
 
 .items-container {
@@ -292,11 +299,8 @@ td {
     text-align: center;
 }
 
-
 .login-form-error-message {
     color: red;
 }
-
-
 
 /* LOGIN END*/
