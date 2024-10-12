@@ -65,9 +65,9 @@ input {
     margin-bottom: 10px;
 }
 
-button {
-    padding: 5px 10px;
-}
+/* button { */
+    /* padding: 5px 10px; */
+/* } */
 
 section {
     min-height: 30vh;
@@ -280,3 +280,23 @@ td {
         flex-direction: column;
     }
 }
+
+/* LOGIN START*/
+.login-form-container {
+    background-color: white;
+    max-width: 30rem;
+    margin: 0 auto;
+}
+
+.login-form-container h1 {
+    text-align: center;
+}
+
+
+.login-form-error-message {
+    color: red;
+}
+
+
+
+/* LOGIN END*/

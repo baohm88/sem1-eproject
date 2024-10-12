@@ -2,21 +2,19 @@ import axios from "axios";
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../App";
+import classes from "./Login.module.css";
 
 export default function Login() {
     const { setUser } = useContext(UserContext);
-
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState(false);
-
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         const userData = { username, password };
-
         try {
             const response = await axios.post(
                 "http://localhost/project/user/login",
@@ -29,7 +27,6 @@ export default function Login() {
             );
 
             const resData = await response.data;
-            console.log(resData);
 
             if (resData.type === "success") {
                 const user = resData.data;
@@ -42,7 +39,7 @@ export default function Login() {
                 localStorage.setItem("user", JSON.stringify(user));
 
                 // Navigate to different routes based on user role
-                if (user.is_admin === 1) {
+                if (user.isAdmin === 1) {
                     navigate("/products");
                 } else {
                     navigate("/");
@@ -58,11 +55,11 @@ export default function Login() {
 
     return (
         <>
-            <form className="user-form" onSubmit={handleSubmit}>
-                <h1 className="center">Login</h1>
-                <br />
+            <form className={classes["user-form"]} onSubmit={handleSubmit}>
+                <h1>Login in or sign up</h1>
+                <p>Please enter your Username and Password:</p>
                 {error && (
-                    <p className="error-message">
+                    <p className={classes["error-message"]}>
                         Wrong username and/or password
                     </p>
                 )}
@@ -71,6 +68,7 @@ export default function Login() {
                     <label>Username</label>
                     <input
                         type="text"
+                        className={classes.input}
                         name="username"
                         onChange={(e) => setUsername(e.target.value)}
                         value={username}
@@ -80,21 +78,36 @@ export default function Login() {
                     <label>Password</label>
                     <input
                         type="password"
+                        className={classes.input}
                         name="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
                 </p>
-                <p className="form-actions">
-                    <button type="submit">LOGIN</button>
+                <p className="center">
+                    <button type="submit" className={classes.button}>
+                        LOGIN
+                    </button>
                 </p>
-                <p>
+                <p className="center">
                     Don't have account yet?{" "}
-                    <Link to="/register">
-                        <button type="button">Register</button>
-                    </Link>{" "}
-                    here
+                    <Link to="/register">Register here</Link>{" "}
                 </p>
+                <div className={classes["benefits-container"]}>
+                    <div className={classes["benefit"]}>
+                        <i className="fas fa-heart"></i> {<span>❤️</span>}
+                        <p>Join Club &amp; receive 50 points</p>
+                    </div>
+                    <div className={classes["benefit"]}>
+                        <i className="fas fa-gift"></i> {<span>🎁</span>}
+                        <p>Earn points &amp; rewards today</p>
+                    </div>
+                    <div className={classes["benefit"]}>
+                        <i className="fas fa-shipping-fast"></i>{" "}
+                        {<span>🚚</span>}
+                        <p>Fast checkout &amp; order tracking</p>
+                    </div>
+                </div>
             </form>
         </>
     );

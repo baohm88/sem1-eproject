@@ -7,9 +7,10 @@ import {
     isEqualsToOtherValue,
 } from "../util/validation.js";
 import axios from "axios";
+import classes from "./Register.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import CryptoJS from "crypto-js";
-import classes from "./Register.module.css";
+
 
 export default function Register() {
     const [firstNameError, setFirstNameError] = useState();
@@ -223,14 +224,14 @@ export default function Register() {
 
     return (
         <>
-            <form className="user-form" onSubmit={handleSubmit}>
-                <h1 className="center">Register a new account</h1>
-
+            <form className={classes['user-form']} onSubmit={handleSubmit}>
+                <h1 className="user-form-title">Register a new account</h1>
+                <br />
+                <p className="text-he">Welcome! We invite you to create an account by completing the form below. If you already have an account, please re-enter your email address on the previous screen.</p>
                 {serverError && (
                     <span className="error-message">({serverError})</span>
                 )}
                 <br />
-
                 <Input
                     label="First Name*"
                     id="firstName"
@@ -239,7 +240,6 @@ export default function Register() {
                     autoFocus
                     error={firstNameError}
                 />
-
                 <Input
                     label="Last Name*"
                     id="lastName"
@@ -345,9 +345,8 @@ export default function Register() {
                 <p>
                     Already had an account?{" "}
                     <Link to="/login">
-                        <button type="button">Login</button>
+                        Login
                     </Link>{" "}
-                    here
                 </p>
             </form>
         </>

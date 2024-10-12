@@ -1,4 +1,66 @@
 .user-form {
-    background-color: var(--darkColor);
-    color: var(--lightColor);
+    max-width: 650px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: "Arial", sans-serif;
 }
+
+h1.center {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 400;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+p.center {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-actions {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.user-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+}
+
+.user-form input[type="text"],
+.user-form input[type="email"],
+.user-form input[type="password"],
+.user-form input[type="date"],
+.user-form input[type="number"] 
+{
+    padding: 4px;
+    margin-bottom: 15px;
+    border: 1px solid #d1d1d1;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.user-form input[type="file"] {
+    margin-bottom: 15px;
+}
+
+.user-form input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+.user-form button {
+    background-color: #A50024;
+    color: white;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 18px;
+    width: 100%;
+}
+
