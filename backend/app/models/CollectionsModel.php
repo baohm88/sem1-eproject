@@ -7,24 +7,31 @@ class CollectionsModel extends BaseController
         $this->__conn = $conn;
     }
 
-    public function getAllProducts($limit = 20, $offset = 0)
+    public function getAllProducts()
     {
-        $startFrom = $offset * $limit;
-        // $sql  = "SELECT * FROM Products LIMIT :limit OFFSET :offset";
-        $sql  = "SELECT p.*, GROUP_CONCAT(pi.product_image) as product_images FROM Products AS p LEFT JOIN ProductImage AS pi ON p.product_id = pi.product_id GROUP BY p.product_id";
+        $sql  = "SELECT p.*, GROUP_CONCAT(pi.image_url) as product_images FROM Products AS p LEFT JOIN ProductImages AS pi ON p.product_id = pi.product_id GROUP BY p.product_id";
 
         $stmt = $this->__conn->prepare($sql);
-        // $stmt->bindParam(":limit", $limit, PDO::PARAM_INT);
-        // $stmt->bindParam(":offset", $startFrom, PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getProductById($product_id)
+    {
+
+        $sql  = "SELECT p.*, GROUP_CONCAT(pi.image_url) as product_images FROM Products AS p 
+                LEFT JOIN ProductImages AS pi ON p.product_id = pi.product_id
+                WHERE p.product_id = :product_id";
+        $stmt = $this->__conn->prepare($sql);
+        $stmt->bindParam(":product_id", $product_id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
     public function getCollectionProducts($category, $max_price = null, $min_price = null, $order_by = null, $offset = null, $desc = null)
     {
-        // $sql = "SELECT * FROM Products WHERE main_category = :main_category";
-        $sql  = "SELECT p.*, GROUP_CONCAT(pi.product_image) as product_images FROM Products AS p 
-                LEFT JOIN ProductImage AS pi ON p.product_id = pi.product_id 
+        $sql  = "SELECT p.*, GROUP_CONCAT(pi.image_url) as product_images FROM Products AS p 
+                LEFT JOIN ProductImages AS pi ON p.product_id = pi.product_id 
                 WHERE p.main_category = :main_category
                 GROUP BY p.product_id";
         $params = [];

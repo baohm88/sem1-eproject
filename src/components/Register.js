@@ -115,12 +115,12 @@ export default function Register() {
         }
         setFirstNameError(false);
 
-        if (isEmpty(userData.first_name)) {
-            setFirstNameError("First name is required");
-            document.getElementById("firstName").focus();
-            return;
-        }
-        setFirstNameError(false);
+        // if (isEmpty(userData.first_name)) {
+        //     setFirstNameError("First name is required");
+        //     document.getElementById("firstName").focus();
+        //     return;
+        // }
+        // setFirstNameError(false);
 
         if (isEmpty(userData.last_name)) {
             setLastNameError("Last name is required");
@@ -137,21 +137,21 @@ export default function Register() {
         setEmailError(false);
 
         if (isEmpty(userData.username)) {
-            setUsernameError("Last name is required");
+            setUsernameError("Username is required");
             document.getElementById("username").focus();
             return;
         }
         setUsernameError(false);
 
         if (isEmpty(userData.password)) {
-            setPasswordError("Last name is required");
+            setPasswordError("Password is required");
             document.getElementById("password").focus();
             return;
         }
         setPasswordError(false);
 
         if (isEmpty(userData.password2)) {
-            setPassword2Error("Last name is required");
+            setPassword2Error("Confirm password is required");
             document.getElementById("password2").focus();
             return;
         }

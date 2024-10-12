@@ -31,6 +31,8 @@ class CollectionsController extends BaseController
         );
         $this->FactoryMessage("success", "This is products array", $data);
     }
+
+
     public function makeup($params = [])
     {
         $inputs = json_decode(file_get_contents('php://input'), true);
@@ -48,5 +50,24 @@ class CollectionsController extends BaseController
             desc: $params["desc"] ?? true
         );
         $this->FactoryMessage("success", "This is products array", $data);
+    }
+
+    public function product($params = [])
+    {
+        // Check if 'id' is passed in the parameters
+        if (!isset($params['id'])) {
+            $this->FactoryMessage("error", "Product ID is required");
+            return;
+        }
+
+        $productId = $params['id']; // Get the product ID from the parameters
+        $product = $this->__instanceModel->getProductById($productId);
+
+        // If the product exists, return it; otherwise, return an error message
+        if ($product) {
+            $this->FactoryMessage("success", "Product found", $product);
+        } else {
+            $this->FactoryMessage("error", "Product not found");
+        }
     }
 }

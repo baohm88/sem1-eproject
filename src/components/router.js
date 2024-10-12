@@ -15,6 +15,7 @@ import UnauthorizedAccess from "./UnauthorizedAccess";
 import ProductForm from "./admin/ProductForm";
 import ProductDetails from "./client/ProductDetails";
 import Cart from "./client/Cart";
+import UpdatePassword from "./client/UpdatePassword";
 
 const routes = [
     { path: "/", component: Home, layout: ClientLayout },
@@ -24,6 +25,11 @@ const routes = [
     { path: "/login", component: Login, layout: ClientLayout },
     { path: "/profile", component: Profile, layout: ClientLayout },
     { path: "/update_profile", component: UpdateProfile, layout: ClientLayout },
+    {
+        path: "/update_password",
+        component: UpdatePassword,
+        layout: ClientLayout,
+    },
     { path: "/products/:id", component: ProductDetails, layout: ClientLayout },
     { path: "/cart", component: Cart, layout: ClientLayout },
     { path: "/products", component: Products, layout: AdminLayout },
@@ -31,7 +37,11 @@ const routes = [
     { path: "/orders", component: Orders, layout: AdminLayout },
     { path: "/categories", component: Categories, layout: AdminLayout },
     { path: "/users", component: Users, layout: AdminLayout },
-    { path: "/unauthorized", component: UnauthorizedAccess, layout: ClientLayout}
+    {
+        path: "/unauthorized",
+        component: UnauthorizedAccess,
+        layout: ClientLayout,
+    },
 ];
 
 export { routes };

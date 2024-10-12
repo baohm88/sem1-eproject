@@ -35,7 +35,7 @@ export default function Profile() {
             <p>Phone: {user.phone} </p>
             <p>Address: {user.address} </p>
 
-            <NavLink to={"/change_password"}>
+            <NavLink to={"/update_password"}>
                 <button>
                     <FaUnlock /> Change Password
                 </button>

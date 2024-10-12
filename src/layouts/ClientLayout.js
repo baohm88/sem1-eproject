@@ -41,12 +41,20 @@ export default function ClientLayout({ children }) {
         const params = new URLSearchParams(location.search);
         const category = params.get("category") || "";
 
-        if (currentPath === "/") {
-            navigate(`/?q=${searchText}`);
-        } else if (currentPath.includes("/skincare")) {
+        // if (currentPath === "/") {
+        //     navigate(`/?q=${searchText}`);
+        // } else if (currentPath.includes("/skincare")) {
+        //     navigate(`/skincare?category=${category}&q=${searchText}`);
+        // } else if (currentPath.includes("/makeup")) {
+        //     navigate(`/makeup?category=${category}&q=${searchText}`);
+        // }
+
+        if (currentPath.includes("/skincare")) {
             navigate(`/skincare?category=${category}&q=${searchText}`);
         } else if (currentPath.includes("/makeup")) {
             navigate(`/makeup?category=${category}&q=${searchText}`);
+        } else {
+            navigate(`/?q=${searchText}`);
         }
     }
 
