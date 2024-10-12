@@ -21,8 +21,6 @@ export default function Home() {
 
     useEffect(() => {
         axios.get("http://localhost/project/collections/all").then((res) => {
-            console.log(res.data);
-
             setProducts(res.data.data);
             setFilteredProducts(res.data.data);
         });
@@ -69,7 +67,7 @@ export default function Home() {
 
                     return (
                         <div className="item-card center" key={item.product_id}>
-                            <Link to={"/"}>
+                            <Link to={"/products/" + item.product_id}>
                                 <img
                                     src={
                                         item.product_images

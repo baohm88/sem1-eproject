@@ -13,6 +13,8 @@ import UpdateProfile from "./UpdateProfile";
 import Register from "./Register";
 import UnauthorizedAccess from "./UnauthorizedAccess";
 import ProductForm from "./admin/ProductForm";
+import ProductDetails from "./client/ProductDetails";
+import Cart from "./client/Cart";
 
 const routes = [
     { path: "/", component: Home, layout: ClientLayout },
@@ -22,16 +24,14 @@ const routes = [
     { path: "/login", component: Login, layout: ClientLayout },
     { path: "/profile", component: Profile, layout: ClientLayout },
     { path: "/update_profile", component: UpdateProfile, layout: ClientLayout },
+    { path: "/products/:id", component: ProductDetails, layout: ClientLayout },
+    { path: "/cart", component: Cart, layout: ClientLayout },
     { path: "/products", component: Products, layout: AdminLayout },
     { path: "/edit_product/:id", component: ProductForm, layout: AdminLayout },
     { path: "/orders", component: Orders, layout: AdminLayout },
     { path: "/categories", component: Categories, layout: AdminLayout },
     { path: "/users", component: Users, layout: AdminLayout },
-    {
-        path: "/unauthorized",
-        component: UnauthorizedAccess,
-        layout: ClientLayout,
-    },
+    { path: "/unauthorized", component: UnauthorizedAccess, layout: ClientLayout}
 ];
 
 export { routes };

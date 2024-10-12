@@ -47,10 +47,16 @@ export default function Products() {
                             return (
                                 <tr key={item.product_id}>
                                     <td>{item.product_id}</td>
-                                    <td>
+                                    <td className="center">
                                         <img
-                                            src="https://www.clarinsusa.com/on/demandware.static/-/Library-Sites-clarins-v3/default/dwc0d1a641/content/Cleansing-2020/Merchpage-V3/img/packshot-nettoyant-moussant-hydratant.png"
-                                            alt=""
+                                            src={
+                                                item.product_images
+                                                    ? item.product_images.split(
+                                                          ","
+                                                      )[0]
+                                                    : ""
+                                            }
+                                            alt={item.product_name}
                                             style={{
                                                 width: "5rem",
                                                 height: "auto",
@@ -58,10 +64,16 @@ export default function Products() {
                                         />
                                     </td>
                                     <td>{item.product_name}</td>
-                                    <td>{formatter.format(item.price)}</td>
-                                    <td>{item.quantity_in_stock}</td>
-                                    <td>{item.main_category}</td>
-                                    <td>{item.sub_category}</td>
+                                    <td className="center">
+                                        {formatter.format(item.price)}
+                                    </td>
+                                    <td className="center">{item.stock_qty}</td>
+                                    <td className="center">
+                                        {item.main_category}
+                                    </td>
+                                    <td className="center">
+                                        {item.sub_category}
+                                    </td>
                                     <td className="center">
                                         <button>View</button>
                                     </td>

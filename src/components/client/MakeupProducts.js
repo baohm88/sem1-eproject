@@ -81,10 +81,16 @@ export default function SkincareProducts() {
             </div>
 
             <p className="tabs-container center">
-                <span onClick={() => updateCategoryInURL("Face")}>Face</span>
-                <span onClick={() => updateCategoryInURL("Eyes")}>Eyes</span>
-                <span onClick={() => updateCategoryInURL("Lips")}>Lips</span>
-                <span onClick={() => navigate("/makeup")}>View All</span>{" "}
+                <button onClick={() => updateCategoryInURL("Face")}>
+                    Face
+                </button>
+                <button onClick={() => updateCategoryInURL("Eyes")}>
+                    Eyes
+                </button>
+                <button onClick={() => updateCategoryInURL("Lips")}>
+                    Lips
+                </button>
+                <button onClick={() => navigate("/makeup")}>View All</button>
                 {/* Reset to show all items */}
             </p>
             <div className="items-container">
@@ -96,7 +102,7 @@ export default function SkincareProducts() {
 
                     return (
                         <div className="item-card center" key={item.product_id}>
-                            <Link to={"/"}>
+                            <Link to={"/products/" + item.product_id}>
                                 <img
                                     src={
                                         item.product_images
