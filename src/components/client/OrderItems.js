@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { formatter } from "../../util/formatter";
 
 export default function OrderItems() {
@@ -45,17 +45,19 @@ export default function OrderItems() {
                         {orderItems.map((item) => (
                             <tr key={item.product_id}>
                                 <td>
-                                    <img
-                                        src={
-                                            item.product_images
-                                                ? item.product_images.split(
-                                                      ","
-                                                  )[0]
-                                                : ""
-                                        }
-                                        alt={item.product_name}
-                                        style={{ width: "5rem" }}
-                                    />
+                                    <Link to={"/products/" + item.product_id}>
+                                        <img
+                                            src={
+                                                item.product_images
+                                                    ? item.product_images.split(
+                                                          ","
+                                                      )[0]
+                                                    : ""
+                                            }
+                                            alt={item.product_name}
+                                            style={{ width: "5rem" }}
+                                        />
+                                    </Link>
                                 </td>
                                 <td>{item.product_name}</td>
                                 <td>{item.main_category}</td>

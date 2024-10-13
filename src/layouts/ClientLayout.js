@@ -17,6 +17,7 @@ import { UserContext } from "../App";
 
 export default function ClientLayout({ children }) {
     const { user, cart, handleLogOut } = useContext(UserContext);
+    const [totalQuantity, setTotalQuantity] = useState(0); // State to store total quantity
     const isLoggedIn = user !== null;
 
     const [searchText, setSearchText] = useState("");
@@ -56,6 +57,17 @@ export default function ClientLayout({ children }) {
         };
     }, [sidebarRef]);
 
+    // Function to calculate the total amount and total quantity
+    useEffect(() => {
+        const calculateTotals = () => {
+            const quantity = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+            setTotalQuantity(quantity); // Set the total quantity state
+        };
+
+        calculateTotals(); // Calculate totals whenever the cart changes
+    }, [cart]);
+
     // Handle search form submission
     function handleSearch(e) {
         e.preventDefault();
@@ -72,6 +84,8 @@ export default function ClientLayout({ children }) {
             navigate(`/?q=${searchText}`);
         }
     }
+
+    console.log(cart);
 
     return (
         <>
@@ -133,7 +147,10 @@ export default function ClientLayout({ children }) {
                         </span>
                         <span>
                             <NavLink to={"/cart"}>
-                                <IoBagAddOutline />
+                                <IoBagAddOutline />{" "}
+                                <span>
+                                    {totalQuantity > 0 ? totalQuantity : ""}
+                                </span>
                             </NavLink>
                         </span>
                     </li>
