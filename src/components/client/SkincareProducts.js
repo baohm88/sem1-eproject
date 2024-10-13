@@ -4,10 +4,12 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { IoChevronBackOutline } from "react-icons/io5";
 import { IoChevronForward } from "react-icons/io5";
 import { formatter } from "../../util/formatter";
+import Modal from "./Modal"; // Import the Modal component
 
 export default function SkincareProducts() {
     const [items, setItems] = useState([]);
     const [filteredItems, setFilteredItems] = useState([]);
+    const [selectedProduct, setSelectedProduct] = useState(null); // For managing modal product
     const location = useLocation(); // Get the current location (URL)
     const navigate = useNavigate();
 
@@ -74,6 +76,14 @@ export default function SkincareProducts() {
     // Calculate total pages
     const totalPages = Math.ceil(filteredItems.length / productsPerPage);
 
+    const openModal = (product) => {
+        setSelectedProduct(product); // Set the selected product for the modal
+    };
+
+    const closeModal = () => {
+        setSelectedProduct(null); // Close the modal by setting the selected product to null
+    };
+
     return (
         <>
             <div className="center">
@@ -119,7 +129,12 @@ export default function SkincareProducts() {
                             <p className="item-price">
                                 {formatter.format(item.price)}
                             </p>
-                            <button className="cart-button">Quick View</button>
+                            <button
+                                className="cart-button"
+                                onClick={() => openModal(item)} // Open modal with product info
+                            >
+                                Quick View
+                            </button>
                         </div>
                     );
                 })}
@@ -152,6 +167,10 @@ export default function SkincareProducts() {
                     <IoChevronForward />
                 </button>
             </div>
+
+            {selectedProduct && (
+                <Modal product={selectedProduct} onClose={closeModal} />
+            )}
         </>
     );
 }

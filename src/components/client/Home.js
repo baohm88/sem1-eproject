@@ -4,10 +4,12 @@ import { Link, useLocation } from "react-router-dom";
 import { formatter } from "../../util/formatter";
 import { IoChevronBackOutline } from "react-icons/io5";
 import { IoChevronForward } from "react-icons/io5";
+import Modal from "./Modal"; // Import the Modal component
 
 export default function Home() {
     const [products, setProducts] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
+    const [selectedProduct, setSelectedProduct] = useState(null); // For managing modal product
 
     const location = useLocation();
 
@@ -58,6 +60,14 @@ export default function Home() {
     // Calculate total pages
     const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
 
+    const openModal = (product) => {
+        setSelectedProduct(product); // Set the selected product for the modal
+    };
+
+    const closeModal = () => {
+        setSelectedProduct(null); // Close the modal by setting the selected product to null
+    };
+
     return (
         <>
             <h1 className="center">All products</h1>
@@ -80,7 +90,12 @@ export default function Home() {
                         <p className="item-price">
                             {formatter.format(item.price)}
                         </p>
-                        <button className="cart-button">Quick View</button>
+                        <button
+                            className="cart-button"
+                            onClick={() => openModal(item)} // Open modal with product info
+                        >
+                            Quick View
+                        </button>
                     </div>
                 ))}
             </div>
@@ -112,6 +127,10 @@ export default function Home() {
                     <IoChevronForward />
                 </button>
             </div>
+            
+            {selectedProduct && (
+                <Modal product={selectedProduct} onClose={closeModal} />
+            )}
         </>
     );
 }

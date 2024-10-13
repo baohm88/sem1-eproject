@@ -17,19 +17,25 @@ import ProductDetails from "./client/ProductDetails";
 import Cart from "./client/Cart";
 import UpdatePassword from "./client/UpdatePassword";
 import UserOrders from "./client/UserOrders";
+import OrderItems from "./client/OrderItems";
 
 const routes = [
     { path: "/", component: Home, layout: ClientLayout },
-    { path: "/skincare", component: SkincareProducts, layout: ClientLayout },
-    { path: "/makeup", component: MakeupProducts, layout: ClientLayout },
     { path: "/register", component: Register, layout: ClientLayout },
     { path: "/login", component: Login, layout: ClientLayout },
     { path: "/profile", component: Profile, layout: ClientLayout },
     { path: "/update_profile", component: UpdateProfile, layout: ClientLayout },
-    { path: "/user/orders", component: UserOrders, layout: ClientLayout },
     {
         path: "/update_password",
         component: UpdatePassword,
+        layout: ClientLayout,
+    },
+    { path: "/skincare", component: SkincareProducts, layout: ClientLayout },
+    { path: "/makeup", component: MakeupProducts, layout: ClientLayout },
+    { path: "/user/orders", component: UserOrders, layout: ClientLayout },
+    {
+        path: "/user/order_items/:order_id",
+        component: OrderItems,
         layout: ClientLayout,
     },
     { path: "/products/:id", component: ProductDetails, layout: ClientLayout },

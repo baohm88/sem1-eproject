@@ -181,9 +181,8 @@ export default function Register() {
                 <br />
                 <div>
                     <Input
-                        label="user_id*"
                         id="user_id"
-                        type="int"
+                        type="hidden"
                         name="user_id"
                         defaultValue={user.user_id}
                     />

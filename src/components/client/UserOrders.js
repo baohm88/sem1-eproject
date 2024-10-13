@@ -3,6 +3,7 @@ import { UserContext } from "../../App";
 import axios from "axios";
 import { formatter } from "../../util/formatter";
 import { FaEye } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 export default function UserOrders() {
     const { user } = useContext(UserContext);
@@ -64,9 +65,13 @@ export default function UserOrders() {
                                 <span className="danger">{order.status}</span>
                             </td>
                             <td>
-                                <span>
-                                    <FaEye />
-                                </span>
+                                <Link
+                                    to={"/user/order_items/" + order.order_id}
+                                >
+                                    <span>
+                                        <FaEye />
+                                    </span>
+                                </Link>
                             </td>
                         </tr>
                     ))}
