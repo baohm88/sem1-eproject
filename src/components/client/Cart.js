@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../App";
 import { formatter } from "../../util/formatter";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function Cart() {
     const {
@@ -75,7 +76,7 @@ export default function Cart() {
             {serverError && (
                 <span className="error-message">({serverError})</span>
             )}
-            <br />
+
             <div id="cart-container">
                 <h1>Your products</h1>
                 <table>
@@ -96,17 +97,21 @@ export default function Cart() {
                                 <tr key={item.product_id}>
                                     <td>{item.product_id}</td>
                                     <td>
-                                        <img
-                                            src={
-                                                item.product_images
-                                                    ? item.product_images.split(
-                                                          ","
-                                                      )[0]
-                                                    : ""
-                                            }
-                                            alt={item.product_name}
-                                            style={{ width: "5rem" }}
-                                        />
+                                        <Link
+                                            to={"/products/" + item.product_id}
+                                        >
+                                            <img
+                                                src={
+                                                    item.product_images
+                                                        ? item.product_images.split(
+                                                              ","
+                                                          )[0]
+                                                        : ""
+                                                }
+                                                alt={item.product_name}
+                                                style={{ width: "5rem" }}
+                                            />
+                                        </Link>
                                     </td>
                                     <td>{item.product_name}</td>
                                     <td className="center">

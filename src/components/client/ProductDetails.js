@@ -112,7 +112,18 @@ export default function ProductDetails() {
                         <p>No images available</p>
                     )}
                 </div>
-
+                <button
+                    style={{
+                        backgroundColor: "#A6212B",
+                        border: "none",
+                        padding: "5px 10px",
+                        color: "white",
+                        borderRadius: "5px",
+                        cursor: "pointer",
+                    }}
+                >
+                    Write a review
+                </button>
                 {/* Rating Summary Section */}
                 <div className="rating-summary">
                     <h2>Ratings Summary</h2>
