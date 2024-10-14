@@ -91,7 +91,7 @@ td {
     line-height: 2rem;
 }
 
-.items-container {
+.products-container {
     display: flex;
     gap: 2rem;
     justify-content: center;
@@ -99,13 +99,13 @@ td {
     align-items: center;
 }
 
-.item-card {
+.product-card {
     background-color: var(--secondaryColor);
     width: 20rem;
     height: 25rem;
 }
 
-.item-image {
+.product-image {
     width: 90%;
     height: 90%;
 }

@@ -14,7 +14,13 @@ class BaseController
             echo "File not exist";
         }
     }
-
+    public function isDigit($arg)
+    {
+        if (ctype_digit($arg) && $arg > 0) {
+            return true;
+        }
+        return false;
+    }
     public function initModel($modelName, $conn)
     {
         try {

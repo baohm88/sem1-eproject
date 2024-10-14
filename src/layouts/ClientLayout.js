@@ -1,4 +1,4 @@
-import { NavLink, useNavigate, useLocation } from "react-router-dom";
+import { NavLink, useNavigate, useLocation, Link } from "react-router-dom";
 import Footer from "../components/Footer";
 import logo from "../assets/clarins_logo.png";
 import clubLogo from "../assets/club-clarins.webp";
@@ -241,7 +241,7 @@ export default function ClientLayout({ children }) {
                         full size products, Club Clarins Dollars, and more!
                     </p>
                     <p className="call-to-actions">
-                        <a href="#">JOIN NOW</a>
+                        <Link to={"/"}>JOIN NOW</Link>
                     </p>
                 </div>
             </div>

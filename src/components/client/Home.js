@@ -5,14 +5,16 @@ import { formatter } from "../../util/formatter";
 import { IoChevronBackOutline, IoChevronForward } from "react-icons/io5";
 import Modal from "./Modal"; // Import the Modal component
 
+import Slider from "rc-slider"; // Import rc-slider
+import "rc-slider/assets/index.css"; // Import rc-slider styles
+
 export default function Home() {
     const [products, setProducts] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [selectedProduct, setSelectedProduct] = useState(null); // For managing modal product
     const [sortOption, setSortOption] = useState(""); // State for sorting option
-    const [minPrice, setMinPrice] = useState(0); // State for minimum price filter
-    const [maxPrice, setMaxPrice] = useState(1000); // State for maximum price filter
-    const [priceRange, setPriceRange] = useState([minPrice, maxPrice]); // State for the range slider
+    const [selectedRange, setSelectedRange] = useState(false);
+    const [priceRange, setPriceRange] = useState([0, 200]); // State for the range slider
 
     const location = useLocation();
 
@@ -27,6 +29,7 @@ export default function Home() {
         indexOfLastProduct
     );
 
+    // fetch products from db initially
     useEffect(() => {
         axios.get("http://localhost/project/collections/all").then((res) => {
             setProducts(res.data.data);
@@ -98,14 +101,16 @@ export default function Home() {
         setSelectedProduct(null); // Close the modal by setting the selected product to null
     };
 
-    // Handle price range slider changes
-    const handleRangeChange = (e) => {
-        const { name, value } = e.target;
-        if (name === "min") {
-            setPriceRange([Number(value), priceRange[1]]);
-        } else {
-            setPriceRange([priceRange[0], Number(value)]);
-        }
+    // Handle price range change
+    const handlePriceRangeChange = (newRange) => {
+        setSelectedRange(true);
+        setPriceRange(newRange);
+        setFilteredProducts(
+            products.filter(
+                (product) =>
+                    product.price >= newRange[0] && product.price <= newRange[1]
+            )
+        );
     };
 
     return (
@@ -113,7 +118,7 @@ export default function Home() {
             <h1 className="center">All products</h1>
 
             {/* Sorting and Filtering Controls */}
-            <div className="filters center">
+            <div className="filters">
                 {/* Sorting Dropdown */}
                 <label htmlFor="sort">Sort by: </label>
                 <select
@@ -121,68 +126,77 @@ export default function Home() {
                     value={sortOption}
                     onChange={(e) => setSortOption(e.target.value)}
                 >
-                    <option value="">Select</option>
+                    <option value="" disabled>
+                        Select
+                    </option>
                     <option value="name_asc">Name (A-Z)</option>
                     <option value="name_desc">Name (Z-A)</option>
                     <option value="price_asc">Price (Low to High)</option>
                     <option value="price_desc">Price (High to Low)</option>
                 </select>
-
-                {/* Price Range Filter */}
-                <div className="price-filter">
-                    <label htmlFor="min-price">
-                        Min Price: {formatter.format(priceRange[0])}
-                    </label>
-                    <input
-                        id="min-price"
-                        type="range"
-                        name="min"
-                        min="0"
-                        max="1000"
-                        value={priceRange[0]}
-                        onChange={handleRangeChange}
-                    />
-                    <label htmlFor="max-price">
-                        Max Price: {formatter.format(priceRange[1])}
-                    </label>
-                    <input
-                        id="max-price"
-                        type="range"
-                        name="max"
-                        min="0"
-                        max="1000"
-                        value={priceRange[1]}
-                        onChange={handleRangeChange}
-                    />
-                    <div>
-                        Selected range: {formatter.format(priceRange[0])} -{" "}
-                        {formatter.format(priceRange[1])}
-                    </div>
-                </div>
             </div>
 
-            <div className="items-container">
-                {currentProducts.map((item) => (
-                    <div className="item-card center" key={item.product_id}>
-                        <Link to={"/products/" + item.product_id}>
+            {/* Price Range Filter */}
+            <div className="price-filter">
+                <h4>Filter by Price:</h4>
+                <Slider
+                    range
+                    min={0}
+                    max={200}
+                    value={priceRange}
+                    onChange={handlePriceRangeChange}
+                    step={5} // You can adjust the step size here
+                />
+
+                {selectedRange && (
+                    <p>
+                        <button
+                            onClick={() => {
+                                setPriceRange([0, 200]);
+                                setSelectedRange(false);
+                            }}
+                        >
+                            X
+                        </button>{" "}
+                        {formatter.format(priceRange[0])} -{" "}
+                        {formatter.format(priceRange[1])}
+                    </p>
+                )}
+            </div>
+
+            {/* Total Products Count */}
+            <div className="total-products">
+                <h4>{filteredProducts.length} products</h4>
+            </div>
+
+            <div className="products-container">
+                {currentProducts.map((product) => (
+                    <div
+                        className="product-card center"
+                        key={product.product_id}
+                    >
+                        <Link to={"/products/" + product.product_id}>
                             <img
                                 src={
-                                    item.product_images
-                                        ? item.product_images.split(",")[0]
+                                    product.product_images
+                                        ? product.product_images.split(",")[0]
                                         : ""
                                 }
-                                alt={item.product_name}
-                                className="item-image"
+                                alt={product.product_name}
+                                className="product-image"
                             />
-                            <h4 className="item-title">{item.product_name}</h4>
+                            <h4 className="product-title">
+                                {product.product_name}
+                            </h4>
                         </Link>
 
-                        <p className="item-price">
-                            {formatter.format(item.price)}
+                        <p className="product-price">
+                            {formatter.format(product.price)}
                         </p>
+                        <p className="product-price">RATING COUNT</p>
                         <button
                             className="cart-button"
-                            onClick={() => openModal(item)} // Open modal with product info
+                            onClick={() => openModal(product)} // Open modal with product info
                         >
                             Quick View
                         </button>
