@@ -246,6 +246,13 @@ export default function SkincareProducts() {
                 ))}
             </div>
 
+
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
             {/* Pagination Controls */}
             <div className="pagination center">
                 <button
