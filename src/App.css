@@ -1,8 +1,8 @@
 * {
     margin: 0;
     padding: 0;
-    text-decoration: none;
-    list-style-type: none;
+    /* text-decoration: none;
+    list-style-type: none; */
 }
 
 :root {
@@ -13,33 +13,33 @@
     --dangerColor: red;
 }
 
-a {
+/* a {
     color: var(--darkColor);
-}
+} */
 
-ul {
+/* ul {
     display: flex;
     justify-content: space-evenly;
-}
+} */
 
-li {
+/* li {
     padding: 10px;
     font-weight: bold;
     text-transform: uppercase;
-}
+} */
 
-li a:hover,
+/* li a:hover,
 li a.active {
     text-decoration: underline;
     color: var(--primaryColor);
-}
+} */
 
-main {
+/* main {
     width: 90vw;
     min-height: 90vh;
     margin: 1rem auto;
     padding: 0 1rem;
-}
+} */
 
 .center {
     text-align: center;
@@ -59,11 +59,11 @@ main {
     border-radius: 5px;
 }
 
-input {
+/* input {
     width: 100%;
     line-height: 2rem;
     margin-bottom: 10px;
-}
+} */
 
 .danger {
     background-color: var(--dangerColor);
@@ -75,21 +75,21 @@ input {
 /* padding: 5px 10px; */
 /* } */
 
-section {
+/* section {
     min-height: 30vh;
-}
+} */
 
-table {
+/* table {
     border-collapse: collapse;
     width: 100%;
     margin: 5px;
-}
+} */
 
-th,
+/* th,
 td {
     border: 1px solid black;
     line-height: 2rem;
-}
+} */
 
 .products-container {
     display: flex;

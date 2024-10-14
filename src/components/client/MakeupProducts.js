@@ -52,8 +52,10 @@ export default function MakeupProducts() {
                 (product) => product.sub_category === category
             );
             setSelectedCategory(category); // Set the selected category state
+            document.title = "Clarins Makeup | " + category;
         } else {
             setSelectedCategory(""); // Clear category selection if not provided
+            document.title = "Clarins Makeup";
         }
 
         if (searchText) {

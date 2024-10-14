@@ -6,6 +6,9 @@ import { formatter } from "../../util/formatter";
 import { FaStar } from "react-icons/fa"; // Import star icon
 import Modal from "react-modal"; // Import react-modal
 
+// Set the app element for accessibility
+Modal.setAppElement("#root");
+
 // Custom styles for the modal
 const customStyles = {
     content: {
@@ -49,6 +52,11 @@ export default function ProductDetails() {
                 const productData = res.data.data;
                 setProduct(productData);
                 calculateRatingSummary(productData.product_ratings);
+
+                // Dynamically set the document title to the product name
+                if (productData.product_name) {
+                    document.title = productData.product_name;
+                }
             });
     }, [id]);
 
@@ -199,7 +207,7 @@ export default function ProductDetails() {
                     style={customStyles}
                     contentLabel="Write a Review"
                 >
-                    <h2>My review for </h2>
+                    <h3>My review for {product.product_name}</h3>
                     <div>
                         <p>Select Rating:</p>
                         {renderStars(selectedRating, setSelectedRating)}
@@ -215,7 +223,19 @@ export default function ProductDetails() {
                         ></textarea>
                     </div>
                     <div>
-                        <button onClick={handleSubmitReview}>Submit</button>
+                        <button
+                            onClick={handleSubmitReview}
+                            style={{
+                                backgroundColor: "#A6212B",
+                                border: "none",
+                                padding: "5px 10px",
+                                color: "white",
+                                borderRadius: "5px",
+                                cursor: "pointer",
+                            }}
+                        >
+                            Post Review
+                        </button>
                         <button
                             onClick={closeModal}
                             style={{ marginLeft: "10px" }}
@@ -232,60 +252,52 @@ export default function ProductDetails() {
                     <p>Total Ratings: {ratingSummary.totalRatings}</p>
 
                     <div>
-                        <table>
-                            {[5, 4, 3, 2, 1].map((star) => (
-                                <tr key={star} className="star-row">
-                                    <td
+                        {[5, 4, 3, 2, 1].map((star) => (
+                            <div
+                                key={star}
+                                className="star-row"
+                                style={{ display: "flex" }}
+                            >
+                                <div
+                                    className="star-label"
+                                    style={{ minWidth: "10rem" }}
+                                >
+                                    {star} <FaStar color={"#A6212B"} />:{" "}
+                                    {ratingSummary.starCounts[star]} (
+                                    {getPercentage(
+                                        ratingSummary.starCounts[star]
+                                    )}
+                                    %)
+                                </div>
+                                <div
+                                    className="progress-bar"
+                                    style={{
+                                        width: "100%",
+                                        backgroundColor: "#e4e5e9",
+                                        height: "10px",
+                                    }}
+                                >
+                                    <div
+                                        className="progress"
                                         style={{
-                                            width: "3rem",
-                                            textAlign: "right",
-                                            paddingRight: "5px",
+                                            width: `${getPercentage(
+                                                ratingSummary.starCounts[star]
+                                            )}%`,
+                                            backgroundColor: "#A6212B",
+                                            height: "10px",
                                         }}
-                                    >
-                                        {star} <FaStar color={"#A6212B"} />:
-                                    </td>
-
-                                    <td style={{ maxWidth: "5rem" }}>
-                                        <div
-                                            className="progress-bar"
-                                            style={{
-                                                backgroundColor: "#e4e5e9",
-                                            }}
-                                        >
-                                            <div
-                                                className="progress"
-                                                style={{
-                                                    width: `${getPercentage(
-                                                        ratingSummary
-                                                            .starCounts[star]
-                                                    )}%`,
-                                                    backgroundColor: "#A6212B",
-                                                    height: "10px",
-                                                }}
-                                            ></div>
-                                        </div>
-                                    </td>
-                                    <td
-                                        style={{
-                                            width: "5rem",
-
-                                            paddingLeft: "5px",
-                                        }}
-                                    >
-                                        {ratingSummary.starCounts[star]} (
-                                        {getPercentage(
-                                            ratingSummary.starCounts[star]
-                                        )}
-                                        %)
-                                    </td>
-                                </tr>
-                            ))}
-                        </table>
+                                    ></div>
+                                </div>
+                            </div>
+                        ))}
                     </div>
                 </div>
 
                 {/* Individual Ratings Section */}
-                <div className="ratings-container">
+                <div
+                    className="ratings-container"
+                    style={{ marginTop: "1rem" }}
+                >
                     <h2>Ratings & Reviews</h2>
                     {product.product_ratings &&
                     product.product_ratings.length > 0 ? (

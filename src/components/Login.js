@@ -10,6 +10,7 @@ export default function Login() {
     const [password, setPassword] = useState("");
     const [error, setError] = useState(false);
     const navigate = useNavigate();
+    document.title = "Account Login";
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -56,7 +57,7 @@ export default function Login() {
     return (
         <>
             <form className={classes["user-form"]} onSubmit={handleSubmit}>
-                <h1>Login in or sign up</h1>
+                <h1>Log in or sign up</h1>
                 <p>Please enter your Username and Password:</p>
                 {error && (
                     <p className={classes["error-message"]}>

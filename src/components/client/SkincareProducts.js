@@ -54,8 +54,10 @@ export default function SkincareProducts() {
                 (product) => product.sub_category === category
             );
             setSelectedCategory(category); // Set the selected category state
+            document.title = "Clarins Skincare | " + category;
         } else {
             setSelectedCategory(""); // Clear category selection if not provided
+            document.title = "Clarins Skincare";
         }
 
         if (searchText) {
@@ -245,7 +247,6 @@ export default function SkincareProducts() {
                     </div>
                 ))}
             </div>
-
 
             <br />
             <br />

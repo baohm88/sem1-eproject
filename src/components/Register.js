@@ -11,7 +11,6 @@ import classes from "./Register.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import CryptoJS from "crypto-js";
 
-
 export default function Register() {
     const [firstNameError, setFirstNameError] = useState();
     const [lastNameError, setLastNameError] = useState();
@@ -30,7 +29,7 @@ export default function Register() {
     console.log(publicId);
 
     const navigate = useNavigate();
-
+    document.title = "Registration";
     const handleImageChange = (e) => {
         setImageFile(e.target.files[0]);
     };
@@ -224,10 +223,14 @@ export default function Register() {
 
     return (
         <>
-            <form className={classes['user-form']} onSubmit={handleSubmit}>
+            <form className={classes["user-form"]} onSubmit={handleSubmit}>
                 <h1 className="user-form-title">Register a new account</h1>
                 <br />
-                <p className="text-he">Welcome! We invite you to create an account by completing the form below. If you already have an account, please re-enter your email address on the previous screen.</p>
+                <p className="text-he">
+                    Welcome! We invite you to create an account by completing
+                    the form below. If you already have an account, please
+                    re-enter your email address on the previous screen.
+                </p>
                 {serverError && (
                     <span className="error-message">({serverError})</span>
                 )}
@@ -343,10 +346,7 @@ export default function Register() {
                 </p>
 
                 <p>
-                    Already had an account?{" "}
-                    <Link to="/login">
-                        Login
-                    </Link>{" "}
+                    Already had an account? <Link to="/login">Login</Link>{" "}
                 </p>
             </form>
         </>

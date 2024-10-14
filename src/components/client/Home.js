@@ -34,6 +34,8 @@ export default function Home() {
         axios.get("http://localhost/project/collections/all").then((res) => {
             setProducts(res.data.data);
             setFilteredProducts(res.data.data);
+
+            document.title = "Clarins Store";
         });
     }, []);
 
