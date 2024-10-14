@@ -120,55 +120,30 @@ export default function ProductDetails() {
                     <p>Total Ratings: {ratingSummary.totalRatings}</p>
 
                     <div>
-                        <table>
-                            {[5, 4, 3, 2, 1].map((star) => (
-                                <tr key={star} className="star-row">
-                                    <td
+                        {[5, 4, 3, 2, 1].map((star) => (
+                            <div key={star} className="star-row">
+                                <div className="star-label">
+                                    {star} <FaStar color={"#A6212B"} />:{" "}
+                                    {ratingSummary.starCounts[star]} (
+                                    {getPercentage(
+                                        ratingSummary.starCounts[star]
+                                    )}
+                                    %)
+                                </div>
+                                <div className="progress-bar">
+                                    <div
+                                        className="progress"
                                         style={{
-                                            width: "3rem",
-                                            textAlign: "right",
-                                            paddingRight: "5px",
+                                            width: `${getPercentage(
+                                                ratingSummary.starCounts[star]
+                                            )}%`,
+                                            backgroundColor: "#ffc107",
+                                            height: "10px",
                                         }}
-                                    >
-                                        {star} <FaStar color={"#A6212B"} />:
-                                    </td>
-
-                                    <td style={{ maxWidth: "5rem" }}>
-                                        <div
-                                            className="progress-bar"
-                                            style={{
-                                                backgroundColor: "#e4e5e9",
-                                            }}
-                                        >
-                                            <div
-                                                className="progress"
-                                                style={{
-                                                    width: `${getPercentage(
-                                                        ratingSummary
-                                                            .starCounts[star]
-                                                    )}%`,
-                                                    backgroundColor: "#A6212B",
-                                                    height: "10px",
-                                                }}
-                                            ></div>
-                                        </div>
-                                    </td>
-                                    <td
-                                        style={{
-                                            width: "5rem",
-
-                                            paddingLeft: "5px",
-                                        }}
-                                    >
-                                        {ratingSummary.starCounts[star]} (
-                                        {getPercentage(
-                                            ratingSummary.starCounts[star]
-                                        )}
-                                        %)
-                                    </td>
-                                </tr>
-                            ))}
-                        </table>
+                                    ></div>
+                                </div>
+                            </div>
+                        ))}
                     </div>
                 </div>
 
