@@ -7,18 +7,40 @@ class CollectionsModel extends BaseController
         $this->__conn = $conn;
     }
 
-    public function getAllProducts()
+    public function getProductRatingsById($product_id)
     {
-        $sql  = "SELECT p.*, GROUP_CONCAT(pi.image_url) as product_images FROM Products AS p LEFT JOIN ProductImages AS pi ON p.product_id = pi.product_id GROUP BY p.product_id";
-
+        $sql  = "SELECT pr.*, u.username FROM ProductRating pr 
+                JOIN users u ON u.user_id = pr.user_id 
+                WHERE pr.product_id = :product_id
+                ORDER BY pr.review_date DESC";
         $stmt = $this->__conn->prepare($sql);
+        $stmt->bindParam(":product_id", $product_id, PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getAllProducts()
+    {
+        $sql  = "SELECT p.*, GROUP_CONCAT(pi.image_url) as product_images 
+        FROM Products AS p 
+        LEFT JOIN ProductImages AS pi 
+        ON p.product_id = pi.product_id GROUP BY p.product_id";
+
+        $stmt = $this->__conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($products as &$product) {
+            // Convert the product_images string into an array
+            if ($product['product_images']) {
+                $product['product_images'] = explode(',', $product['product_images']);
+            } else {
+                $product['product_images'] = []; // No images, return an empty array
+            }
+        }
+    }
+
     public function getProductById($product_id)
     {
-
         $sql  = "SELECT p.*, GROUP_CONCAT(pi.image_url) as product_images FROM Products AS p 
                 LEFT JOIN ProductImages AS pi ON p.product_id = pi.product_id
                 WHERE p.product_id = :product_id";

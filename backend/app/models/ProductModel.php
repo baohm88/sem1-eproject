@@ -1,5 +1,5 @@
 <?php
-class ProductModel
+class ProductModel extends BaseController
 {
     private $__conn;
     public function __construct($conn)
@@ -67,5 +67,61 @@ class ProductModel
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function createNewProduct($o_product) {}
+    public function createNewProduct($columns, $values)
+    {
+        // Convert the column and value strings into arrays
+        $a_columns = explode(", ", $columns);
+        $a_values = explode(", ", $values);
+
+        // Prepare the placeholders for the SQL statement
+        $placeholders = [];
+        foreach ($a_columns as $column_name) {
+            $placeholders[] = ":value_" . trim($column_name);
+        }
+
+        // Create the SQL statement
+
+        $sql = "INSERT INTO Products (" . implode(", ", $a_columns) . ") VALUES (" . implode(", ", $placeholders) . ")";
+
+        // Prepare the SQL statement
+        $stmt = $this->__conn->prepare($sql);
+
+        // Bind the values to the placeholders
+        foreach ($a_columns as $index => $column_name) {
+            $placeholder = ":value_" . trim($column_name);
+            $value = trim($a_values[$index]); // Get the corresponding value and trim whitespace
+
+            // Determine the appropriate data type for binding
+            if ($column_name === 'quantity_in_stock') {
+                $stmt->bindValue($placeholder, (int)$value, PDO::PARAM_INT); // Bind as integer
+            } else {
+                $stmt->bindValue($placeholder, $value, PDO::PARAM_STR); // Bind as string
+            }
+        }
+
+        // Execute the prepared statement
+        $stmt->execute();
+
+        $sql1 = "SELECT MAX(product_id) as id FROM Products";
+        $stmt1 = $this->__conn->prepare($sql1);
+        $stmt1->execute();
+        return $stmt1->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function deleteProductImages($product_id)
+    {
+        $sql = "DELETE FROM ProductImages WHERE product_id = :product_id";
+        $stmt = $this->__conn->prepare($sql);
+        $stmt->bindValue(":product_id", $product_id, PDO::PARAM_INT);
+        $stmt->execute();
+    }
+
+    public function insertNewProductImage($image_link, $product_id)
+    {
+        $sql = "INSERT INTO ProductImages (image_url, product_id) VALUES (:image_link, :product_id)";
+        $stmt = $this->__conn->prepare($sql);
+        $stmt->bindValue(":image_link", $image_link);
+        $stmt->bindValue(":product_id", $product_id);
+        $stmt->execute();
+    }
 }

@@ -60,7 +60,7 @@ class BaseController
 
     public function insert_data_to_instance($instance, $inputs)
     {
-        // $this->viewData($inputs);
+        // $this->viewData($instance);
         // die();
         foreach ($inputs as $key => $value) {
             $method_name = "set_" . $key;

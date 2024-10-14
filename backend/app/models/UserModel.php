@@ -85,7 +85,7 @@ class UserModel extends BaseController
             }
             return null;
         } catch (Exception $e) {
-            echo "Error checking user: " . $e->getMessage();
+            echo "error checking user: " . $e->getMessage();
         }
     }
 
