@@ -113,7 +113,13 @@ export default function Cart() {
                                             />
                                         </Link>
                                     </td>
-                                    <td>{item.product_name}</td>
+                                    <td>
+                                        <Link
+                                            to={"/products/" + item.product_id}
+                                        >
+                                            {item.product_name}
+                                        </Link>
+                                    </td>
                                     <td className="center">
                                         {" "}
                                         <button
