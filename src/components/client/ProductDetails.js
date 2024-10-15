@@ -171,8 +171,6 @@ export default function ProductDetails() {
             user_id: user.user_id,
             rating: selectedRating,
             rating_comment: reviewText,
-            // username: "CurrentUser", // Replace this with the current user's name if available
-            // review_date: new Date().toLocaleDateString(),
         };
 
         // Send review data to the backend
@@ -302,11 +300,11 @@ export default function ProductDetails() {
                         }}
                     >
                         <div className="summary">
-                            <p>
+                            {/* <p>
                                 Average Rating: {ratingSummary.averageRating} /
                                 5
                             </p>
-                            <p>Total Ratings: {ratingSummary.totalRatings}</p>
+                            <p>Total Ratings: {ratingSummary.totalRatings}</p> */}
 
                             {/* Average Rating Stars */}
                             <div
@@ -333,19 +331,22 @@ export default function ProductDetails() {
                                 <div
                                     key={star}
                                     className="star-row"
-                                    style={{ display: "flex" }}
+                                    style={{
+                                        display: "flex",
+                                        alignItems: "center",
+                                    }}
                                 >
                                     <div
                                         className="star-label"
-                                        style={{ minWidth: "8rem" }}
+                                        style={{
+                                            width: "4rem",
+                                            textAlign: "right",
+                                            paddingRight: "1rem",
+                                        }}
                                     >
                                         {star} <FaStar color={"#A6212B"} />:{" "}
-                                        {ratingSummary.starCounts[star]} (
-                                        {getPercentage(
-                                            ratingSummary.starCounts[star]
-                                        )}
-                                        %)
                                     </div>
+
                                     <div
                                         className="progress-bar"
                                         style={{
@@ -369,6 +370,15 @@ export default function ProductDetails() {
                                                 borderRadius: "3px",
                                             }}
                                         ></div>
+                                    </div>
+                                    <div
+                                        className="star-percentage"
+                                        style={{
+                                            width: "8rem",
+                                            paddingLeft: "1rem",
+                                        }}
+                                    >
+                                        {ratingSummary.starCounts[star]}
                                     </div>
                                 </div>
                             ))}
