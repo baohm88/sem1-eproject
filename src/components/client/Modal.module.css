@@ -4,7 +4,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.7);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -13,7 +13,7 @@
 
 .modal-content {
     background: white;
-    padding: 20px;
+    padding: 24px;
     border-radius: 8px;
     max-width: 500px;
     width: 100%;
@@ -54,7 +54,6 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    color: black;
 }
 
 .prev-button {
@@ -70,8 +69,8 @@
     cursor: not-allowed;
     opacity: 0.5;
 }
-.addtocard{
-    background-color: #e60023; /* Màu nền của nút là đỏ đậm */
+.addtocart {
+    background-color: #e60023;
     color: white; /* Màu chữ trên nút là trắng */
     border: none; /* Loại bỏ viền của nút */
     border-radius: 5px; /* Làm tròn các góc của nút */
@@ -80,6 +79,6 @@
     font-size: 14px; /* Kích thước chữ trên nút là 14px */
     transition: background-color 0.3s ease; /* Hiệu ứng chuyển màu nền của nút khi hover */
 }
-.addtocard:hover {
+.addtocart:hover {
     background-color: #cc0020; /* Đổi màu nền nút thành đỏ sậm hơn khi hover */
 }

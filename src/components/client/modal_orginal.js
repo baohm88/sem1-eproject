@@ -29,7 +29,6 @@ export default function Modal({ product, onClose }) {
         addToCart(product); // Call addToCart with the current product
         alert(product.product_name + " has been added to cart!");
     };
-    console.log(product);
 
     if (!product) return null; // If no product, return null (don't render anything)
 
@@ -67,9 +66,9 @@ export default function Modal({ product, onClose }) {
                     </div>
                 )}
 
-                <h3>{product.product_name}</h3>
-                <p>{product.product_description}</p>
-                <h4>{formatter.format(product.price)}</h4>
+                <h2>{product.product_name}</h2>
+                <p>{product.description}</p>
+                <h3>{formatter.format(product.price)}</h3>
                 <button
                     onClick={handleAddToCart}
                     className={classes["addtocart"]}
