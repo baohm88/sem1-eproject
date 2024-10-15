@@ -8,9 +8,8 @@ Follow the instructions below to clone the project and set it up locally.
 
 ### Prerequisites
 
--   PHP 7.4 or higher
--   MySQL
--   Composer (for managing PHP dependencies)
+-   VS Code
+-   XAMPP 8.2.4 or newer
 -   Node.js (for managing frontend dependencies, if any)
 -   Git
 
@@ -20,4 +19,10 @@ To clone the repository, run the following command:
 
 ```bash
 git clone https://github.com/baohm88/team2fly-eproject.git
+```
+
+Navigate into the project folder:
+
+```bash
+cd team2fly-eproject
 ```
