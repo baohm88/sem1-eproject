@@ -16,9 +16,10 @@ export default function UserOrders() {
                 const response = await axios.get(
                     `http://localhost/project/user/orders/user_id=${user.user_id}` // Corrected the parameter name to user_id
                 );
-                console.log(response);
                 if (response.data.type === "success") {
                     setUserOrders(response.data.data); // Set user orders to state
+                    document.title =
+                        user.first_name + " " + user.last_name + "'s Orders";
                 } else {
                     console.log(
                         "Creating order failed: ",
@@ -36,7 +37,7 @@ export default function UserOrders() {
         }
     }, [user]); // Add user as a dependency to fetch orders when user changes
 
-    if (!userOrders || userOrders.length == 0) {
+    if (!userOrders || userOrders.length === 0) {
         return <p>You have no orders yet.</p>;
     }
 
@@ -49,32 +50,42 @@ export default function UserOrders() {
             <div className="center">
                 <h1>Your orders</h1>
                 <table>
-                    <tr>
-                        <th>Order #</th>
-                        <th>Order Date</th>
-                        <th>Order Value</th>
-                        <th>Order Status</th>
-                        <th>Actions</th>
-                    </tr>
-                    {userOrders.map((order) => (
-                        <tr key={order.order_id} className="center">
-                            <td>{order.order_id}</td>
-                            <td>{order.order_date}</td>
-                            <td>{formatter.format(order.order_value)}</td>
-                            <td>
-                                <span className="danger">{order.status}</span>
-                            </td>
-                            <td>
-                                <Link
-                                    to={"/user/order_items/" + order.order_id}
-                                >
-                                    <span>
-                                        <FaEye />
-                                    </span>
-                                </Link>
-                            </td>
+                    <thead>
+                        <tr>
+                            <th>Order #</th>
+                            <th>Order Date</th>
+                            <th>Order Value</th>
+                            <th>Order Status</th>
+                            <th>Actions</th>
                         </tr>
-                    ))}
+                    </thead>
+
+                    <tbody>
+                        {userOrders.map((order) => (
+                            <tr key={order.order_id} className="center">
+                                <td>{order.order_id}</td>
+                                <td>{order.order_date}</td>
+                                <td>{formatter.format(order.order_value)}</td>
+                                <td>
+                                    <span className="danger">
+                                        {order.status}
+                                    </span>
+                                </td>
+                                <td>
+                                    <Link
+                                        to={
+                                            "/user/order_items/" +
+                                            order.order_id
+                                        }
+                                    >
+                                        <span>
+                                            <FaEye />
+                                        </span>
+                                    </Link>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
                 </table>
             </div>
         </>

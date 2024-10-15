@@ -158,7 +158,7 @@ class UserController extends BaseController
                 $quantity = $cart_item["quantity"];
                 $product_id  = $cart_item["product_id"];
                 // $instanceOrderModel->createOrderItem($order_id[0]['id'], $product_id, $cart_item['product_name'], $cart_item['product_price'], $cart_item['quantity']);
-                $instanceOrderModel->createOrderItem($order_id[0]['id'], $product_id, $cart_item['product_name'], $cart_item['price'], $cart_item['quantity']);
+                $instanceOrderModel->createOrderItem($order_id[0]['id'], $product_id, $cart_item['product_name'], $cart_item['product_price'], $cart_item['quantity']);
             }
             $this->FactoryMessage("success", "Your Order has been placed Successfully ", $result);
         }

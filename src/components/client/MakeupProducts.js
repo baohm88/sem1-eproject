@@ -21,7 +21,7 @@ export default function MakeupProducts() {
     const navigate = useNavigate();
 
     const [currentPage, setCurrentPage] = useState(1); // For tracking the current page
-    const productsPerPage = 3; // Number of products per page
+    const productsPerPage = 4; // Number of products per page
 
     // Calculate index range for the products to be displayed on the current page
     const indexOfLastProduct = currentPage * productsPerPage;
@@ -254,29 +254,31 @@ export default function MakeupProducts() {
             <br />
             <br />
             {/* Pagination Controls */}
-            <div className="pagination center">
-                <button
-                    onClick={() => paginate(currentPage - 1)}
-                    disabled={currentPage === 1}
-                >
-                    <IoChevronBackOutline />
-                </button>
-                {Array.from({ length: totalPages }, (_, i) => (
+            {totalPages > 0 && (
+                <div className="pagination center">
                     <button
-                        key={i + 1}
-                        onClick={() => paginate(i + 1)}
-                        className={currentPage === i + 1 ? "active" : ""}
+                        onClick={() => paginate(currentPage - 1)}
+                        disabled={currentPage === 1}
                     >
-                        {i + 1}
+                        <IoChevronBackOutline />
                     </button>
-                ))}
-                <button
-                    onClick={() => paginate(currentPage + 1)}
-                    disabled={currentPage === totalPages}
-                >
-                    <IoChevronForward />
-                </button>
-            </div>
+                    {Array.from({ length: totalPages }, (_, i) => (
+                        <button
+                            key={i + 1}
+                            onClick={() => paginate(i + 1)}
+                            className={currentPage === i + 1 ? "active" : ""}
+                        >
+                            {i + 1}
+                        </button>
+                    ))}
+                    <button
+                        onClick={() => paginate(currentPage + 1)}
+                        disabled={currentPage === totalPages}
+                    >
+                        <IoChevronForward />
+                    </button>
+                </div>
+            )}
 
             {selectedProduct && (
                 <Modal product={selectedProduct} onClose={closeModal} />

@@ -13,6 +13,8 @@ export default function UpdatePassword() {
     const [serverError, setServerError] = useState();
     const navigate = useNavigate();
 
+    document.title = "Update Password";
+
     console.log(user);
 
     async function handleSubmit(e) {

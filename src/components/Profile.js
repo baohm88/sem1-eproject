@@ -17,7 +17,7 @@ export default function Profile() {
         if (!user) {
             navigate("/login"); // Navigate to login if user is not set
         }
-        document.title = user.full_name + " profile";
+        document.title = user.full_name + "'s profile";
     }, [user, navigate]);
 
     // Show a loading message if user is not yet available

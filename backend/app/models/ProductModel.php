@@ -124,4 +124,15 @@ class ProductModel extends BaseController
         $stmt->bindValue(":product_id", $product_id);
         $stmt->execute();
     }
+
+    public function updateExistingProduct($o_product)
+    {
+        $sql_params = rtrim($this->create_sql_param_for_sql($o_product, "PUT"), ", ");
+        $sql = "UPDATE Products
+                SET " . $sql_params . "
+                WHERE product_id = :product_id";
+        $stmt = $this->__conn->prepare($sql);
+        $this->bind_instance_value($o_product, $stmt);
+        $stmt->execute();
+    }
 }

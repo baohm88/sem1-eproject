@@ -59,7 +59,11 @@ export default function OrderItems() {
                                         />
                                     </Link>
                                 </td>
-                                <td>{item.product_name}</td>
+                                <td>
+                                    <Link to={"/products/" + item.product_id}>
+                                        {item.product_name}
+                                    </Link>
+                                </td>
                                 <td>{item.main_category}</td>
                                 <td>{item.sub_category}</td>
                                 <td>{formatter.format(item.price)}</td>

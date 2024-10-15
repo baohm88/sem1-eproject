@@ -11,18 +11,26 @@ class OrderItemModel
     public function checkProductQuantity($product_id, $quantity)
     {
         $sql = "SELECT 
-                CASE WHEN stock_qty > :quantity
-                    THEN 'true'
-                    ELSE 'false'
-                END
-                AS result
-                FROM Products
-                WHERE product_id = :product_id
-        ";
+        CASE WHEN stock_qty > :quantity
+            THEN 'true'
+            ELSE 'false'
+        END
+        AS result
+        FROM Products
+        WHERE product_id = :product_id
+";
         $stmt = $this->__conn->prepare($sql);
         $stmt->bindValue(":quantity", $quantity, PDO::PARAM_INT);
         $stmt->bindValue(":product_id", $product_id, PDO::PARAM_INT);
         $stmt->execute();
+        $sql1 = "UPDATE Products
+        SET stock_qty  = stock_qty - :quantity
+        WHERE product_id = :product_id
+        ";
+        $stmt1 = $this->__conn->prepare($sql1);
+        $stmt1->bindValue(":quantity", $quantity, PDO::PARAM_INT);
+        $stmt1->bindValue(":product_id", $product_id, PDO::PARAM_INT);
+        $stmt1->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
