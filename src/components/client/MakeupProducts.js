@@ -7,7 +7,7 @@ import Modal from "./Modal"; // Import the Modal component
 
 import Slider from "rc-slider"; // Import rc-slider
 import "rc-slider/assets/index.css"; // Import rc-slider styles
-
+import classes from "./SkincareProducts.module.css";
 export default function MakeupProducts() {
     const [products, setProducts] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
@@ -52,10 +52,8 @@ export default function MakeupProducts() {
                 (product) => product.sub_category === category
             );
             setSelectedCategory(category); // Set the selected category state
-            document.title = "Clarins Makeup | " + category;
         } else {
             setSelectedCategory(""); // Clear category selection if not provided
-            document.title = "Clarins Makeup";
         }
 
         if (searchText) {
@@ -140,7 +138,7 @@ export default function MakeupProducts() {
 
     return (
         <>
-            <div className="center">
+            <div className={classes["center"]}>
                 <h1>MAKEUP</h1>
                 <p>
                     From daily rituals to targeted anti-aging care, discover the
@@ -149,7 +147,7 @@ export default function MakeupProducts() {
                 </p>
             </div>
 
-            <p className="tabs-container center">
+            <p className={classes["tabs-container"]}>
                 <button onClick={() => updateCategoryInURL("Face")}>
                     Face
                 </button>
@@ -163,7 +161,7 @@ export default function MakeupProducts() {
             </p>
 
             {/* Sorting and Filtering Controls */}
-            <div className="filters">
+            <div className={classes["filters"]}>
                 {/* Sorting Dropdown */}
                 <label htmlFor="sort">Sort by: </label>
                 <select
@@ -179,44 +177,45 @@ export default function MakeupProducts() {
                     <option value="price_asc">Price (Low to High)</option>
                     <option value="price_desc">Price (High to Low)</option>
                 </select>
+                {/* Price Range Filter */}
+                <div className="price-filter">
+                    <h4>Filter by Price:</h4>
+                    <Slider
+                        range
+                        min={0}
+                        max={200}
+                        value={priceRange}
+                        onChange={handlePriceRangeChange}
+                        step={5} // You can adjust the step size here
+                    />
+                    {selectedRange && (
+                        <p>
+                            <button
+                                onClick={() => {
+                                    setPriceRange([0, 200]);
+                                    setSelectedRange(false);
+                                }}
+                            >
+                                X
+                            </button>{" "}
+                            {formatter.format(priceRange[0])} -{" "}
+                            {formatter.format(priceRange[1])}
+                        </p>
+                    )}
+                </div>
             </div>
 
-            {/* Price Range Filter */}
-            <div className="price-filter">
-                <h4>Filter by Price:</h4>
-                <Slider
-                    range
-                    min={0}
-                    max={200}
-                    value={priceRange}
-                    onChange={handlePriceRangeChange}
-                    step={5} // You can adjust the step size here
-                />
-                {selectedRange && (
-                    <p>
-                        <button
-                            onClick={() => {
-                                setPriceRange([0, 200]);
-                                setSelectedRange(false);
-                            }}
-                        >
-                            X
-                        </button>{" "}
-                        {formatter.format(priceRange[0])} -{" "}
-                        {formatter.format(priceRange[1])}
-                    </p>
-                )}
-            </div>
+
 
             {/* Total Products Count */}
-            <div className="total-products">
+            <div className={classes["total-products"]}>
                 <h4>{filteredProducts.length} products</h4>
             </div>
 
-            <div className="products-container">
+            <div className={classes["products-container"]}>
                 {currentProducts.map((product) => (
                     <div
-                        className="product-card center"
+                        className={classes["product-card"]}
                         key={product.product_id}
                     >
                         <Link to={"/products/" + product.product_id}>
@@ -227,18 +226,18 @@ export default function MakeupProducts() {
                                         : ""
                                 }
                                 alt={product.product_name}
-                                className="product-image"
+                                className={classes["product-image"]}
                             />
-                            <h4 className="product-title">
+                            <h4 className={classes["product-title"]}>
                                 {product.product_name}
                             </h4>
                         </Link>
 
-                        <p className="product-price">
+                        <p className={classes["product-price"]}>
                             {formatter.format(product.price)}
                         </p>
                         <button
-                            className="cart-button"
+                            className={classes["cart-button"]}
                             onClick={() => openModal(product)} // Open modal with product info
                         >
                             Quick View
@@ -254,31 +253,29 @@ export default function MakeupProducts() {
             <br />
             <br />
             {/* Pagination Controls */}
-            {totalPages > 0 && (
-                <div className="pagination center">
+            <div className={classes["pagination"]}>
+                <button
+                    onClick={() => paginate(currentPage - 1)}
+                    disabled={currentPage === 1}
+                >
+                    <IoChevronBackOutline />
+                </button>
+                {Array.from({ length: totalPages }, (_, i) => (
                     <button
-                        onClick={() => paginate(currentPage - 1)}
-                        disabled={currentPage === 1}
+                        key={i + 1}
+                        onClick={() => paginate(i + 1)}
+                        className={currentPage === i + 1 ? "active" : ""}
                     >
-                        <IoChevronBackOutline />
+                        {i + 1}
                     </button>
-                    {Array.from({ length: totalPages }, (_, i) => (
-                        <button
-                            key={i + 1}
-                            onClick={() => paginate(i + 1)}
-                            className={currentPage === i + 1 ? "active" : ""}
-                        >
-                            {i + 1}
-                        </button>
-                    ))}
-                    <button
-                        onClick={() => paginate(currentPage + 1)}
-                        disabled={currentPage === totalPages}
-                    >
-                        <IoChevronForward />
-                    </button>
-                </div>
-            )}
+                ))}
+                <button
+                    onClick={() => paginate(currentPage + 1)}
+                    disabled={currentPage === totalPages}
+                >
+                    <IoChevronForward />
+                </button>
+            </div>
 
             {selectedProduct && (
                 <Modal product={selectedProduct} onClose={closeModal} />

@@ -70,3 +70,16 @@
     cursor: not-allowed;
     opacity: 0.5;
 }
+.addtocard{
+    background-color: #e60023; /* Màu nền của nút là đỏ đậm */
+    color: white; /* Màu chữ trên nút là trắng */
+    border: none; /* Loại bỏ viền của nút */
+    border-radius: 5px; /* Làm tròn các góc của nút */
+    padding: 10px 15px; /* Tạo khoảng đệm bên trong nút để nội dung không sát cạnh */
+    cursor: pointer; /* Con trỏ chuột chuyển thành dạng pointer khi hover qua nút */
+    font-size: 14px; /* Kích thước chữ trên nút là 14px */
+    transition: background-color 0.3s ease; /* Hiệu ứng chuyển màu nền của nút khi hover */
+}
+.addtocard:hover {
+    background-color: #cc0020; /* Đổi màu nền nút thành đỏ sậm hơn khi hover */
+}

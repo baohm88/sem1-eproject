@@ -1,0 +1,162 @@
+/* Cart.module.css */
+
+/* General Layout */
+.cart {
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem;
+}
+
+.cartContainer {
+    width: 65%;
+}
+
+.orderSummary {
+    width: 30%;
+    background-color: #f9f9f9;
+    padding: 1.5rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th,
+table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+/* Product Image */
+table td img {
+    width: 100px;
+    border-radius: 8px;
+}
+
+/* Centering Text and Buttons */
+.center {
+    text-align: center;
+}
+
+.button {
+    padding: 0.5rem 1rem;
+    background-color: #fff;
+    border: 1px solid #dcdcdc;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #f0f0f0;
+}
+
+/* Order Summary */
+.orderSummary h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.flexContainerBetween {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+}
+
+.orderSummary hr {
+    border: 1px solid #e0e0e0;
+}
+
+.orderSummary p {
+    font-size: 1rem;
+    margin: 0.5rem 0;
+}
+
+.checkoutButton {
+    background-color: #d6001c;
+    color: white;
+    padding: 1rem;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.checkoutButton:hover {
+    background-color: #bf0018;
+}
+
+/* Promotion Code Section */
+.promotionCode {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.promotionCode input {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 70%;
+}
+
+.promotionCode button {
+    background-color: #333;
+    color: white;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.promotionCode button:hover {
+    background-color: #555;
+}
+
+/* Subscription Box */
+.subscriptionBox {
+    background-color: #f0f0f0;
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+.subscriptionBox label {
+    display: flex;
+    align-items: center;
+}
+
+.subscriptionBox input {
+    margin-right: 0.5rem;
+}
+
+.subscriptionBox .description {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.subscriptionBox select {
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .cart {
+        flex-direction: column;
+    }
+
+    .cartContainer,
+    .orderSummary {
+        width: 100%;
+        margin-top: 1rem;
+    }
+}
