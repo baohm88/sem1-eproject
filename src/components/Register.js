@@ -115,13 +115,6 @@ export default function Register() {
         }
         setFirstNameError(false);
 
-        // if (isEmpty(userData.first_name)) {
-        //     setFirstNameError("First name is required");
-        //     document.getElementById("firstName").focus();
-        //     return;
-        // }
-        // setFirstNameError(false);
-
         if (isEmpty(userData.last_name)) {
             setLastNameError("Last name is required");
             document.getElementById("lastName").focus();
@@ -337,6 +330,7 @@ export default function Register() {
                             src={imageURL}
                             alt="Uploaded"
                             style={{ width: "300px" }}
+                            className="avatar-image"
                         />
                     </div>
                 )}

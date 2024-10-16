@@ -48,16 +48,13 @@
 /* Additional styling to match the subtle feel of the image */
 body {
     background-color: #fafafa;
-    font-family: 'Arial', sans-serif;
+    font-family: "Arial", sans-serif;
 }
-
-
-
 
 .total-products {
     text-align: left; /* Căn lề trái cho phần hiển thị tổng số sản phẩm */
     margin-bottom: 20px; /* Tạo khoảng cách phía dưới để tránh nội dung tiếp theo quá sát */
-    font-family: 'Arial', sans-serif; /* Đặt font chữ Arial, và sans-serif là dự phòng */
+    font-family: "Arial", sans-serif; /* Đặt font chữ Arial, và sans-serif là dự phòng */
     font-size: 18px; /* Kích thước chữ 18px */
     color: #333; /* Màu chữ là màu xám đậm */
 }
@@ -68,67 +65,6 @@ body {
     gap: 20px;
     padding: 0 10px;
     justify-items: center; /* Đảm bảo các thẻ sản phẩm được căn giữa theo chiều ngang */
-}
-
-.product-card {
-    position: relative; /* Đặt vị trí tương đối để chứa phần tử con có vị trí tuyệt đối (như huy hiệu Best Seller) */
-    display: flex; /* Sử dụng flexbox để dễ dàng căn giữa nội dung bên trong */
-    flex-direction: column; /* Xếp các phần tử bên trong theo chiều dọc (hình ảnh, tiêu đề, giá) */
-    align-items: center; /* Căn giữa nội dung bên trong theo chiều ngang */
-    justify-content: space-between; /* Tạo khoảng cách hợp lý giữa các thành phần bên trong */
-    border: 1px solid #e1e1e1; /* Đặt viền mỏng màu xám nhạt xung quanh thẻ sản phẩm */
-    border-radius: 8px; /* Làm tròn các góc thẻ sản phẩm */
-    padding: 15px; /* Tạo khoảng cách bên trong thẻ sản phẩm */
-    background-color: #fff; /* Màu nền trắng */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Hiệu ứng chuyển động khi hover (thẻ sản phẩm nhô lên) */
-    text-align: center; /* Căn giữa nội dung văn bản trong thẻ */
-    max-width: 300px; /* Giới hạn chiều rộng tối đa của thẻ sản phẩm là 300px */
-    height: 100%; /* Đảm bảo tất cả các thẻ sản phẩm có cùng chiều cao */
-}
-
-.product-card:hover {
-    transform: translateY(-5px); /* Thẻ sẽ nhô lên 5px khi hover */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Tạo đổ bóng nhẹ khi hover, giúp sản phẩm nổi bật */
-}
-
-.product-image {
-    width: 100%; /* Đảm bảo hình ảnh chiếm toàn bộ chiều ngang của thẻ */
-    height: auto; /* Chiều cao sẽ tự động điều chỉnh theo tỷ lệ của ảnh */
-    margin-bottom: 15px; /* Tạo khoảng cách 15px bên dưới hình ảnh */
-    object-fit: contain; /* Đảm bảo ảnh không bị méo, giữ nguyên tỷ lệ */
-}
-
-.product-title {
-    font-size: 16px; /* Kích thước font cho tiêu đề là 16px */
-    color: #333; /* Màu chữ xám đậm cho tiêu đề */
-    margin: 10px 0; /* Tạo khoảng cách 10px trên dưới tiêu đề */
-    font-weight: 500; /* Độ đậm của chữ tiêu đề là 500 (trung bình) */
-    height: 50px; /* Đặt chiều cao cố định cho tiêu đề để giữ sự đồng đều giữa các thẻ */
-    display: flex; /* Sử dụng flex để căn giữa nội dung theo chiều ngang và dọc */
-    align-items: center; /* Căn giữa tiêu đề theo chiều dọc */
-    justify-content: center; /* Căn giữa tiêu đề theo chiều ngang */
-}
-
-.product-price {
-    font-size: 18px; /* Kích thước font chữ cho giá sản phẩm là 18px */
-    color: #000; /* Màu chữ đen cho giá sản phẩm */
-    font-weight: bold; /* In đậm giá sản phẩm */
-    margin-bottom: 15px; /* Tạo khoảng cách 15px bên dưới giá sản phẩm */
-}
-
-.cart-button {
-    background-color: #e60023; /* Màu nền của nút là đỏ đậm */
-    color: white; /* Màu chữ trên nút là trắng */
-    border: none; /* Loại bỏ viền của nút */
-    border-radius: 5px; /* Làm tròn các góc của nút */
-    padding: 10px 15px; /* Tạo khoảng đệm bên trong nút để nội dung không sát cạnh */
-    cursor: pointer; /* Con trỏ chuột chuyển thành dạng pointer khi hover qua nút */
-    font-size: 14px; /* Kích thước chữ trên nút là 14px */
-    transition: background-color 0.3s ease; /* Hiệu ứng chuyển màu nền của nút khi hover */
-}
-
-.cart-button:hover {
-    background-color: #cc0020; /* Đổi màu nền nút thành đỏ sậm hơn khi hover */
 }
 
 .best-seller-badge {
@@ -142,7 +78,7 @@ body {
     left: 10px; /* Cách cạnh trái 10px */
     border-radius: 5px; /* Làm tròn các góc của huy hiệu */
 }
-.pagination{
+.pagination {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -150,6 +86,4 @@ body {
     margin-bottom: 20px;
     text-align: center;
     width: 100%;
-
-
 }

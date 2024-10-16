@@ -23,7 +23,7 @@
 }
 
 .banner-content h2 {
-    font-size: 2.5em;
+    font-size: 1.5em;
     font-weight: bold;
 }
 
@@ -67,7 +67,7 @@
 }
 
 .benefit p {
-    font-family: 'Arial', sans-serif;
+    font-family: "Arial", sans-serif;
     font-size: 15px;
     color: #333;
     margin: 0;
@@ -156,40 +156,42 @@
 
 .product-categories {
     display: flex;
-    justify-content: space-between;  /* Phân bố đều các phần tử */
+    justify-content: space-between; /* Phân bố đều các phần tử */
     gap: 20px; /* Khoảng cách giữa các phần tử */
     padding: 20px;
     max-width: 1200px; /* Đặt chiều rộng tối đa cho container */
     margin: 0 auto; /* Căn giữa container */
     flex-wrap: wrap; /* Cho phép các phần tử xuống dòng khi không đủ không gian */
     margin-top: 100px;
-    }
+}
 
 .category1 {
-    transform: translateY(70px)
+    transform: translateY(70px);
 }
 
 .category2 {
-    transform: translateY(-70px)
+    transform: translateY(-70px);
 }
 
-.category1, .category2 {
+.category1,
+.category2 {
     flex: 1; /* Các phần tử sẽ giãn đều ra không gian */
     display: flex;
     flex-direction: column;
     align-items: center; /* Căn giữa nội dung theo trục ngang */
     max-width: 300px; /* Đặt chiều rộng tối đa cho mỗi phần tử */
     padding: 10px;
-    border-radius: 5px
+    border-radius: 5px;
 }
 
-.category1:hover, .category2:hover {
+.category1:hover,
+.category2:hover {
     background-color: #f4ecec;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Hiệu ứng đổ bóng khi di chuột qua sản phẩm */
 }
 
 .category-image {
-    width: 100%;  /* Hình ảnh chiếm toàn bộ chiều rộng của phần tử */
+    width: 100%; /* Hình ảnh chiếm toàn bộ chiều rộng của phần tử */
     height: auto; /* Giữ nguyên tỷ lệ hình ảnh */
     max-width: 300px; /* Đặt chiều rộng tối đa của hình ảnh */
     padding: 10px; /* Thêm khoảng cách bên trong */
@@ -210,20 +212,24 @@ h3 {
     color: black;
 }
 
-
 @media (max-width: 1026px) {
     .product-categories {
         flex-wrap: wrap; /* Cho phép xuống dòng */
         justify-content: space-between; /* Phân bố đều khoảng cách giữa các phần tử */
     }
-    .category1, .category2 {
+    .category1,
+    .category2 {
         transform: none;
-        flex-basis: calc(50% - 10px); /* Mỗi phần tử chiếm 50% chiều rộng trừ đi khoảng cách */
+        flex-basis: calc(
+            50% - 10px
+        ); /* Mỗi phần tử chiếm 50% chiều rộng trừ đi khoảng cách */
         max-width: none; /* Xóa bỏ giới hạn chiều rộng */
     }
 
     .category {
-        flex-basis: calc(50% - 10px); /* Mỗi phần tử chiếm 50% chiều rộng trừ đi khoảng cách */
+        flex-basis: calc(
+            50% - 10px
+        ); /* Mỗi phần tử chiếm 50% chiều rộng trừ đi khoảng cách */
         max-width: none; /* Xóa bỏ giới hạn chiều rộng */
     }
 
@@ -237,14 +243,19 @@ h3 {
         flex-wrap: wrap; /* Cho phép xuống dòng */
         justify-content: space-between; /* Phân bố đều khoảng cách giữa các phần tử */
     }
-    .category1, .category2 {
+    .category1,
+    .category2 {
         transform: none;
-        flex-basis: calc(50% - 10px); /* Mỗi phần tử chiếm 50% chiều rộng trừ đi khoảng cách */
+        flex-basis: calc(
+            50% - 10px
+        ); /* Mỗi phần tử chiếm 50% chiều rộng trừ đi khoảng cách */
         max-width: none; /* Xóa bỏ giới hạn chiều rộng */
     }
 
     .category {
-        flex-basis: calc(50% - 10px); /* Mỗi phần tử chiếm 50% chiều rộng trừ đi khoảng cách */
+        flex-basis: calc(
+            50% - 10px
+        ); /* Mỗi phần tử chiếm 50% chiều rộng trừ đi khoảng cách */
         max-width: none; /* Xóa bỏ giới hạn chiều rộng */
     }
 
@@ -360,7 +371,6 @@ h3 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Hiệu ứng đổ bóng khi di chuột qua sản phẩm */
 }
 
-
 /* Our exclusive services */
 /* Phần container chính của exclusive-services */
 .exclusive-services {
@@ -444,8 +454,8 @@ h3 {
 
 /* Hiệu ứng khi di chuột qua mỗi khối dịch vụ */
 .service:hover {
-    transform: translateY(-10px); /* Khối dịch vụ được nâng lên 10px khi hover */
+    transform: translateY(
+        -10px
+    ); /* Khối dịch vụ được nâng lên 10px khi hover */
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Đổ bóng mạnh hơn khi hover */
 }
-
-

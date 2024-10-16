@@ -29,7 +29,6 @@ p.center {
     margin-top: 20px;
 }
 
-
 /* Label styling */
 .user-form label {
     display: block;
@@ -78,7 +77,7 @@ p.center {
 
 /* Button styling */
 .user-form button {
-    background-color: #A50024;
+    background-color: #a50024;
     color: white;
     padding: 15px 20px;
     border: none;
@@ -102,7 +101,7 @@ p.center {
 }
 
 /* Image preview */
-img {
+.user-form img {
     display: block;
     margin: 10px auto;
     max-width: 200px;
@@ -140,7 +139,7 @@ img {
 
 /* Update button */
 .form-actions-container button[type="submit"] {
-    background-color: #A50024;
+    background-color: #a50024;
     color: white;
 }
 

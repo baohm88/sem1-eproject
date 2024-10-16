@@ -8,6 +8,7 @@ import Modal from "./Modal"; // Import the Modal component
 import Slider from "rc-slider"; // Import rc-slider
 import "rc-slider/assets/index.css"; // Import rc-slider styles
 import classes from "./SkincareProducts.module.css";
+import ProductItem from "./ProductItem";
 
 export default function SkincareProducts() {
     const [products, setProducts] = useState([]);
@@ -126,11 +127,11 @@ export default function SkincareProducts() {
     const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
 
     const openModal = (product) => {
-        setSelectedProduct(product); // Set the selected product for the modal
+        setSelectedProduct(product);
     };
 
     const closeModal = () => {
-        setSelectedProduct(null); // Close the modal by setting the selected product to null
+        setSelectedProduct(null);
     };
 
     // Handle price range change
@@ -141,7 +142,7 @@ export default function SkincareProducts() {
 
     return (
         <>
-            <div className= {classes["center"]}>
+            <div className={classes["center"]}>
                 <h1>SKINCARE</h1>
                 <p>
                     From daily rituals to targeted anti-aging care, discover the
@@ -215,37 +216,14 @@ export default function SkincareProducts() {
 
             <div className={classes["products-container"]}>
                 {currentProducts.map((product) => (
-                    <div
-                        className={classes["product-card"]}
+                    <ProductItem
                         key={product.product_id}
-                    >
-                        <Link to={"/products/" + product.product_id}>
-                            <img
-                                src={
-                                    product.product_images
-                                        ? product.product_images.split(",")[0]
-                                        : ""
-                                }
-                                alt={product.product_name}
-                                className={classes["product-image"]}
-                            />
-                            <h4 className={classes["product-title"]}>
-                                {product.product_name}
-                            </h4>
-                        </Link>
-
-                        <p className={classes["product-price"]}>
-                            {formatter.format(product.price)}
-                        </p>
-                        <button
-                            className={classes["cart-button"]}
-                            onClick={() => openModal(product)} // Open modal with product info
-                        >
-                            Quick View
-                        </button>
-                    </div>
+                        product={product}
+                        openModal={openModal}
+                    />
                 ))}
             </div>
+
             {/* Pagination Controls */}
             <div className={classes["pagination"]}>
                 <button

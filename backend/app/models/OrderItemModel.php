@@ -23,14 +23,7 @@ class OrderItemModel
         $stmt->bindValue(":quantity", $quantity, PDO::PARAM_INT);
         $stmt->bindValue(":product_id", $product_id, PDO::PARAM_INT);
         $stmt->execute();
-        $sql1 = "UPDATE Products
-        SET stock_qty  = stock_qty - :quantity
-        WHERE product_id = :product_id
-        ";
-        $stmt1 = $this->__conn->prepare($sql1);
-        $stmt1->bindValue(":quantity", $quantity, PDO::PARAM_INT);
-        $stmt1->bindValue(":product_id", $product_id, PDO::PARAM_INT);
-        $stmt1->execute();
+
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
@@ -84,5 +77,16 @@ class OrderItemModel
         $stmt->bindValue(":product_price", $product_price, PDO::PARAM_STR);
         $stmt->bindValue(":quantity", $quantity, PDO::PARAM_STR);
         $stmt->execute();
+    }
+    public function removeProductQuantity($product_id, $quantity)
+    {
+        $sql1 = "UPDATE Products
+        SET stock_qty  = stock_qty - :quantity
+        WHERE product_id = :product_id
+        ";
+        $stmt1 = $this->__conn->prepare($sql1);
+        $stmt1->bindValue(":quantity", $quantity, PDO::PARAM_INT);
+        $stmt1->bindValue(":product_id", $product_id, PDO::PARAM_INT);
+        $stmt1->execute();
     }
 }
