@@ -1,0 +1,85 @@
+
+.exclusive-services {
+    text-align: center; /* Căn giữa nội dung */
+    margin: 50px auto; /* Thêm khoảng cách trên và dưới, căn giữa ngang */
+    max-width: 1200px; /* Đặt chiều rộng tối đa cho toàn bộ phần */
+}
+
+/* Tiêu đề chính "Our exclusive services" */
+.exclusive-services h2 {
+    font-size: 2rem; /* Kích thước chữ lớn cho tiêu đề */
+    font-weight: bold; /* Chữ đậm */
+    margin-bottom: 10px; /* Khoảng cách dưới tiêu đề */
+}
+
+/* Phần mô tả nhỏ dưới tiêu đề */
+.exclusive-services p {
+    font-size: 1.2rem; /* Kích thước chữ nhỏ hơn tiêu đề */
+    color: #999; /* Màu chữ xám nhạt */
+    margin-bottom: 40px; /* Khoảng cách dưới đoạn mô tả */
+}
+
+/* Phần lưới chứa các khối dịch vụ */
+.services-grid {
+    display: flex; /* Sử dụng flexbox để sắp xếp các phần tử theo hàng ngang */
+    justify-content: space-between; /* Khoảng cách đều giữa các khối */
+    gap: 20px; /* Khoảng cách giữa các khối dịch vụ */
+    flex-wrap: wrap; /* Đảm bảo các phần tử sẽ tự động xuống dòng khi không đủ không gian */
+}
+
+/* Phong cách cho mỗi khối dịch vụ */
+.service {
+    background-color: #fff; /* Màu nền trắng */
+    border: 1px solid #e0e0e0; /* Viền nhẹ màu xám nhạt */
+    border-radius: 10px; /* Góc bo tròn cho khối */
+    padding: 20px; /* Khoảng cách bên trong khối */
+    text-align: center; /* Căn giữa nội dung */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Hiệu ứng đổ bóng nhẹ */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Hiệu ứng khi hover (di chuột qua) */
+    max-width: 250px; /* Chiều rộng tối đa cho khối */
+    flex: 1; /* Cho phép khối co giãn trong flexbox */
+}
+
+/* Phong cách cho hình ảnh trong mỗi khối dịch vụ */
+.service img {
+    max-width: 100%; /* Đảm bảo hình ảnh không vượt quá chiều rộng khối */
+    height: auto; /* Giữ tỷ lệ hình ảnh */
+    border-radius: 10px; /* Bo tròn các góc của ảnh */
+    margin-bottom: 20px; /* Khoảng cách dưới hình ảnh */
+}
+
+/* Phong cách cho tiêu đề của mỗi dịch vụ */
+.service h3 {
+    font-size: 1.5rem; /* Kích thước chữ lớn hơn bình thường */
+    font-weight: bold; /* Chữ đậm */
+    margin-bottom: 10px; /* Khoảng cách dưới tiêu đề */
+}
+
+/* Phong cách cho đoạn mô tả của mỗi dịch vụ */
+.service p {
+    font-size: 1rem; /* Kích thước chữ trung bình */
+    color: #666; /* Màu xám trung bình cho đoạn mô tả */
+    margin-bottom: 20px; /* Khoảng cách dưới đoạn mô tả */
+}
+
+/* Phong cách cho đường dẫn "Learn More" hoặc "Shop Now" */
+.learn-more {
+    font-size: 1rem; /* Kích thước chữ trung bình */
+    font-weight: bold; /* Chữ đậm */
+    color: #000; /* Màu đen cho chữ */
+    text-decoration: none; /* Xóa gạch chân mặc định */
+    border-bottom: 1px solid #000; /* Đường gạch chân là đường viền dưới */
+    transition: color 0.3s ease, border-bottom 0.3s ease; /* Hiệu ứng chuyển màu khi hover */
+}
+
+/* Hiệu ứng khi di chuột qua đường dẫn "Learn More" */
+.learn-more:hover {
+    color: #e74c3c; /* Đổi màu thành đỏ khi hover */
+    border-bottom: 1px solid #e74c3c; /* Đổi màu viền dưới thành đỏ khi hover */
+}
+
+/* Hiệu ứng khi di chuột qua mỗi khối dịch vụ */
+.service:hover {
+    transform: translateY(-10px); /* Khối dịch vụ được nâng lên 10px khi hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Đổ bóng mạnh hơn khi hover */
+}

@@ -1,0 +1,135 @@
+/* Main header container */
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 0;
+    width: 100%;
+}
+
+/* Top navigation bar */
+.top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 20px;
+    max-width: 1200px;
+}
+
+/* Menu icon */
+.menu-icon {
+    cursor: pointer;
+    font-size: 1.5rem;
+    margin-right: 20px;
+}
+
+/* Search bar container */
+.search-bar {
+    display: flex;
+    align-items: center;
+    width: 250px; /* Adjust width as per your design */
+}
+
+.searchContainer {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    overflow: hidden;
+    width: 100%;
+}
+
+/* Input for search */
+.searchInput {
+    width: 100%;
+    padding: 8px;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.searchButton {
+    background-color: #f0ebe5;
+    padding: 8px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.searchButton svg {
+    font-size: 1.5rem;
+    color: #555;
+}
+
+/* Centering the logo */
+.logo {
+    max-width: 150px; /* Adjust logo size */
+    margin: 0 auto;
+}
+
+/* Bottom navigation bar */
+.bottom-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px; /* Increased gap for more spacing between items */
+    padding: 10px 0;
+    width: 100%;
+    font-size: 0.9rem;
+}
+
+.nav-link a {
+    text-decoration: none;
+    color: #4a4a4a; /* Dark gray color */
+    padding: 5px 10px;
+    font-weight: bold;
+    white-space: nowrap;
+    transition: color 0.3s ease;
+    text-transform: uppercase;
+}
+
+.nav-link a:hover {
+    color: #b51828; /* Hover effect color */
+}
+
+/* Right side icons (help, account, bag) */
+.nav-icons {
+    display: flex;
+    align-items: center;
+    gap: 30px; /* Adjusted for better spacing between icons */
+}
+
+.nav-icons span {
+    position: relative;
+    cursor: pointer;
+}
+
+/* Icon styles */
+.nav-icons svg {
+    font-size: 1.5rem;
+    color: black;
+}
+
+.nav-icons span::after {
+    content: attr(data-label);
+    position: absolute;
+    top: 35px; /* Adjust according to icon position */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.75rem;
+    color: black;
+}
+
+/* Add a line separating the sections */
+.nav-icons::before {
+    content: "";
+    height: 50px;
+    width: 1px;
+    background-color: #ccc;
+    display: inline-block;
+    margin-right: 15px;
+}

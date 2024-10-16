@@ -1,10 +1,14 @@
+/* General styling for the user form */
 .user-form {
     max-width: 650px;
     margin: 0 auto;
     padding: 20px;
     font-family: "Arial", sans-serif;
+    background-color: white;
+    border-radius: 10px;
 }
 
+/* Heading style */
 h1.center {
     text-align: center;
     font-size: 30px;
@@ -13,16 +17,20 @@ h1.center {
     color: #333;
 }
 
+/* Paragraph center alignment */
 p.center {
     text-align: center;
     margin-bottom: 20px;
 }
 
+/* Form actions centered */
 .form-actions {
     text-align: center;
     margin-top: 20px;
 }
 
+
+/* Label styling */
 .user-form label {
     display: block;
     margin-bottom: 5px;
@@ -31,28 +39,44 @@ p.center {
     color: #333;
 }
 
+/* Input fields styling */
 .user-form input[type="text"],
 .user-form input[type="email"],
 .user-form input[type="password"],
 .user-form input[type="date"],
-.user-form input[type="number"] 
-{
-    padding: 4px;
+.user-form input[type="number"],
+.user-form input[type="tel"],
+.user-form textarea {
+    padding: 10px;
     margin-bottom: 15px;
     border: 1px solid #d1d1d1;
     border-radius: 4px;
     font-size: 16px;
     box-sizing: border-box;
+    width: 100%;
+    background-color: #fff;
+    color: #333;
 }
 
+/* Input focus effect */
+.user-form input:focus,
+.user-form textarea:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+}
+
+/* File input styling */
 .user-form input[type="file"] {
     margin-bottom: 15px;
 }
 
+/* Checkbox styling */
 .user-form input[type="checkbox"] {
     margin-right: 8px;
 }
 
+/* Button styling */
 .user-form button {
     background-color: #A50024;
     color: white;
@@ -62,5 +86,75 @@ p.center {
     cursor: pointer;
     font-size: 18px;
     width: 100%;
+    transition: background-color 0.3s ease;
 }
 
+/* Button hover effect */
+.user-form button:hover {
+    background-color: #80001b;
+}
+
+/* Error message styling */
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+/* Image preview */
+img {
+    display: block;
+    margin: 10px auto;
+    max-width: 200px;
+    height: auto;
+    border-radius: 5px;
+}
+
+/* Form responsive for mobile */
+@media screen and (max-width: 600px) {
+    .user-form {
+        padding: 15px;
+    }
+
+    button {
+        font-size: 16px;
+    }
+}
+/* Flexbox container for buttons on the same line */
+.form-actions-container {
+    display: flex;
+    justify-content: space-between; /* Space between buttons */
+    margin-top: 20px;
+}
+
+/* Buttons styling */
+.form-actions-container button {
+    padding: 15px 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 48%; /* Adjust width to allow for spacing */
+    transition: background-color 0.3s ease;
+}
+
+/* Update button */
+.form-actions-container button[type="submit"] {
+    background-color: #A50024;
+    color: white;
+}
+
+/* Cancel button */
+.form-actions-container button[type="button"] {
+    background-color: #6c757d;
+    color: white;
+}
+
+/* Hover effects */
+.form-actions-container button[type="submit"]:hover {
+    background-color: #80001b;
+}
+
+.form-actions-container button[type="button"]:hover {
+    background-color: #5a6268;
+}

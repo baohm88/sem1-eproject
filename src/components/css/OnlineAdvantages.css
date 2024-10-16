@@ -1,0 +1,59 @@
+/* Container chính */
+.commitments-container {
+    background-color: #e8e8e8; /* Màu nền xám nhạt */
+    padding: 50px 0; /* Khoảng cách trên và dưới cho toàn bộ phần */
+    text-align: center; /* Căn giữa tiêu đề và các phần tử */
+    margin-top: 50px; /* Khoảng cách trên cùng */
+}
+
+/* Tiêu đề chính */
+.commitments-container h2 {
+    font-size: 2rem; /* Kích thước chữ lớn */
+    font-weight: bold; /* Chữ đậm */
+    margin-bottom: 30px; /* Khoảng cách dưới tiêu đề */
+    color: #333; /* Màu chữ xám đậm */
+}
+
+/* Grid để sắp xếp các phần tử */
+.commitments-grid {
+    display: flex; /* Sử dụng Flexbox */
+    justify-content: center; /* Căn giữa các phần tử */
+    gap: 40px; /* Khoảng cách giữa các khối */
+}
+
+/* Phong cách cho từng button */
+.commitment-button {
+    max-width: 200px; /* Chiều rộng tối đa */
+    text-align: center; /* Căn giữa nội dung */
+    background-color: transparent; /* Nền trong suốt */
+    border: none; /* Loại bỏ đường viền button */
+    cursor: pointer; /* Thêm con trỏ tay khi hover */
+    padding: 20px; /* Khoảng cách trong cho button */
+    transition: transform 0.3s ease; /* Hiệu ứng khi hover */
+}
+
+/* Phong cách khi hover vào button */
+.commitment-button:hover {
+    transform: scale(1.05); /* Tăng nhẹ kích thước khi hover */
+}
+
+/* Hình ảnh đại diện cho cam kết */
+.commitment-button img {
+    max-width: 100%; /* Đảm bảo hình ảnh không vượt quá chiều rộng khối */
+    height: auto; /* Giữ nguyên tỷ lệ hình ảnh */
+    margin-bottom: 20px; /* Khoảng cách dưới hình ảnh */
+}
+
+/* Tiêu đề cam kết */
+.commitment-button h3 {
+    font-size: 1.1rem; /* Kích thước chữ vừa phải */
+    font-weight: bold; /* Chữ đậm */
+    color: #444; /* Màu xám đậm cho tiêu đề */
+}
+
+/* Phần chú thích dưới */
+.disclaimer {
+    font-size: 0.9rem; /* Kích thước chữ nhỏ */
+    color: #777; /* Màu xám nhạt cho chú thích */
+    margin-top: 20px; /* Khoảng cách trên phần chú thích */
+}

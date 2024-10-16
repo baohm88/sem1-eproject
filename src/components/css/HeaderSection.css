@@ -1,0 +1,185 @@
+/* Existing styles here */
+
+.nav-menu ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    position: relative;
+}
+
+.nav-menu ul li {
+    position: relative;
+}
+
+.nav-menu ul li a {
+    text-decoration: none;
+    color: #000;
+    font-weight: 600;
+}
+
+/* Dropdown menu container */
+.dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    display: block;
+    width: 220px; /* Adjust width based on content */
+    height: auto;
+    padding: 100px; /* Padding for spacing around the items */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+/* Dropdown list styling */
+.dropdown ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: none;
+}
+
+/* Each item inside dropdown */
+.dropdown ul li {
+    margin: 10px 0; /* Space between each item */
+    font-size: 14px;
+    font-weight: 600;
+    padding: 10px 15px; /* Padding for spacing around the text */
+    transition: background-color 0.2s ease-in-out;
+    cursor: pointer;
+    position: relative;
+    padding-left: 20px; /* Add indentation for sub-items */
+    border-left: 5px solid transparent; /* Optional: Add a left border for sub-items */
+    border-left-color: #ccc; /* Optional: Change the color of the left border */
+    display: flex;
+    flex-direction: column;
+
+}
+
+/* First dropdown heading */
+.dropdown ul li:first-child {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 15px; /* Extra space for the header */
+    padding: 10px 15px; /* Padding for spacing around the text */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Dropdown links styling */
+.dropdown ul li a {
+    text-decoration: none;
+    color: #000;
+    display: block;
+    transition: background-color 0.2s ease-in-out;
+    display: flex;
+    flex-direction: column;
+}
+
+.dropdown ul li a:hover {
+    text-decoration: underline;
+    color: #c00; /* Optional: Change color on hover */
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    font-family: Arial, sans-serif;
+}
+
+.header-top {
+    background-color: #f5f0ec;
+    padding: 10px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.header-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+}
+
+.menu-btn {
+    font-size: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.search-input {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-left: 10px;
+}
+
+.search-btn {
+    margin-left: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.logo {
+    text-align: center;
+    font-size: 22px;
+    margin-bottom: 10px;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    margin-top: 15px;
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+
+}
+
+.logo img {
+    height: 41px;
+    width: auto;
+    margin-right: 10px;
+    vertical-align: middle;
+
+}
+
+.logo-text {
+    color: #c00;
+    font-weight: bold;
+}
+
+.nav-menu ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+
+}
+
+.nav-menu ul li a {
+    text-decoration: none;
+    color: #000;
+    font-weight: 600;
+}
+
+.header-icons {
+    display: flex;
+    gap: 15px;
+}
+
+.header-icons .icon {
+    text-decoration: none;
+    color: #000;
+    font-weight: bold;
+}
+
+
+

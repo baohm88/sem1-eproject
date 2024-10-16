@@ -1,0 +1,123 @@
+.tabs-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    font-family: 'Arial', sans-serif;
+}
+
+.tabs-container button {
+    background-color: white;
+    border: 1px solid #d1d1d1;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 0 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    color: #333;
+}
+
+.tabs-container button:hover {
+    background-color: #f0f0f0;
+    color: #000;
+}
+
+.tabs-container button:focus {
+    outline: none;
+}
+
+.tabs-container button.active {
+    background-color: #333;
+    color: white;
+    border-color: #333;
+}
+
+.total-products {
+    text-align: left;
+    margin-bottom: 20px;
+    font-family: 'Arial', sans-serif;
+    font-size: 18px;
+}
+
+
+
+
+
+.products-container {
+    display: flex;
+   justify-content: center;
+    gap: 20px;
+    padding: 0 10px;
+    justify-items: center; /* Đảm bảo các thẻ sản phẩm được căn giữa theo chiều ngang */
+}
+
+.product-card {
+    display: flex;
+    flex-direction: column; /* Sắp xếp các thành phần trong thẻ theo chiều dọc */
+    align-items: center; /* Căn giữa nội dung theo chiều ngang */
+    justify-content: center; /* Tạo khoảng cách hợp lý giữa các thành phần */
+    border: 1px solid #e1e1e1;
+    border-radius: 8px;
+    padding: 15px;
+    background-color: white;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    max-width: 300px; /* Đặt giới hạn chiều rộng cho thẻ */
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.product-image {
+    width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+}
+
+.product-title {
+    font-size: 16px;
+    color: #333;
+    margin: 10px 0;
+    font-weight: 500;
+}
+
+.product-price {
+    font-size: 18px;
+    color: #000;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.cart-button {
+    background-color: #e60023;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.cart-button:hover {
+    background-color: #cc0020;
+}
+
+.best-seller-badge {
+    background-color: #f1f1f1;
+    color: #333;
+    padding: 5px 10px;
+    font-size: 12px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    border-radius: 5px;
+}
+/*css new/*
+
+ */
+
+

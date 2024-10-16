@@ -7,6 +7,9 @@ import Modal from "./Modal"; // Import the Modal component
 
 import Slider from "rc-slider"; // Import rc-slider
 import "rc-slider/assets/index.css"; // Import rc-slider styles
+import "../css/BodySection.css";
+import "../css/BeautyMustHaves.css";
+import "../css/Commitments.css";
 
 export default function Home() {
     const [products, setProducts] = useState([]);
@@ -114,130 +117,388 @@ export default function Home() {
             )
         );
     };
+    // Quản lý trạng thái tab đang được chọn
+    const [activeTab, setActiveTab] = useState("just-for-you");
+
+    // Hàm để chuyển tab
+    const handleTabClick = (tab) => {
+        setActiveTab(tab);
+    };
 
     return (
         <>
-            <h1 className="center">All products</h1>
+            <div className="body-section">
+                {/* Phần banner lớn */}
+                <div className="banner">
+                    <img
+                        src="Local-immersive-DS9-desktop-v2.jpg"
+                        alt="Double Serum"
+                        className="banner-image"
+                    />
+                    <div className="banner-content">
+                        <h2>NEW (R)EVOLUTION DOUBLE SERUM</h2>
+                        <p>The power to change your skin's future</p>
+                        <p>Just one drop for younger looking skin</p>
+                        <button className="discover-button">DISCOVER</button>
+                    </div>
+                </div>
 
-            {/* Sorting and Filtering Controls */}
-            <div className="filters">
-                {/* Sorting Dropdown */}
-                <label htmlFor="sort">Sort by: </label>
-                <select
-                    id="sort"
-                    value={sortOption}
-                    onChange={(e) => setSortOption(e.target.value)}
-                >
-                    <option value="" disabled>
-                        Select
-                    </option>
-                    <option value="name_asc">Name (A-Z)</option>
-                    <option value="name_desc">Name (Z-A)</option>
-                    <option value="price_asc">Price (Low to High)</option>
-                    <option value="price_desc">Price (High to Low)</option>
-                </select>
+                {/* Phần ưu đãi online */}
+                <div className="online-benefits">
+                    <div className="benefit">
+                        <i className="icon-free-shipping"></i>
+                        <p>Free shipping with any $50 order</p>
+                    </div>
+                    <div className="benefit">
+                        <i className="icon-rewards"></i>
+                        <p>Earn 10 points per dollar and redeem for rewards</p>
+                    </div>
+                    <div className="benefit">
+                        <i className="icon-samples"></i>
+                        <p>Choose 3 free samples with any order</p>
+                    </div>
+                    <div className="benefit">
+                        <i className="icon-subscribe"></i>
+                        <p>Subscribe for 10% off and free shipping</p>
+                    </div>
+                </div>
+
+                {/* Phần khám phá sản phẩm */}
+                <div className="expertise-section">
+                    <h1>Your skin. Our expertise.</h1>
+                    <p>Discover our plant-powered formulas</p>
+
+                    <div className="product-categories">
+                        <div className="category1">
+                            <a href="/skincare">
+                                <img
+                                    src="Highlight_DOUBLE-SERUM_2024.jpg"
+                                    alt="Face"
+                                    className="category-image"
+                                />
+                            </a>
+                            <h3>FACE</h3>
+                            <a href="/skincare" className="shop-now">
+                                SHOP NOW
+                            </a>
+                        </div>
+
+                        <div className="category2">
+                            <a href="/makeup">
+                                <img
+                                    src="CBA_HP_Highlight_LIP-OIL-BALM_2024_Cherry-APAC.jpg"
+                                    alt="Makeup"
+                                    className="category-image"
+                                />
+                            </a>
+                            <h3>MAKEUP</h3>
+                            <a href="/makeup" className="shop-now">
+                                SHOP NOW
+                            </a>
+                        </div>
+
+                        <div className="category1">
+                            <a href="/skincare">
+                                <img
+                                    src="Body-Fit-Active-Highlight.JPG"
+                                    alt="Body"
+                                    className="category-image"
+                                />
+                            </a>
+                            <h3>BODY</h3>
+                            <a href="/skincare" className="shop-now">
+                                SHOP NOW
+                            </a>
+                        </div>
+
+                        <div className="category2">
+                            <a href="/skincare">
+                                <img
+                                    src="CBA_HP_Highlights_Lifestyle_Body_Sun3.jpg"
+                                    alt="Sun"
+                                    className="category-image"
+                                />
+                            </a>
+                            <h3>SUN</h3>
+                            <a href="/skincare" className="shop-now">
+                                SHOP NOW
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            {/* Price Range Filter */}
-            <div className="price-filter">
-                <h4>Filter by Price:</h4>
-                <Slider
-                    range
-                    min={0}
-                    max={200}
-                    value={priceRange}
-                    onChange={handlePriceRangeChange}
-                    step={5} // You can adjust the step size here
-                />
+            {/*Beutymusthaves*/}
 
-                {selectedRange && (
-                    <p>
-                        <button
-                            onClick={() => {
-                                setPriceRange([0, 200]);
-                                setSelectedRange(false);
-                            }}
-                        >
-                            X
-                        </button>{" "}
-                        {formatter.format(priceRange[0])} -{" "}
-                        {formatter.format(priceRange[1])}
-                    </p>
+            <div className="beauty-must-haves">
+                <h2>Beauty must-haves</h2>
+                <p>Discover our iconic products</p>
+                <div className="product-tabs">
+                    <button
+                        className={`tab ${
+                            activeTab === "just-for-you" ? "active" : ""
+                        }`}
+                        onClick={() => handleTabClick("just-for-you")}
+                    >
+                        Just for You
+                    </button>
+                    <button
+                        className={`tab ${
+                            activeTab === "whats-new" ? "active" : ""
+                        }`}
+                        onClick={() => handleTabClick("whats-new")}
+                    >
+                        What's New
+                    </button>
+                    <button
+                        className={`tab ${
+                            activeTab === "online-exclusives" ? "active" : ""
+                        }`}
+                        onClick={() => handleTabClick("online-exclusives")}
+                    >
+                        Online Exclusives
+                    </button>
+                </div>
+
+                {/* Hiển thị các sản phẩm dựa trên tab đang được chọn */}
+                {activeTab === "just-for-you" && (
+                    <div className="product-slider">
+                        <div className="product">
+                            <img
+                                src="80103084_original_original_A.jpg"
+                                alt="Product 1"
+                            />
+                            <h3>Double Serum Anti-Aging</h3>
+                            <p>$135.00</p>
+                            <button className="cart-button">Quick View</button>
+                        </div>
+                        <div className="product">
+                            <img
+                                src="80068482_original_original_A.jpg"
+                                alt="Product 2"
+                            />
+                            <h3>Total Eye Lift Cream</h3>
+                            <p>$92.00</p>
+                            <button className="cart-button">Quick View</button>
+                        </div>
+                        <div className="product">
+                            <img
+                                src="80077133_original_original_A.jpg"
+                                alt="Product 3"
+                            />
+                            <h3>Double Serum Eye</h3>
+                            <p>$83.00</p>
+                            <button className="cart-button" onClick={openModal}>
+                                Quick View
+                            </button>
+                        </div>
+                        <div className="product">
+                            <img
+                                src="80084587_original_original_A.jpg"
+                                alt="Product 4"
+                            />
+                            <h3>Lip Comfort Oil</h3>
+                            <p>$30.00</p>
+                            <button className="cart-button">Quick View</button>
+                        </div>
+                    </div>
+                )}
+
+                {activeTab === "whats-new" && (
+                    <div className="product-slider">
+                        <div className="product">
+                            <img src="new_product_1.jpg" alt="New Product 1" />
+                            <h3>New Serum XYZ</h3>
+                            <p>$120.00</p>
+                            <p>★★★★★</p>
+                        </div>
+                        <div className="product">
+                            <img src="new_product_2.jpg" alt="New Product 2" />
+                            <h3>New Cream ABC</h3>
+                            <p>$95.00</p>
+                            <p>★★★★★</p>
+                        </div>
+                    </div>
+                )}
+
+                {activeTab === "online-exclusives" && (
+                    <div className="product-slider">
+                        <div className="product">
+                            <img
+                                src="exclusive_product_1.jpg"
+                                alt="Exclusive Product 1"
+                            />
+                            <h3>Exclusive Product 1</h3>
+                            <p>$140.00</p>
+                            <p>★★★★★</p>
+                        </div>
+                        <div className="product">
+                            <img
+                                src="exclusive_product_2.jpg"
+                                alt="Exclusive Product 2"
+                            />
+                            <h3>Exclusive Product 2</h3>
+                            <p>$110.00</p>
+                            <p>★★★★★</p>
+                        </div>
+                    </div>
                 )}
             </div>
 
-            {/* Total Products Count */}
-            <div className="total-products">
-                <h4>{filteredProducts.length} products</h4>
-            </div>
-
-            <div className="products-container">
-                {currentProducts.map((product) => (
-                    <div
-                        className="product-card center"
-                        key={product.product_id}
-                    >
-                        <Link to={"/products/" + product.product_id}>
+            <div>
+                <div className="exclusive-services">
+                    <h2>Our exclusive services</h2>
+                    <p>Created to make your life more beautiful</p>
+                    <div className="services-grid">
+                        <div className="service">
                             <img
-                                src={
-                                    product.product_images
-                                        ? product.product_images.split(",")[0]
-                                        : ""
-                                }
-                                alt={product.product_name}
-                                className="product-image"
+                                src="CBA_Services_Carousel_Gift_Card_01.jpg"
+                                alt="Gift Cards"
                             />
-                            <h4 className="product-title">
-                                {product.product_name}
-                            </h4>
-                        </Link>
-
-                        <p className="product-price">
-                            {formatter.format(product.price)}
-                        </p>
-                        <p className="product-price">RATING COUNT</p>
-                        <button
-                            className="cart-button"
-                            onClick={() => openModal(product)} // Open modal with product info
-                        >
-                            Quick View
-                        </button>
+                            <h3>Gift Cards</h3>
+                            <p>
+                                Take the guesswork out of gifting, and let them
+                                choose their favorites.
+                            </p>
+                            <a href="/gift-cards" className="learn-more">
+                                SHOP NOW
+                            </a>
+                        </div>
+                        <div className="service">
+                            <img
+                                src="CBA_HP_Pushs-Carousel-292x292_CLUB-CLARINS-2_INTE.jpg"
+                                alt="Club Clarins"
+                            />
+                            <h3>Club Clarins</h3>
+                            <p>
+                                Earn 10 points per dollar and redeem for
+                                rewards.
+                            </p>
+                            <a href="/club-clarins" className="learn-more">
+                                LEARN MORE
+                            </a>
+                        </div>
+                        <div className="service">
+                            <img
+                                src="Subscription-service-carousel.webp"
+                                alt="Subscription Service"
+                            />
+                            <h3>Subscription Service</h3>
+                            <p>
+                                Enjoy 10% off, free shipping, and 3 free samples
+                                with recurring orders.
+                            </p>
+                            <a href="/subscription" className="learn-more">
+                                LEARN MORE
+                            </a>
+                        </div>
+                        <div className="service">
+                            <img
+                                src="live-consultation-2024-CLP.jpg"
+                                alt="Live Consultation"
+                            />
+                            <h3>Live Consultation</h3>
+                            <p>
+                                Connect with a Beauty Coach for a complimentary
+                                consultation.
+                            </p>
+                            <a href="/consultation" className="learn-more">
+                                BOOK NOW
+                            </a>
+                        </div>
                     </div>
-                ))}
+                </div>
             </div>
 
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            {/* Pagination Controls */}
-            {totalPages > 0 && (
-                <div className="pagination center">
-                    <button
-                        onClick={() => paginate(currentPage - 1)}
-                        disabled={currentPage === 1}
-                    >
-                        <IoChevronBackOutline />
+            <div className="commitments-container">
+                <h2>Our Commitments</h2>
+                <div className="commitments-grid">
+                    <button className="commitment-button">
+                        <img
+                            src="CSR_Sustainable_Sourcing_v2.png"
+                            alt="Sustainable Sourcing & Traceability"
+                        />
+                        <h3>Sustainable Sourcing & Traceability</h3>
                     </button>
-                    {Array.from({ length: totalPages }, (_, i) => (
-                        <button
-                            key={i + 1}
-                            onClick={() => paginate(i + 1)}
-                            className={currentPage === i + 1 ? "active" : ""}
-                        >
-                            {i + 1}
-                        </button>
-                    ))}
-                    <button
-                        onClick={() => paginate(currentPage + 1)}
-                        disabled={currentPage === totalPages}
-                    >
-                        <IoChevronForward />
+                    <button className="commitment-button">
+                        <img
+                            src="CSR_Supporting_Actions_v2.png"
+                            alt="Charitable Initiatives"
+                        />
+                        <h3>Charitable Initiatives</h3>
+                    </button>
+                    <button className="commitment-button">
+                        <img src="CSR_EcoDesign_v2.png" alt="Eco Design" />
+                        <h3>Eco Design</h3>
+                    </button>
+                    <button className="commitment-button">
+                        <img
+                            src="CSR_Made_in_France_v2.png"
+                            alt="Made in France"
+                        />
+                        <h3>Made in France</h3>
                     </button>
                 </div>
-            )}
+                <p className="disclaimer">
+                    *Excluding: ClarinsMen Foaming Shave Gel / myClarins
+                    Clear-out Targets Imperfections / Bright Plus Fresh Ampoule
+                    Vitamin C Complex / Nourishing Shampoo bar
+                </p>
+                <div>
+                    <h2>Online advantages</h2>
+                    <div className="commitments-grid">
+                        <button className="commitment-button">
+                            <img
+                                src="free-shipping.webp"
+                                alt="Sustainable Sourcing & Traceability"
+                            />
+                            <h3>Free Shipping</h3>
+                            <p>with any $50 order</p>
+                        </button>
+                        <button className="commitment-button">
+                            <img
+                                src="samples.png"
+                                alt="Charitable Initiatives"
+                            />
+                            <h3>3 Free Samples</h3>
+                            <p>with any order</p>
+                        </button>
+                        <button className="commitment-button">
+                            <img src="special-offers.webp" alt="Eco Design" />
+                            <h3>Special Offers</h3>
+                            <p>all year long</p>
+                        </button>
+                        <button className="commitment-button">
+                            <img
+                                src="Club-clarins-2023.webp"
+                                alt="Made in France"
+                            />
+                            <h3>Earn Rewards</h3>
+                            <p>$1 = 10 points</p>
+                        </button>
+                        <button className="commitment-button">
+                            <img
+                                src="auto-replenishment.webp"
+                                alt="Made in France"
+                            />
+                            <h3>Subscription</h3>
+                            <p>10% off and free shipping</p>
+                        </button>
+                    </div>
+                </div>
+                <div className="payment-methods">
+                    <img src="visa-2.webp" alt="Visa" />
+                    <img src="mastercard-2.webp" alt="MasterCard" />
+                    <img src="american-express.webp" alt="American Express" />
+                    <img src="discover.webp" alt="Discover" />
+                    <img src="paypal.webp" alt="PayPal" />
+                    <img
+                        src="apple-pay-footer-advantage.webp"
+                        alt="Apple Pay"
+                    />
+                    <img src="afterpay.webp" alt="Afterpay" />
+                </div>
+            </div>
 
             {selectedProduct && (
                 <Modal product={selectedProduct} onClose={closeModal} />
