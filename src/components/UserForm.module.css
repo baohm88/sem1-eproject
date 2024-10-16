@@ -1,0 +1,92 @@
+/* General styling for the user form */
+.user-form {
+    max-width: 650px;
+    margin: 0 auto;
+    padding: 1rem;
+    font-family: "Arial", sans-serif;
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+/* Form actions centered */
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* File input styling */
+.user-form input[type="file"] {
+    margin-bottom: 15px;
+}
+
+.user-form h1 {
+    text-align: center;
+    color: var(--primaryColor);
+    margin-bottom: 20px;
+}
+
+.user-form a {
+    color: var(--primaryColor);
+    text-decoration: underline;
+}
+
+/* Error message styling */
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+/* Image preview */
+.user-form img {
+    display: block;
+    margin: 10px auto;
+    max-width: 200px;
+    height: auto;
+    border-radius: 5px;
+}
+
+/* Form responsive for mobile */
+@media screen and (max-width: 600px) {
+    .form-row {
+        flex-direction: column;
+    }
+}
+
+/* Benefits container */
+
+.benefits-container {
+    display: flex; /* Sử dụng flexbox để sắp xếp các phần tử theo hàng ngang */
+    justify-content: space-between; /* Khoảng cách đều giữa các phần tử */
+    align-items: center; /* Căn chỉnh các phần tử theo chiều dọc */
+    background-color: #f7f7f7; /* Màu nền cho container */
+    padding: 20px; /* Khoảng cách bên trong container */
+    border-radius: 5px; /* Bo tròn góc */
+    margin-top: 20px; /* Khoảng cách từ phần trên */
+}
+
+.benefit {
+    display: flex; /* Sử dụng flexbox để căn chỉnh nội dung trong mỗi phần tử */
+    flex-direction: row; /* Đặt các icon và text theo hàng ngang */
+    align-items: center; /* Căn giữa icon và text theo chiều dọc */
+    text-align: left; /* Căn trái cho văn bản */
+    padding: 10px; /* Khoảng cách bên trong từng benefit */
+    background-color: #f7f7f7;
+    border-radius: 5px; /* Bo tròn các góc của từng benefit */
+    flex: 1; /* Để các phần tử có thể co dãn đều */
+    margin: 0 10px; /* Khoảng cách giữa các benefit */
+}
+
+.benefit i {
+    font-size: 24px; /* Kích thước icon */
+    margin-right: 10px; /* Khoảng cách giữa icon và văn bản */
+}
+
+.benefit p {
+    font-size: 14px; /* Kích thước chữ */
+    color: #333; /* Màu chữ */
+}

@@ -158,30 +158,30 @@ export default function ClientLayout({ children }) {
                     </li>
                 </ul>
                 <ul className={classes["bottom-nav"]}>
-                    <li className="nav-link">
+                    <li className={classes["nav-link"]}>
                         <NavLink to={"/"}>Home</NavLink>
                     </li>
-                    <li className="nav-link">
+                    <li className={classes["nav-link"]}>
                         <NavLink to={"/skincare?category="}>Skincare</NavLink>
                     </li>
-                    <li className="nav-link">
+                    <li className={classes["nav-link"]}>
                         <NavLink to={"/makeup?category="}>Makeup</NavLink>
                     </li>
                     {!isLoggedIn && (
-                        <li className="nav-link">
+                        <li className={classes["nav-link"]}>
                             <NavLink to={"/login"}>Login</NavLink>
                         </li>
                     )}
                     {isLoggedIn && (
                         <>
-                            <li>
+                            <li className={classes["nav-link"]}>
                                 <NavLink to={"/profile"}>Profile</NavLink>
                             </li>
-                            <li>
+                            <li className={classes["nav-link"]}>
                                 <NavLink to={"/user/orders"}>Orders</NavLink>
                             </li>
-                            <li>
-                                <button onClick={handleLogOut}>LOGOUT</button>
+                            <li className={classes["nav-link"]}>
+                                <span onClick={handleLogOut}>LOGOUT</span>
                             </li>
                         </>
                     )}

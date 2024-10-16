@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { IoChevronBackOutline, IoChevronForward } from "react-icons/io5";
 import { formatter } from "../../util/formatter";
 import Modal from "./Modal"; // Import the Modal component
@@ -8,6 +8,8 @@ import Modal from "./Modal"; // Import the Modal component
 import Slider from "rc-slider"; // Import rc-slider
 import "rc-slider/assets/index.css"; // Import rc-slider styles
 import classes from "./SkincareProducts.module.css";
+import ProductItem from "./ProductItem";
+
 export default function MakeupProducts() {
     const [products, setProducts] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
@@ -205,8 +207,6 @@ export default function MakeupProducts() {
                 </div>
             </div>
 
-
-
             {/* Total Products Count */}
             <div className={classes["total-products"]}>
                 <h4>{filteredProducts.length} products</h4>
@@ -214,44 +214,14 @@ export default function MakeupProducts() {
 
             <div className={classes["products-container"]}>
                 {currentProducts.map((product) => (
-                    <div
-                        className={classes["product-card"]}
+                    <ProductItem
                         key={product.product_id}
-                    >
-                        <Link to={"/products/" + product.product_id}>
-                            <img
-                                src={
-                                    product.product_images
-                                        ? product.product_images.split(",")[0]
-                                        : ""
-                                }
-                                alt={product.product_name}
-                                className={classes["product-image"]}
-                            />
-                            <h4 className={classes["product-title"]}>
-                                {product.product_name}
-                            </h4>
-                        </Link>
-
-                        <p className={classes["product-price"]}>
-                            {formatter.format(product.price)}
-                        </p>
-                        <button
-                            className={classes["cart-button"]}
-                            onClick={() => openModal(product)} // Open modal with product info
-                        >
-                            Quick View
-                        </button>
-                    </div>
+                        product={product}
+                        openModal={openModal}
+                    />
                 ))}
             </div>
 
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
             {/* Pagination Controls */}
             <div className={classes["pagination"]}>
                 <button

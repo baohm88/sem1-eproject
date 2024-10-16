@@ -86,14 +86,6 @@
         padding: 10px; /* Giảm padding cho các trường và nút trên màn hình nhỏ */
     }
 }
-
-
-
-
-
-
-
-
 .benefits-container {
     display: flex; /* Sử dụng flexbox để sắp xếp các phần tử theo hàng ngang */
     justify-content: space-between; /* Khoảng cách đều giữa các phần tử */

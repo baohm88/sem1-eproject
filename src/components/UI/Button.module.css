@@ -1,0 +1,30 @@
+.button {
+    border: none;
+    cursor: pointer;
+    color: white;
+    padding: 0.7rem 1.5rem;
+    border-radius: 5px;
+    background-color: #e60023;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+}
+
+.button:hover,
+.button:active {
+    background-color: #cc0020;
+}
+
+.text-button {
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    font-weight: bold;
+    margin-right: 1rem;
+    text-transform: uppercase;
+}
+
+.text-button:hover,
+.text-button:active {
+    color: #e60023;
+    background-color: transparent;
+}

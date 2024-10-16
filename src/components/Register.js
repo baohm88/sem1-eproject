@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Input from "./Input.js";
+import Input from "./UI/Input.js";
 import {
     hasMinLength,
     isEmail,
@@ -7,9 +7,10 @@ import {
     isEqualsToOtherValue,
 } from "../util/validation.js";
 import axios from "axios";
-import classes from "./Register.module.css";
+import classes from "./UserForm.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import CryptoJS from "crypto-js";
+import Button from "./UI/Button.js";
 
 export default function Register() {
     const [firstNameError, setFirstNameError] = useState();
@@ -205,7 +206,6 @@ export default function Register() {
             if (response.data.type === "success") {
                 navigate("/login");
             } else {
-                // type = Error
                 console.log("Registration failed: ", response.data.message);
                 setServerError(response.data.message);
             }
@@ -219,7 +219,7 @@ export default function Register() {
             <form className={classes["user-form"]} onSubmit={handleSubmit}>
                 <h1 className="user-form-title">Register a new account</h1>
                 <br />
-                <p className="text-he">
+                <p className={classes["text-he"]}>
                     Welcome! We invite you to create an account by completing
                     the form below. If you already have an account, please
                     re-enter your email address on the previous screen.
@@ -228,85 +228,96 @@ export default function Register() {
                     <span className="error-message">({serverError})</span>
                 )}
                 <br />
-                <Input
-                    label="First Name*"
-                    id="firstName"
-                    type="text"
-                    name="first_name"
-                    autoFocus
-                    error={firstNameError}
-                />
-                <Input
-                    label="Last Name*"
-                    id="lastName"
-                    type="text"
-                    name="last_name"
-                    error={lastNameError}
-                />
+                <div className={classes["form-row"]}>
+                    <Input
+                        label="First Name*"
+                        id="firstName"
+                        type="text"
+                        name="first_name"
+                        autoFocus
+                        error={firstNameError}
+                    />
+                    <Input
+                        label="Last Name*"
+                        id="lastName"
+                        type="text"
+                        name="last_name"
+                        error={lastNameError}
+                    />
+                </div>
 
-                <Input
-                    label="Email*"
-                    id="email"
-                    type="email"
-                    name="email"
-                    error={emailError}
-                />
+                <div className={classes["form-row"]}>
+                    <Input
+                        label="Email*"
+                        id="email"
+                        type="email"
+                        name="email"
+                        error={emailError}
+                    />
 
-                <Input
-                    label="Username*"
-                    id="username"
-                    type="text"
-                    name="username"
-                    error={usernameError}
-                />
-                <Input
-                    label="Password*"
-                    id="password"
-                    type="password"
-                    name="password"
-                    error={passwordError}
-                />
-                <Input
-                    label="Confirm Password*"
-                    id="password2"
-                    type="password"
-                    name="password2"
-                    error={password2Error}
-                />
+                    <Input
+                        label="Username*"
+                        id="username"
+                        type="text"
+                        name="username"
+                        error={usernameError}
+                    />
+                </div>
 
-                <Input
-                    label="Date of Birth*"
-                    id="dob"
-                    type="date"
-                    name="dob"
-                    error={dobError}
-                />
+                <div className={classes["form-row"]}>
+                    <Input
+                        label="Password*"
+                        id="password"
+                        type="password"
+                        name="password"
+                        error={passwordError}
+                    />
+                    <Input
+                        label="Confirm Password*"
+                        id="password2"
+                        type="password"
+                        name="password2"
+                        error={password2Error}
+                    />
+                </div>
 
-                <Input
-                    label="Phone*"
-                    id="phone"
-                    type="number"
-                    name="phone"
-                    error={phoneError}
-                />
+                <div className={classes["form-row"]}>
+                    <Input
+                        label="Date of Birth*"
+                        id="dob"
+                        type="date"
+                        name="dob"
+                        error={dobError}
+                    />
 
-                <Input
-                    label="Address*"
-                    id="address"
-                    type="text"
-                    name="address"
-                    error={addressError}
-                />
+                    <Input
+                        label="Phone*"
+                        id="phone"
+                        type="number"
+                        name="phone"
+                        error={phoneError}
+                    />
+                </div>
 
-                <Input
-                    label="Image*"
-                    id="image"
-                    type="file"
-                    accept="image/*"
-                    name="user_image"
-                    error={imageError}
-                    onChange={handleImageChange}
-                />
+                <div className={classes["form-row"]}>
+                    <Input
+                        label="Address*"
+                        id="address"
+                        type="text"
+                        name="address"
+                        error={addressError}
+                    />
+
+                    <Input
+                        label="Image*"
+                        id="image"
+                        type="file"
+                        accept="image/*"
+                        name="user_image"
+                        error={imageError}
+                        onChange={handleImageChange}
+                    />
+                </div>
 
                 {imageFile && !imageURL ? (
                     <button type="button" onClick={handleUpload}>
@@ -321,8 +332,6 @@ export default function Register() {
                         Delete Image
                     </button>
                 )}
-                <br />
-                <br />
 
                 {imageURL && (
                     <div>
@@ -336,11 +345,11 @@ export default function Register() {
                 )}
 
                 <p className="form-actions">
-                    <button>REGISTER</button>
+                    <Button className="button">Register</Button>
                 </p>
 
-                <p>
-                    Already had an account? <Link to="/login">Login</Link>{" "}
+                <p className="center">
+                    Already had an account? <Link to="/login">Login here</Link>{" "}
                 </p>
             </form>
         </>

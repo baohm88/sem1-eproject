@@ -2,9 +2,7 @@ import axios from "axios";
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../App";
-import classes from "./UserForm.module.css";
-import Input from "./UI/Input";
-import Button from "./UI/Button";
+import classes from "./Login.module.css";
 
 export default function Login() {
     const { setUser } = useContext(UserContext);
@@ -59,41 +57,39 @@ export default function Login() {
     return (
         <>
             <form className={classes["user-form"]} onSubmit={handleSubmit}>
-                <h1 className="user-form-title">Log in or Sign up</h1>
-                <br />
-                <p className="text-he">
-                    Please enter your Username and Password:
-                </p>
-                <br />
+                <h1>Log in or sign up</h1>
+                <p>Please enter your Username and Password:</p>
                 {error && (
-                    <p className="error-message">
+                    <p className={classes["error-message"]}>
                         Wrong username and/or password
                     </p>
                 )}
                 <br />
-                <div className={classes["form-row"]}>
-                    <Input
-                        label="Username*:"
-                        id="username"
+                <p>
+                    <label>Username</label>
+                    <input
                         type="text"
+                        className={classes.input}
                         name="username"
                         onChange={(e) => setUsername(e.target.value)}
                         value={username}
                     />
-                    <Input
-                        label="Password*:"
-                        id="password"
+                </p>
+                <p>
+                    <label>Password</label>
+                    <input
                         type="password"
+                        className={classes.input}
                         name="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
-                </div>
-
-                <p className="form-actions">
-                    <Button className="button">LOGIN</Button>
                 </p>
-
+                <p className="center">
+                    <button type="submit" className={classes.button}>
+                        LOGIN
+                    </button>
+                </p>
                 <p className="center">
                     Don't have account yet?{" "}
                     <Link to="/register">Register here</Link>{" "}

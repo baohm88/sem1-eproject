@@ -2,9 +2,8 @@ import axios from "axios";
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../App";
-import classes from "./UserForm.module.css";
-import Input from "./UI/Input";
-import Button from "./UI/Button";
+import classes from "./Register.module.css";
+import Input from "./Input";
 
 export default function Login() {
     const { setUser } = useContext(UserContext);
@@ -61,39 +60,39 @@ export default function Login() {
             <form className={classes["user-form"]} onSubmit={handleSubmit}>
                 <h1 className="user-form-title">Log in or Sign up</h1>
                 <br />
+                <p></p>
                 <p className="text-he">
                     Please enter your Username and Password:
                 </p>
-                <br />
                 {error && (
-                    <p className="error-message">
+                    <span className="error-message">
                         Wrong username and/or password
-                    </p>
+                    </span>
                 )}
                 <br />
-                <div className={classes["form-row"]}>
-                    <Input
-                        label="Username*:"
-                        id="username"
-                        type="text"
-                        name="username"
-                        onChange={(e) => setUsername(e.target.value)}
-                        value={username}
-                    />
-                    <Input
-                        label="Password*:"
-                        id="password"
-                        type="password"
-                        name="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                </div>
 
-                <p className="form-actions">
-                    <Button className="button">LOGIN</Button>
+                <Input
+                    label="Username*:"
+                    id="username"
+                    type="text"
+                    name="username"
+                    onChange={(e) => setUsername(e.target.value)}
+                    value={username}
+                />
+                <Input
+                    label="Password*:"
+                    id="password"
+                    type="password"
+                    name="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+
+                <p className="center">
+                    <button type="submit" className={classes.button}>
+                        LOGIN
+                    </button>
                 </p>
-
                 <p className="center">
                     Don't have account yet?{" "}
                     <Link to="/register">Register here</Link>{" "}

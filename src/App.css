@@ -223,6 +223,7 @@ td {
 /* ERROR-MESSAGE STARTS */
 .error-message {
     color: var(--dangerColor);
+    text-align: center;
 }
 /* ERROR-MESSAGE ENDS */
 

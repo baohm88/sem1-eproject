@@ -1,12 +1,12 @@
 import { useContext, useEffect, useState } from "react";
-import Input from "./Input.js";
+import Input from "./UI/Input";
 import { hasMinLength, isEmail, isEmpty } from "../util/validation.js";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../App.js";
 import CryptoJS from "crypto-js";
 import { upload } from "@testing-library/user-event/dist/upload.js";
-import classes from "./Register.module.css"
+import classes from "./UserForm.module.css";
 export default function Register() {
     const [firstNameError, setFirstNameError] = useState();
     const [lastNameError, setLastNameError] = useState();
@@ -172,7 +172,7 @@ export default function Register() {
 
     return (
         <>
-            <form className={classes['user-form']}   onSubmit={handleSubmit}>
+            <form className={classes["user-form"]} onSubmit={handleSubmit}>
                 <h1 className="center">Update account</h1>
 
                 {serverError && (
@@ -270,13 +270,16 @@ export default function Register() {
                     />
                 )}
 
-<div className="form-actions-container">
-    
-        <button type="button">Submit</button>
-    
-    <span className="center">Don't want to update anything?</span><Link className="center" to="/profile">Cancel</Link>   
-</div>
+                <div className="form-actions-container">
+                    <button>Submit</button>
 
+                    <span className="center">
+                        Don't want to update anything?
+                    </span>
+                    <Link className="center" to="/profile">
+                        Cancel
+                    </Link>
+                </div>
             </form>
         </>
     );

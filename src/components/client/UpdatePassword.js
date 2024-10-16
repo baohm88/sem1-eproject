@@ -3,8 +3,9 @@ import { UserContext } from "../../App";
 import { isEmpty, isEqualsToOtherValue } from "../../util/validation";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Input from "../Input";
+
 import classes from "./UpdatePassword.module.css";
+import Input from "../UI/Input";
 export default function UpdatePassword() {
     const { user } = useContext(UserContext);
     const [oldPasswordError, setOldPasswordError] = useState();
@@ -100,6 +101,7 @@ export default function UpdatePassword() {
     <br />
 
     <input type="hidden" value={user.user_id} name="user_id" />
+    
 
     <div className={classes["input-group"]}>
         <Input

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { IoChevronBackOutline, IoChevronForward } from "react-icons/io5";
 import { formatter } from "../../util/formatter";
 import Modal from "./Modal"; // Import the Modal component
