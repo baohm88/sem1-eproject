@@ -1,3 +1,4 @@
+.full-width-button,
 .button,
 .info-button,
 .warning-button {
@@ -10,10 +11,16 @@
     transition: background-color 0.3s ease;
 }
 
+.full-width-button {
+    width: 100%;
+}
+
+.full-width-button,
 .button {
     background-color: #a6212b;
 }
 
+.full-width-button:hover,
 .button:hover {
     background-color: #cc0020;
 }

@@ -22,7 +22,7 @@ export default function ProductItem({ product, openModal }) {
             </Link>
 
             <p className={classes["product-price"]}>
-                {formatter.format(product.price)}
+                {formatter.format(product.product_price)}
             </p>
             <Button className="button" onClick={() => openModal(product)}>
                 Quick View

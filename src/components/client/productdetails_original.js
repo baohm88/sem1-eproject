@@ -206,7 +206,7 @@ export default function ProductDetails() {
                 <p>Sub cat: {product.main_category}</p>
                 <p>Sub cat: {product.sub_category}</p>
                 <p>Qty available: {product.stock_qty}</p>
-                <p>Price: {formatter.format(product.price)}</p>
+                <p>Price: {formatter.format(product.product_price)}</p>
 
                 <div>
                     <h3>Product Images:</h3>

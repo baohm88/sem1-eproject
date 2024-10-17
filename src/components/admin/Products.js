@@ -61,7 +61,7 @@ export default function Products() {
                                     </td>
                                     <td>{item.product_name}</td>
                                     <td className="center">
-                                        {formatter.format(item.price)}
+                                        {formatter.format(item.product_price)}
                                     </td>
                                     <td className="center">{item.stock_qty}</td>
                                     <td className="center">

@@ -20,7 +20,7 @@ class ProductModel extends BaseController
     {
         $sql = "SELECT 
                     p.product_name,
-                    p.price,
+                    p.product_price,
                     p.product_description,
                     p.quantity_in_stock,
                     p.main_category,

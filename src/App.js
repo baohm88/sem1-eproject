@@ -61,7 +61,7 @@ function App() {
                         ? {
                               ...item,
                               quantity: item.quantity + 1,
-                              total: item.price * (item.quantity + 1),
+                              total: item.product_price * (item.quantity + 1),
                           }
                         : item
                 );
@@ -69,7 +69,7 @@ function App() {
                 // If the product does not exist, add it to the cart
                 updatedCart = [
                     ...prevCart,
-                    { ...product, quantity: 1, total: product.price },
+                    { ...product, quantity: 1, total: product.product_price },
                 ];
             }
 
@@ -87,7 +87,7 @@ function App() {
                 ? {
                       ...item,
                       quantity: item.quantity + 1,
-                      total: item.price * (item.quantity + 1),
+                      total: item.product_price * (item.quantity + 1),
                   }
                 : item
         );
@@ -106,7 +106,7 @@ function App() {
                         return {
                             ...item,
                             quantity: item.quantity - 1,
-                            total: item.price * (item.quantity - 1),
+                            total: item.product_price * (item.quantity - 1),
                         };
                     } else {
                         // Return null for items to be removed

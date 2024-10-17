@@ -75,15 +75,16 @@ export default function Home() {
                 b.product_name.localeCompare(a.product_name)
             );
         } else if (sortOption === "price_asc") {
-            sortedProducts.sort((a, b) => a.price - b.price);
+            sortedProducts.sort((a, b) => a.product_price - b.product_price);
         } else if (sortOption === "price_desc") {
-            sortedProducts.sort((a, b) => b.price - a.price);
+            sortedProducts.sort((a, b) => b.product_price - a.product_price);
         }
 
         // Apply price range filter
         sortedProducts = sortedProducts.filter(
             (product) =>
-                product.price >= priceRange[0] && product.price <= priceRange[1]
+                product.product_price >= priceRange[0] &&
+                product.product_price <= priceRange[1]
         );
 
         setFilteredProducts(sortedProducts);
@@ -110,7 +111,8 @@ export default function Home() {
         setFilteredProducts(
             products.filter(
                 (product) =>
-                    product.price >= newRange[0] && product.price <= newRange[1]
+                    product.product_price >= newRange[0] &&
+                    product.product_price <= newRange[1]
             )
         );
     };
@@ -193,7 +195,7 @@ export default function Home() {
                         </Link>
 
                         <p className="product-price">
-                            {formatter.format(product.price)}
+                            {formatter.format(product.product_price)}
                         </p>
                         <p className="product-price">RATING COUNT</p>
                         <button

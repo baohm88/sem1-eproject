@@ -42,16 +42,74 @@ table td img {
     text-align: center;
 }
 
-.button {
-    padding: 0.5rem 1rem;
-    background-color: #fff;
+/* Quantity control container */
+.quantityControl {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Ensure buttons are spaced on either side of the quantity */
+    width: 100px; /* Adjust width as needed */
+    padding: 0;
     border: 1px solid #dcdcdc;
     border-radius: 4px;
-    cursor: pointer;
+    background-color: #fff;
 }
 
-button:hover {
+/* Adjust buttons (- and +) */
+.adjustButton {
+    width: 30px; /* Set fixed width */
+    height: 30px; /* Set fixed height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1.2rem;
+    border: 1px solid transparent;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Hover effect */
+.adjustButton:hover {
     background-color: #f0f0f0;
+}
+
+/* Active effect when button is clicked */
+.adjustButton:active {
+    background-color: #333; /* Darkens when clicked */
+    color: white; /* Change text color to white when clicked */
+}
+
+/* Quantity number */
+.quantity {
+    flex: 1; /* Let it take up remaining space */
+    text-align: center;
+}
+
+/* Quantity number */
+.quantity {
+    text-align: center;
+    flex: 1;
+}
+
+/* Remove button for deleting item */
+.removeButton {
+    cursor: pointer;
+    color: rgba(0, 0, 0, 0.671);
+    font-size: 1.5rem;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid transparent; /* Initially transparent border */
+    border-radius: 8px; /* Rounded corners to match the design */
+    transition: all 0.3s ease; /* Smooth transition for hover effects */
+}
+
+/* Hover effect for remove button */
+.removeButton:hover {
+    background-color: #f0f0f0;
+    border: 1px solid #dcdcdc; /* Visible border when hovered */
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2); /* Shadow effect for hover */
 }
 
 /* Order Summary */
@@ -90,64 +148,6 @@ button:hover {
     background-color: #bf0018;
 }
 
-/* Promotion Code Section */
-.promotionCode {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 1rem;
-}
-
-.promotionCode input {
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    width: 70%;
-}
-
-.promotionCode button {
-    background-color: #333;
-    color: white;
-    padding: 0.5rem;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.promotionCode button:hover {
-    background-color: #555;
-}
-
-/* Subscription Box */
-.subscriptionBox {
-    background-color: #f0f0f0;
-    padding: 1rem;
-    margin: 1rem 0;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-}
-
-.subscriptionBox label {
-    display: flex;
-    align-items: center;
-}
-
-.subscriptionBox input {
-    margin-right: 0.5rem;
-}
-
-.subscriptionBox .description {
-    font-size: 0.9rem;
-    color: #666;
-}
-
-.subscriptionBox select {
-    margin-top: 0.5rem;
-    padding: 0.5rem;
-    width: 100%;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
 /* Responsive Design */
 @media (max-width: 768px) {
     .cart {
@@ -159,4 +159,14 @@ button:hover {
         width: 100%;
         margin-top: 1rem;
     }
+}
+/* Thay đổi màu chữ cho tên sản phẩm */
+.productName {
+    color: black; /* Đặt màu chữ thành đen */
+    text-decoration: none;
+}
+
+/* Nếu cần thêm hover effect */
+.productName:hover {
+    text-decoration: underline; /* Hoặc bất kỳ hiệu ứng nào khác mà bạn muốn */
 }

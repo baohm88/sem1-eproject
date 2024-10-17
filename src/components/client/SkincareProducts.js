@@ -100,15 +100,16 @@ export default function SkincareProducts() {
                 b.product_name.localeCompare(a.product_name)
             );
         } else if (sortOption === "price_asc") {
-            filtered.sort((a, b) => a.price - b.price);
+            filtered.sort((a, b) => a.product_price - b.product_price);
         } else if (sortOption === "price_desc") {
-            filtered.sort((a, b) => b.price - a.price);
+            filtered.sort((a, b) => b.product_price - a.product_price);
         }
 
         // Apply price range filter
         filtered = filtered.filter(
             (product) =>
-                product.price >= priceRange[0] && product.price <= priceRange[1]
+                product.product_price >= priceRange[0] &&
+                product.product_price <= priceRange[1]
         );
 
         setFilteredProducts(filtered);

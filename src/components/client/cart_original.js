@@ -3,6 +3,8 @@ import { UserContext } from "../../App";
 import { formatter } from "../../util/formatter";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import classes from "./Cart.module.css"; // Importing CSS Module
+import Button from "../UI/Button";
 
 export default function Cart() {
     const {
@@ -11,35 +13,31 @@ export default function Cart() {
         decrementQuantity,
         removeItem,
         clearCart,
-    } = useContext(UserContext); // Access cart from UserContext
-    const [totalAmount, setTotalAmount] = useState(0); // State to store the total amount
+    } = useContext(UserContext);
+    const [totalAmount, setTotalAmount] = useState(0);
     const [serverError, setServerError] = useState();
     const { user } = useContext(UserContext);
 
-    // Function to calculate the total amount
     useEffect(() => {
         const calculateTotalAmount = () => {
             const total = cart.reduce(
-                (sum, item) => sum + item.price * item.quantity,
+                (sum, item) => sum + item.product_price * item.quantity,
                 0
             );
-            setTotalAmount(total); // Set the total amount state
+            setTotalAmount(total);
         };
 
-        calculateTotalAmount(); // Calculate total whenever cart changes
+        calculateTotalAmount();
     }, [cart]);
 
-    // Function to handle the checkout
     const handleCheckout = async () => {
         try {
-            // Create an object to hold the data to be sent
             const orderData = {
-                user_id: user.user_id, // Assuming `user.id` holds the logged-in user ID
+                user_id: user.user_id,
                 order_value: totalAmount,
-                cart_items: cart, // Sending the entire cart as an array of items
+                cart_items: cart,
             };
 
-            // Send a POST request to the backend to create the order
             const response = await axios.post(
                 `http://localhost/project/user/orders/user_idd=${user.user_id}`,
                 orderData
@@ -47,11 +45,8 @@ export default function Cart() {
 
             console.log(response.data.type);
 
-            // Handle the response, e.g., redirect to a success page or show confirmation
             if (response.data.type === "success") {
                 alert("Order created successfully!");
-                // Optionally, you could redirect or clear the cart here
-                // e.g., clearCart();
                 clearCart();
             } else {
                 console.log("Creating order failed: ", response.data.message);
@@ -66,36 +61,22 @@ export default function Cart() {
     };
 
     if (!cart || cart.length === 0) {
-        return <p>Your cart is empty</p>; // Safely check if cart is empty or undefined
+        return <p>Your cart is empty</p>;
     }
 
-    console.log(cart);
-
     return (
-        <div id="cart">
+        <div className={classes.cart}>
             {serverError && (
                 <span className="error-message">({serverError})</span>
             )}
 
-            <div id="cart-container">
+            <div className={classes.cartContainer}>
                 <h1>Your products</h1>
                 <table>
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Image</th>
-                            <th>Name</th>
-                            <th>Qty</th>
-                            <th>Price</th>
-                            <th>Amount</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
                     <tbody>
                         {cart.map((item) => {
                             return (
                                 <tr key={item.product_id}>
-                                    <td>{item.product_id}</td>
                                     <td>
                                         <Link
                                             to={"/products/" + item.product_id}
@@ -120,8 +101,7 @@ export default function Cart() {
                                             {item.product_name}
                                         </Link>
                                     </td>
-                                    <td className="center">
-                                        {" "}
+                                    <td className={classes.center}>
                                         <button
                                             onClick={() =>
                                                 decrementQuantity(
@@ -142,15 +122,15 @@ export default function Cart() {
                                             +
                                         </button>
                                     </td>
-                                    <td className="center">
-                                        {formatter.format(item.price)}
+                                    <td className={classes.center}>
+                                        {formatter.format(item.product_price)}
                                     </td>
-                                    <td className="center">
+                                    <td className={classes.center}>
                                         {formatter.format(
-                                            item.price * item.quantity
+                                            item.product_price * item.quantity
                                         )}
                                     </td>
-                                    <td className="center">
+                                    <td className={classes.center}>
                                         <button
                                             onClick={() =>
                                                 removeItem(item.product_id)
@@ -166,21 +146,24 @@ export default function Cart() {
                 </table>
             </div>
 
-            <div id="order-summary">
+            <div className={classes.orderSummary}>
                 <h3>Order Summary</h3>
                 <hr />
-                <p className="flex-container-between">
+                <p className={classes.flexContainerBetween}>
                     <span>Subtotal</span> <span>${totalAmount}</span>
                 </p>
-                <p className="flex-container-between">
+                <p className={classes.flexContainerBetween}>
                     <span>Shipping</span> <span>$0</span>
                 </p>
                 <hr />
                 <p>Tax will be calculated during checkout</p>
-                <p className="flex-container-between">
+                <p className={classes.flexContainerBetween}>
                     <span>Estimated Total</span> <span>${totalAmount}</span>
                 </p>
-                <button onClick={handleCheckout}>Checkout</button>
+
+                <Button className="button" onClick={handleCheckout}>
+                    Checkout
+                </Button>
             </div>
         </div>
     );
