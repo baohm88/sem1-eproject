@@ -65,6 +65,9 @@ body {
     gap: 20px;
     padding: 0 10px;
     justify-items: center; /* Đảm bảo các thẻ sản phẩm được căn giữa theo chiều ngang */
+    max-width: 1264px;
+    width: 100%;
+    margin: 0 auto;
 }
 
 .best-seller-badge {
@@ -87,3 +90,29 @@ body {
     text-align: center;
     width: 100%;
 }
+
+.filters,
+.total-products {
+    display: flex;
+    gap: 1rem;
+    max-width: 1264px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.slider {
+    min-width: 15rem;
+}
+
+.selectedRange {
+    padding: 1rem 2 rem;
+    border-radius: 10px;
+    border: 1px solid black;
+    background-color: antiquewhite;
+}
+
+/* .sort-options,
+.filter-options {
+    background-color: antiquewhite;
+    min-width: 13rem;
+} */

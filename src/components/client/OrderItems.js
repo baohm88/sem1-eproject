@@ -28,7 +28,7 @@ export default function OrderItems() {
     return (
         <>
             <div className="center">
-                <h1>Order# {order_id} </h1>
+                <h1>Your Order Items </h1>
                 <table>
                     <thead>
                         <tr>
