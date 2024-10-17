@@ -3,9 +3,11 @@ import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { UserContext } from "../../App";
 import { formatter } from "../../util/formatter";
-import { FaStar, FaStarHalfAlt } from "react-icons/fa"; // Import star icon
+import { FaStar } from "react-icons/fa";
 import Modal from "react-modal"; // Import react-modal
 import Button from "../UI/Button";
+import ProductRatings from "./ProductRatings";
+import RatingSummary from "./RatingSummary";
 
 // Set the app element for accessibility
 Modal.setAppElement("#root");
@@ -82,20 +84,6 @@ export default function ProductDetails() {
         );
     };
 
-    // Function to render stars based on the rating value
-    const renderReviewStars = (rating) => {
-        return (
-            <span className="stars">
-                {Array.from({ length: 5 }, (_, index) => (
-                    <FaStar
-                        key={index}
-                        color={index < rating ? "#A6212B" : "#e4e5e9"}
-                    />
-                ))}
-            </span>
-        );
-    };
-
     // Calculate the rating summary (counts and average)
     const calculateRatingSummary = (ratings) => {
         if (!ratings || ratings.length === 0) return;
@@ -119,13 +107,6 @@ export default function ProductDetails() {
         });
     };
 
-    // Function to calculate the percentage for each star rating
-    const getPercentage = (count) => {
-        return ratingSummary.totalRatings > 0
-            ? ((count / ratingSummary.totalRatings) * 100).toFixed(1)
-            : 0;
-    };
-
     // Open modal
     const openModal = () => {
         setIsModalOpen(true);
@@ -134,30 +115,6 @@ export default function ProductDetails() {
     // Close modal
     const closeModal = () => {
         setIsModalOpen(false);
-    };
-
-    // Function to render the average rating using stars
-    const renderAverageRatingStars = (averageRating) => {
-        const fullStars = Math.floor(averageRating); // Full stars
-        const hasHalfStar = averageRating - fullStars >= 0.5; // Half star if remainder is 0.5 or more
-        const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0); // Remaining empty stars
-
-        return (
-            <span className="average-rating-stars">
-                {/* Full Stars */}
-                {Array.from({ length: fullStars }, (_, index) => (
-                    <FaStar key={"full-" + index} color={"#A6212B"} />
-                ))}
-
-                {/* Half Star */}
-                {hasHalfStar && <FaStarHalfAlt color={"#A6212B"} />}
-
-                {/* Empty Stars */}
-                {Array.from({ length: emptyStars }, (_, index) => (
-                    <FaStar key={"empty-" + index} color={"#e4e5e9"} />
-                ))}
-            </span>
-        );
     };
 
     // Handle submit review
@@ -270,129 +227,9 @@ export default function ProductDetails() {
                     </div>
                 </Modal>
 
-                {/* Rating Summary Section */}
-                <div className="rating-summary">
-                    <h2>Ratings Summary</h2>
-                    <div
-                        style={{
-                            display: "flex",
-                            justifyContent: "space-between",
-                        }}
-                    >
-                        <div className="summary">
-                            {/* <p>
-                                Average Rating: {ratingSummary.averageRating} /
-                                5
-                            </p>
-                            <p>Total Ratings: {ratingSummary.totalRatings}</p> */}
+                <RatingSummary ratingSummary={ratingSummary} />
 
-                            {/* Average Rating Stars */}
-                            <div
-                                className="average-rating-stars-container"
-                                style={{ display: "flex", gap: "10px" }}
-                            >
-                                <span>Overall: </span>
-                                <span>
-                                    {renderAverageRatingStars(
-                                        ratingSummary.averageRating
-                                    )}
-                                </span>
-                                <span>{ratingSummary.averageRating} / 5 </span>
-                                <span>
-                                    {" "}
-                                    | {ratingSummary.totalRatings} reviews
-                                </span>
-                            </div>
-                        </div>
-
-                        {/* Individual stars count */}
-                        <div style={{ width: "50vw" }}>
-                            {[5, 4, 3, 2, 1].map((star) => (
-                                <div
-                                    key={star}
-                                    className="star-row"
-                                    style={{
-                                        display: "flex",
-                                        alignItems: "center",
-                                    }}
-                                >
-                                    <div
-                                        className="star-label"
-                                        style={{
-                                            width: "4rem",
-                                            textAlign: "right",
-                                            paddingRight: "1rem",
-                                        }}
-                                    >
-                                        {star} <FaStar color={"#A6212B"} />:{" "}
-                                    </div>
-
-                                    <div
-                                        className="progress-bar"
-                                        style={{
-                                            maxWidth: "20rem",
-                                            width: "100%",
-                                            backgroundColor: "#e4e5e9",
-                                            height: "10px",
-                                            borderRadius: "3px",
-                                        }}
-                                    >
-                                        <div
-                                            className="progress"
-                                            style={{
-                                                width: `${getPercentage(
-                                                    ratingSummary.starCounts[
-                                                        star
-                                                    ]
-                                                )}%`,
-                                                backgroundColor: "#A6212B",
-                                                height: "10px",
-                                                borderRadius: "3px",
-                                            }}
-                                        ></div>
-                                    </div>
-                                    <div
-                                        className="star-percentage"
-                                        style={{
-                                            width: "8rem",
-                                            paddingLeft: "1rem",
-                                        }}
-                                    >
-                                        {ratingSummary.starCounts[star]}
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-
-                {/* Individual Ratings Section */}
-                <div
-                    className="ratings-container"
-                    style={{ marginTop: "1rem" }}
-                >
-                    <h2>Ratings & Reviews</h2>
-                    {product.product_ratings &&
-                    product.product_ratings.length > 0 ? (
-                        product.product_ratings.map((rating) => (
-                            <div className="rating-card" key={rating.rating_id}>
-                                <br />
-                                <p>{renderReviewStars(rating.rating)} </p>
-                                <h5>
-                                    By: {rating.username} on{" "}
-                                    {rating.review_date}
-                                </h5>
-
-                                <i>{rating.rating_comment}</i>
-                                <br />
-                                <br />
-                                <hr />
-                            </div>
-                        ))
-                    ) : (
-                        <p>No ratings available</p>
-                    )}
-                </div>
+                <ProductRatings ratings={product.product_ratings} />
             </div>
         </>
     );
