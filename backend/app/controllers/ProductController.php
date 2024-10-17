@@ -37,10 +37,10 @@ class ProductController extends ValidateController
         }
         return null;
     }
-    public function set_price($price)
+    public function set_price($product_price)
     {
 
-        $this->__price = $price;
+        $this->__price = $product_price;
         return $this->get_price();
     }
 
