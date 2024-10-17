@@ -37,6 +37,10 @@
     cursor: pointer;
 }
 
+.close-button:hover {
+    background: transparent;
+}
+
 /* Slideshow styles */
 .image-slideshow {
     position: relative;
@@ -54,6 +58,7 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
+    border-radius: 50%;
 }
 
 .prev-button {
@@ -68,17 +73,4 @@
 .next-button:disabled {
     cursor: not-allowed;
     opacity: 0.5;
-}
-.addtocart {
-    background-color: #e60023;
-    color: white; /* Màu chữ trên nút là trắng */
-    border: none; /* Loại bỏ viền của nút */
-    border-radius: 5px; /* Làm tròn các góc của nút */
-    padding: 10px 15px; /* Tạo khoảng đệm bên trong nút để nội dung không sát cạnh */
-    cursor: pointer; /* Con trỏ chuột chuyển thành dạng pointer khi hover qua nút */
-    font-size: 14px; /* Kích thước chữ trên nút là 14px */
-    transition: background-color 0.3s ease; /* Hiệu ứng chuyển màu nền của nút khi hover */
-}
-.addtocart:hover {
-    background-color: #cc0020; /* Đổi màu nền nút thành đỏ sậm hơn khi hover */
 }

@@ -1,16 +1,20 @@
-.button {
+.button,
+.info-button,
+.warning-button {
     border: none;
     cursor: pointer;
     color: white;
     padding: 0.7rem 1.5rem;
     border-radius: 5px;
-    background-color: #e60023;
-    transition: background-color 0.3s ease;
     font-weight: bold;
+    transition: background-color 0.3s ease;
 }
 
-.button:hover,
-.button:active {
+.button {
+    background-color: #a6212b;
+}
+
+.button:hover {
     background-color: #cc0020;
 }
 
@@ -23,8 +27,23 @@
     text-transform: uppercase;
 }
 
-.text-button:hover,
-.text-button:active {
-    color: #e60023;
+.text-button:hover {
+    color: #a6212b;
     background-color: transparent;
+}
+
+.info-button {
+    background-color: rgb(24, 24, 245);
+}
+
+.info-button:hover {
+    background-color: rgb(73, 73, 240);
+}
+
+.warning-button {
+    background-color: rgb(255, 136, 0);
+}
+
+.warning-button:hover {
+    background-color: rgb(237, 165, 84);
 }

@@ -79,6 +79,7 @@ export default function Login() {
                         name="username"
                         onChange={(e) => setUsername(e.target.value)}
                         value={username}
+                        autoFocus
                     />
                     <Input
                         label="Password*:"

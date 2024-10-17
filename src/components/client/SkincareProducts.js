@@ -1,7 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { IoChevronBackOutline, IoChevronForward } from "react-icons/io5";
+
+import { FaCaretSquareLeft, FaCaretSquareRight } from "react-icons/fa";
+
 import { formatter } from "../../util/formatter";
 import Modal from "./Modal"; // Import the Modal component
 
@@ -230,7 +232,7 @@ export default function SkincareProducts() {
                     onClick={() => paginate(currentPage - 1)}
                     disabled={currentPage === 1}
                 >
-                    <IoChevronBackOutline />
+                    <FaCaretSquareLeft />
                 </button>
                 {Array.from({ length: totalPages }, (_, i) => (
                     <button
@@ -245,7 +247,7 @@ export default function SkincareProducts() {
                     onClick={() => paginate(currentPage + 1)}
                     disabled={currentPage === totalPages}
                 >
-                    <IoChevronForward />
+                    <FaCaretSquareRight />
                 </button>
             </div>
 

@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import classes from "./ProductItem.module.css";
 import { formatter } from "../../util/formatter";
+import Button from "../UI/Button";
 
 export default function ProductItem({ product, openModal }) {
-    
     return (
         <div className={classes["product-card"]} key={product.product_id}>
             <Link to={"/products/" + product.product_id}>
@@ -24,12 +24,9 @@ export default function ProductItem({ product, openModal }) {
             <p className={classes["product-price"]}>
                 {formatter.format(product.price)}
             </p>
-            <button
-                className={classes["cart-button"]}
-                onClick={() => openModal(product)} // Open modal with product info
-            >
+            <Button className="button" onClick={() => openModal(product)}>
                 Quick View
-            </button>
+            </Button>
         </div>
     );
 }

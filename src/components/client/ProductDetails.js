@@ -5,6 +5,7 @@ import { UserContext } from "../../App";
 import { formatter } from "../../util/formatter";
 import { FaStar, FaStarHalfAlt } from "react-icons/fa"; // Import star icon
 import Modal from "react-modal"; // Import react-modal
+import Button from "../UI/Button";
 
 // Set the app element for accessibility
 Modal.setAppElement("#root");
@@ -195,21 +196,19 @@ export default function ProductDetails() {
 
     return (
         <>
-            <h1>Product # {id}</h1>
             <div>
-                <p>
-                    <button onClick={handleAddToCart}>Add to Cart</button>
-                </p>
-                <h3>{product.product_name}</h3>
+                <h1>{product.product_name}</h1>
+                <Button className="button" onClick={handleAddToCart}>
+                    Add to Cart
+                </Button>
 
-                <p>Main cat: {product.product_description}</p>
+                <p>{product.product_description}</p>
                 <p>Sub cat: {product.main_category}</p>
                 <p>Sub cat: {product.sub_category}</p>
                 <p>Qty available: {product.stock_qty}</p>
-                <p>Price: {formatter.format(product.price)}</p>
+                <h4>Price: {formatter.format(product.price)}</h4>
 
                 <div>
-                    <h3>Product Images:</h3>
                     {product.product_images &&
                     product.product_images.length > 0 ? (
                         product.product_images
@@ -227,19 +226,9 @@ export default function ProductDetails() {
                     )}
                 </div>
 
-                <button
-                    style={{
-                        backgroundColor: "#A6212B",
-                        border: "none",
-                        padding: "5px 10px",
-                        color: "white",
-                        borderRadius: "5px",
-                        cursor: "pointer",
-                    }}
-                    onClick={openModal}
-                >
+                <Button className="button" onClick={openModal}>
                     Write a review
-                </button>
+                </Button>
 
                 {/* Modal for writing a review */}
                 <Modal
@@ -268,25 +257,16 @@ export default function ProductDetails() {
                         ></textarea>
                     </div>
                     <div>
-                        <button
-                            onClick={handleSubmitReview}
-                            style={{
-                                backgroundColor: "#A6212B",
-                                border: "none",
-                                padding: "5px 10px",
-                                color: "white",
-                                borderRadius: "5px",
-                                cursor: "pointer",
-                            }}
-                        >
+                        <Button className="button" onClick={handleSubmitReview}>
                             Post Review
-                        </button>
-                        <button
+                        </Button>
+                        <Button
+                            className="text-button"
                             onClick={closeModal}
-                            style={{ marginLeft: "10px" }}
+                            style={{ marginLeft: "1rem" }}
                         >
                             Cancel
-                        </button>
+                        </Button>
                     </div>
                 </Modal>
 

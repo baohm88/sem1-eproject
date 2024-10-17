@@ -4,6 +4,7 @@ import { formatter } from "../../util/formatter";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import classes from "./Cart.module.css"; // Importing CSS Module
+import Button from "../UI/Button";
 
 export default function Cart() {
     const {
@@ -159,12 +160,11 @@ export default function Cart() {
                 <p className={classes.flexContainerBetween}>
                     <span>Estimated Total</span> <span>${totalAmount}</span>
                 </p>
-                <button
-                    className={classes.checkoutButton}
-                    onClick={handleCheckout}
-                >
+                
+                <Button className="button" onClick={handleCheckout}>
                     Checkout
-                </button>
+                </Button>
+                {/* <button className={classes.checkoutButton}>Checkout</button> */}
             </div>
         </div>
     );

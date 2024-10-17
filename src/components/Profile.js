@@ -5,6 +5,7 @@ import { UserContext } from "../App";
 import { FaUnlock } from "react-icons/fa6";
 import { FaUserGear } from "react-icons/fa6";
 import { FaUserMinus } from "react-icons/fa6";
+import Button from "./UI/Button";
 
 export default function Profile() {
     const { user } = useContext(UserContext);
@@ -45,19 +46,19 @@ export default function Profile() {
             <p>Address: {user.address} </p>
 
             <NavLink to={"/update_password"}>
-                <button>
-                    <FaUnlock /> Change Password
-                </button>
+                <Button className="button">
+                    <FaUnlock /> Update Password
+                </Button>
             </NavLink>
+
             <NavLink to={"/update_profile"}>
-                <button>
+                <Button className="info-button">
                     <FaUserGear /> Edit Profile
-                </button>
+                </Button>
             </NavLink>
-            <button>
-                {" "}
+            <Button className="warning-button">
                 <FaUserMinus /> Delete Profile
-            </button>
+            </Button>
         </div>
     );
 }

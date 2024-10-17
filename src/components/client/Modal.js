@@ -3,6 +3,7 @@ import { formatter } from "../../util/formatter";
 import { IoChevronBackOutline, IoChevronForward } from "react-icons/io5";
 import classes from "./Modal.module.css";
 import { UserContext } from "../../App";
+import Button from "../UI/Button";
 
 export default function Modal({ product, onClose }) {
     const { addToCart } = useContext(UserContext); // Destructure addToCart from context
@@ -29,7 +30,6 @@ export default function Modal({ product, onClose }) {
         addToCart(product); // Call addToCart with the current product
         alert(product.product_name + " has been added to cart!");
     };
-    console.log(product);
 
     if (!product) return null; // If no product, return null (don't render anything)
 
@@ -70,12 +70,9 @@ export default function Modal({ product, onClose }) {
                 <h3>{product.product_name}</h3>
                 <p>{product.product_description}</p>
                 <h4>{formatter.format(product.price)}</h4>
-                <button
-                    onClick={handleAddToCart}
-                    className={classes["addtocart"]}
-                >
+                <Button className="button" onClick={handleAddToCart}>
                     Add to Cart
-                </button>
+                </Button>
             </div>
         </div>
     );
