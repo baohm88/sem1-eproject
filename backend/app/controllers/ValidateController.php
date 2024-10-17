@@ -15,7 +15,7 @@ class ValidateController
             case "username":
                 $regex = "/^[a-z0-9_]{1,30}$/";
                 break;
-            case "product_price":
+            case "price":
                 $regex =  '/(?<!\w)([€$£]|VND)?\s?\d{1,3}(?:[.,]\d{3})*(?:[.,]\d{2})?(?!\w)/';
                 break;
             case 'qty':

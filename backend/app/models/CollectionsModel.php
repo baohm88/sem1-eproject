@@ -58,19 +58,19 @@ class CollectionsModel extends BaseController
                 GROUP BY p.product_id";
         $params = [];
         if ($max_price !== null && $min_price !== null) {
-            $sql .=  " AND product_price BETWEEN :min_price AND :max_price";
+            $sql .=  " AND price BETWEEN :min_price AND :max_price";
             $params["min_price"] = $min_price;
             $params["max_price"] = $max_price;
         } else if ($max_price !== null && $min_price == null) {
-            $sql .= " AND product_price <= :max_price";
+            $sql .= " AND price <= :max_price";
             $params["max_price"] = $max_price;
         } else if ($max_price  == null && $min_price !== null) {
-            $sql .= " AND product_price >= :min_price";
+            $sql .= " AND price >= :min_price";
             $params["min_price"] = $min_price;
         }
 
         if ($order_by !== null) {
-            $allowed_order_columns = ['product_price', 'name', 'date_listed']; // Add allowed columns here
+            $allowed_order_columns = ['price', 'name', 'date_listed']; // Add allowed columns here
             if (in_array($order_by, $allowed_order_columns)) {
                 if ($order_by == "name") {
                     $order_by = "product_" . $order_by;
