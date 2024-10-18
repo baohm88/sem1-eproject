@@ -10,13 +10,19 @@
     background-color: #fff; /* Màu nền trắng */
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* Hiệu ứng chuyển động khi hover (thẻ sản phẩm nhô lên) */
     text-align: center; /* Căn giữa nội dung văn bản trong thẻ */
-    max-width: 300px; /* Giới hạn chiều rộng tối đa của thẻ sản phẩm là 300px */
+    max-width: 16rem;
     height: 100%; /* Đảm bảo tất cả các thẻ sản phẩm có cùng chiều cao */
+    min-width: 10rem;
+    width: 100%;
 }
 
 .product-card:hover {
     transform: translateY(-5px); /* Thẻ sẽ nhô lên 5px khi hover */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Tạo đổ bóng nhẹ khi hover, giúp sản phẩm nổi bật */
+}
+
+.product-card a {
+    text-decoration: none;
 }
 
 .product-image {
@@ -27,11 +33,11 @@
 }
 
 .product-title {
-    font-size: 16px; /* Kích thước font cho tiêu đề là 16px */
-    color: #333; /* Màu chữ xám đậm cho tiêu đề */
-    margin: 10px 0; /* Tạo khoảng cách 10px trên dưới tiêu đề */
-    font-weight: 500; /* Độ đậm của chữ tiêu đề là 500 (trung bình) */
-    height: 50px; /* Đặt chiều cao cố định cho tiêu đề để giữ sự đồng đều giữa các thẻ */
+    font-size: 16px;
+    color: #333;
+    margin: 10px 0;
+    font-weight: 500;
+    height: 50px;
     display: flex; /* Sử dụng flex để căn giữa nội dung theo chiều ngang và dọc */
     align-items: center; /* Căn giữa tiêu đề theo chiều dọc */
     justify-content: center; /* Căn giữa tiêu đề theo chiều ngang */
@@ -42,20 +48,4 @@
     color: #000; /* Màu chữ đen cho giá sản phẩm */
     font-weight: bold; /* In đậm giá sản phẩm */
     margin-bottom: 15px; /* Tạo khoảng cách 15px bên dưới giá sản phẩm */
-}
-
-
-.cart-button {
-    background-color: #e60023; /* Màu nền của nút là đỏ đậm */
-    color: white; /* Màu chữ trên nút là trắng */
-    border: none; /* Loại bỏ viền của nút */
-    border-radius: 5px; /* Làm tròn các góc của nút */
-    padding: 10px 15px; /* Tạo khoảng đệm bên trong nút để nội dung không sát cạnh */
-    cursor: pointer; /* Con trỏ chuột chuyển thành dạng pointer khi hover qua nút */
-    font-size: 14px; /* Kích thước chữ trên nút là 14px */
-    transition: background-color 0.3s ease; /* Hiệu ứng chuyển màu nền của nút khi hover */
-}
-
-.cart-button:hover {
-    background-color: #cc0020; /* Đổi màu nền nút thành đỏ sậm hơn khi hover */
 }

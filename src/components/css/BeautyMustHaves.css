@@ -3,7 +3,6 @@
     text-align: center; /* Căn giữa toàn bộ nội dung */
     padding: 40px 0; /* Phần đệm trên và dưới cho khoảng cách */
     background-color: #fff; /* Màu nền trắng */
-
 }
 
 /* Tiêu đề "Beauty must-haves" */
@@ -18,13 +17,6 @@
     font-size: 16px; /* Kích thước chữ nhỏ hơn */
     color: #666; /* Màu xám nhạt cho mô tả */
     margin-bottom: 40px; /* Khoảng cách dưới mô tả lớn để tách biệt với các tab */
-}
-
-/* Tabs điều hướng "Just for You", "Holiday Gift Sets", "What's New" */
-.product-tabs {
-    display: flex; /* Sắp xếp các tab nằm ngang */
-    justify-content: center; /* Căn giữa các tab */
-    margin-bottom: 40px; /* Khoảng cách dưới cùng với các sản phẩm */
 }
 
 /* Thiết kế cho mỗi tab */
@@ -98,7 +90,9 @@
 
 /* Hiệu ứng khi hover qua từng sản phẩm */
 .product:hover {
-    transform: translateY(-10px); /* Khối dịch vụ được nâng lên 10px khi hover */
+    transform: translateY(
+        -10px
+    ); /* Khối dịch vụ được nâng lên 10px khi hover */
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Đổ bóng mạnh hơn khi hover */
 }
 .beauty-must-haves {

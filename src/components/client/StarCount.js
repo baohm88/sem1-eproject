@@ -8,34 +8,12 @@ export default function StarCount({ star, ratingSummary }) {
             : 0;
     };
     return (
-        <div
-            className="star-row"
-            style={{
-                display: "flex",
-                alignItems: "center",
-            }}
-        >
-            <div
-                className="star-label"
-                style={{
-                    width: "4rem",
-                    textAlign: "right",
-                    paddingRight: "1rem",
-                }}
-            >
-                {star} <FaStar color={"#A6212B"} />:{" "}
+        <div className="star-row">
+            <div className="star-label">
+                {star} <FaStar color={"#A6212B"} />:
             </div>
 
-            <div
-                className="progress-bar"
-                style={{
-                    maxWidth: "20rem",
-                    width: "100%",
-                    backgroundColor: "#e4e5e9",
-                    height: "10px",
-                    borderRadius: "3px",
-                }}
-            >
+            <div className="progress-bar">
                 <div
                     className="progress"
                     style={{
@@ -44,17 +22,11 @@ export default function StarCount({ star, ratingSummary }) {
                         )}%`,
                         backgroundColor: "#A6212B",
                         height: "10px",
-                        borderRadius: "3px",
+                        borderRadius: "5px",
                     }}
                 ></div>
             </div>
-            <div
-                className="star-percentage"
-                style={{
-                    width: "8rem",
-                    paddingLeft: "1rem",
-                }}
-            >
+            <div className="star-percentage">
                 {ratingSummary.starCounts[star]}
             </div>
         </div>

@@ -64,10 +64,11 @@ body {
     justify-content: center;
     gap: 20px;
     padding: 0 10px;
-    justify-items: center; /* Đảm bảo các thẻ sản phẩm được căn giữa theo chiều ngang */
+    align-items: center; /* Đảm bảo các thẻ sản phẩm được căn giữa theo chiều ngang */
     max-width: 1264px;
     width: 100%;
     margin: 0 auto;
+    flex-wrap: wrap;
 }
 
 .best-seller-badge {

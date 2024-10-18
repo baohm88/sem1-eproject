@@ -56,8 +56,8 @@
 }
 
 .benefit {
-    text-align: center;
-    flex: 1;
+    display: flex;
+    align-items: center;
     background-color: rgb(248, 236, 228); /* Màu nền giống với ảnh */
     padding: 1rem;
     border-radius: 5px;
@@ -67,10 +67,9 @@
     background-color: rgb(247, 219, 201); /* Màu nền giống với ảnh */
 }
 
-.benefit i {
-    display: block;
-    font-size: 24px;
-    margin-bottom: 10px;
+.benefit img {
+    width: 3rem;
+    margin-right: 1rem;
 }
 
 .benefit p {
@@ -301,13 +300,6 @@ h3 {
     margin-bottom: 40px; /* Khoảng cách dưới mô tả lớn để tách biệt với các tab */
 }
 
-/* Tabs điều hướng "Just for You", "Holiday Gift Sets", "What's New" */
-.product-tabs {
-    display: flex; /* Sắp xếp các tab nằm ngang */
-    justify-content: center; /* Căn giữa các tab */
-    margin-bottom: 40px; /* Khoảng cách dưới cùng với các sản phẩm */
-}
-
 /* Thiết kế cho mỗi tab */
 .tab {
     font-size: 14px; /* Kích thước chữ nhỏ hơn cho các tab */
@@ -329,13 +321,6 @@ h3 {
 /* Hiệu ứng khi di chuột qua tab */
 .tab:hover {
     color: #333; /* Đổi màu khi hover (di chuột qua) */
-}
-
-/* Slider hiển thị các sản phẩm */
-.product-slider {
-    display: flex; /* Sắp xếp các sản phẩm nằm ngang */
-    justify-content: center; /* Căn giữa toàn bộ sản phẩm */
-    gap: 20px; /* Khoảng cách giữa các sản phẩm */
 }
 
 /* Thiết kế của từng sản phẩm */
@@ -506,13 +491,6 @@ h3 {
     margin-bottom: 40px; /* Khoảng cách dưới mô tả lớn để tách biệt với các tab */
 }
 
-/* Tabs điều hướng "Just for You", "Holiday Gift Sets", "What's New" */
-.product-tabs {
-    display: flex; /* Sắp xếp các tab nằm ngang */
-    justify-content: center; /* Căn giữa các tab */
-    margin-bottom: 40px; /* Khoảng cách dưới cùng với các sản phẩm */
-}
-
 /* Thiết kế cho mỗi tab */
 .tab {
     font-size: 14px; /* Kích thước chữ nhỏ hơn cho các tab */
@@ -534,13 +512,6 @@ h3 {
 /* Hiệu ứng khi di chuột qua tab */
 .tab:hover {
     color: #333; /* Đổi màu khi hover (di chuột qua) */
-}
-
-/* Slider hiển thị các sản phẩm */
-.product-slider {
-    display: flex; /* Sắp xếp các sản phẩm nằm ngang */
-    justify-content: center; /* Căn giữa toàn bộ sản phẩm */
-    gap: 20px; /* Khoảng cách giữa các sản phẩm */
 }
 
 /* Thiết kế của từng sản phẩm */

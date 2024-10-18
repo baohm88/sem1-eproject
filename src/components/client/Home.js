@@ -5,10 +5,9 @@ import { formatter } from "../../util/formatter";
 import { IoChevronBackOutline, IoChevronForward } from "react-icons/io5";
 import Modal from "./Modal"; // Import the Modal component
 
-import Slider from "rc-slider"; // Import rc-slider
-// import "rc-slider/assets/index.css"; // Import rc-slider styles
 import classes from "./Home.module.css";
 import Button from "../UI/Button";
+import ProductItem from "./ProductItem";
 
 export default function Home() {
     const [products, setProducts] = useState([]);
@@ -17,6 +16,9 @@ export default function Home() {
     const [sortOption, setSortOption] = useState(""); // State for sorting option
     const [selectedRange, setSelectedRange] = useState(false);
     const [priceRange, setPriceRange] = useState([0, 200]); // State for the range slider
+    const [forYouProducts, setForYouProducts] = useState([]);
+    const [giftProducts, setGiftProducts] = useState([]);
+    const [newProducts, setNewProducts] = useState([]);
 
     const location = useLocation();
 
@@ -34,8 +36,14 @@ export default function Home() {
     // fetch products from db initially
     useEffect(() => {
         axios.get("http://localhost/project/collections/all").then((res) => {
-            setProducts(res.data.data);
-            setFilteredProducts(res.data.data);
+            const data = res.data.data;
+            setProducts(data);
+            setFilteredProducts(data);
+            setForYouProducts(
+                data.filter((product) => product.note === "for-you")
+            );
+            setGiftProducts(data.filter((product) => product.note === "gift"));
+            setNewProducts(data.filter((product) => product.note === "new"));
 
             document.title = "Clarins Store";
         });
@@ -126,6 +134,8 @@ export default function Home() {
         setActiveTab(tab);
     };
 
+    console.log(forYouProducts);
+
     return (
         <>
             <div className={classes["body-section"]}>
@@ -149,19 +159,31 @@ export default function Home() {
                 {/* Phần ưu đãi online */}
                 <div className={classes["online-benefits"]}>
                     <div className={classes["benefit"]}>
-                        <i className={["icon-free-shipping"]}></i>
+                        <img
+                            src="https://www.clarinsusa.com/on/demandware.static/-/Library-Sites-clarins-v3/default/dw14d9bd9b/Icon_CBA/illustrative-bag-delivery.svg"
+                            alt="free shipping"
+                        />
                         <p>Free shipping with any $50 order</p>
                     </div>
                     <div className={classes["benefit"]}>
-                        <i className={classes["icon-rewards"]}></i>
+                        <img
+                            src="https://www.clarinsusa.com/on/demandware.static/-/Library-Sites-clarins-v3/default/dw4e59dd0e/Icon_CBA/Club%20clarins-2023.svg"
+                            alt="reward"
+                        />
                         <p>Earn 10 points per dollar and redeem for rewards</p>
                     </div>
                     <div className={classes["benefit"]}>
-                        <i className={classes["icon-samples"]}></i>
+                        <img
+                            src="https://www.clarinsusa.com/on/demandware.static/-/Library-Sites-clarins-v3/default/dw1820564d/CLP%20-%20Template/Products%20Samples.png"
+                            alt="sample"
+                        />
                         <p>Choose 3 free samples with any order</p>
                     </div>
                     <div className={classes["benefit"]}>
-                        <i className={classes["icon-subscribe"]}></i>
+                        <img
+                            src="https://www.clarinsusa.com/on/demandware.static/-/Library-Sites-clarins-v3/default/dwf2d8c037/Icon_CBA/illustrative-products-autoreplenishment.svg"
+                            alt="autoreplenishment"
+                        />
                         <p>Subscribe for 10% off and free shipping</p>
                     </div>
                 </div>
@@ -283,96 +305,34 @@ export default function Home() {
                 {/* Hiển thị các sản phẩm dựa trên tab đang được chọn */}
                 {activeTab === "just-for-you" && (
                     <div className={classes["product-slider"]}>
-                        <div className={classes["product"]}>
-                            <img
-                                src="80103084_original_original_A.jpg"
-                                alt="Product 1"
+                        {forYouProducts.map((product) => (
+                            <ProductItem
+                                product={product}
+                                openModal={openModal}
                             />
-                            <h3>Double Serum Anti-Aging</h3>
-                            <p>$135.00</p>
-                            <Button className="button" onClick={openModal}>
-                                Quick View
-                            </Button>
-                        </div>
-                        <div className={classes["product"]}>
-                            <img
-                                src="80068482_original_original_A.jpg"
-                                alt="Product 2"
-                            />
-                            <h3>Total Eye Lift Cream</h3>
-                            <p>$92.00</p>
-                            <Button className="button" onClick={openModal}>
-                                Quick View
-                            </Button>
-                        </div>
-                        <div className={classes["product"]}>
-                            <img
-                                src="80077133_original_original_A.jpg"
-                                alt="Product 3"
-                            />
-                            <h3>Double Serum Eye</h3>
-                            <p>$83.00</p>
-                            <Button className="button" onClick={openModal}>
-                                Quick View
-                            </Button>
-                        </div>
-                        <div className={classes["product"]}>
-                            <img
-                                src="80084587_original_original_A.jpg"
-                                alt="Product 4"
-                            />
-                            <h3>Lip Comfort Oil</h3>
-                            <p>$30.00</p>
-                            <Button className="button" onClick={openModal}>
-                                Quick View
-                            </Button>
-                        </div>
+                        ))}
                     </div>
                 )}
 
                 {activeTab === "whats-new" && (
                     <div className={classes["product-slider"]}>
-                        <div className={classes["product"]}>
-                            <img src="new_product_1.jpg" alt="New Product 1" />
-
-                            <h3>New Serum XYZ</h3>
-                            <p>$120.00</p>
-                            <p>★★★★★</p>
-                        </div>
-
-                        <div className={classes["product"]}>
-                            <img src="new_product_2.jpg" alt="New Product 2" />
-
-                            <h3>New Cream ABC</h3>
-                            <p>$95.00</p>
-                            <p>★★★★★</p>
-                        </div>
+                        {newProducts.map((product) => (
+                            <ProductItem
+                                product={product}
+                                openModal={openModal}
+                            />
+                        ))}
                     </div>
                 )}
 
                 {activeTab === "online-exclusives" && (
                     <div className={classes["product-slider"]}>
-                        <div className={classes["product"]}>
-                            <img
-                                src="exclusive_product_1.jpg"
-                                alt="Exclusive Product 1"
+                        {giftProducts.map((product) => (
+                            <ProductItem
+                                product={product}
+                                openModal={openModal}
                             />
-
-                            <h3>Exclusive Product 1</h3>
-                            <p>$140.00</p>
-                            <p>★★★★★</p>
-                        </div>
-
-                        <div className={classes["product"]}>
-                            <img
-                                src="exclusive_product_2.jpg"
-                                alt="Exclusive Product 2"
-                            />
-
-                            <h3>Exclusive Product 2</h3>
-                            <p>$110.00</p>
-                            <p>★★★★★</p>
-                        </div>
+                        ))}
                     </div>
                 )}
             </div>

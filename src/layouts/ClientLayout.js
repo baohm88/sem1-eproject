@@ -92,12 +92,15 @@ export default function ClientLayout({ children }) {
     return (
         <>
             <header>
-                <ul className="top-nav">
-                    <li className="row">
-                        <span className="menu-icon" onClick={openSidebar}>
+                <ul className={classes["top-nav"]}>
+                    <li className={classes["row"]}>
+                        <span
+                            className={classes["menu-icon"]}
+                            onClick={openSidebar}
+                        >
                             <IoMenuSharp />
                         </span>
-                        <span className="search-bar">
+                        <span className={classes["search-bar"]}>
                             <form onSubmit={handleSearch} method="get">
                                 <div className={classes.searchContainer}>
                                     {" "}
@@ -128,12 +131,12 @@ export default function ClientLayout({ children }) {
                             <img
                                 src={logo}
                                 alt="Clarins logo"
-                                className="logo"
+                                className={classes["logo"]}
                             />
                         </NavLink>
                     </li>
-                    <li className="row">
-                        <span className="nav-icons">
+                    <li className={classes["row"]}>
+                        <span className={classes["nav-icons"]}>
                             <span>
                                 {isLoggedIn && (
                                     <>
@@ -189,7 +192,7 @@ export default function ClientLayout({ children }) {
             </header>
 
             <div id="mySideBar" ref={sidebarRef}>
-                <div className="sidebar-header">
+                <div className={classes["sidebar-header"]}>
                     <p onClick={closeSidebar}>
                         <TfiClose /> Menu
                     </p>
@@ -226,27 +229,27 @@ export default function ClientLayout({ children }) {
                         <GiHeartBeats /> Club Clarins
                     </p>
                 </div>
-                <div className="sidebar-body">
-                    <p className="row-space-between" onClick={closeSidebar}>
+                <div className={classes["sidebar-body"]}>
+                    <p className={classes["row-space-between"]} onClick={closeSidebar}>
                         <NavLink to={"/"}>What's new</NavLink>
                         <span>
                             <IoChevronForwardOutline />
                         </span>
                     </p>
-                    <p className="row-space-between" onClick={closeSidebar}>
+                    <p className={classes["row-space-between"]} onClick={closeSidebar}>
                         <NavLink to={"/skincare"}>Skincare</NavLink>
                         <span>
                             <IoChevronForwardOutline />
                         </span>
                     </p>
-                    <p className="row-space-between" onClick={closeSidebar}>
+                    <p className={classes["row-space-between"]} onClick={closeSidebar}>
                         <NavLink to={"/makeup"}>Makeup</NavLink>
                         <span>
                             <IoChevronForwardOutline />
                         </span>
                     </p>
                 </div>
-                <div className="sidebar-footer">
+                <div className={classes["sidebar-footer"]}>
                     <img src={clubLogo} alt="Clarins Club" />
                     <p>
                         Enter a world <br />
@@ -256,7 +259,7 @@ export default function ClientLayout({ children }) {
                         Exciting benefits await - <br />
                         full size products, Club Clarins Dollars, and more!
                     </p>
-                    <p className="call-to-actions">
+                    <p className={classes["call-to-actions"]}>
                         <Link to={"/"}>JOIN NOW</Link>
                     </p>
                 </div>

@@ -273,6 +273,50 @@ td {
 }
 /* CART ENDS */
 
+.row-flex-between {
+    display: flex;
+    justify-content: space-between;
+}
+
+.average-rating-stars-container {
+    display: flex;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.star-row {
+    display: flex;
+    align-items: center;
+}
+
+.progress-bar {
+    /* max-width: 20rem; */
+    width: 90%;
+    background-color: #e4e5e9;
+    height: 10px;
+    border-radius: 5px;
+}
+
+.star-label {
+    width: 4rem;
+    text-align: right;
+    padding-right: 1rem;
+}
+
+.star-percentage {
+    min-width: 1rem;
+    padding-left: 1rem;
+    text-align: right;
+}
+
+.rating-summary {
+    margin: 1rem 0;
+}
+
+.star-rows-container {
+    min-width: 50vw;
+    margin: 1rem 0;
+}
 /* MOBILE */
 @media screen and (max-width: 1023px) {
     main,
@@ -289,19 +333,8 @@ td {
     }
 }
 
-/* LOGIN START*/
-.login-form-container {
-    background-color: white;
-    max-width: 30rem;
-    margin: 0 auto;
+@media screen and (max-width: 700px) {
+    .row-flex-between {
+        flex-direction: column;
+    }
 }
-
-.login-form-container h1 {
-    text-align: center;
-}
-
-.login-form-error-message {
-    color: red;
-}
-
-/* LOGIN END*/
