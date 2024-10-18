@@ -1,13 +1,3 @@
-/* Main header container */
-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 0;
-    width: 100%;
-}
-
 /* Top navigation bar */
 .top-nav {
     display: flex;
@@ -15,15 +5,29 @@ header {
     align-items: center;
     width: 100%;
     padding: 0 20px;
-    max-width: 1200px;
     list-style-type: none;
+    max-width: 1264px;
+    width: 100%;
+    margin: 5px auto;
 }
 
-/* Menu icon */
-.menu-icon {
+.top-nav svg {
+    font-size: 1.8rem;
+    margin: 0 5px;
+}
+
+.top-nav svg:hover {
+    color: var(--primaryColor);
     cursor: pointer;
-    font-size: 1.5rem;
-    margin-right: 20px;
+}
+
+/* menu icon */
+.menu-icon {
+    margin: 3px;
+    border-radius: 5px;
+}
+.menu-icon:hover {
+    background-color: antiquewhite;
 }
 
 /* Search bar container */
@@ -32,6 +36,10 @@ header {
     align-items: center;
     width: 250px; /* Adjust width as per your design */
 }
+.search-bar input {
+    margin: 0;
+}
+
 
 .searchContainer {
     display: flex;
@@ -95,29 +103,9 @@ header {
 }
 
 .nav-link a:hover,
-.nav-link a:active {
+.nav-link a.active {
     color: #b51828; /* Hover effect color */
 }
-
-/* Right side icons (help, account, bag) */
-.nav-icons {
-    display: flex;
-    align-items: center;
-    gap: 30px; /* Adjusted for better spacing between icons */
-}
-
-.nav-icons span {
-    position: relative;
-    cursor: pointer;
-}
-
-/* Icon styles */
-.nav-icons svg {
-    font-size: 1.5rem;
-    color: black;
-}
-
-
 
 :root {
     --primaryColor: rgb(166, 43, 43);
@@ -125,15 +113,6 @@ header {
     --darkColor: black;
     --lightColor: white;
     --dangerColor: red;
-}
-
-.center {
-    text-align: center;
-}
-
-.form-actions {
-    display: flex;
-    justify-content: flex-end;
 }
 
 .user-form {
@@ -170,25 +149,6 @@ header {
     width: 90%;
     height: 90%;
 }
-/* TOP-NAV STARTS */
-.top-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1264px;
-    width: 100%;
-    margin: 0 auto;
-}
-
-.top-nav svg {
-    font-size: 1.8rem;
-    margin: 0 5px;
-}
-
-.top-nav svg:hover {
-    color: var(--primaryColor);
-    cursor: pointer;
-}
 
 .logo {
     width: 10rem;
@@ -200,17 +160,7 @@ header {
     align-items: center;
 }
 
-.menu-icon {
-    margin: 3px;
-    border-radius: 5px;
-}
-.menu-icon:hover {
-    background-color: antiquewhite;
-}
 
-.search-bar input {
-    margin: 0;
-}
 .search-button {
     background-color: antiquewhite;
     padding: 4px;
@@ -334,13 +284,58 @@ header {
 }
 /* CART ENDS */
 
+/* Container for the shopping bag icon and badge */
+.nav-icons {
+    position: relative; /* Allows positioning of the badge relative to the icon */
+}
+
+/* Badge for showing total quantity */
+.nav-icons .badge {
+    position: absolute;
+    top: -8px; /* Adjusts the vertical position of the badge */
+    right: -8px; /* Adjusts the horizontal position of the badge */
+    background-color: #a6212b; /* Red background for the badge */
+    color: white; /* White text for the number */
+    border-radius: 50%; /* Makes the badge a circle */
+    padding: 2px; /* Adds some padding for the badge */
+    font-size: 12px; /* Smaller font size for the number */
+    min-width: 1rem; /* Minimum width to ensure the badge is round */
+    height: 1rem; /* Fixed height for the badge */
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Centers the number inside the badge */
+    font-weight: bold; /* Bold text for better visibility */
+}
+
+.nav-icons .badge:hover {
+    background-color: #cc0020;
+}
+
+/* Smaller checkmark icon positioned on top of the person icon */
+.checkmarkIcon {
+    position: absolute; /* Absolutely position the checkmark */
+    top: -5px; /* Adjust to position it correctly above the icon */
+    right: -5px; /* Adjust to position it correctly */
+    width: 1rem; /* Size of the checkmark */
+    height: 1rem; /* Maintain aspect ratio */
+    color: green; /* Set the color of the checkmark */
+}
+
+/* Add similar styles for the red dot when not logged in if necessary */
+.redDot {
+    position: absolute; /* Absolutely position the checkmark */
+    top: -5px; /* Adjust to position it correctly above the icon */
+    right: -5px; /* Adjust to position it correctly */
+    width: 1rem; /* Size of the checkmark */
+    height: 1rem; /* Maintain aspect ratio */
+    color: red; /* Set the color of the checkmark */
+}
+
 /* MOBILE */
 @media screen and (max-width: 1023px) {
-    main,
-    .top-nav {
+    main {
         width: 100vw;
     }
-
     .search-bar,
     .bottom-nav {
         display: none;
@@ -349,4 +344,3 @@ header {
         flex-direction: column;
     }
 }
-

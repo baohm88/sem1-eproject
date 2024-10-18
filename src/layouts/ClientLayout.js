@@ -11,6 +11,8 @@ import {
     IoLogOutOutline,
     IoChevronForwardOutline,
 } from "react-icons/io5";
+import { GoDotFill } from "react-icons/go";
+import { IoIosCheckmarkCircle } from "react-icons/io";
 import { TfiClose } from "react-icons/tfi";
 import { GiHeartBeats } from "react-icons/gi";
 import { BsCartCheck } from "react-icons/bs";
@@ -137,25 +139,26 @@ export default function ClientLayout({ children }) {
                     </li>
                     <li className={classes["row"]}>
                         <span className={classes["nav-icons"]}>
-                            <span>
-                                {isLoggedIn && (
-                                    <>
-                                        <span>Hi, {user.first_name}</span>
-                                    </>
+                            <NavLink to={isLoggedIn ? "/profile" : "/login"}>
+                                <IoPersonOutline />
+                                {isLoggedIn ? (
+                                    <IoIosCheckmarkCircle
+                                        className={classes.checkmarkIcon}
+                                    />
+                                ) : (
+                                    <GoDotFill className={classes.redDot} />
                                 )}
-                                <NavLink
-                                    to={isLoggedIn ? "/profile" : "/login"}
-                                >
-                                    <IoPersonOutline />
-                                </NavLink>
-                            </span>
+                            </NavLink>
                         </span>
-                        <span>
+
+                        <span className={classes["nav-icons"]}>
                             <NavLink to={"/cart"}>
-                                <IoBagAddOutline />{" "}
-                                <span>
-                                    {totalQuantity > 0 ? totalQuantity : ""}
-                                </span>
+                                <IoBagAddOutline />
+                                {totalQuantity > 0 && (
+                                    <span className={classes["badge"]}>
+                                        {totalQuantity}
+                                    </span>
+                                )}
                             </NavLink>
                         </span>
                     </li>
@@ -230,19 +233,28 @@ export default function ClientLayout({ children }) {
                     </p>
                 </div>
                 <div className={classes["sidebar-body"]}>
-                    <p className={classes["row-space-between"]} onClick={closeSidebar}>
+                    <p
+                        className={classes["row-space-between"]}
+                        onClick={closeSidebar}
+                    >
                         <NavLink to={"/"}>What's new</NavLink>
                         <span>
                             <IoChevronForwardOutline />
                         </span>
                     </p>
-                    <p className={classes["row-space-between"]} onClick={closeSidebar}>
+                    <p
+                        className={classes["row-space-between"]}
+                        onClick={closeSidebar}
+                    >
                         <NavLink to={"/skincare"}>Skincare</NavLink>
                         <span>
                             <IoChevronForwardOutline />
                         </span>
                     </p>
-                    <p className={classes["row-space-between"]} onClick={closeSidebar}>
+                    <p
+                        className={classes["row-space-between"]}
+                        onClick={closeSidebar}
+                    >
                         <NavLink to={"/makeup"}>Makeup</NavLink>
                         <span>
                             <IoChevronForwardOutline />

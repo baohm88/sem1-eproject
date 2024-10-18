@@ -13,34 +13,6 @@
     --dangerColor: red;
 }
 
-/* a {
-    color: var(--darkColor);
-} */
-
-/* ul {
-    display: flex;
-    justify-content: space-evenly;
-} */
-
-/* li {
-    padding: 10px;
-    font-weight: bold;
-    text-transform: uppercase;
-} */
-
-/* li a:hover,
-li a.active {
-    text-decoration: underline;
-    color: var(--primaryColor);
-} */
-
-/* main {
-    width: 90vw;
-    min-height: 90vh;
-    margin: 1rem auto;
-    padding: 0 1rem;
-} */
-
 .center {
     text-align: center;
 }
@@ -50,46 +22,12 @@ li a.active {
     justify-content: flex-end;
 }
 
-.user-form {
-    width: 25rem;
-    margin: 2rem auto;
-    padding: 1rem;
-    background-color: antiquewhite;
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.25);
-    border-radius: 5px;
-}
-
-/* input {
-    width: 100%;
-    line-height: 2rem;
-    margin-bottom: 10px;
-} */
-
 .danger {
     background-color: var(--dangerColor);
     color: var(--lightColor);
     border-radius: 5px;
     padding: 3px;
 }
-/* button { */
-/* padding: 5px 10px; */
-/* } */
-
-/* section {
-    min-height: 30vh;
-} */
-
-/* table {
-    border-collapse: collapse;
-    width: 100%;
-    margin: 5px;
-} */
-
-/* th,
-td {
-    border: 1px solid black;
-    line-height: 2rem;
-} */
 
 .products-container {
     display: flex;
@@ -109,47 +47,12 @@ td {
     width: 90%;
     height: 90%;
 }
-/* TOP-NAV STARTS */
-.top-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1264px;
-    width: 100%;
-    margin: 0 auto;
-}
-
-.top-nav svg {
-    font-size: 1.8rem;
-    margin: 0 5px;
-}
-
-.top-nav svg:hover {
-    color: var(--primaryColor);
-    cursor: pointer;
-}
 
 .logo {
     width: 10rem;
     height: auto;
 }
 
-.row {
-    display: flex;
-    align-items: center;
-}
-
-.menu-icon {
-    margin: 3px;
-    border-radius: 5px;
-}
-.menu-icon:hover {
-    background-color: antiquewhite;
-}
-
-.search-bar input {
-    margin: 0;
-}
 .search-button {
     background-color: antiquewhite;
     padding: 4px;
@@ -179,11 +82,6 @@ td {
     overflow-x: hidden;
     transition: 0.5s;
     font-size: larger;
-}
-
-.row-space-between {
-    display: flex;
-    justify-content: space-between;
 }
 
 .sidebar-header {
@@ -324,7 +222,6 @@ td {
         width: 100vw;
     }
 
-    .search-bar,
     .bottom-nav {
         display: none;
     }
