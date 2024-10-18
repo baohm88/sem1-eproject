@@ -20,6 +20,7 @@
     display: flex;
     justify-content: center;
     gap: 15px;
+    margin-bottom: 2rem;
 }
 
 .tabs-container button {
@@ -67,7 +68,7 @@ body {
     align-items: center; /* Đảm bảo các thẻ sản phẩm được căn giữa theo chiều ngang */
     max-width: 1264px;
     width: 100%;
-    margin: 0 auto;
+    margin: 2rem auto;
     flex-wrap: wrap;
 }
 
@@ -98,7 +99,7 @@ body {
     gap: 1rem;
     max-width: 1264px;
     width: 100%;
-    margin: 0 auto;
+    margin: 1rem auto;
 }
 
 .slider {
@@ -106,14 +107,13 @@ body {
 }
 
 .selectedRange {
-    padding: 1rem 2 rem;
-    border-radius: 10px;
-    border: 1px solid black;
-    background-color: antiquewhite;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    border: 1px solid rgb(135, 134, 134);
+    color: rgb(135, 134, 134);
+    cursor: pointer;
 }
 
-/* .sort-options,
-.filter-options {
-    background-color: antiquewhite;
-    min-width: 13rem;
-} */
+.selectedRange:hover {
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
+}

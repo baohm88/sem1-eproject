@@ -19,6 +19,10 @@
     border-radius: 8px;
 }
 
+.orderSummary  p {
+    
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -109,7 +113,7 @@ table td img {
 .removeButton:hover {
     background-color: #f0f0f0;
     border: 1px solid #dcdcdc; /* Visible border when hovered */
-    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2); /* Shadow effect for hover */
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* Order Summary */

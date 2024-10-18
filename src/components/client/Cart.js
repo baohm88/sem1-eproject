@@ -168,7 +168,12 @@ export default function Cart() {
                 <hr />
                 <p>Tax will be calculated during checkout</p>
                 <p className={classes.flexContainerBetween}>
-                    <span>Estimated Total</span> <span>${totalAmount}</span>
+                    <span>
+                        <strong>Estimated Total</strong>
+                    </span>{" "}
+                    <span>
+                        <strong>${totalAmount}</strong>
+                    </span>
                 </p>
                 <Button className="full-width-button" onClick={handleCheckout}>
                     Checkout

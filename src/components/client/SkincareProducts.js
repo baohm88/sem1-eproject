@@ -214,15 +214,15 @@ export default function SkincareProducts() {
                     )}
 
                     {selectedRange && (
-                        <p>
-                            <button
+                        <p className={classes.selectedRange}>
+                            <span
                                 onClick={() => {
                                     setPriceRange([0, 200]);
                                     setSelectedRange(false);
                                 }}
                             >
                                 X
-                            </button>{" "}
+                            </span>{" "}
                             {formatter.format(priceRange[0])} -{" "}
                             {formatter.format(priceRange[1])}
                         </p>
