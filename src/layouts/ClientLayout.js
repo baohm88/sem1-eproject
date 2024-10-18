@@ -76,7 +76,6 @@ export default function ClientLayout({ children }) {
         }
         navigate(`${path}&q=${searchText}`);
     }
-    console.log(cart);
 
     return (
         <>
@@ -247,12 +246,18 @@ export default function ClientLayout({ children }) {
                                         >
                                             View Cart
                                         </Button>
-                                        <div className={
+                                        <div
+                                            className={
                                                 classes["dropdown-footer"]
-                                            }>
-                                            <p><IoBagAddOutline /></p>
-                                            <p>Your order is qualified for FREE shipping</p>
-                                            
+                                            }
+                                        >
+                                            <p>
+                                                <IoBagAddOutline />
+                                            </p>
+                                            <p>
+                                                Your order is qualified for FREE
+                                                shipping
+                                            </p>
                                         </div>
                                     </>
                                 ) : (

@@ -129,7 +129,7 @@ export default function ProductDetails() {
     };
 
     return (
-        <div className={classes['product-details-container']}>
+        <div className={classes["product-details-container"]}>
             <div className={classes["product-details"]}>
                 <div className={classes["product-images-container"]}>
                     <div className={classes["product-images"]}>
@@ -174,7 +174,7 @@ export default function ProductDetails() {
                         <span> | {ratingSummary.totalRatings} reviews</span>
                     </div>
 
-                    <p className={classes.description}>
+                    <p className={classes.product_description}>
                         {product.product_description}
                     </p>
                     <p className={classes.available}>
@@ -192,7 +192,7 @@ export default function ProductDetails() {
                     </Button>
                 </div>
             </div>
-            
+
             <div className={classes["product-reviews"]}>
                 <RatingSummary
                     ratingSummary={ratingSummary}

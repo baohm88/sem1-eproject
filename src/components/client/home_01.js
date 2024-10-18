@@ -62,8 +62,8 @@ export default function Home() {
                             product.product_name
                                 .toLowerCase()
                                 .includes(searchText.toLowerCase())) ||
-                        (product.description &&
-                            product.description
+                        (product.product_description &&
+                            product.product_description
                                 .toLowerCase()
                                 .includes(searchText.toLowerCase()))
                 )
