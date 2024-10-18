@@ -27,7 +27,7 @@ export default function OrderItems() {
 
     return (
         <>
-            <div className="center">
+            <div className="order-container center">
                 <h1>Your Order Items </h1>
                 <table>
                     <thead>

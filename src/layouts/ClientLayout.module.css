@@ -184,8 +184,8 @@
 /* Badge for showing total quantity */
 .nav-icons .badge {
     position: absolute;
-    top: -8px; /* Adjusts the vertical position of the badge */
-    right: -8px; /* Adjusts the horizontal position of the badge */
+    top: -1rem; /* Adjusts the vertical position of the badge */
+    right: -5px; /* Adjusts the horizontal position of the badge */
     background-color: #a6212b; /* Red background for the badge */
     color: white; /* White text for the number */
     border-radius: 50%; /* Makes the badge a circle */
@@ -206,7 +206,7 @@
 /* Smaller checkmark icon positioned on top of the person icon */
 .checkmarkIcon {
     position: absolute; /* Absolutely position the checkmark */
-    top: -5px; /* Adjust to position it correctly above the icon */
+    top: -1rem; /* Adjust to position it correctly above the icon */
     right: -5px; /* Adjust to position it correctly */
     width: 1rem; /* Size of the checkmark */
     height: 1rem; /* Maintain aspect ratio */
@@ -230,11 +230,12 @@
 }
 
 /* Dropdown content - hidden by default */
-.dropdown-content {
+.dropdown-content-account {
     display: none;
     position: absolute;
     background-color: white;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    background-color: rgb(243, 241, 240);
     min-width: 160px;
     z-index: 1;
     border-radius: 5px;
@@ -243,8 +244,8 @@
 }
 
 /* Links inside the dropdown */
-.dropdown-content a,
-.dropdown-content span {
+.dropdown-content-account a,
+.dropdown-content-account span {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
@@ -254,18 +255,75 @@
 }
 
 /* Show dropdown on hover */
-.dropdown:hover .dropdown-content {
+.dropdown:hover .dropdown-content-account {
     display: block;
 }
 
 /* Hover effect for dropdown links */
-.dropdown-content a:hover,
-.dropdown-content span:hover {
-    background-color: #f1f1f1;
+.dropdown-content-account a:hover,
+.dropdown-content-account span:hover {
+    color: #a6212b;
 }
 
-.dropdown-content svg {
-    font-size: 1rem;
+.dropdown-content-account svg {
+    font-size: 1.5rem;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+    background-color: rgb(243, 241, 240);
+    z-index: 1;
+    width: 360px; /* Adjust width as needed */
+    right: 0;
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-footer {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    background-color: rgb(221, 218, 216);
+    margin-top: 0.5rem;
+}
+
+.dropdown-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.cart-item-image {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.cart-item-price {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+}
+
+.cart-item-name {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.dropdown-total {
+    border-top: 1px solid black;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0;
 }
 
 /* MOBILE */

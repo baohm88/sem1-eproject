@@ -13,6 +13,13 @@
     --dangerColor: red;
 }
 
+.orders-container,
+.order-container {
+    max-width: 1264px;
+    width: 100%;
+    margin: 2rem auto;
+}
+
 a,
 a:hover {
     text-decoration: none;
@@ -64,7 +71,6 @@ a:hover {
 }
 
 .progress-bar {
-    /* max-width: 20rem; */
     width: 90%;
     background-color: #e4e5e9;
     height: 10px;

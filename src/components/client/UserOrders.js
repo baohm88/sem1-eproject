@@ -47,7 +47,7 @@ export default function UserOrders() {
                 <span className="error-message">({serverError})</span>
             )}
             <br />
-            <div className="center">
+            <div className="orders-container center">
                 <h1>Your orders</h1>
                 <table>
                     <thead>

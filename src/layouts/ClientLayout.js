@@ -18,17 +18,34 @@ import { GiHeartBeats } from "react-icons/gi";
 import { BsCartCheck } from "react-icons/bs";
 import { useContext, useState, useEffect, useRef } from "react";
 import { UserContext } from "../App";
+import Button from "../components/UI/Button";
+import { formatter } from "../util/formatter";
 
 export default function ClientLayout({ children }) {
     const { user, cart, handleLogOut } = useContext(UserContext);
-    const [totalQuantity, setTotalQuantity] = useState(0); // State to store total quantity
-    const isLoggedIn = user !== null;
-
+    const [totalQuantity, setTotalQuantity] = useState(0);
+    const [totalAmount, setTotalAmount] = useState(0);
+    const isLoggedIn = !!user;
     const [searchText, setSearchText] = useState("");
     const navigate = useNavigate();
     const location = useLocation();
+    const sidebarRef = useRef();
 
-    const sidebarRef = useRef(); // Reference for sidebar
+    useEffect(() => {
+        document.addEventListener("mousedown", handleClickOutside);
+        return () =>
+            document.removeEventListener("mousedown", handleClickOutside);
+    }, []);
+
+    useEffect(() => {
+        setTotalQuantity(cart.reduce((sum, item) => sum + item.quantity, 0));
+
+        const amount = cart.reduce(
+            (sum, item) => sum + item.product_price * item.quantity,
+            0
+        );
+        setTotalAmount(amount.toFixed(2));
+    }, [cart]);
 
     function openSidebar() {
         document.getElementById("mySideBar").style.width = "25rem";
@@ -40,54 +57,26 @@ export default function ClientLayout({ children }) {
         document.body.style.backgroundColor = "white";
     }
 
-    // Close sidebar when clicking outside
-    useEffect(() => {
-        function handleClickOutside(event) {
-            // If the click is outside the sidebar, close it
-            if (
-                sidebarRef.current && // Check if ref is set
-                !sidebarRef.current.contains(event.target) // If click is outside sidebar
-            ) {
-                closeSidebar();
-            }
-        }
-
-        // Attach the event listener
-        document.addEventListener("mousedown", handleClickOutside);
-
-        // Cleanup the event listener on unmount
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-    }, [sidebarRef]);
-
-    // Function to calculate the total amount and total quantity
-    useEffect(() => {
-        const calculateTotals = () => {
-            const quantity = cart.reduce((sum, item) => sum + item.quantity, 0);
-
-            setTotalQuantity(quantity); // Set the total quantity state
-        };
-
-        calculateTotals(); // Calculate totals whenever the cart changes
-    }, [cart]);
-
-    // Handle search form submission
-    function handleSearch(e) {
-        e.preventDefault();
-
-        const currentPath = location.pathname;
-        const params = new URLSearchParams(location.search);
-        const category = params.get("category") || "";
-
-        if (currentPath.includes("/skincare")) {
-            navigate(`/skincare?category=${category}&q=${searchText}`);
-        } else if (currentPath.includes("/makeup")) {
-            navigate(`/makeup?category=${category}&q=${searchText}`);
-        } else {
-            navigate(`/?q=${searchText}`);
+    function handleClickOutside(event) {
+        if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+            closeSidebar();
         }
     }
+
+    function handleSearch(e) {
+        e.preventDefault();
+        const params = new URLSearchParams(location.search);
+        const category = params.get("category") || "";
+        let path = "/";
+
+        if (location.pathname.includes("/skincare")) {
+            path = `/skincare?category=${category}`;
+        } else if (location.pathname.includes("/makeup")) {
+            path = `/makeup?category=${category}`;
+        }
+        navigate(`${path}&q=${searchText}`);
+    }
+    console.log(cart);
 
     return (
         <>
@@ -101,20 +90,16 @@ export default function ClientLayout({ children }) {
                             <IoMenuSharp />
                         </span>
                         <span className={classes["search-bar"]}>
-                            <form onSubmit={handleSearch} method="get">
+                            <form onSubmit={handleSearch}>
                                 <div className={classes.searchContainer}>
-                                    {" "}
-                                    {/* Container mới */}
                                     <input
                                         type="text"
-                                        name="q"
-                                        id="q"
                                         value={searchText}
                                         onChange={(e) =>
                                             setSearchText(e.target.value)
                                         }
                                         placeholder="Search"
-                                        className={classes.searchInput} // Thêm class cho input
+                                        className={classes.searchInput}
                                     />
                                     <span
                                         className={classes.searchButton}
@@ -153,12 +138,16 @@ export default function ClientLayout({ children }) {
                             </span>
 
                             {isLoggedIn && (
-                                <div className={classes["dropdown-content"]}>
+                                <div
+                                    className={
+                                        classes["dropdown-content-account"]
+                                    }
+                                >
                                     <NavLink to={"/profile"}>
-                                        <IoPersonOutline /> Profile
+                                        <IoPersonOutline /> My Profile
                                     </NavLink>
                                     <NavLink to={"/user/orders"}>
-                                        <BsCartCheck /> Orders
+                                        <BsCartCheck /> My Orders
                                     </NavLink>
                                     <span onClick={handleLogOut}>
                                         <IoLogOutOutline /> Logout
@@ -167,16 +156,110 @@ export default function ClientLayout({ children }) {
                             )}
                         </div>
 
-                        <span className={classes["nav-icons"]}>
-                            <NavLink to={"/cart"}>
-                                <IoBagAddOutline />
-                                {totalQuantity > 0 && (
-                                    <span className={classes["badge"]}>
-                                        {totalQuantity}
-                                    </span>
+                        {/* Bag Dropdown */}
+                        <div className={classes["dropdown"]}>
+                            <span className={classes["nav-icons"]}>
+                                <NavLink to={"/cart"}>
+                                    <IoBagAddOutline />
+                                    {totalQuantity > 0 && (
+                                        <span className={classes["badge"]}>
+                                            {totalQuantity}
+                                        </span>
+                                    )}
+                                </NavLink>
+                            </span>
+
+                            {/* Dropdown for bag items */}
+                            <div className={classes["dropdown-content"]}>
+                                {cart.length > 0 ? (
+                                    <>
+                                        {cart.map((item) => (
+                                            <div
+                                                key={item.product_id}
+                                                className={
+                                                    classes["dropdown-item"]
+                                                }
+                                            >
+                                                <div>
+                                                    <img
+                                                        src={
+                                                            item.product_images
+                                                                ? item.product_images.split(
+                                                                      ","
+                                                                  )[0]
+                                                                : ""
+                                                        }
+                                                        alt={item.product_name}
+                                                        className={
+                                                            classes[
+                                                                "cart-item-image"
+                                                            ]
+                                                        }
+                                                    />
+                                                </div>
+
+                                                <div
+                                                    className={
+                                                        classes[
+                                                            "cart-item-name"
+                                                        ]
+                                                    }
+                                                >
+                                                    <p>{item.product_name}</p>
+                                                </div>
+                                                <div
+                                                    className={
+                                                        classes[
+                                                            "cart-item-price"
+                                                        ]
+                                                    }
+                                                >
+                                                    <p>
+                                                        <strong>
+                                                            {formatter.format(
+                                                                item.product_price
+                                                            )}
+                                                        </strong>
+                                                    </p>
+                                                    <p>Qty: {item.quantity}</p>
+                                                </div>
+                                            </div>
+                                        ))}
+                                        <div
+                                            className={
+                                                classes["dropdown-total"]
+                                            }
+                                        >
+                                            <span>
+                                                <h4>Total:</h4>
+                                            </span>
+                                            <span>
+                                                <strong>
+                                                    {formatter.format(
+                                                        totalAmount
+                                                    )}
+                                                </strong>
+                                            </span>
+                                        </div>
+                                        <Button
+                                            className="full-width-button"
+                                            onClick={() => navigate("/cart")}
+                                        >
+                                            View Cart
+                                        </Button>
+                                        <div className={
+                                                classes["dropdown-footer"]
+                                            }>
+                                            <p><IoBagAddOutline /></p>
+                                            <p>Your order is qualified for FREE shipping</p>
+                                            
+                                        </div>
+                                    </>
+                                ) : (
+                                    <p>Your bag is empty.</p>
                                 )}
-                            </NavLink>
-                        </span>
+                            </div>
+                        </div>
                     </li>
                 </ul>
                 <ul className={classes["bottom-nav"]}>
@@ -197,38 +280,32 @@ export default function ClientLayout({ children }) {
                 </ul>
             </header>
 
-            <div id="mySideBar" ref={sidebarRef}>
-                {/* <div className={classes["sidebar-header"]}> */}
+            <div id="mySideBar" ref={sidebarRef} className={classes["sidebar"]}>
                 <div className={classes["sidebar-header"]}>
                     <p onClick={closeSidebar}>
                         <TfiClose /> Menu
                     </p>
-
                     {!isLoggedIn && (
-                        <>
-                            <p onClick={closeSidebar}>
-                                <NavLink to={"/login"}>
-                                    <IoPersonOutline /> Login
-                                </NavLink>
-                            </p>
-                        </>
+                        <p onClick={closeSidebar}>
+                            <NavLink to={"/login"}>
+                                <IoPersonOutline /> Login
+                            </NavLink>
+                        </p>
                     )}
                     {isLoggedIn && (
                         <>
                             <p onClick={closeSidebar}>
                                 <NavLink to={"/profile"}>
-                                    <IoPersonOutline /> Profile
+                                    <IoPersonOutline /> My Profile
                                 </NavLink>
                             </p>
                             <p onClick={closeSidebar}>
                                 <NavLink to={"/user/orders"}>
-                                    <BsCartCheck /> Orders
+                                    <BsCartCheck /> My Orders
                                 </NavLink>
                             </p>
                             <p onClick={handleLogOut}>
-                                <NavLink>
-                                    <IoLogOutOutline /> Logout
-                                </NavLink>
+                                <IoLogOutOutline /> Logout
                             </p>
                         </>
                     )}
@@ -236,54 +313,52 @@ export default function ClientLayout({ children }) {
                         <GiHeartBeats /> Club Clarins
                     </p>
                 </div>
+
                 <div className={classes["sidebar-body"]}>
-                    <p
-                        className={classes["row-space-between"]}
-                        onClick={closeSidebar}
-                    >
-                        <NavLink to={"/"}>What's new</NavLink>
-                        <span>
-                            <IoChevronForwardOutline />
-                        </span>
-                    </p>
-                    <p
-                        className={classes["row-space-between"]}
-                        onClick={closeSidebar}
-                    >
-                        <NavLink to={"/skincare"}>Skincare</NavLink>
-                        <span>
-                            <IoChevronForwardOutline />
-                        </span>
-                    </p>
-                    <p
-                        className={classes["row-space-between"]}
-                        onClick={closeSidebar}
-                    >
-                        <NavLink to={"/makeup"}>Makeup</NavLink>
-                        <span>
-                            <IoChevronForwardOutline />
-                        </span>
-                    </p>
+                    <SidebarLink
+                        to={"/"}
+                        label="What's new"
+                        closeSidebar={closeSidebar}
+                    />
+                    <SidebarLink
+                        to={"/skincare"}
+                        label="Skincare"
+                        closeSidebar={closeSidebar}
+                    />
+                    <SidebarLink
+                        to={"/makeup"}
+                        label="Makeup"
+                        closeSidebar={closeSidebar}
+                    />
                 </div>
+
                 <div className={classes["sidebar-footer"]}>
                     <img src={clubLogo} alt="Clarins Club" />
+                    <p>Enter a world of beauty rewards</p>
                     <p>
-                        Enter a world <br />
-                        of beauty rewards
-                    </p>
-                    <p>
-                        Exciting benefits await - <br />
-                        full size products, Club Clarins Dollars, and more!
+                        Exciting benefits await - full-size products, Club
+                        Clarins Dollars, and more!
                     </p>
                     <p className={classes["call-to-actions"]}>
                         <Link to={"/"}>JOIN NOW</Link>
                     </p>
                 </div>
             </div>
+
             <hr />
             <main>{children}</main>
-
             <Footer />
         </>
+    );
+}
+
+function SidebarLink({ to, label, closeSidebar }) {
+    return (
+        <p className={classes["row-space-between"]} onClick={closeSidebar}>
+            <NavLink to={to}>{label}</NavLink>
+            <span>
+                <IoChevronForwardOutline />
+            </span>
+        </p>
     );
 }

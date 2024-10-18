@@ -24,6 +24,7 @@ export default function Cart() {
                 (sum, item) => sum + item.product_price * item.quantity,
                 0
             );
+            
             setTotalAmount(total);
         };
 
