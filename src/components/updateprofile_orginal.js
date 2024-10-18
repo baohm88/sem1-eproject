@@ -270,7 +270,7 @@ export default function Register() {
                     />
                 )}
 
-                <p className="form-actions">
+                <p className={classes["form-actions"]}>
                     <Link to="/profile">
                         <button type="button">Cancel</button>
                     </Link>{" "}

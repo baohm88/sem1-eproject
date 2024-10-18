@@ -136,7 +136,7 @@ export default function UpdatePassword() {
                 />
             </div>
 
-            <p className="form-actions">
+            <p className={classes["form-actions"]}>
                 <Button
                     className="text-button"
                     onClick={() => navigate("/profile")}

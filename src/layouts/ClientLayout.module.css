@@ -1,14 +1,20 @@
+:root {
+    --primaryColor: rgb(166, 43, 43);
+    --secondaryColor: rgb(244, 239, 235);
+    --darkColor: black;
+    --lightColor: white;
+    --dangerColor: red;
+}
+
 /* Top navigation bar */
 .top-nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
-    padding: 0 20px;
     list-style-type: none;
     max-width: 1264px;
     width: 100%;
-    margin: 5px auto;
+    margin: 0 auto;
 }
 
 .top-nav svg {
@@ -40,12 +46,11 @@
     margin: 0;
 }
 
-
 .searchContainer {
     display: flex;
     align-items: center;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 5px;
     overflow: hidden;
     width: 100%;
 }
@@ -92,29 +97,6 @@
     list-style-type: none;
 }
 
-.nav-link a {
-    text-decoration: none;
-    color: #4a4a4a; /* Dark gray color */
-    padding: 5px 10px;
-    font-weight: bold;
-    white-space: nowrap;
-    transition: color 0.3s ease;
-    text-transform: uppercase;
-}
-
-.nav-link a:hover,
-.nav-link a.active {
-    color: #b51828; /* Hover effect color */
-}
-
-:root {
-    --primaryColor: rgb(166, 43, 43);
-    --secondaryColor: rgb(244, 239, 235);
-    --darkColor: black;
-    --lightColor: white;
-    --dangerColor: red;
-}
-
 .user-form {
     width: 25rem;
     margin: 2rem auto;
@@ -131,25 +113,6 @@
     padding: 3px;
 }
 
-.products-container {
-    display: flex;
-    gap: 2rem;
-    justify-content: center;
-    flex-wrap: wrap;
-    align-items: center;
-}
-
-.product-card {
-    background-color: var(--secondaryColor);
-    width: 20rem;
-    height: 25rem;
-}
-
-.product-image {
-    width: 90%;
-    height: 90%;
-}
-
 .logo {
     width: 10rem;
     height: auto;
@@ -160,42 +123,12 @@
     align-items: center;
 }
 
-
-.search-button {
-    background-color: antiquewhite;
-    padding: 4px;
-    border-radius: 5px;
-    margin: 5px;
-}
-/* TOP-NAV ENDS */
-
 /* BOTTOM-NAV STARTS */
 .bottom-nav {
     width: 60vw;
     margin: 0 auto;
 }
 /* BOTTOM-NAV ENDS */
-
-/* SIDEBAR STARTS */
-#mySideBar {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    width: 0;
-    position: fixed;
-    background-color: var(--lightColor);
-    z-index: 1;
-    top: 0;
-    left: 0;
-    overflow-x: hidden;
-    transition: 0.5s;
-    font-size: larger;
-}
-
-.row-space-between {
-    display: flex;
-    justify-content: space-between;
-}
 
 .sidebar-header {
     background-color: var(--primaryColor);
@@ -213,12 +146,18 @@
     padding: 10px 0;
 }
 
+.sidebar-body p {
+    display: flex;
+    justify-content: space-between;
+}
+
 .sidebar-header p:hover,
 .sidebar-body p:hover {
     opacity: 0.7;
 }
 
 .sidebar-header a {
+    text-decoration: none;
     color: var(--lightColor);
 }
 
@@ -229,60 +168,13 @@
 .sidebar-body a:hover {
     color: var(--primaryColor);
 }
+
+.sidebar-body a {
+    text-decoration: none;
+    color: black;
+}
+
 /* SIDEBAR ENDS */
-
-/* ERROR-MESSAGE STARTS */
-.error-message {
-    color: var(--dangerColor);
-    text-align: center;
-}
-/* ERROR-MESSAGE ENDS */
-
-/* tabs-container START */
-.tabs-container {
-    display: flex;
-    max-width: 20rem;
-    margin: 0 auto;
-    gap: 1rem;
-    justify-content: center;
-    align-items: center;
-}
-/* tabs-container START */
-
-.flex-container-between {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-/* CART STARTS */
-#cart {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-#order-summary {
-    background-color: var(--secondaryColor);
-    padding: 1.5rem;
-    border-radius: 5px;
-}
-
-#order-summary p {
-    line-height: 2rem;
-}
-
-#order-summary button {
-    width: 100%;
-    background-color: var(--primaryColor);
-    color: var(--lightColor);
-    border: none;
-    border-radius: 5px;
-    margin: 1rem 0;
-    padding: 0.5rem;
-    cursor: pointer;
-}
-/* CART ENDS */
 
 /* Container for the shopping bag icon and badge */
 .nav-icons {
@@ -329,6 +221,51 @@
     width: 1rem; /* Size of the checkmark */
     height: 1rem; /* Maintain aspect ratio */
     color: red; /* Set the color of the checkmark */
+}
+
+/* Dropdown container */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown content - hidden by default */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    min-width: 160px;
+    z-index: 1;
+    border-radius: 5px;
+    padding: 12px 16px;
+    right: 0;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a,
+.dropdown-content span {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+/* Show dropdown on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Hover effect for dropdown links */
+.dropdown-content a:hover,
+.dropdown-content span:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown-content svg {
+    font-size: 1rem;
 }
 
 /* MOBILE */

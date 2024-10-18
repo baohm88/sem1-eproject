@@ -7,7 +7,6 @@ export default function ImageUpload() {
     const [imageFile, setImageFile] = useState(null);
     const [imageURL, setImageURL] = useState("");
     const [publicId, setPublicId] = useState("");
-    console.log(publicId);
 
     const handleImageChange = (e) => {
         setImageFile(e.target.files[0]);
@@ -28,8 +27,6 @@ export default function ImageUpload() {
                 "https://api.cloudinary.com/v1_1/dppk10edk/image/upload",
                 formData
             );
-
-            console.log(response);
 
             console.log("Image Uploaded:", response.data.secure_url);
             setImageURL(response.data.secure_url);
@@ -79,7 +76,7 @@ export default function ImageUpload() {
             console.error("Error deleting the image:", error);
         }
     };
-    
+
     return (
         <div>
             <Input

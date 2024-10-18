@@ -5,7 +5,7 @@
     align-items: center; /* Căn giữa nội dung bên trong theo chiều ngang */
     justify-content: space-between; /* Tạo khoảng cách hợp lý giữa các thành phần bên trong */
     border: 1px solid #e1e1e1; /* Đặt viền mỏng màu xám nhạt xung quanh thẻ sản phẩm */
-    border-radius: 8px; /* Làm tròn các góc thẻ sản phẩm */
+    border-radius: 5px; /* Làm tròn các góc thẻ sản phẩm */
     padding: 15px; /* Tạo khoảng cách bên trong thẻ sản phẩm */
     background-color: #fff; /* Màu nền trắng */
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* Hiệu ứng chuyển động khi hover (thẻ sản phẩm nhô lên) */

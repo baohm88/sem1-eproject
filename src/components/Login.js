@@ -91,7 +91,7 @@ export default function Login() {
                     />
                 </div>
 
-                <p className="form-actions">
+                <p className={classes["form-actions"]}>
                     <Button className="button">LOGIN</Button>
                 </p>
 

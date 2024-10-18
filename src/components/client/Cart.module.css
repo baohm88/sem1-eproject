@@ -4,7 +4,11 @@
 .cart {
     display: flex;
     justify-content: space-between;
-    padding: 2rem;
+    padding: 2rem 0.7rem;
+    gap: 1rem;
+    max-width: 1264px;
+    width: 100%;
+    margin: 1rem auto;
 }
 
 .cartContainer {
@@ -16,11 +20,7 @@
     background-color: #f9f9f9;
     padding: 1.5rem;
     border: 1px solid #e0e0e0;
-    border-radius: 8px;
-}
-
-.orderSummary  p {
-    
+    border-radius: 5px;
 }
 
 table {
@@ -38,7 +38,7 @@ table td {
 /* Product Image */
 table td img {
     width: 100px;
-    border-radius: 8px;
+    border-radius: 5px;
 }
 
 /* Centering Text and Buttons */
@@ -54,7 +54,7 @@ table td img {
     width: 100px; /* Adjust width as needed */
     padding: 0;
     border: 1px solid #dcdcdc;
-    border-radius: 4px;
+    border-radius: 5px;
     background-color: #fff;
 }
 
@@ -105,7 +105,7 @@ table td img {
     justify-content: center;
     align-items: center;
     border: 1px solid transparent; /* Initially transparent border */
-    border-radius: 8px; /* Rounded corners to match the design */
+    border-radius: 5px; /* Rounded corners to match the design */
     transition: all 0.3s ease; /* Smooth transition for hover effects */
 }
 

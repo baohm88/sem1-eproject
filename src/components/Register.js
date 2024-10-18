@@ -344,7 +344,7 @@ export default function Register() {
                     </div>
                 )}
 
-                <p className="form-actions">
+                <p className={classes["form-actions"]}>
                     <Button className="button">Register</Button>
                 </p>
 
