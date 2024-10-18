@@ -54,3 +54,7 @@
 .warning-button:hover {
     background-color: rgb(237, 165, 84);
 }
+
+.pagination-button {
+    padding: 5px;
+}

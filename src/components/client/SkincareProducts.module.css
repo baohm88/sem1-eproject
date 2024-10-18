@@ -83,15 +83,6 @@ body {
     left: 10px; /* Cách cạnh trái 10px */
     border-radius: 5px; /* Làm tròn các góc của huy hiệu */
 }
-.pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    text-align: center;
-    width: 100%;
-}
 
 .filters,
 .total-products {

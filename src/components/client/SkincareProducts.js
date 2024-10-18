@@ -10,6 +10,7 @@ import Slider from "rc-slider"; // Import rc-slider
 import "rc-slider/assets/index.css"; // Import rc-slider styles
 import classes from "./SkincareProducts.module.css";
 import ProductItem from "./ProductItem";
+import Pagination from "../UI/Pagination";
 
 export default function SkincareProducts() {
     const [products, setProducts] = useState([]);
@@ -246,29 +247,7 @@ export default function SkincareProducts() {
             </div>
 
             {/* Pagination Controls */}
-            <div className={classes["pagination"]}>
-                <button
-                    onClick={() => paginate(currentPage - 1)}
-                    disabled={currentPage === 1}
-                >
-                    <IoChevronBackOutline />
-                </button>
-                {Array.from({ length: totalPages }, (_, i) => (
-                    <button
-                        key={i + 1}
-                        onClick={() => paginate(i + 1)}
-                        className={currentPage === i + 1 ? "active" : ""}
-                    >
-                        {i + 1}
-                    </button>
-                ))}
-                <button
-                    onClick={() => paginate(currentPage + 1)}
-                    disabled={currentPage === totalPages}
-                >
-                    <IoChevronForward />
-                </button>
-            </div>
+            <Pagination currentPage={currentPage} totalPages={totalPages} paginate={paginate} />
 
             {selectedProduct && (
                 <Modal product={selectedProduct} onClose={closeModal} />
