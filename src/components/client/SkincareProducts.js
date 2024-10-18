@@ -246,7 +246,7 @@ export default function SkincareProducts() {
                 ))}
             </div>
 
-            {/* Pagination Controls */}
+            
             <Pagination currentPage={currentPage} totalPages={totalPages} paginate={paginate} />
 
             {selectedProduct && (

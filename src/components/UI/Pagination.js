@@ -14,7 +14,7 @@ export default function Pagination({ currentPage, totalPages, paginate }) {
                 <button
                     key={i + 1}
                     onClick={() => paginate(i + 1)}
-                    className={currentPage === i + 1 ? "active" : ""}
+                    className={currentPage === i + 1 ? classes.active : ""}
                 >
                     {i + 1}
                 </button>

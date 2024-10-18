@@ -1,0 +1,125 @@
+.expertise-section {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.product-categories {
+    display: flex;
+    justify-content: space-between; /* Phân bố đều các phần tử */
+    gap: 20px; /* Khoảng cách giữa các phần tử */
+    padding: 20px;
+    max-width: 1200px; /* Đặt chiều rộng tối đa cho container */
+    margin: 0 auto; /* Căn giữa container */
+    flex-wrap: wrap; /* Cho phép các phần tử xuống dòng khi không đủ không gian */
+    margin-top: 100px;
+}
+
+.category1,
+.category3 {
+    transform: translateY(70px);
+}
+
+.category2,
+.category4 {
+    transform: translateY(-70px);
+}
+
+.category1,
+.category2 {
+    flex: 1; /* Các phần tử sẽ giãn đều ra không gian */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Căn giữa nội dung theo trục ngang */
+    max-width: 300px; /* Đặt chiều rộng tối đa cho mỗi phần tử */
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.category1:hover,
+.category2:hover {
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Hiệu ứng đổ bóng khi di chuột qua sản phẩm */
+}
+
+.category-image {
+    align-items: center;
+    width: 90%; /* Hình ảnh chiếm toàn bộ chiều rộng của phần tử */
+    height: auto; /* Giữ nguyên tỷ lệ hình ảnh */
+    max-width: 300px; /* Đặt chiều rộng tối đa của hình ảnh */
+    padding: 10px; /* Thêm khoảng cách bên trong */
+    border-radius: 10px; /* Bo tròn các góc viền */
+    max-height: 100%; /* Make sure the image doesn’t exceed the container’s height */
+    object-fit: contain; /* This ensures the image retains its aspect ratio */
+}
+
+/* h3 {
+    font-size: 18px;
+    margin-top: 15px;
+    font-weight: bold;
+} */
+
+.shop-now {
+    text-transform: uppercase;
+    text-decoration: none;
+    font-size: 14px;
+    margin-top: 10px;
+    color: black;
+}
+
+@media (max-width: 1026px) {
+    .product-categories {
+        flex-wrap: wrap; /* Cho phép xuống dòng */
+        justify-content: space-between; /* Phân bố đều khoảng cách giữa các phần tử */
+    }
+    .category1,
+    .category2 {
+        transform: none;
+        flex-basis: calc(
+            50% - 10px
+        ); /* Mỗi phần tử chiếm 50% chiều rộng trừ đi khoảng cách */
+        max-width: none; /* Xóa bỏ giới hạn chiều rộng */
+    }
+
+    .category {
+        flex-basis: calc(
+            50% - 10px
+        ); /* Mỗi phần tử chiếm 50% chiều rộng trừ đi khoảng cách */
+        max-width: none; /* Xóa bỏ giới hạn chiều rộng */
+    }
+
+    .category-image {
+        max-width: 100%; /* Hình ảnh sẽ chiếm toàn bộ chiều rộng trong phần tử */
+    }
+}
+
+@media (max-width: 768px) {
+    .product-categories {
+        flex-wrap: wrap; /* Cho phép xuống dòng */
+        justify-content: space-between; /* Phân bố đều khoảng cách giữa các phần tử */
+    }
+    .category1,
+    .category2 {
+        transform: none;
+        flex-basis: calc(
+            50% - 10px
+        ); /* Mỗi phần tử chiếm 50% chiều rộng trừ đi khoảng cách */
+        max-width: none; /* Xóa bỏ giới hạn chiều rộng */
+    }
+
+    .category {
+        flex-basis: calc(
+            50% - 10px
+        ); /* Mỗi phần tử chiếm 50% chiều rộng trừ đi khoảng cách */
+        max-width: none; /* Xóa bỏ giới hạn chiều rộng */
+    }
+
+    .category-image {
+        max-width: 100%; /* Hình ảnh sẽ chiếm toàn bộ chiều rộng trong phần tử */
+    }
+}
+
+@media (max-width: 480px) {
+    .category {
+        flex-basis: 100%; /* Trên màn hình rất nhỏ, phần tử sẽ chiếm 100% chiều rộng */
+    }
+}

@@ -245,7 +245,7 @@ export default function MakeupProducts() {
                 ))}
             </div>
 
-            {/* Pagination Controls */}
+            
             <Pagination
                 currentPage={currentPage}
                 totalPages={totalPages}

@@ -1,0 +1,33 @@
+.online-benefits {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 20px 0;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.benefit {
+    display: flex;
+    align-items: center;
+    background-color: rgb(248, 236, 228); /* Màu nền giống với ảnh */
+    padding: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.benefit:hover {
+    background-color: rgb(247, 219, 201); /* Màu nền giống với ảnh */
+}
+
+.benefit img {
+    width: 3rem;
+    margin-right: 1rem;
+}
+
+.benefit p {
+    font-family: "Arial", sans-serif;
+    font-size: 15px;
+    color: #333;
+    margin: 0;
+    line-height: 1.5;
+}
