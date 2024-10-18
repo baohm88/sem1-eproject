@@ -131,15 +131,45 @@ export default function SkincareProducts() {
 
             {/* Category Tabs */}
             <div className={classes["tabs-container"]}>
-                <button onClick={() => updateCategoryInURL("Face")}>
+                <button
+                    onClick={() => updateCategoryInURL("Face")}
+                    className={
+                        queryParams.category === "Face" ? classes.active : ""
+                    }
+                >
                     Face
                 </button>
-                <button onClick={() => updateCategoryInURL("Body")}>
+
+                <button
+                    onClick={() => updateCategoryInURL("Body")}
+                    className={
+                        queryParams.category === "Body" ? classes.active : ""
+                    }
+                >
                     Body
                 </button>
-                <button onClick={() => updateCategoryInURL("Sun")}>Sun</button>
-                <button onClick={() => updateCategoryInURL("Men")}>Men</button>
-                <button onClick={() => navigate("/skincare")}>View All</button>
+                <button
+                    onClick={() => updateCategoryInURL("Sun")}
+                    className={
+                        queryParams.category === "Sun" ? classes.active : ""
+                    }
+                >
+                    Sun
+                </button>
+                <button
+                    onClick={() => updateCategoryInURL("Men")}
+                    className={
+                        queryParams.category === "Men" ? classes.active : ""
+                    }
+                >
+                    Men
+                </button>
+                <button
+                    onClick={() => navigate("/skincare")}
+                    className={!queryParams.category ? classes.active : ""}
+                >
+                    View All
+                </button>
             </div>
 
             {/* Sorting and Filtering */}

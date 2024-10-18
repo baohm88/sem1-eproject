@@ -131,16 +131,36 @@ export default function MakeupProducts() {
 
             {/* Category Tabs */}
             <div className={classes["tabs-container"]}>
-                <button onClick={() => updateCategoryInURL("Face")}>
+                <button
+                    className={
+                        queryParams.category === "Face" ? classes.active : ""
+                    }
+                    onClick={() => updateCategoryInURL("Face")}
+                >
                     Face
                 </button>
-                <button onClick={() => updateCategoryInURL("Eyes")}>
+                <button
+                    className={
+                        queryParams.category === "Eyes" ? classes.active : ""
+                    }
+                    onClick={() => updateCategoryInURL("Eyes")}
+                >
                     Eyes
                 </button>
-                <button onClick={() => updateCategoryInURL("Lips")}>
+                <button
+                    className={
+                        queryParams.category === "Lips" ? classes.active : ""
+                    }
+                    onClick={() => updateCategoryInURL("Lips")}
+                >
                     Lips
                 </button>
-                <button onClick={() => navigate("/makeup")}>View All</button>
+                <button
+                    className={!queryParams.category ? classes.active : ""}
+                    onClick={() => navigate("/makeup")}
+                >
+                    View All
+                </button>
             </div>
 
             {/* Sorting and Filtering */}

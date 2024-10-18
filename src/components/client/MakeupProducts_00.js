@@ -105,20 +105,18 @@ export default function MakeupProducts() {
     }, [filteredProducts, currentPage]);
 
     // Update category in the URL
-    function updateCategoryInURL(category) {
+    const updateCategoryInURL = (category) => {
         navigate({
             pathname: "/makeup",
             search: `?category=${category}`,
         });
-    }
+    };
 
     // Handle price range change
     const handlePriceRangeChange = (newRange) => {
         setSelectedRange(true);
         setPriceRange(newRange);
     };
-
-    console.log(products);
 
     return (
         <>
@@ -127,7 +125,7 @@ export default function MakeupProducts() {
                 <p>
                     At Clarins, we believe that nature reveals our true beauty.
                     Shop our expert selection of beauty bestsellers for face,
-                    eyes and lips, powered by plants.
+                    eyes, and lips, powered by plants.
                 </p>
             </div>
 
