@@ -237,13 +237,15 @@ export default function MakeupProducts() {
             </div>
 
             {/* Pagination */}
-            <Pagination
-                currentPage={currentPage}
-                totalPages={Math.ceil(
-                    filteredProducts.length / productsPerPage
-                )}
-                paginate={setCurrentPage}
-            />
+            {filteredProducts.length > 0 && (
+                <Pagination
+                    currentPage={currentPage}
+                    totalPages={Math.ceil(
+                        filteredProducts.length / productsPerPage
+                    )}
+                    paginate={setCurrentPage}
+                />
+            )}
 
             {/* Modal */}
             {selectedProduct && (

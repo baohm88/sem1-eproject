@@ -18,9 +18,11 @@ import Cart from "./client/Cart";
 import UpdatePassword from "./client/UpdatePassword";
 import UserOrders from "./client/UserOrders";
 import OrderItems from "./client/OrderItems";
+import SearchResults from "./client/SearchResults";
 
 const routes = [
     { path: "/", component: Home, layout: ClientLayout },
+    { path: "/search_results", component: SearchResults, layout: ClientLayout },
     { path: "/register", component: Register, layout: ClientLayout },
     { path: "/login", component: Login, layout: ClientLayout },
     { path: "/profile", component: Profile, layout: ClientLayout },

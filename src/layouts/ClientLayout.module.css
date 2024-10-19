@@ -216,7 +216,7 @@
 /* Add similar styles for the red dot when not logged in if necessary */
 .redDot {
     position: absolute; /* Absolutely position the checkmark */
-    top: -5px; /* Adjust to position it correctly above the icon */
+    top: -1rem; /* Adjust to position it correctly above the icon */
     right: -5px; /* Adjust to position it correctly */
     width: 1rem; /* Size of the checkmark */
     height: 1rem; /* Maintain aspect ratio */

@@ -1,6 +1,7 @@
 // components/ProductCategories.js
 import React from "react";
 import classes from "./ProductCategories.module.css";
+import { Link } from "react-router-dom";
 
 const ProductCategories = () => {
     const categories = [
@@ -40,17 +41,20 @@ const ProductCategories = () => {
                         className={classes[`category${index + 1}`]}
                         key={index}
                     >
-                        <a href={category.href}>
+                        <Link to={category.href}>
                             <img
                                 src={category.src}
                                 alt={category.alt}
                                 className={classes["category-image"]}
                             />
-                        </a>
+                        </Link>
                         <h3>{category.name}</h3>
-                        <a href={category.href} className={classes["shop-now"]}>
+                        <Link
+                            to={category.href}
+                            className={classes["shop-now"]}
+                        >
                             SHOP NOW
-                        </a>
+                        </Link>
                     </div>
                 ))}
             </div>

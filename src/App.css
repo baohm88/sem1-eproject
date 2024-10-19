@@ -108,14 +108,14 @@ a:hover {
     justify-content: space-between;
     align-items: flex-start;
     gap: 20px;
-    flex-wrap: wrap; /* Allow wrapping for small screens */
+    flex-wrap: wrap;
 }
 
 /* Child Flex Items */
 .average-rating-stars-container,
 .star-rows-container {
     flex: 1; /* Both take equal space */
-    min-width: 250px; /* Prevent the columns from shrinking too much */
+    min-width: 250px;
 }
 
 /* Flexbox Alignment for Star Rows */
@@ -189,5 +189,120 @@ a:hover {
 
     .star-percentage {
         font-size: 12px;
+    }
+}
+
+/* userorders */
+.orders-container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.orders-container h1 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #a6212b;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1rem;
+    margin-top: 1rem;
+}
+
+thead {
+    background-color: #a6212b;
+    color: white;
+}
+
+th,
+td {
+    padding: 1rem;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    /* font-size: 1.2rem; */
+    text-transform: uppercase;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tbody tr:hover {
+    background-color: #f5e4e5;
+}
+
+td span.danger {
+    color: white;
+    font-weight: bold;
+}
+
+.error-message {
+    color: red;
+    font-size: 1rem;
+    text-align: center;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.actions span {
+    display: inline-block;
+    font-size: 1.2rem;
+    color: #555;
+    cursor: pointer;
+}
+
+.actions span:hover {
+    color: #a6212b;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    table,
+    thead,
+    tbody,
+    th,
+    td,
+    tr {
+        display: block;
+    }
+
+    thead tr {
+        display: none;
+    }
+
+    tbody tr {
+        margin-bottom: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 1rem;
+    }
+
+    td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+    }
+
+    td:before {
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    .orders-container h1 {
+        font-size: 1.5rem;
     }
 }

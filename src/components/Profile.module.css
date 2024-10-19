@@ -4,8 +4,8 @@
     background-color: #f9f9f9;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
-    margin: 0 auto;
+    max-width: 500px;
+    margin: 2rem auto;
 }
 
 .profileImage {
@@ -36,7 +36,9 @@
     text-decoration: none;
 }
 
-.button, .info-button, .warning-button {
+.button,
+.info-button,
+.warning-button {
     background-color: #007bff;
     border: none;
     color: white;
@@ -54,7 +56,9 @@
     background-color: #dc3545;
 }
 
-.button:hover, .info-button:hover, .warning-button:hover {
+.button:hover,
+.info-button:hover,
+.warning-button:hover {
     background-color: #0056b3;
 }
 

@@ -67,14 +67,21 @@ export default function ClientLayout({ children }) {
         e.preventDefault();
         const params = new URLSearchParams(location.search);
         const category = params.get("category") || "";
-        let path = "/";
 
-        if (location.pathname.includes("/skincare")) {
+        let path = location.pathname;
+
+        // Check if user is on Skincare or Makeup routes
+        if (path.includes("/skincare")) {
             path = `/skincare?category=${category}`;
-        } else if (location.pathname.includes("/makeup")) {
+        } else if (path.includes("/makeup")) {
             path = `/makeup?category=${category}`;
+        } else {
+            // Redirect to search_results if not in skincare or makeup
+            path = `/search_results`;
         }
-        navigate(`${path}&q=${searchText}`);
+
+        // Add the search query parameter to the path
+        navigate(`${path}?q=${searchText}`);
     }
 
     return (

@@ -31,10 +31,12 @@ export default function ProductDetails() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedRating, setSelectedRating] = useState(0);
     const [reviewText, setReviewText] = useState("");
+    const [selectedImage, setSelectedImage] = useState("");
+
     const { user } = useContext(UserContext);
 
     const { id } = useParams();
-    const { addToCart } = useContext(UserContext); // Destructure addToCart from context
+    const { addToCart } = useContext(UserContext);
 
     useEffect(() => {
         axios
@@ -48,6 +50,11 @@ export default function ProductDetails() {
                 if (productData.product_name) {
                     document.title = productData.product_name;
                 }
+
+                if (productData.product_images) {
+                    const imagesArray = productData.product_images.split(",");
+                    setSelectedImage(imagesArray[0]);
+                }
             })
             .catch((error) => {
                 console.error("Error fetching product details:", error);
@@ -55,7 +62,7 @@ export default function ProductDetails() {
     }, [id]);
 
     const handleAddToCart = () => {
-        addToCart(product); // Call addToCart with the current product
+        addToCart(product);
         alert(product.product_name + " has been added to cart!");
     };
 
@@ -139,8 +146,12 @@ export default function ProductDetails() {
                 alert("Failed to submit the review. Please try again.");
             });
     };
+    const handleImageClick = (imageUrl) => {
+        setSelectedImage(imageUrl);
+    };
 
-    if (loading) return <p>Loading product details...</p>; // Show loading message
+    if (loading) return <p>Loading product details...</p>;
+   
 
     return (
         <div className={classes["product-details-container"]}>
@@ -150,11 +161,19 @@ export default function ProductDetails() {
                         {product_images && product_images.length > 0 ? (
                             product_images
                                 .split(",")
-                                .map((image, index) => (
+                                .map((imageUrl, index) => (
                                     <img
                                         key={index}
-                                        src={image}
-                                        alt={`Product ${index + 1}`}
+                                        src={imageUrl}
+                                        alt={`${product_name} ${index + 1}`}
+                                        onClick={() =>
+                                            handleImageClick(imageUrl)
+                                        }
+                                        className={
+                                            selectedImage === imageUrl
+                                                ? classes.selected
+                                                : ""
+                                        }
                                     />
                                 ))
                         ) : (
@@ -164,9 +183,10 @@ export default function ProductDetails() {
                     <div className={classes["current-image-container"]}>
                         <img
                             src={
-                                product_images
+                                selectedImage ||
+                                (product_images
                                     ? product_images.split(",")[0]
-                                    : ""
+                                    : "")
                             }
                             alt={product_name}
                             className={classes["product-image"]}
