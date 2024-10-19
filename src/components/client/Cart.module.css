@@ -1,64 +1,47 @@
-/* General Layout */
+/* General cart container */
 .cart {
     display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Flex container for cart and summary */
+.cartLayout {
+    display: flex;
     justify-content: space-between;
-    padding: 2rem 0.7rem;
-    gap: 1rem;
-    max-width: 1264px;
-    width: 100%;
-    margin: 1rem auto;
+    gap: 2rem;
+    flex-wrap: wrap;
 }
 
+/* Cart container (products) */
 .cartContainer {
-    width: 65%;
+    flex: 1; /* This allows it to take more space on large screens */
+    max-width: 70%; /* Take 70% of the width */
+    overflow-x: auto;
+    margin-bottom: 2rem;
 }
 
-.empty-cart {
-    text-align: center; /* Centers content horizontally */
-    padding: 2rem 1rem; /* Adds space around the content */
-    font-family: Arial, sans-serif; /* Ensures clean, readable font */
-    color: #555; /* Slightly muted text color */
-}
-
-.empty-cart p {
-    font-size: 1.2rem; /* Slightly larger font for the message */
-    margin-bottom: 1rem; /* Adds space below the message */
-    color: #333; /* Darker text color for better contrast */
-}
-
-.empty-cart a {
-    text-decoration: none; /* Removes default underline for links */
-}
-
-.orderSummary {
-    width: 30%;
-    background-color: #f9f9f9;
-    padding: 1.5rem;
-    border: 1px solid #e0e0e0;
-    border-radius: 5px;
-}
-
-table {
+.cartContainer table {
     width: 100%;
     border-collapse: collapse;
 }
 
-table th,
-table td {
+.cartContainer td {
     padding: 1rem;
     text-align: left;
-    border-bottom: 1px solid #e0e0e0;
 }
 
-/* Product Image */
-table td img {
-    width: 100px;
-    border-radius: 5px;
+.productName {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #333;
+    text-decoration: none;
 }
 
-/* Centering Text and Buttons */
-.center {
-    text-align: center;
+.productName:hover {
+    text-decoration: underline;
 }
 
 /* Quantity control container */
@@ -103,12 +86,6 @@ table td img {
     text-align: center;
 }
 
-/* Quantity number */
-.quantity {
-    text-align: center;
-    flex: 1;
-}
-
 /* Remove button for deleting item */
 .removeButton {
     cursor: pointer;
@@ -131,61 +108,93 @@ table td img {
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Order Summary */
-.orderSummary h3 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
+/* Order Summary Section */
+.orderSummary {
+    flex: 1; /* This allows it to take the remaining space on large screens */
+    max-width: 30%; /* Take 30% of the width */
+    padding: 1rem;
+    background-color: #f8f8f8;
+    border-radius: 8px;
 }
 
-.flexContainerBetween {
+.orderSummary h3 {
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.orderSummary .flexContainerBetween {
     display: flex;
     justify-content: space-between;
-    padding: 0.5rem 0;
+    margin: 1rem 0;
 }
 
-.orderSummary hr {
-    border: 1px solid #e0e0e0;
-}
-
-.orderSummary p {
-    font-size: 1rem;
-    margin: 0.5rem 0;
-}
-
-.checkoutButton {
-    background-color: #d6001c;
-    color: white;
-    padding: 1rem;
-    width: 100%;
-    border: none;
-    border-radius: 5px;
-    font-size: 1.2rem;
-    cursor: pointer;
-}
-
-.checkoutButton:hover {
-    background-color: #bf0018;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .cart {
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+    /* Stack cart and order summary on smaller screens */
+    .cartLayout {
         flex-direction: column;
     }
 
     .cartContainer,
     .orderSummary {
+        max-width: 100%; /* Take full width when stacked */
+    }
+
+    .cartContainer table {
+        display: block;
         width: 100%;
-        margin-top: 1rem;
+    }
+
+    .cartContainer td {
+        padding: 0.5rem;
+    }
+
+    .cartContainer img {
+        width: 4rem; /* Smaller image for mobile */
+    }
+
+    .cartContainer .quantityControl {
+        display: flex;
+        justify-content: space-between;
+        max-width: 120px;
+        margin: 0.5rem auto;
+    }
+
+    .cartContainer .adjustButton {
+        font-size: 1.2rem;
+        cursor: pointer;
+    }
+
+    .orderSummary {
+        padding: 0.5rem;
+    }
+
+    .full-width-button {
+        padding: 0.75rem;
     }
 }
-/* Thay đổi màu chữ cho tên sản phẩm */
-.productName {
-    color: black; /* Đặt màu chữ thành đen */
-    text-decoration: none;
+
+/* Empty cart styling */
+.empty-cart {
+    text-align: center;
+    padding: 2rem 0;
 }
 
-/* Nếu cần thêm hover effect */
-.productName:hover {
-    text-decoration: underline; /* Hoặc bất kỳ hiệu ứng nào khác mà bạn muốn */
+.empty-cart p {
+    font-size: 1.4rem;
+    color: #555;
+}
+
+.empty-cart .button {
+    background-color: #a6212b;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.empty-cart .button:hover {
+    background-color: #8c1d25;
 }
