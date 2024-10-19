@@ -12,11 +12,20 @@ import classes from "./ProductDetails.module.css";
 
 export default function ProductDetails() {
     const [product, setProduct] = useState("");
+    const [loading, setLoading] = useState(true);
     const [ratingSummary, setRatingSummary] = useState({
         totalRatings: 0,
         averageRating: 0,
         starCounts: { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 },
     });
+    const {
+        product_name,
+        product_description,
+        stock_qty,
+        product_price,
+        product_images,
+        product_ratings,
+    } = product;
 
     // State for modal visibility, rating, and review
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -34,11 +43,14 @@ export default function ProductDetails() {
                 const productData = res.data.data;
                 setProduct(productData);
                 calculateRatingSummary(productData.product_ratings);
+                setLoading(false); // Loading complete
 
-                // Dynamically set the document title to the product name
                 if (productData.product_name) {
                     document.title = productData.product_name;
                 }
+            })
+            .catch((error) => {
+                console.error("Error fetching product details:", error);
             });
     }, [id]);
 
@@ -128,14 +140,15 @@ export default function ProductDetails() {
             });
     };
 
+    if (loading) return <p>Loading product details...</p>; // Show loading message
+
     return (
         <div className={classes["product-details-container"]}>
             <div className={classes["product-details"]}>
                 <div className={classes["product-images-container"]}>
                     <div className={classes["product-images"]}>
-                        {product.product_images &&
-                        product.product_images.length > 0 ? (
-                            product.product_images
+                        {product_images && product_images.length > 0 ? (
+                            product_images
                                 .split(",")
                                 .map((image, index) => (
                                     <img
@@ -151,18 +164,18 @@ export default function ProductDetails() {
                     <div className={classes["current-image-container"]}>
                         <img
                             src={
-                                product.product_images
-                                    ? product.product_images.split(",")[0]
+                                product_images
+                                    ? product_images.split(",")[0]
                                     : ""
                             }
-                            alt={product.product_name}
+                            alt={product_name}
                             className={classes["product-image"]}
                         />
                     </div>
                 </div>
 
                 <div className={classes["product-info-container"]}>
-                    <h1>{product.product_name}</h1>
+                    <h1>{product_name}</h1>
 
                     <div className={classes["average-rating-stars-container"]}>
                         <span>
@@ -175,14 +188,14 @@ export default function ProductDetails() {
                     </div>
 
                     <p className={classes.product_description}>
-                        {product.product_description}
+                        {product_description}
                     </p>
                     <p className={classes.available}>
                         {" "}
-                        Qty available: {product.stock_qty}
+                        Qty available: {stock_qty}
                     </p>
                     <h4 className={classes.price}>
-                        Price: {formatter.format(product.product_price)}
+                        Price: {formatter.format(product_price)}
                     </h4>
                     <Button
                         className="full-width-button"
@@ -194,14 +207,26 @@ export default function ProductDetails() {
             </div>
 
             <div className={classes["product-reviews"]}>
-                <RatingSummary
-                    ratingSummary={ratingSummary}
-                    renderAverageRatingStars={renderAverageRatingStars}
-                />
-                <Button className="button" onClick={openModal}>
-                    Write a review
-                </Button>
-                <ProductRatings ratings={product.product_ratings} />
+                {ratingSummary.totalRatings === 0 ? (
+                    <div className={classes["no-reviews-message"]}>
+                        <h3>No ratings or reviews yet</h3>
+                        <p>Be the first to review this product!</p>
+                        <Button className="button" onClick={openModal}>
+                            Write a review
+                        </Button>
+                    </div>
+                ) : (
+                    <>
+                        <RatingSummary
+                            ratingSummary={ratingSummary}
+                            renderAverageRatingStars={renderAverageRatingStars}
+                        />
+                        <Button className="button" onClick={openModal}>
+                            Write a review
+                        </Button>
+                        <ProductRatings ratings={product_ratings} />
+                    </>
+                )}
 
                 <WriteReviewModal
                     isOpen={isModalOpen}
@@ -211,7 +236,7 @@ export default function ProductDetails() {
                     setSelectedRating={setSelectedRating}
                     reviewText={reviewText}
                     setReviewText={setReviewText}
-                    productName={product.product_name}
+                    productName={product_name}
                 />
             </div>
         </div>

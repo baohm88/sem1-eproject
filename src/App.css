@@ -1,8 +1,6 @@
 * {
     margin: 0;
     padding: 0;
-    /* text-decoration: none;
-    list-style-type: none; */
 }
 
 :root {
@@ -56,42 +54,10 @@ a:hover {
 .error-message {
     color: var(--dangerColor);
     text-align: center;
+    font-weight: bold;
+    margin: 1rem;
 }
 /* ERROR-MESSAGE ENDS */
-
-/* Stars count */
-.star-rows-container {
-    min-width: 50vw;
-    margin: 1rem 0;
-}
-
-.star-row {
-    display: flex;
-    align-items: center;
-}
-
-.progress-bar {
-    width: 90%;
-    background-color: #e4e5e9;
-    height: 10px;
-    border-radius: 5px;
-}
-
-.star-label {
-    width: 4rem;
-    text-align: right;
-    padding-right: 1rem;
-}
-
-.star-percentage {
-    min-width: 1rem;
-    padding-left: 1rem;
-    text-align: right;
-}
-
-.rating-summary {
-    margin: 1rem 0;
-}
 
 .nav-link a {
     text-decoration: none;
@@ -103,14 +69,12 @@ a:hover {
     text-transform: uppercase;
 }
 
-/* Hover state for the NavLink */
 .nav-link a:hover {
-    color: #b51828; /* Hover effect color */
+    color: #b51828;
 }
 
-/* Active state for the NavLink (targeting the .active class applied by NavLink) */
 .nav-link .active {
-    color: #b51828; /* Active link color */
+    color: #b51828;
 }
 
 /* MOBILE */
@@ -124,8 +88,106 @@ a:hover {
     }
 }
 
-@media screen and (max-width: 700px) {
+/* Rating summary */
+.rating-summary {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    margin-bottom: 20px;
+}
+
+.center {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Parent Flex Container */
+.row-flex-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    flex-wrap: wrap; /* Allow wrapping for small screens */
+}
+
+/* Child Flex Items */
+.average-rating-stars-container,
+.star-rows-container {
+    flex: 1; /* Both take equal space */
+    min-width: 250px; /* Prevent the columns from shrinking too much */
+}
+
+/* Flexbox Alignment for Star Rows */
+.star-rows-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Star Row Styling */
+.star-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.star-label {
+    min-width: 50px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+}
+
+.progress-bar {
+    flex: 1;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-right: 10px;
+}
+
+.progress {
+    height: 10px;
+}
+
+.star-percentage {
+    min-width: 20px;
+    font-size: 14px;
+}
+
+/* Mobile Responsive Adjustments */
+@media (max-width: 768px) {
     .row-flex-between {
-        flex-direction: column;
+        flex-direction: column; /* Stack elements on small screens */
+    }
+
+    .average-rating-stars-container,
+    .star-rows-container {
+        width: 100%; /* Full width on small screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .center {
+        font-size: 18px; /* Smaller font for small screens */
+    }
+
+    .average-rating-stars-container {
+        font-size: 14px;
+        gap: 3px;
+    }
+
+    .star-row {
+        gap: 5px;
+    }
+
+    .star-label {
+        font-size: 12px;
+    }
+
+    .star-percentage {
+        font-size: 12px;
     }
 }

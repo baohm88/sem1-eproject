@@ -1,5 +1,3 @@
-/* Cart.module.css */
-
 /* General Layout */
 .cart {
     display: flex;
@@ -13,6 +11,23 @@
 
 .cartContainer {
     width: 65%;
+}
+
+.empty-cart {
+    text-align: center; /* Centers content horizontally */
+    padding: 2rem 1rem; /* Adds space around the content */
+    font-family: Arial, sans-serif; /* Ensures clean, readable font */
+    color: #555; /* Slightly muted text color */
+}
+
+.empty-cart p {
+    font-size: 1.2rem; /* Slightly larger font for the message */
+    margin-bottom: 1rem; /* Adds space below the message */
+    color: #333; /* Darker text color for better contrast */
+}
+
+.empty-cart a {
+    text-decoration: none; /* Removes default underline for links */
 }
 
 .orderSummary {

@@ -24,7 +24,7 @@ export default function Cart() {
                 (sum, item) => sum + item.product_price * item.quantity,
                 0
             );
-            
+
             setTotalAmount(total);
         };
 
@@ -40,7 +40,7 @@ export default function Cart() {
             };
 
             const response = await axios.post(
-                `http://localhost/project/user/orders/user_idd=${user.user_id}`,
+                `http://localhost/project/user/orders/user_id=${user.user_id}`,
                 orderData
             );
 
@@ -62,7 +62,14 @@ export default function Cart() {
     };
 
     if (!cart || cart.length === 0) {
-        return <p>Your cart is empty</p>;
+        return (
+            <div className={classes["empty-cart"]}>
+                <p>Your cart is empty</p>
+                <Link to="/skincare">
+                    <Button className="button">Shop Now</Button>
+                </Link>
+            </div>
+        );
     }
 
     return (
@@ -161,7 +168,8 @@ export default function Cart() {
                 <h3>Order Summary</h3>
                 <hr />
                 <p className={classes.flexContainerBetween}>
-                    <span>Subtotal</span> <span>${totalAmount}</span>
+                    <span>Subtotal</span>{" "}
+                    <span>{formatter.format(totalAmount)}</span>
                 </p>
                 <p className={classes.flexContainerBetween}>
                     <span>Shipping</span> <span>$0</span>
@@ -173,10 +181,14 @@ export default function Cart() {
                         <strong>Estimated Total</strong>
                     </span>{" "}
                     <span>
-                        <strong>${totalAmount}</strong>
+                        <strong>{formatter.format(totalAmount)}</strong>
                     </span>
                 </p>
-                <Button className="full-width-button" onClick={handleCheckout}>
+                <Button
+                    className="full-width-button"
+                    onClick={handleCheckout}
+                    disabled={cart.length === 0}
+                >
                     Checkout
                 </Button>
             </div>

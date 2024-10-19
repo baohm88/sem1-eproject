@@ -24,6 +24,7 @@
 
 .product-images img {
     margin: 0 1rem 1rem 0;
+    cursor: pointer;
 }
 
 .current-image-container,
@@ -51,6 +52,26 @@
     border-top: 1px solid rgb(164, 151, 151);
     margin: 1rem 0;
     padding: 2rem 0;
+}
+
+.no-reviews-message {
+    text-align: center;
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+
+.no-reviews-message h3 {
+    font-size: 18px;
+    color: #a6212b;
+}
+
+.no-reviews-message p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 20px;
 }
 
 /* MOBILE */
