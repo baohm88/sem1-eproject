@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 16, 2024 at 04:01 PM
+-- Generation Time: Oct 19, 2024 at 01:09 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -312,7 +312,11 @@ INSERT INTO `OrderItems` (`order_id`, `product_id`, `product_name`, `product_pri
 (253, 2, 'Dry Touch Facial Sunscreen - Broad Spectrum SPF 50+', 40.000000000, 2),
 (253, 14, 'Lip Perfector 2-in-1 Lip and Cheek Color Balm', 30.000000000, 5),
 (254, 5, 'UV Plus SPF 50 Anti Pollution Face Sunscreen', 46.000000000, 6),
-(254, 9, 'Joli Rouge Satin Lipstick', 37.000000000, 5);
+(254, 9, 'Joli Rouge Satin Lipstick', 37.000000000, 5),
+(260, 1, 'Hydrating Gentle Foaming Face Cleanser for Normal to Dry Skin', 31.000000000, 1),
+(261, 9, 'Joli Rouge Satin Lipstick', 37.000000000, 1),
+(262, 1, 'Hydrating Gentle Foaming Face Cleanser for Normal to Dry Skin', 31.000000000, 9),
+(262, 2, 'Dry Touch Facial Sunscreen - Broad Spectrum SPF 50+', 40.000000000, 1);
 
 -- --------------------------------------------------------
 
@@ -334,7 +338,9 @@ CREATE TABLE `Orders` (
 
 INSERT INTO `Orders` (`order_id`, `user_id`, `order_value`, `order_date`, `status`) VALUES
 (253, 121, 230.000000000, '2024-10-12', 'pending'),
-(254, 121, 461.000000000, '2024-10-12', 'pending');
+(254, 121, 461.000000000, '2024-10-12', 'pending'),
+(261, 121, 37.000000000, '2024-10-17', 'pending'),
+(262, 121, 319.000000000, '2024-10-19', 'pending');
 
 -- --------------------------------------------------------
 
@@ -447,34 +453,35 @@ CREATE TABLE `Products` (
   `product_id` int(11) NOT NULL,
   `product_name` varchar(255) NOT NULL,
   `product_description` text NOT NULL,
-  `price` decimal(21,9) NOT NULL,
+  `product_price` decimal(21,9) NOT NULL,
   `stock_qty` int(11) NOT NULL,
   `main_category` enum('Skincare','Makeup') NOT NULL DEFAULT 'Skincare',
   `sub_category` enum('Face','Body','Sun','Men','Eyes','Lips') NOT NULL DEFAULT 'Face',
   `date_listed` date NOT NULL,
-  `is_active` tinyint(1) NOT NULL DEFAULT 1
+  `is_active` tinyint(1) NOT NULL DEFAULT 1,
+  `note` text NOT NULL DEFAULT 'new'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `Products`
 --
 
-INSERT INTO `Products` (`product_id`, `product_name`, `product_description`, `price`, `stock_qty`, `main_category`, `sub_category`, `date_listed`, `is_active`) VALUES
-(1, 'Hydrating Gentle Foaming Face Cleanser for Normal to Dry Skin', 'Moisture-rich, gentle foaming cleanser for normal to dry skin types removes makeup, impurities + boosts hydration for a soft and supple complexion.', 31.000000000, 100, 'Skincare', 'Body', '1974-05-07', 1),
-(2, 'Dry Touch Facial Sunscreen - Broad Spectrum SPF 50+', 'A lightweight, dry-touch Broad Spectrum SPF 50+ sunscreen for face that works to filter out UVA/UVB rays, while moisturizing and soothing skin.', 40.000000000, 123, 'Skincare', 'Sun', '2024-01-12', 1),
-(3, 'ClarinsMen Smooth Shave Foaming Gel', 'Creamy mousse shave gel delivers a comfortable shave, while soothing and moisturizing the skin.', 25.000000000, 99, 'Skincare', 'Men', '1976-08-31', 1),
-(4, 'Blue Orchid Face Treatment Oil', 'Hydrating face oil formulated with 100% plant extracts to help restore radiance, tone and vitality.', 67.000000000, 90, 'Skincare', 'Face', '2009-04-21', 1),
-(5, 'UV Plus SPF 50 Anti Pollution Face Sunscreen', 'Daily, oil-free multi-protection UV sunscreen with broad spectrum SPF 50.', 46.000000000, 30, 'Skincare', 'Face', '2011-05-16', 1),
-(6, 'Wonder Volume Mascara XXL', 'A volumizing mascara for extra dimensional lashes that look bigger, bolder and twice as thick¹. Swipe on this long-lasting, pitch black formula for 2X the volume¹, 12H¹ smudge-proof wear.', 30.000000000, 20, 'Makeup', 'Eyes', '1990-05-11', 1),
-(7, 'Hydra-Essentiel Mask', 'Super-quenching face mask for all skin types powered by exclusive Hyaluronic Power Complex+ to help reinforce skin\'s moisture barrier and provide 24H hydration¹ for skin that is visibly plumped, nourished, and protected.', 39.000000000, 75, 'Skincare', 'Face', '2011-07-19', 1),
-(8, 'Exfoliating Gentle Body-Scrub For Smooth Skin', 'Refreshing body scrub that gently exfoliates, softens, and nourishes.', 43.000000000, 133, 'Skincare', 'Body', '2017-03-07', 1),
-(9, 'Joli Rouge Satin Lipstick', 'A creamy, satin-finish lipstick that delivers intense color, and extreme comfort in a new eco-friendly, refillable tube.', 37.000000000, 73, 'Makeup', 'Lips', '1985-01-11', 1),
-(10, 'Instant Concealer Long Wearing + Crease Free', 'A long-wearing, crease-free concealer that brightens, smoothes, and conceals dark circles and imperfections.', 35.000000000, 66, 'Makeup', 'Face', '2005-03-30', 1),
-(11, 'Beauty Flash Balm', 'A multi-tasking balm that instantly moisturizes, visibly brightens, and tightens facial contours so skin looks rested and relaxed.', 52.000000000, 50, 'Makeup', 'Face', '1991-04-23', 1),
-(12, 'Wonder Perfect Mascara 4D', 'All-in-one, 4D mascara that takes lashes to bold new dimensions: visibly lengthened, curled, defined and volumized.', 30.000000000, 94, 'Makeup', 'Eyes', '2014-01-25', 1),
-(13, 'Super Restorative Night Cream - All Skin Types', 'An anti-aging night cream for mature skin that replenishes, targets wrinkles, visibly improves slackening, boosts radiance, and evens skin tone. Powered by Organic Harungana, as effective as retinol* and gentle on the skin, plus Organic Gorse.', 142.000000000, 66, 'Skincare', 'Face', '2021-12-03', 1),
-(14, 'Lip Perfector 2-in-1 Lip and Cheek Color Balm', 'A 2-in-1 balm and highlighter that nourishes and plumps lips with 3D shine while providing a boost of radiance to cheeks for a natural healthy glow.', 30.000000000, 80, 'Makeup', 'Lips', '2007-05-27', 1),
-(15, 'Graphik Ink Liner Liquid Eyeliner Pen', 'High-precision liquid eyeliner delivers intense, transfer-proof color.', 33.000000000, 54, 'Makeup', 'Eyes', '2022-11-22', 1);
+INSERT INTO `Products` (`product_id`, `product_name`, `product_description`, `product_price`, `stock_qty`, `main_category`, `sub_category`, `date_listed`, `is_active`, `note`) VALUES
+(1, 'Hydrating Gentle Foaming Face Cleanser for Normal to Dry Skin', 'Moisture-rich, gentle foaming cleanser for normal to dry skin types removes makeup, impurities + boosts hydration for a soft and supple complexion.', 31.000000000, 90, 'Skincare', 'Body', '1974-05-07', 1, 'new'),
+(2, 'Dry Touch Facial Sunscreen - Broad Spectrum SPF 50+', 'A lightweight, dry-touch Broad Spectrum SPF 50+ sunscreen for face that works to filter out UVA/UVB rays, while moisturizing and soothing skin.', 40.000000000, 122, 'Skincare', 'Sun', '2024-01-12', 1, 'for-you'),
+(3, 'ClarinsMen Smooth Shave Foaming Gel', 'Creamy mousse shave gel delivers a comfortable shave, while soothing and moisturizing the skin.', 25.000000000, 99, 'Skincare', 'Men', '1976-08-31', 1, 'gift'),
+(4, 'Blue Orchid Face Treatment Oil', 'Hydrating face oil formulated with 100% plant extracts to help restore radiance, tone and vitality.', 67.000000000, 90, 'Skincare', 'Face', '2009-04-21', 1, 'new'),
+(5, 'UV Plus SPF 50 Anti Pollution Face Sunscreen', 'Daily, oil-free multi-protection UV sunscreen with broad spectrum SPF 50.', 46.000000000, 30, 'Skincare', 'Face', '2011-05-16', 1, 'for-you'),
+(6, 'Wonder Volume Mascara XXL', 'A volumizing mascara for extra dimensional lashes that look bigger, bolder and twice as thick¹. Swipe on this long-lasting, pitch black formula for 2X the volume¹, 12H¹ smudge-proof wear.', 30.000000000, 20, 'Makeup', 'Eyes', '1990-05-11', 1, 'gift'),
+(7, 'Hydra-Essentiel Mask', 'Super-quenching face mask for all skin types powered by exclusive Hyaluronic Power Complex+ to help reinforce skin\'s moisture barrier and provide 24H hydration¹ for skin that is visibly plumped, nourished, and protected.', 39.000000000, 60, 'Skincare', 'Face', '2011-07-19', 1, 'new'),
+(8, 'Exfoliating Gentle Body-Scrub For Smooth Skin', 'Refreshing body scrub that gently exfoliates, softens, and nourishes.', 43.000000000, 133, 'Skincare', 'Body', '2017-03-07', 1, 'for-you'),
+(9, 'Joli Rouge Satin Lipstick', 'A creamy, satin-finish lipstick that delivers intense color, and extreme comfort in a new eco-friendly, refillable tube.', 37.000000000, 72, 'Makeup', 'Lips', '1985-01-11', 1, 'gift'),
+(10, 'Instant Concealer Long Wearing + Crease Free', 'A long-wearing, crease-free concealer that brightens, smoothes, and conceals dark circles and imperfections.', 35.000000000, 66, 'Makeup', 'Face', '2005-03-30', 1, 'new'),
+(11, 'Beauty Flash Balm', 'A multi-tasking balm that instantly moisturizes, visibly brightens, and tightens facial contours so skin looks rested and relaxed.', 52.000000000, 50, 'Makeup', 'Face', '1991-04-23', 1, 'for-you'),
+(12, 'Wonder Perfect Mascara 4D', 'All-in-one, 4D mascara that takes lashes to bold new dimensions: visibly lengthened, curled, defined and volumized.', 30.000000000, 94, 'Makeup', 'Eyes', '2014-01-25', 1, 'gift'),
+(13, 'Super Restorative Night Cream - All Skin Types', 'An anti-aging night cream for mature skin that replenishes, targets wrinkles, visibly improves slackening, boosts radiance, and evens skin tone. Powered by Organic Harungana, as effective as retinol* and gentle on the skin, plus Organic Gorse.', 142.000000000, 66, 'Skincare', 'Face', '2021-12-03', 1, ''),
+(14, 'Lip Perfector 2-in-1 Lip and Cheek Color Balm', 'A 2-in-1 balm and highlighter that nourishes and plumps lips with 3D shine while providing a boost of radiance to cheeks for a natural healthy glow.', 30.000000000, 80, 'Makeup', 'Lips', '2007-05-27', 1, ''),
+(15, 'Graphik Ink Liner Liquid Eyeliner Pen', 'High-precision liquid eyeliner delivers intense, transfer-proof color.', 33.000000000, 54, 'Makeup', 'Eyes', '2022-11-22', 1, '');
 
 -- --------------------------------------------------------
 
@@ -502,7 +509,7 @@ CREATE TABLE `Users` (
 --
 
 INSERT INTO `Users` (`user_id`, `username`, `password`, `email`, `is_admin`, `is_active`, `first_name`, `last_name`, `dob`, `phone`, `address`, `user_image`) VALUES
-(121, 'bao', '$2y$10$ouBhbdtkf8vHYPU9X6LmxOt9VFGfo4pS0DHngrPZmC9Qs3ar0HdZa', 'baohm88@hotmail.com', 1, 1, 'Bao', 'Ha', '2020-01-01', '0988666281', 'Al Ruwais', 'https://res.cloudinary.com/dppk10edk/image/upload/v1729064893/tl0vqnnzqb4inkgxovjr.jpg'),
+(121, 'bao', '$2y$10$ouBhbdtkf8vHYPU9X6LmxOt9VFGfo4pS0DHngrPZmC9Qs3ar0HdZa', 'baohm88@hotmail.com', 1, 1, 'Bao', 'Ha', '2020-01-01', '0988666281', 'Al Ruwais', 'https://res.cloudinary.com/dppk10edk/image/upload/v1729278153/kbpstutvacmhfnll9agc.avif'),
 (122, 'admin', '$2y$10$RjTF8VkMryp5ymIp1NJp9uMywKSnfo9RwTx.UbbqDyOE8BrhBn8UO', 'admin@gmail.com', 0, 1, 'admin', 'admin', '2020-01-01', '123456789', 'Hanoi', 'https://res.cloudinary.com/dppk10edk/image/upload/v1728749101/my_avatar_jhnlkj.avif');
 
 --
@@ -565,7 +572,7 @@ ALTER TABLE `Coupons`
 -- AUTO_INCREMENT for table `Orders`
 --
 ALTER TABLE `Orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=255;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=263;
 
 --
 -- AUTO_INCREMENT for table `ProductImages`
