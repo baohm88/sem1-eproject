@@ -43,10 +43,10 @@ const ExclusiveServices = () => {
     ];
 
     return (
-        <div className={classes["exclusive-services"]}>
+        <div className={classes["exclusive-services-container"]}>
             <h2>Our exclusive services</h2>
             <p>Created to make your life more beautiful</p>
-            <div className={classes["services-grid"]}>
+            <div className={classes["services-container"]}>
                 {services.map((service) => (
                     <ExclusiveServiceItem key={service.id} service={service} />
                 ))}

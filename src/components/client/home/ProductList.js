@@ -7,7 +7,7 @@ const ProductList = ({ products, openModal }) => {
         <div className={classes["product-slider"]}>
             {products.map((product) => (
                 <ProductItem
-                    key={product.id}
+                    key={product.product_id}
                     product={product}
                     openModal={openModal}
                 />

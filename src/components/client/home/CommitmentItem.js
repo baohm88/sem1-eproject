@@ -1,14 +1,14 @@
 import React from "react";
-import classes from "./CommitmentItem.module.css"; // Use a separate CSS module if necessary
+import classes from "./CommitmentItem.module.css";
 
 const CommitmentItem = ({ commitment }) => {
     const { imgSrc, title } = commitment;
 
     return (
-        <button className={classes["commitment-button"]}>
+        <div className={classes["commitment-item"]}>
             <img src={imgSrc} alt={title} />
             <h3>{title}</h3>
-        </button>
+        </div>
     );
 };
 

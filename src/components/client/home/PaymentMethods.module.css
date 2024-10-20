@@ -1,8 +1,9 @@
 .payment-methods {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    padding: 10px 0;
+    flex-wrap: wrap;
+    gap: 1rem;
     border-top: 1px solid #e0e0e0;
     border-bottom: 1px solid #e0e0e0;
     max-width: 600px;
@@ -10,9 +11,9 @@
 }
 
 .payment-methods img {
-    height: 28px; /* Chiều cao cố định của biểu tượng */
+    height: 28px;
     width: auto;
-    margin: 0 15px; /* Khoảng cách giữa các biểu tượng */
+    margin: 0 15px;
     filter: grayscale(100%);
     transition: filter 0.3s ease;
 }

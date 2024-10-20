@@ -33,6 +33,8 @@ export default function ProductDetails() {
     const [reviewText, setReviewText] = useState("");
     const [selectedImage, setSelectedImage] = useState("");
 
+    const [category, setCategory] = useState("");
+
     const { user } = useContext(UserContext);
 
     const { id } = useParams();
@@ -151,7 +153,6 @@ export default function ProductDetails() {
     };
 
     if (loading) return <p>Loading product details...</p>;
-   
 
     return (
         <div className={classes["product-details-container"]}>

@@ -8,7 +8,8 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Hiệu ứng đổ bóng nhẹ */
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* Hiệu ứng khi hover (di chuột qua) */
     max-width: 250px; /* Chiều rộng tối đa cho khối */
-    flex: 1; /* Cho phép khối co giãn trong flexbox */
+    width: 100%;
+    margin: 0 auto;
 }
 
 /* Phong cách cho hình ảnh trong mỗi khối dịch vụ */

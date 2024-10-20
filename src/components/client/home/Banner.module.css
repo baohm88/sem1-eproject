@@ -1,4 +1,4 @@
-.banner {
+/* .banner {
     position: relative;
     text-align: center;
     margin-bottom: 40px;
@@ -38,4 +38,96 @@
 
 .discover-button:hover {
     background-color: #bf1653;
+} */
+
+.banner {
+    position: relative;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.banner-image {
+    width: 100%;
+    height: auto;
+}
+
+.banner-content {
+    position: absolute;
+    top: 40%;
+    left: 70%;
+    transform: translate(-50%, -50%);
+    color: white;
+}
+
+.banner-content h2 {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.banner-content p {
+    font-size: 1.2em;
+}
+
+.discover-button {
+    background-color: #d71a63;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+    margin-top: 10px;
+}
+
+.discover-button:hover {
+    background-color: #bf1653;
+}
+
+/* Mobile Responsiveness */
+
+/* On small screens (tablets and phones) */
+@media (max-width: 768px) {
+    .banner-content {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80%; /* Center the content and give it more width */
+        text-align: center;
+    }
+
+    .banner-content h2 {
+        font-size: 1.5rem; /* Smaller font size for mobile */
+    }
+
+    .banner-content p {
+        font-size: 1rem; /* Adjust font size for smaller screens */
+    }
+
+    .discover-button {
+        padding: 8px 16px;
+        font-size: 0.9em;
+    }
+}
+
+/* On very small screens (phones) */
+@media (max-width: 480px) {
+    .banner-content {
+        top: 60%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 90%; /* Give more width for small devices */
+        text-align: center;
+    }
+
+    .banner-content h2 {
+        font-size: 1.2rem; /* Further reduce font size */
+    }
+
+    .banner-content p {
+        font-size: 0.9em;
+    }
+
+    .discover-button {
+        padding: 6px 12px;
+        font-size: 0.8em;
+    }
 }

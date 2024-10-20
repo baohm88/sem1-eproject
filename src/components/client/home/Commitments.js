@@ -29,13 +29,17 @@ const Commitments = () => {
     return (
         <div className={classes["commitments-container"]}>
             <h2>Our Commitments</h2>
-            <div className={classes["commitments-grid"]}>
+            <div className={classes["commitments-flex"]}>
                 {commitments.map((commitment) => (
-                    <CommitmentItem key={commitment.id} commitment={commitment} />
+                    <CommitmentItem
+                        key={commitment.id}
+                        commitment={commitment}
+                    />
                 ))}
             </div>
             <p className={classes["disclaimer"]}>
-                *Excluding: ClarinsMen Foaming Shave Gel / myClarins Clear-out Targets Imperfections
+                *Excluding: ClarinsMen Foaming Shave Gel / myClarins Clear-out
+                Targets Imperfections
             </p>
         </div>
     );

@@ -141,8 +141,6 @@ export default function Home() {
         setActiveTab(tab);
     };
 
-    console.log(forYouProducts);
-
     return (
         <>
             <div className={classes["body-section"]}>

@@ -25,7 +25,9 @@
 }
 
 .category1,
-.category2 {
+.category2,
+.category3,
+.category4 {
     flex: 1; /* Các phần tử sẽ giãn đều ra không gian */
     display: flex;
     flex-direction: column;
@@ -71,8 +73,11 @@
         flex-wrap: wrap; /* Cho phép xuống dòng */
         justify-content: space-between; /* Phân bố đều khoảng cách giữa các phần tử */
     }
+
     .category1,
-    .category2 {
+    .category2,
+    .category3,
+    .category4 {
         transform: none;
         flex-basis: calc(
             50% - 10px
@@ -97,8 +102,11 @@
         flex-wrap: wrap; /* Cho phép xuống dòng */
         justify-content: space-between; /* Phân bố đều khoảng cách giữa các phần tử */
     }
+    
     .category1,
-    .category2 {
+    .category2,
+    .category3,
+    .category4 {
         transform: none;
         flex-basis: calc(
             50% - 10px

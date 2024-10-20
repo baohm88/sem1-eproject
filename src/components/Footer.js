@@ -1,128 +1,218 @@
 import React from "react";
 import classes from "./Footer.module.css";
-
+import { Link } from "react-router-dom";
+import { FaFacebookSquare } from "react-icons/fa"; // Import icon FaBeer từ FontAwesome
+import { FaYoutubeSquare } from "react-icons/fa"; // Import icon FaBeer từ FontAwesome
+import { FaInstagramSquare } from "react-icons/fa"; // Import icon FaBeer từ FontAwesome
+import { FaTwitterSquare } from "react-icons/fa";
 export default function Footer() {
     return (
         <footer className={classes["footer"]}>
-            <div className={classes["footer-section"]}>
-                <h4>CATEGORIES</h4>
-                <ul>
-                    <li><a href="#">Cleansers</a></li>
-                    <li><a href="#">Toners</a></li>
-                    <li><a href="#">Serums</a></li>
-                    <li><a href="#">Moisturizers</a></li>
-                    <li><a href="#">Eye Care</a></li>
-                    <li><a href="#">Exfoliators & Masks</a></li>
-                    <li><a href="#">Face Treatment Oils</a></li>
-                    <li><a href="#">Anti-Aging and Anti-Wrinkle Treatment</a></li>
-                    <li><a href="#">Makeup</a></li>
-                    <li><a href="#">Body</a></li>
-                    <li><a href="#">Self Tanning</a></li>
-                    <li><a href="#">Men</a></li>
-                </ul>
-            </div>
+            <div className={classes["footer-grid"]}>
+                <div className={classes["footer-section"]}>
+                    <h4>CATEGORIES</h4>
+                    <ul>
+                        <li>
+                            <Link to="/skincare?category=Face"> Face</Link>
+                        </li>
+                        <li>
+                            <Link to="/skincare?category=Body"> Body</Link>
+                        </li>
+                        <li>
+                            <Link to="/skincare?category=Sun"> Sun</Link>
+                        </li>
+                        <li>
+                            <Link to="/skincare?category=Men"> Men</Link>
+                        </li>
+                        <li>
+                            <Link to="/makeup?category=Eyes"> Eyes</Link>
+                        </li>
+                        <li>
+                            <Link to="/makeup?category=Lips"> Lips</Link>
+                        </li>
+                    </ul>
+                </div>
 
-            <div className={classes["footer-section"]}>
-                <h4>MOST POPULAR</h4>
-                <ul>
-                    <li><a href="#">Double Serum Anti-Aging + Anti-Wrinkle Serum</a></li>
-                    <li><a href="#">Total Eye Lift Cream</a></li>
-                    <li><a href="#">One-Step Gentle Exfoliating Cleanser</a></li>
-                    <li><a href="#">Hydrating Toner + Face Lotion - Normal Dry Skin</a></li>
-                    <li><a href="#">Tonic Body-Firming + Tightening-Treatment Oil</a></li>
-                    <li><a href="#">Moisture-Rich Body Lotion</a></li>
-                    <li><a href="#">Hand and Nail Moisturizing Treatment Cream</a></li>
-                    <li><a href="#">Lip Comfort Oil Hydrating and Plumping Lip Oil</a></li>
-                    <li><a href="#">Lip Oil Balm Hydrating Peptide Balm</a></li>
-                    <li><a href="#">Instant Smooth-Perfecting Touch Face Primer</a></li>
-                </ul>
-            </div>
+                <div className={classes["footer-section"]}>
+                    <h4>MOST POPULAR</h4>
+                    <ul>
+                        <li>
+                            <Link to="/products/1">
+                                {" "}
+                                Hydrating Gentle Foaming Face Cleanser for
+                                Normal to Dry Skin
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/products/2">
+                                {" "}
+                                Dry Touch Facial Sunscreen - Broad Spectrum SPF
+                                50+
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/products/3">
+                                {" "}
+                                ClarinsMen Smooth Shave Foaming Gel
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/products/8">
+                                {" "}
+                                Exfoliating Gentle Body-Scrub For Smooth Skin
+                            </Link>
+                        </li>
+                    </ul>
+                </div>
 
-            <div className={classes["footer-section"]}>
-                <h4>WHAT'S NEW</h4>
-                <ul>
-                    <li><a href="#">Double Serum Anti-Aging + Anti-Wrinkle Serum</a></li>
-                    <li><a href="#">24 Day Advent Calendar</a></li>
-                    <li><a href="#">12 Day Advent Calendar</a></li>
-                    <li><a href="#">Double Serum Duo</a></li>
-                    <li><a href="#">Double Serum Face + Eye Icons</a></li>
-                    <li><a href="#">Double Serum Face + Eye Power Duo</a></li>
-                    <li><a href="#">Clarins Skincare Essentials</a></li>
-                    <li><a href="#">Double Serum + Nutri-Lumière Collection</a></li>
-                    <li><a href="#">Double Serum + Super Restorative Collection</a></li>
-                    <li><a href="#">Double Serum + Extra-Firming Collection</a></li>
-                </ul>
-            </div>
+                <div className={classes["footer-section"]}>
+                    <h4>WHAT'S NEW</h4>
+                    <ul>
+                        <li>
+                            <Link to="/products/6">
+                                {" "}
+                                Wonder Volume Mascara XXL
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/products/9">
+                                {" "}
+                                Joli Rouge Satin Lipstick
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/products/14">
+                                {" "}
+                                Lip Perfector 2-in-1 Lip and Cheek Color Balm
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/products/15">
+                                {" "}
+                                Graphik Ink Liner Liquid Eyeliner Pen
+                            </Link>
+                        </li>
+                    </ul>
+                </div>
 
-            <div className={classes["footer-section"]}>
-                <h4>NEED HELP?</h4>
-                <ul>
-                    <li><a href="#">Track My Order</a></li>
-                    <li><a href="#">FAQ</a></li>
-                    <li><a href="#">Shipping Information</a></li>
-                    <li><a href="#">Return Policy</a></li>
-                    <li><a href="#">Payment Options</a></li>
-                    <li><a href="#">Contact Us</a></li>
-                </ul>
-            </div>
+                <div className={classes["footer-section services"]}>
+                    <h4>SERVICES</h4>
+                    <ul>
+                        <li>
+                            <a href="https://www.clarinsusa.com/en/live-consultation/">
+                                Live Consultation
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.clarinsusa.com/en/rewards/">
+                                Club Clarins Loyalty Program
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.clarinsusa.com/en/subscription-service/">
+                                Subscription Service
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.clarinsusa.com/en/faq-help/?question=e-gift-certificates">
+                                Clarins Gift Cards
+                            </a>
+                        </li>
+                    </ul>
+                </div>
 
-            <div className={classes["footer-section services"]}>
-                <h4>SERVICES</h4>
-                <ul>
-                    <li><a href="#">Live Consultation</a></li>
-                    <li><a href="#">Club Clarins Loyalty Program</a></li>
-                    <li><a href="#">Subscription Service</a></li>
-                    <li><a href="#">Clarins Gift Cards</a></li>
-                    <li><a href="#">Refer a Friend</a></li>
-                    <li><a href="#">Beauty FAQ</a></li>
-                    <li><a href="#">Spa</a></li>
-                    <li><a href="#">Find a Store/Spa</a></li>
-                </ul>
-            </div>
+                <div className={classes["footer-newsletter"]}>
+                    <h4>SIGN UP FOR OUR NEWSLETTER</h4>
+                    <form>
+                        <input type="email" placeholder="Email Address" />
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
 
-            <div className={classes["footer-newsletter"]}>
-                <h4>SIGN UP FOR OUR NEWSLETTER</h4>
-                <form>
-                    <input type="email" placeholder="Email Address"/>
-                    <button type="submit">Subscribe</button>
-                </form>
-            </div>
+                <div className={classes["footer-info"]}>
+                    <h4>ABOUT CLARINS</h4>
+                    <ul>
+                        <li>
+                            <a href="https://www.groupeclarins.com/">
+                                About Clarins Group
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.clarinsusa.com/en/explore-clarins-story/Responsible-beauty-innovation.html">
+                                Our Story/Commitment
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://workforcenow.adp.com/mascsr/default/mdf/recruitment/recruitment.html?cid=ead7c146-d98d-4ef9-8cc4-cb33c711ace8&ccId=19000101_000001&type=MP&lang=en_US">
+                                Careers
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://www.opmpros.com/host/clarins/affiliate/Become_Affiliate_CLARINSUS.html">
+                                Affiliate Program
+                            </a>
+                        </li>
+                    </ul>
+                </div>
 
-            <div className={classes["footer-info"]}>
-                <h4>ABOUT CLARINS</h4>
-                <ul>
-                    <li><a href="#">About Clarins Group</a></li>
-                    <li><a href="#">Our Story/Commitment</a></li>
-                    <li><a href="#">Careers</a></li>
-                    <li><a href="#">Affiliate Program</a></li>
-                </ul>
-            </div>
+                <div className={classes["footer-social"]}>
+                    <h4>FOLLOW US</h4>
+                    <div className={classes["social-icons"]}>
+                        <a href="https://www.facebook.com">
+                            <FaFacebookSquare size="30px" />
+                        </a>
+                        <a href="https://www.youtube.com">
+                            <FaYoutubeSquare size="30px" />{" "}
+                            {/* Sử dụng icon YouTube */}
+                        </a>
+                        <a href="https://www.instagram.com">
+                            <FaInstagramSquare size="30px" />{" "}
+                            {/* Sử dụng icon YouTube */}
+                        </a>
+                        <a href="https://www.x.com">
+                            <FaTwitterSquare size="30px" />{" "}
+                            {/* Sử dụng icon YouTube */}
+                        </a>
+                    </div>
+                </div>
 
-            <div className={classes["footer-social"]}>
-                <h4>FOLLOW US</h4>
-                <div className={classes["social-icons"]}>
-                    <a href="#"><i className="fa fa-facebook"></i></a>
-                    <a href="#"><i className="fa fa-youtube"></i></a>
-                    <a href="#"><i className="fa fa-instagram"></i></a>
-                    <a href="#"><i className="fa fa-envelope"></i></a>
+                <div className={classes["footer-country"]}>
+                    <label>Change Country or Language</label>
+                    <select>
+                        <option>Clarins United States (English)</option>
+                    </select>
                 </div>
             </div>
-
-            <div className={classes["footer-country"]}>
-                <label>Change Country or Language</label>
-                <select>
-                    <option>Clarins United States (English)</option>
-                </select>
-            </div>
-
             <div className={classes["footer-legal"]}>
                 <ul>
-                    <li><a href="#">Copyright © Clarins</a></li>
-                    <li><a href="#">Terms & Conditions</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Accessibility Statement</a></li>
-                    <li><a href="#">Information on Transparency</a></li>
-                    <li><a href="#">Site Map</a></li>
+                    <li>
+                        <a>Copyright © Clarins</a>
+                    </li>
+                    <li>
+                        <a href="https://www.clarinsusa.com/en/terms.html">
+                            Terms & Conditions
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.clarinsusa.com/en/privacy-policy.html">
+                            Privacy Policy
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.clarinsusa.com/en/accessibility-statement.html">
+                            Accessibility Statement
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cigna.com/legal/compliance/machine-readable-files">
+                            Information on Transparency
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.clarinsusa.com/en/sitemap.html">
+                            Site Map
+                        </a>
+                    </li>
                 </ul>
             </div>
         </footer>

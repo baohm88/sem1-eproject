@@ -357,7 +357,6 @@ export default function ClientLayout({ children }) {
                 </div>
             </div>
 
-            <hr />
             <main>{children}</main>
             <Footer />
         </>

@@ -1,6 +1,9 @@
 .center {
     text-align: center;
-    margin-top: 50px;
+}
+
+.center h1 {
+    margin-bottom: 1rem;
 }
 
 .h1 {
@@ -20,7 +23,7 @@
     display: flex;
     justify-content: center;
     gap: 15px;
-    margin-bottom: 2rem;
+    margin: 2rem auto;
 }
 
 .tabs-container button {

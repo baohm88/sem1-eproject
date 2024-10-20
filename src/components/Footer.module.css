@@ -4,13 +4,23 @@
     color: #333;
     font-family: Arial, sans-serif;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    flex-direction: column; /* Sắp xếp các phần tử theo chiều dọc */
+    align-items: center;
+    width: 100%;
+    gap: 40px; /* Khoảng cách giữa các phần */
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Chia footer thành 4 cột */
+    gap: 40px; /* Khoảng cách giữa các cột */
+    max-width: 1200px; /* Giới hạn chiều rộng của footer */
+    width: 100%;
+    margin: 0 auto; /* Canh giữa */
 }
 
 .footer-section {
-    width: 20%;
-    margin-bottom: 20px;
+    width: 100%;
 }
 
 .footer-section h4 {
@@ -70,6 +80,9 @@
     display: flex;
     align-items: center;
 }
+.footer-social h4 {
+    margin-bottom: 20px; /* Tạo khoảng cách dưới tiêu đề */
+}
 
 .footer-social .social-icons a {
     margin-right: 15px;
@@ -94,7 +107,10 @@
 
 .footer-legal {
     width: 100%;
-    margin-top: 40px;
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+    margin-top: 40px; /* Tạo khoảng cách giữa phần nội dung và phần legal */
     font-size: 11px;
 }
 
@@ -102,6 +118,7 @@
     list-style-type: none;
     padding: 0;
     display: flex;
+    justify-content: center; /* Căn giữa các mục trong phần legal */
     flex-wrap: wrap;
 }
 
@@ -119,20 +136,15 @@
     color: #b01616;
 }
 
-.footer img {
-    margin-top: 15px;
-    width: 80px;
-}
-
-@media (max-width: 768px) {
-    .footer-section {
-        width: 50%;
+@media (max-width: 1024px) {
+    .footer-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 cột trên màn hình nhỏ hơn */
     }
 }
 
-@media (max-width: 480px) {
-    .footer-section {
-        width: 100%;
+@media (max-width: 768px) {
+    .footer-grid {
+        grid-template-columns: repeat(1, 1fr); /* 1 cột trên màn hình rất nhỏ */
     }
 
     .footer-newsletter input {

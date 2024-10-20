@@ -1,4 +1,4 @@
-.commitment-button {
+.commitment-item {
     max-width: 200px; /* Chiều rộng tối đa */
     text-align: center; /* Căn giữa nội dung */
     background-color: transparent; /* Nền trong suốt */
@@ -6,6 +6,7 @@
     cursor: pointer; /* Thêm con trỏ tay khi hover */
     padding: 20px; /* Khoảng cách trong cho button */
     transition: transform 0.3s ease; /* Hiệu ứng khi hover */
+    width: 100%;
 }
 
 /* Phong cách khi hover vào button */
