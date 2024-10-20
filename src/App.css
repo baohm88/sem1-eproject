@@ -37,10 +37,6 @@ a:hover {
     text-decoration: none;
 }
 
-.center {
-    text-align: center;
-}
-
 .danger {
     background-color: var(--dangerColor);
     color: var(--lightColor);
@@ -89,6 +85,20 @@ a:hover {
 
 .nav-link .active {
     color: #b51828;
+}
+
+/* products-container */
+
+.products-container {
+    display: flex; /* Sử dụng grid layout để xếp các sản phẩm theo lưới */
+    justify-content: center;
+    gap: 20px;
+    padding: 0 10px;
+    align-items: center; /* Đảm bảo các thẻ sản phẩm được căn giữa theo chiều ngang */
+    max-width: 1264px;
+    width: 100%;
+    margin: 2rem auto;
+    flex-wrap: wrap;
 }
 
 /* MOBILE */

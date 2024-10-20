@@ -226,7 +226,7 @@ export default function MakeupProducts() {
             </div>
 
             {/* Product Grid */}
-            <div className={classes["products-container"]}>
+            <div className="products-container">
                 {currentProducts.map((product) => (
                     <ProductItem
                         key={product.product_id}

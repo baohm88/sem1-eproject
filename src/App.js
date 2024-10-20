@@ -13,10 +13,18 @@ export const UserContext = createContext({
     decrementQuantity: () => {},
     removeItem: () => {},
     clearCart: () => {},
+    openModal: false,
+    closeModal: () => {},
+    isModalOpen: () => {},
+    selectedProduct: null,
 });
 
 function App() {
     const navigate = useNavigate();
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedProduct, setSelectedProduct] = useState(null);
+
     const [user, setUser] = useState(() => {
         const savedUser = localStorage.getItem("user");
         return savedUser ? JSON.parse(savedUser) : null; // Parse the saved user
@@ -139,6 +147,16 @@ function App() {
         localStorage.removeItem("cart"); // Remove cart from localStorage
     };
 
+    const openModal = (product) => {
+        setSelectedProduct(product); // Set the selected product when opening the modal
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+        setSelectedProduct(null); // Reset the selected product
+    };
+
     const ctxValue = {
         user,
         setUser: setUser,
@@ -149,6 +167,10 @@ function App() {
         decrementQuantity,
         removeItem,
         clearCart,
+        openModal,
+        closeModal,
+        isModalOpen,
+        selectedProduct,
     };
 
     return (

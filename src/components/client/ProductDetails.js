@@ -8,6 +8,7 @@ import Button from "../UI/Button";
 import ProductRatings from "./ProductRatings";
 import RatingSummary from "./RatingSummary";
 import WriteReviewModal from "./WriteReviewModal";
+import RelatedProducts from "./RelatedProducts";
 import classes from "./ProductDetails.module.css";
 
 export default function ProductDetails() {
@@ -33,7 +34,8 @@ export default function ProductDetails() {
     const [reviewText, setReviewText] = useState("");
     const [selectedImage, setSelectedImage] = useState("");
 
-    const [category, setCategory] = useState("");
+    const [mainCategory, setMainCategory] = useState("");
+    const [subCategory, setSubCategory] = useState("");
 
     const { user } = useContext(UserContext);
 
@@ -46,6 +48,8 @@ export default function ProductDetails() {
             .then((res) => {
                 const productData = res.data.data;
                 setProduct(productData);
+                setMainCategory(productData.main_category);
+                setSubCategory(productData.sub_category);
                 calculateRatingSummary(productData.product_ratings);
                 setLoading(false); // Loading complete
 
@@ -152,6 +156,9 @@ export default function ProductDetails() {
         setSelectedImage(imageUrl);
     };
 
+    console.log(mainCategory);
+    console.log(subCategory);
+
     if (loading) return <p>Loading product details...</p>;
 
     return (
@@ -226,6 +233,12 @@ export default function ProductDetails() {
                     </Button>
                 </div>
             </div>
+
+            <RelatedProducts
+                productId={Number(id)}
+                mainCategory={mainCategory}
+                subCategory={subCategory}
+            />
 
             <div className={classes["product-reviews"]}>
                 {ratingSummary.totalRatings === 0 ? (

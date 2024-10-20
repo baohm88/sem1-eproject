@@ -1,0 +1,9 @@
+/* RelatedProducts.module.css */
+.related-products {
+    border-top: 1px solid rgb(164, 151, 151);
+    margin: 1rem 0;
+}
+
+.related-products h3 {
+    margin-top: 2rem;
+}
