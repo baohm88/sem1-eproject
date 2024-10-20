@@ -3,32 +3,43 @@ import { useEffect, useState, useMemo } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
 import { formatter } from "../../util/formatter";
-import Modal from "./Modal";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import classes from "./SkincareProducts.module.css";
-import ProductItem from "./ProductItem";
-import Pagination from "../UI/Pagination";
+import ProductsContainer from "./ProductsContainer";
 
 export default function SkincareProducts() {
     const [products, setProducts] = useState([]);
-    const [selectedProduct, setSelectedProduct] = useState(null); // Modal state
     const [sortOption, setSortOption] = useState("");
     const [selectedRange, setSelectedRange] = useState(false);
     const [priceRange, setPriceRange] = useState([0, 200]);
     const [sliderIsVisible, setSliderIsVisible] = useState(false);
-    const [currentPage, setCurrentPage] = useState(1);
-
     const location = useLocation();
     const navigate = useNavigate();
 
-    const productsPerPage = 4;
-
     // Fetch skincare products from the database
     useEffect(() => {
-        axios
-            .get("http://localhost/project/collections/skincare")
-            .then((res) => setProducts(res.data.data));
+        let isMounted = true; // Flag to track if component is mounted
+
+        const fetchProducts = async () => {
+            try {
+                const res = await axios.get(
+                    "http://localhost/project/collections/skincare"
+                );
+                if (isMounted) {
+                    setProducts(res.data.data);
+                }
+            } catch (error) {
+                console.error("Error fetching products:", error);
+                // Optionally, you could set an error state here
+            }
+        };
+
+        fetchProducts();
+
+        return () => {
+            isMounted = false; // Cleanup function
+        };
     }, []);
 
     // Parse URL parameters
@@ -97,13 +108,6 @@ export default function SkincareProducts() {
         return filtered;
     }, [products, queryParams, sortOption, priceRange]);
 
-    // Pagination logic
-    const currentProducts = useMemo(() => {
-        const indexOfLastProduct = currentPage * productsPerPage;
-        const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-        return filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
-    }, [filteredProducts, currentPage]);
-
     // Update category in the URL
     function updateCategoryInURL(category) {
         navigate({
@@ -130,21 +134,31 @@ export default function SkincareProducts() {
             </div>
 
             {/* Category Tabs */}
-            <div className={classes.tabsContainer}>
-                <button onClick={() => updateCategoryInURL("Face")}>
-                    Face
+            <div className={classes["tabs-container"]}>
+                {["Face", "Body", "Sun", "Men"].map((category) => (
+                    <button
+                        key={category}
+                        onClick={() => updateCategoryInURL(category)}
+                        className={
+                            queryParams.category === category
+                                ? classes.active
+                                : ""
+                        }
+                    >
+                        {category}
+                    </button>
+                ))}
+                <button
+                    onClick={() => navigate("/skincare")}
+                    className={!queryParams.category ? classes.active : ""}
+                >
+                    View All
                 </button>
-                <button onClick={() => updateCategoryInURL("Body")}>
-                    Body
-                </button>
-                <button onClick={() => updateCategoryInURL("Sun")}>Sun</button>
-                <button onClick={() => updateCategoryInURL("Men")}>Men</button>
-                <button onClick={() => navigate("/skincare")}>View All</button>
             </div>
 
             {/* Sorting and Filtering */}
             <div className={classes.filters}>
-                <div className={classes.sortOptions}>
+                <div className={classes["sort-options"]}>
                     <label htmlFor="sort">
                         <strong>Sort by: </strong>
                     </label>
@@ -167,7 +181,7 @@ export default function SkincareProducts() {
                 <div>
                     <h4
                         onClick={() => setSliderIsVisible((prev) => !prev)}
-                        className={classes.filterOptions}
+                        className={classes["filter-options"]}
                     >
                         Price{" "}
                         {sliderIsVisible ? <FaCaretUp /> : <FaCaretDown />}
@@ -176,7 +190,7 @@ export default function SkincareProducts() {
                         <Slider
                             range
                             min={0}
-                            max={200}
+                            max={200} // Set to the actual maximum price if needed
                             value={priceRange}
                             onChange={handlePriceRangeChange}
                             step={5}
@@ -186,7 +200,7 @@ export default function SkincareProducts() {
                         <p className={classes.selectedRange}>
                             <span
                                 onClick={() => {
-                                    setPriceRange([0, 200]);
+                                    setPriceRange([0, 200]); // Reset to default
                                     setSelectedRange(false);
                                 }}
                             >
@@ -200,37 +214,12 @@ export default function SkincareProducts() {
             </div>
 
             {/* Total Products Count */}
-            <div className={classes.totalProducts}>
+            <div className={classes["total-products"]}>
                 <h5>{filteredProducts.length} products</h5>
             </div>
 
-            {/* Product Grid */}
-            <div className={classes.productsContainer}>
-                {currentProducts.map((product) => (
-                    <ProductItem
-                        key={product.product_id}
-                        product={product}
-                        openModal={() => setSelectedProduct(product)}
-                    />
-                ))}
-            </div>
-
-            {/* Pagination */}
-            <Pagination
-                currentPage={currentPage}
-                totalPages={Math.ceil(
-                    filteredProducts.length / productsPerPage
-                )}
-                paginate={setCurrentPage}
-            />
-
-            {/* Modal */}
-            {selectedProduct && (
-                <Modal
-                    product={selectedProduct}
-                    onClose={() => setSelectedProduct(null)}
-                />
-            )}
+            {/* Products Container with Pagination */}
+            <ProductsContainer products={filteredProducts} />
         </>
     );
 }

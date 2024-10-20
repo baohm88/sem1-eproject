@@ -15,7 +15,7 @@ export default function MakeupProducts() {
     const [selectedProduct, setSelectedProduct] = useState(null); // Modal state
     const [sortOption, setSortOption] = useState("");
     const [selectedRange, setSelectedRange] = useState(false);
-    const [priceRange, setPriceRange] = useState([0, 1000]);
+    const [priceRange, setPriceRange] = useState([0, 200]);
     const [sliderIsVisible, setSliderIsVisible] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
 

@@ -7,11 +7,10 @@ import Modal from "./Modal";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import classes from "./SkincareProducts.module.css";
-import ProductsContainer from "./ProductsContainer"; // Import ProductsContainer
+import ProductItem from "./ProductItem";
 import Pagination from "../UI/Pagination";
-import useFilterAndSortProducts from "../../hooks/useFilterAndSortProducts";
 
-export default function SearchResults() {
+export default function SkincareProducts() {
     const [products, setProducts] = useState([]);
     const [selectedProduct, setSelectedProduct] = useState(null); // Modal state
     const [sortOption, setSortOption] = useState("");
@@ -24,7 +23,7 @@ export default function SearchResults() {
 
     const productsPerPage = 4;
 
-    // Fetch all products from the database
+    // Fetch skincare products from the database
     useEffect(() => {
         axios
             .get("http://localhost/project/collections/all")
@@ -52,13 +51,69 @@ export default function SearchResults() {
         }
     }, [queryParams]);
 
-    // Use custom hook to filter and sort products
-    const filteredProducts = useFilterAndSortProducts(
-        products,
-        queryParams,
-        sortOption,
-        priceRange
-    );
+    // Filtered products based on category, search text, and price range
+    const filteredProducts = useMemo(() => {
+        let filtered = products;
+
+        // Filter by category
+        if (queryParams.category) {
+            filtered = filtered.filter(
+                (product) => product.sub_category === queryParams.category
+            );
+        }
+
+        // Filter by search text
+        if (queryParams.searchText) {
+            const searchTextLower = queryParams.searchText.toLowerCase();
+            filtered = filtered.filter(
+                (product) =>
+                    product.product_name
+                        .toLowerCase()
+                        .includes(searchTextLower) ||
+                    product.product_description
+                        .toLowerCase()
+                        .includes(searchTextLower)
+            );
+        }
+
+        // Filter by price range
+        filtered = filtered.filter(
+            (product) =>
+                product.product_price >= priceRange[0] &&
+                product.product_price <= priceRange[1]
+        );
+
+        // Sort products
+        switch (sortOption) {
+            case "name_asc":
+                filtered.sort((a, b) =>
+                    a.product_name.localeCompare(b.product_name)
+                );
+                break;
+            case "name_desc":
+                filtered.sort((a, b) =>
+                    b.product_name.localeCompare(a.product_name)
+                );
+                break;
+            case "price_asc":
+                filtered.sort((a, b) => a.product_price - b.product_price);
+                break;
+            case "price_desc":
+                filtered.sort((a, b) => b.product_price - a.product_price);
+                break;
+            default:
+                break;
+        }
+
+        return filtered;
+    }, [products, queryParams, sortOption, priceRange]);
+
+    // Pagination logic
+    const currentProducts = useMemo(() => {
+        const indexOfLastProduct = currentPage * productsPerPage;
+        const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+        return filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+    }, [filteredProducts, currentPage]);
 
     // Handle price range change
     const handlePriceRangeChange = (newRange) => {
@@ -71,9 +126,7 @@ export default function SearchResults() {
             <div className={classes.center}>
                 {/* Display Search Text */}
                 {queryParams.searchText ? (
-                    <h1>
-                        Search results for <i>'{queryParams.searchText}'</i>
-                    </h1>
+                    <h1>Search results for '{queryParams.searchText}'</h1>
                 ) : (
                     <h1>All Products</h1>
                 )}
@@ -113,7 +166,7 @@ export default function SearchResults() {
                         <Slider
                             range
                             min={0}
-                            max={200} // Update based on actual max price
+                            max={200}
                             value={priceRange}
                             onChange={handlePriceRangeChange}
                             step={5}
@@ -123,11 +176,11 @@ export default function SearchResults() {
                         <p className={classes.selectedRange}>
                             <span
                                 onClick={() => {
-                                    setPriceRange([0, 200]); // Reset to default
+                                    setPriceRange([0, 200]);
                                     setSelectedRange(false);
                                 }}
                             >
-                                X&nbsp;
+                                X
                             </span>
                             {formatter.format(priceRange[0])} -{" "}
                             {formatter.format(priceRange[1])}
@@ -141,8 +194,35 @@ export default function SearchResults() {
                 <h5>{filteredProducts.length} products</h5>
             </div>
 
-            {/* Products Container with Pagination */}
-            <ProductsContainer products={filteredProducts} />
+            {/* Product Grid */}
+            <div className={classes["products-container"]}>
+                {currentProducts.map((product) => (
+                    <ProductItem
+                        key={product.product_id}
+                        product={product}
+                        openModal={() => setSelectedProduct(product)}
+                    />
+                ))}
+            </div>
+
+            {/* Pagination */}
+            {filteredProducts.length > 0 && (
+                <Pagination
+                    currentPage={currentPage}
+                    totalPages={Math.ceil(
+                        filteredProducts.length / productsPerPage
+                    )}
+                    paginate={setCurrentPage}
+                />
+            )}
+
+            {/* Modal */}
+            {selectedProduct && (
+                <Modal
+                    product={selectedProduct}
+                    onClose={() => setSelectedProduct(null)}
+                />
+            )}
         </>
     );
 }

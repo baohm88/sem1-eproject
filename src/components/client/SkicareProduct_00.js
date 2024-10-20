@@ -17,7 +17,7 @@ export default function SkincareProducts() {
     const [selectedProduct, setSelectedProduct] = useState(null); // For managing modal product
     const [sortOption, setSortOption] = useState("");
     const [selectedRange, setSelectedRange] = useState(false);
-    const [priceRange, setPriceRange] = useState([0, 1000]);
+    const [priceRange, setPriceRange] = useState([0, 200]);
     const [selectedCategory, setSelectedCategory] = useState("");
 
     const [sliderIsVisible, setSliderIsVisible] = useState(false);

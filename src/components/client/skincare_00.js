@@ -130,21 +130,51 @@ export default function SkincareProducts() {
             </div>
 
             {/* Category Tabs */}
-            <div className={classes.tabsContainer}>
-                <button onClick={() => updateCategoryInURL("Face")}>
+            <div className={classes["tabs-container"]}>
+                <button
+                    onClick={() => updateCategoryInURL("Face")}
+                    className={
+                        queryParams.category === "Face" ? classes.active : ""
+                    }
+                >
                     Face
                 </button>
-                <button onClick={() => updateCategoryInURL("Body")}>
+
+                <button
+                    onClick={() => updateCategoryInURL("Body")}
+                    className={
+                        queryParams.category === "Body" ? classes.active : ""
+                    }
+                >
                     Body
                 </button>
-                <button onClick={() => updateCategoryInURL("Sun")}>Sun</button>
-                <button onClick={() => updateCategoryInURL("Men")}>Men</button>
-                <button onClick={() => navigate("/skincare")}>View All</button>
+                <button
+                    onClick={() => updateCategoryInURL("Sun")}
+                    className={
+                        queryParams.category === "Sun" ? classes.active : ""
+                    }
+                >
+                    Sun
+                </button>
+                <button
+                    onClick={() => updateCategoryInURL("Men")}
+                    className={
+                        queryParams.category === "Men" ? classes.active : ""
+                    }
+                >
+                    Men
+                </button>
+                <button
+                    onClick={() => navigate("/skincare")}
+                    className={!queryParams.category ? classes.active : ""}
+                >
+                    View All
+                </button>
             </div>
 
             {/* Sorting and Filtering */}
             <div className={classes.filters}>
-                <div className={classes.sortOptions}>
+                <div className={classes["sort-options"]}>
                     <label htmlFor="sort">
                         <strong>Sort by: </strong>
                     </label>
@@ -167,7 +197,7 @@ export default function SkincareProducts() {
                 <div>
                     <h4
                         onClick={() => setSliderIsVisible((prev) => !prev)}
-                        className={classes.filterOptions}
+                        className={classes["filter-options"]}
                     >
                         Price{" "}
                         {sliderIsVisible ? <FaCaretUp /> : <FaCaretDown />}
@@ -200,12 +230,12 @@ export default function SkincareProducts() {
             </div>
 
             {/* Total Products Count */}
-            <div className={classes.totalProducts}>
+            <div className={classes["total-products"]}>
                 <h5>{filteredProducts.length} products</h5>
             </div>
 
             {/* Product Grid */}
-            <div className={classes.productsContainer}>
+            <div className="products-container">
                 {currentProducts.map((product) => (
                     <ProductItem
                         key={product.product_id}
@@ -216,13 +246,15 @@ export default function SkincareProducts() {
             </div>
 
             {/* Pagination */}
-            <Pagination
-                currentPage={currentPage}
-                totalPages={Math.ceil(
-                    filteredProducts.length / productsPerPage
-                )}
-                paginate={setCurrentPage}
-            />
+            {filteredProducts.length > 0 && (
+                <Pagination
+                    currentPage={currentPage}
+                    totalPages={Math.ceil(
+                        filteredProducts.length / productsPerPage
+                    )}
+                    paginate={setCurrentPage}
+                />
+            )}
 
             {/* Modal */}
             {selectedProduct && (

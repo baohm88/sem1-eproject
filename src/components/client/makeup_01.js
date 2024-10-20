@@ -10,7 +10,7 @@ import classes from "./SkincareProducts.module.css";
 import ProductItem from "./ProductItem";
 import Pagination from "../UI/Pagination";
 
-export default function SkincareProducts() {
+export default function MakeupProducts() {
     const [products, setProducts] = useState([]);
     const [selectedProduct, setSelectedProduct] = useState(null); // Modal state
     const [sortOption, setSortOption] = useState("");
@@ -24,10 +24,10 @@ export default function SkincareProducts() {
 
     const productsPerPage = 4;
 
-    // Fetch skincare products from the database
+    // Fetch makeup products from the database
     useEffect(() => {
         axios
-            .get("http://localhost/project/collections/skincare")
+            .get("http://localhost/project/collections/makeup")
             .then((res) => setProducts(res.data.data));
     }, []);
 
@@ -105,12 +105,12 @@ export default function SkincareProducts() {
     }, [filteredProducts, currentPage]);
 
     // Update category in the URL
-    function updateCategoryInURL(category) {
+    const updateCategoryInURL = (category) => {
         navigate({
-            pathname: "/skincare",
+            pathname: "/makeup",
             search: `?category=${category}`,
         });
-    }
+    };
 
     // Handle price range change
     const handlePriceRangeChange = (newRange) => {
@@ -121,30 +121,51 @@ export default function SkincareProducts() {
     return (
         <>
             <div className={classes.center}>
-                <h1>SKINCARE</h1>
+                <h1>MAKEUP</h1>
                 <p>
-                    From daily rituals to targeted anti-aging care, discover the
-                    best in plant-based skincare, powered by nature's most
-                    effective ingredients.
+                    At Clarins, we believe that nature reveals our true beauty.
+                    Shop our expert selection of beauty bestsellers for face,
+                    eyes, and lips, powered by plants.
                 </p>
             </div>
 
             {/* Category Tabs */}
-            <div className={classes.tabsContainer}>
-                <button onClick={() => updateCategoryInURL("Face")}>
+            <div className={classes["tabs-container"]}>
+                <button
+                    className={
+                        queryParams.category === "Face" ? classes.active : ""
+                    }
+                    onClick={() => updateCategoryInURL("Face")}
+                >
                     Face
                 </button>
-                <button onClick={() => updateCategoryInURL("Body")}>
-                    Body
+                <button
+                    className={
+                        queryParams.category === "Eyes" ? classes.active : ""
+                    }
+                    onClick={() => updateCategoryInURL("Eyes")}
+                >
+                    Eyes
                 </button>
-                <button onClick={() => updateCategoryInURL("Sun")}>Sun</button>
-                <button onClick={() => updateCategoryInURL("Men")}>Men</button>
-                <button onClick={() => navigate("/skincare")}>View All</button>
+                <button
+                    className={
+                        queryParams.category === "Lips" ? classes.active : ""
+                    }
+                    onClick={() => updateCategoryInURL("Lips")}
+                >
+                    Lips
+                </button>
+                <button
+                    className={!queryParams.category ? classes.active : ""}
+                    onClick={() => navigate("/makeup")}
+                >
+                    View All
+                </button>
             </div>
 
             {/* Sorting and Filtering */}
             <div className={classes.filters}>
-                <div className={classes.sortOptions}>
+                <div className={classes["sort-options"]}>
                     <label htmlFor="sort">
                         <strong>Sort by: </strong>
                     </label>
@@ -167,7 +188,7 @@ export default function SkincareProducts() {
                 <div>
                     <h4
                         onClick={() => setSliderIsVisible((prev) => !prev)}
-                        className={classes.filterOptions}
+                        className={classes["filter-options"]}
                     >
                         Price{" "}
                         {sliderIsVisible ? <FaCaretUp /> : <FaCaretDown />}
@@ -200,12 +221,12 @@ export default function SkincareProducts() {
             </div>
 
             {/* Total Products Count */}
-            <div className={classes.totalProducts}>
+            <div className={classes["total-products"]}>
                 <h5>{filteredProducts.length} products</h5>
             </div>
 
             {/* Product Grid */}
-            <div className={classes.productsContainer}>
+            <div className="products-container">
                 {currentProducts.map((product) => (
                     <ProductItem
                         key={product.product_id}
@@ -216,13 +237,15 @@ export default function SkincareProducts() {
             </div>
 
             {/* Pagination */}
-            <Pagination
-                currentPage={currentPage}
-                totalPages={Math.ceil(
-                    filteredProducts.length / productsPerPage
-                )}
-                paginate={setCurrentPage}
-            />
+            {filteredProducts.length > 0 && (
+                <Pagination
+                    currentPage={currentPage}
+                    totalPages={Math.ceil(
+                        filteredProducts.length / productsPerPage
+                    )}
+                    paginate={setCurrentPage}
+                />
+            )}
 
             {/* Modal */}
             {selectedProduct && (

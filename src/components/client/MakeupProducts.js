@@ -3,32 +3,44 @@ import { useEffect, useState, useMemo } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
 import { formatter } from "../../util/formatter";
-import Modal from "./Modal";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import classes from "./SkincareProducts.module.css";
-import ProductItem from "./ProductItem";
-import Pagination from "../UI/Pagination";
+import ProductsContainer from "./ProductsContainer";
+import useFilterAndSortProducts from "../../hooks/useFilterAndSortProducts";
 
 export default function MakeupProducts() {
     const [products, setProducts] = useState([]);
-    const [selectedProduct, setSelectedProduct] = useState(null); // Modal state
     const [sortOption, setSortOption] = useState("");
     const [selectedRange, setSelectedRange] = useState(false);
-    const [priceRange, setPriceRange] = useState([0, 1000]);
+    const [priceRange, setPriceRange] = useState([0, 200]);
     const [sliderIsVisible, setSliderIsVisible] = useState(false);
-    const [currentPage, setCurrentPage] = useState(1);
-
     const location = useLocation();
     const navigate = useNavigate();
 
-    const productsPerPage = 4;
-
     // Fetch makeup products from the database
     useEffect(() => {
-        axios
-            .get("http://localhost/project/collections/makeup")
-            .then((res) => setProducts(res.data.data));
+        let isMounted = true; // Flag to track if component is mounted
+
+        const fetchProducts = async () => {
+            try {
+                const res = await axios.get(
+                    "http://localhost/project/collections/makeup"
+                );
+                if (isMounted) {
+                    setProducts(res.data.data);
+                }
+            } catch (error) {
+                console.error("Error fetching products:", error);
+                // Optionally, you could set an error state here
+            }
+        };
+
+        fetchProducts();
+
+        return () => {
+            isMounted = false; // Cleanup function
+        };
     }, []);
 
     // Parse URL parameters
@@ -40,77 +52,21 @@ export default function MakeupProducts() {
         };
     }, [location.search]);
 
-    // Filtered products based on category, search text, and price range
-    const filteredProducts = useMemo(() => {
-        let filtered = products;
-
-        // Filter by category
-        if (queryParams.category) {
-            filtered = filtered.filter(
-                (product) => product.sub_category === queryParams.category
-            );
-        }
-
-        // Filter by search text
-        if (queryParams.searchText) {
-            const searchTextLower = queryParams.searchText.toLowerCase();
-            filtered = filtered.filter(
-                (product) =>
-                    product.product_name
-                        .toLowerCase()
-                        .includes(searchTextLower) ||
-                    product.product_description
-                        .toLowerCase()
-                        .includes(searchTextLower)
-            );
-        }
-
-        // Filter by price range
-        filtered = filtered.filter(
-            (product) =>
-                product.product_price >= priceRange[0] &&
-                product.product_price <= priceRange[1]
-        );
-
-        // Sort products
-        switch (sortOption) {
-            case "name_asc":
-                filtered.sort((a, b) =>
-                    a.product_name.localeCompare(b.product_name)
-                );
-                break;
-            case "name_desc":
-                filtered.sort((a, b) =>
-                    b.product_name.localeCompare(a.product_name)
-                );
-                break;
-            case "price_asc":
-                filtered.sort((a, b) => a.product_price - b.product_price);
-                break;
-            case "price_desc":
-                filtered.sort((a, b) => b.product_price - a.product_price);
-                break;
-            default:
-                break;
-        }
-
-        return filtered;
-    }, [products, queryParams, sortOption, priceRange]);
-
-    // Pagination logic
-    const currentProducts = useMemo(() => {
-        const indexOfLastProduct = currentPage * productsPerPage;
-        const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-        return filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
-    }, [filteredProducts, currentPage]);
+    // Use custom hook to filter and sort products
+    const filteredProducts = useFilterAndSortProducts(
+        products,
+        queryParams,
+        sortOption,
+        priceRange
+    );
 
     // Update category in the URL
-    const updateCategoryInURL = (category) => {
+    function updateCategoryInURL(category) {
         navigate({
             pathname: "/makeup",
             search: `?category=${category}`,
         });
-    };
+    }
 
     // Handle price range change
     const handlePriceRangeChange = (newRange) => {
@@ -131,33 +87,22 @@ export default function MakeupProducts() {
 
             {/* Category Tabs */}
             <div className={classes["tabs-container"]}>
+                {["Face", "Eyes", "Lips"].map((category) => (
+                    <button
+                        key={category}
+                        onClick={() => updateCategoryInURL(category)}
+                        className={
+                            queryParams.category === category
+                                ? classes.active
+                                : ""
+                        }
+                    >
+                        {category}
+                    </button>
+                ))}
                 <button
-                    className={
-                        queryParams.category === "Face" ? classes.active : ""
-                    }
-                    onClick={() => updateCategoryInURL("Face")}
-                >
-                    Face
-                </button>
-                <button
-                    className={
-                        queryParams.category === "Eyes" ? classes.active : ""
-                    }
-                    onClick={() => updateCategoryInURL("Eyes")}
-                >
-                    Eyes
-                </button>
-                <button
-                    className={
-                        queryParams.category === "Lips" ? classes.active : ""
-                    }
-                    onClick={() => updateCategoryInURL("Lips")}
-                >
-                    Lips
-                </button>
-                <button
-                    className={!queryParams.category ? classes.active : ""}
                     onClick={() => navigate("/makeup")}
+                    className={!queryParams.category ? classes.active : ""}
                 >
                     View All
                 </button>
@@ -197,7 +142,7 @@ export default function MakeupProducts() {
                         <Slider
                             range
                             min={0}
-                            max={200}
+                            max={200} // Set to the actual maximum price if needed
                             value={priceRange}
                             onChange={handlePriceRangeChange}
                             step={5}
@@ -207,7 +152,7 @@ export default function MakeupProducts() {
                         <p className={classes.selectedRange}>
                             <span
                                 onClick={() => {
-                                    setPriceRange([0, 200]);
+                                    setPriceRange([0, 200]); // Reset to default
                                     setSelectedRange(false);
                                 }}
                             >
@@ -225,35 +170,8 @@ export default function MakeupProducts() {
                 <h5>{filteredProducts.length} products</h5>
             </div>
 
-            {/* Product Grid */}
-            <div className="products-container">
-                {currentProducts.map((product) => (
-                    <ProductItem
-                        key={product.product_id}
-                        product={product}
-                        openModal={() => setSelectedProduct(product)}
-                    />
-                ))}
-            </div>
-
-            {/* Pagination */}
-            {filteredProducts.length > 0 && (
-                <Pagination
-                    currentPage={currentPage}
-                    totalPages={Math.ceil(
-                        filteredProducts.length / productsPerPage
-                    )}
-                    paginate={setCurrentPage}
-                />
-            )}
-
-            {/* Modal */}
-            {selectedProduct && (
-                <Modal
-                    product={selectedProduct}
-                    onClose={() => setSelectedProduct(null)}
-                />
-            )}
+            {/* Products Container with Pagination */}
+            <ProductsContainer products={filteredProducts} />
         </>
     );
 }

@@ -18,23 +18,24 @@ const ProductsContainer = ({ products, itemsPerPage = 4 }) => {
     const totalPages = Math.ceil(products.length / itemsPerPage);
 
     const openModal = (product) => {
-        setSelectedProduct(product); 
+        setSelectedProduct(product);
     };
 
     const closeModal = () => {
-        setSelectedProduct(null); 
+        setSelectedProduct(null);
     };
 
     return (
-        <div className="products-container">
-            {currentProducts.map((product) => (
-                <ProductItem
-                    key={product.product_id}
-                    product={product}
-                    openModal={openModal}
-                />
-            ))}
-
+        <>
+            <div className="products-container">
+                {currentProducts.map((product) => (
+                    <ProductItem
+                        key={product.product_id}
+                        product={product}
+                        openModal={openModal}
+                    />
+                ))}
+            </div>
             {totalPages > 1 && (
                 <Pagination
                     currentPage={currentPage}
@@ -42,11 +43,10 @@ const ProductsContainer = ({ products, itemsPerPage = 4 }) => {
                     paginate={(page) => setCurrentPage(page)}
                 />
             )}
-
             {selectedProduct && (
                 <Modal product={selectedProduct} onClose={closeModal} />
             )}
-        </div>
+        </>
     );
 };
 

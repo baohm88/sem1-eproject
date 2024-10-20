@@ -63,6 +63,24 @@ export default function ClientLayout({ children }) {
         }
     }
 
+    function handleSearchInputChange(e) {
+        const newSearchText = e.target.value;
+        setSearchText(newSearchText); // Update the search text state
+    
+        const params = new URLSearchParams(location.search);
+        const category = params.get("category") || "";
+        let path = location.pathname;
+    
+        // Navigate to the appropriate path with the updated search query
+        if (path.includes("/skincare")) {
+            navigate(`/skincare?category=${category}&q=${newSearchText}`);
+        } else if (path.includes("/makeup")) {
+            navigate(`/makeup?category=${category}&q=${newSearchText}`);
+        } else {
+            navigate(`/search_results?q=${newSearchText}`);
+        }
+    }
+
     function handleSearch(e) {
         e.preventDefault();
         const params = new URLSearchParams(location.search);
@@ -101,9 +119,7 @@ export default function ClientLayout({ children }) {
                                     <input
                                         type="text"
                                         value={searchText}
-                                        onChange={(e) =>
-                                            setSearchText(e.target.value)
-                                        }
+                                        onChange={handleSearchInputChange}
                                         placeholder="Search"
                                         className={classes.searchInput}
                                     />
