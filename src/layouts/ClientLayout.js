@@ -47,6 +47,11 @@ export default function ClientLayout({ children }) {
         setTotalAmount(amount.toFixed(2));
     }, [cart]);
 
+    useEffect(() => {
+        // Reset search text whenever the user navigates to a new route
+        setSearchText("");
+    }, [location.pathname]); // Triggered when the route path changes
+
     function openSidebar() {
         document.getElementById("mySideBar").style.width = "25rem";
         document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
@@ -66,11 +71,11 @@ export default function ClientLayout({ children }) {
     function handleSearchInputChange(e) {
         const newSearchText = e.target.value;
         setSearchText(newSearchText); // Update the search text state
-    
+
         const params = new URLSearchParams(location.search);
         const category = params.get("category") || "";
         let path = location.pathname;
-    
+
         // Navigate to the appropriate path with the updated search query
         if (path.includes("/skincare")) {
             navigate(`/skincare?category=${category}&q=${newSearchText}`);

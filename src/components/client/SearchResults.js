@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState, useMemo } from "react";
 import { useLocation } from "react-router-dom";
 import classes from "./SkincareProducts.module.css";
-import ProductsContainer from "./ProductsContainer"; // Import ProductsContainer
+import ProductsContainer from "../UI/ProductsContainer";
 import useFilterAndSortProducts from "../../hooks/useFilterAndSortProducts";
 import SortAndFilter from "./SortAndFilter";
 
@@ -70,6 +70,9 @@ export default function SearchResults() {
                     setPriceRange={setPriceRange}
                     maxPrice={200}
                 />
+            </div>
+            <div className="total-products">
+                <h5>{filteredProducts.length} products</h5>
             </div>
 
             <ProductsContainer products={filteredProducts} />

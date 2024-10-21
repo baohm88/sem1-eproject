@@ -1,4 +1,3 @@
-// SortAndFilter.js
 import React, { useState } from "react";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
@@ -6,7 +5,13 @@ import { FaCaretDown, FaCaretUp } from "react-icons/fa";
 import classes from "./SortAndFilter.module.css"; // Create styles for this component
 import { formatter } from "../../util/formatter";
 
-const SortAndFilter = ({ sortOption, setSortOption, priceRange, setPriceRange, maxPrice = 200 }) => {
+const SortAndFilter = ({
+    sortOption,
+    setSortOption,
+    priceRange,
+    setPriceRange,
+    maxPrice = 200,
+}) => {
     const [sliderIsVisible, setSliderIsVisible] = useState(false);
     const [selectedRange, setSelectedRange] = useState(false);
 
@@ -64,7 +69,7 @@ const SortAndFilter = ({ sortOption, setSortOption, priceRange, setPriceRange, m
                                 setSelectedRange(false);
                             }}
                         >
-                            X
+                            X&nbsp;
                         </span>
                         {formatter.format(priceRange[0])} -{" "}
                         {formatter.format(priceRange[1])}

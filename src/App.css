@@ -32,6 +32,7 @@ main {
     max-width: 1264px;
     width: 100%;
     margin: 2rem auto;
+    padding: 0 5px;
 }
 
 a,
@@ -271,6 +272,51 @@ td span.danger {
 
 .rating-comment {
     padding-top: 1rem;
+}
+
+/* SortAndFilter.module.css */
+
+/* Style for the entire slider track */
+.rc-slider {
+    margin: 0.5rem 0;
+    height: 2rem; /* Modify height of the slider */
+}
+
+/* Style for the track that has been selected (between the two handles) */
+.rc-slider-track {
+    background-color: var(--primaryColor); /* Change to your desired color */
+    height: 2rem; /* Adjust thickness */
+}
+
+/* Style for the rail (track background behind the slider) */
+.rc-slider-rail {
+    background-color: var(--primaryColor);
+    height: 10px; /* Adjust thickness */
+}
+
+/* Style for the slider handles */
+.rc-slider-handle {
+    border-color: var(--primaryColor); /* Change the handle border color */
+    background-color: var(--primaryColor); /* Handle background color */
+    width: 20px; /* Size of the handle */
+    height: 20px;
+    margin-top: -5px; /* Adjust the positioning to center on the track */
+    box-shadow: none; /* Remove shadow */
+}
+
+/* When the handle is being hovered or focused */
+.rc-slider-handle:hover,
+.rc-slider-handle:focus {
+    border-color: var(--primaryColor);
+}
+
+.rc-slider-handle:active {
+    border-color: var(--primaryColor); /* Color when active */
+}
+
+/* Style for marks (if you are using marks) */
+.rc-slider-mark {
+    font-size: 12px;
 }
 
 @media screen and (max-width: 1023px) {

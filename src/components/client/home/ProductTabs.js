@@ -1,7 +1,7 @@
 import React from "react";
 import classes from "./ProductTabs.module.css";
 import ProductTab from "./ProductTab";
-import ProductsContainer from "../ProductsContainer";
+import ProductsContainer from "../../UI/ProductsContainer";
 
 const ProductTabs = ({
     activeTab,

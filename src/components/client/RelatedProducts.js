@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import ProductsContainer from "./ProductsContainer";
+import ProductsContainer from "../UI/ProductsContainer";
 import classes from "./RelatedProducts.module.css";
 
 export default function RelatedProducts({

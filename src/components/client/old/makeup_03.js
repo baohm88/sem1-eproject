@@ -2,12 +2,12 @@ import axios from "axios";
 import { useEffect, useState, useMemo } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
-import { formatter } from "../../util/formatter";
+import { formatter } from "../../../util/formatter";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import classes from "./SkincareProducts.module.css";
-import ProductsContainer from "./ProductsContainer";
-import useFilterAndSortProducts from "../../hooks/useFilterAndSortProducts";
+import ProductsContainer from "../ProductsContainer";
+import useFilterAndSortProducts from "../../../hooks/useFilterAndSortProducts";
 
 export default function MakeupProducts() {
     const [products, setProducts] = useState([]);

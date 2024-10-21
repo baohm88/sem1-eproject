@@ -1,7 +1,7 @@
 import { useState } from "react";
-import ProductItem from "./ProductItem"; // Assuming you have a ProductItem component
-import Pagination from "../UI/Pagination";
-import Modal from "./Modal";
+import ProductItem from "../client/ProductItem"; // Assuming you have a ProductItem component
+import Pagination from "./Pagination";
+import Modal from "../client/Modal";
 
 const ProductsContainer = ({ products, itemsPerPage = 4 }) => {
     const [currentPage, setCurrentPage] = useState(1);
@@ -27,9 +27,6 @@ const ProductsContainer = ({ products, itemsPerPage = 4 }) => {
 
     return (
         <>
-            <div className="total-products">
-                <h5>{products.length} products</h5>
-            </div>
             <div className="products-container">
                 {currentProducts.map((product) => (
                     <ProductItem

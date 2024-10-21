@@ -1,10 +1,10 @@
-.filters,
-.total-products {
+.filters {
     display: flex;
     gap: 1rem;
     max-width: 1264px;
     width: 100%;
     margin: 1rem auto;
+    padding: 0 5px;
 }
 
 .select {
@@ -12,4 +12,17 @@
     color: white;
     padding: 3px;
     border-radius: 5px;
+}
+
+.selectedRange {
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    border: 1px solid rgb(135, 134, 134);
+    color: rgb(135, 134, 134);
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+.selectedRange:hover {
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
 }
