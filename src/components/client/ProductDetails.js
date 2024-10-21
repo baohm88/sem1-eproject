@@ -132,9 +132,6 @@ export default function ProductDetails() {
         setSelectedImage(imageUrl);
     };
 
-    console.log(mainCategory);
-    console.log(subCategory);
-
     if (loading) return <p>Loading product details...</p>;
 
     return (

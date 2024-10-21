@@ -1,14 +1,16 @@
 import { renderReviewStars } from "../../util/renderReviewStars";
 
 export default function ProductRating({ rating }) {
-    console.log(rating);
-
     return (
         <div className="rating-card">
             <div>
                 <img
-                    src="https://img.freepik.com/premium-photo/web-developer-digital-avatar-generative-ai_934475-9048.jpg"
-                    alt="web dev"
+                    src={
+                        rating.user_image
+                            ? rating.user_image
+                            : "https://static-00.iconduck.com/assets.00/user-2-account-icon-2048x2046-oucjsuyg.png"
+                    }
+                    alt={rating.username}
                 />
             </div>
             <div>
