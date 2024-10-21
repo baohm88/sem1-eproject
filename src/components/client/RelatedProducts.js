@@ -10,7 +10,7 @@ export default function RelatedProducts({
 }) {
     const [relatedProducts, setRelatedProducts] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null); // Add state for error handling
+    const [error, setError] = useState(null); 
 
     useEffect(() => {
         const fetchRelatedProducts = async () => {
@@ -30,9 +30,9 @@ export default function RelatedProducts({
                 );
             } catch (error) {
                 console.error("Error fetching related products:", error);
-                setError("Failed to load related products."); // Set error message
+                setError("Failed to load related products.");
             } finally {
-                setLoading(false); // Set loading to false in finally block
+                setLoading(false); 
             }
         };
 
@@ -40,7 +40,7 @@ export default function RelatedProducts({
     }, [productId, mainCategory, subCategory]);
 
     if (loading) return <p>Loading related products...</p>;
-    if (error) return <p>{error}</p>; // Display error message
+    if (error) return <p>{error}</p>; 
 
     if (relatedProducts.length === 0) {
         return;

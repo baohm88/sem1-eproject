@@ -1,7 +1,7 @@
 import { useState } from "react";
 import ProductItem from "../client/ProductItem"; // Assuming you have a ProductItem component
 import Pagination from "./Pagination";
-import Modal from "../client/Modal";
+import Modal from "./Modal";
 
 const ProductsContainer = ({ products, itemsPerPage = 4 }) => {
     const [currentPage, setCurrentPage] = useState(1);

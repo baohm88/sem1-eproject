@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { formatter } from "../../util/formatter";
 import classes from "./Modal.module.css";
 import { UserContext } from "../../App";
-import Button from "../UI/Button";
+import Button from "./Button";
 import { renderAverageRatingStars } from "../../util/renderAverageRatingStars";
 import { calculateRatingSummary } from "../../util/ratingUtils";
 import { Link } from "react-router-dom";

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
-import classes from "./SortAndFilter.module.css"; // Create styles for this component
+import classes from "./SortAndFilter.module.css";
 import { formatter } from "../../util/formatter";
 
 const SortAndFilter = ({

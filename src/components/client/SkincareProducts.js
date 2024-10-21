@@ -4,8 +4,8 @@ import { useLocation } from "react-router-dom";
 import classes from "./SkincareProducts.module.css";
 import ProductsContainer from "../UI/ProductsContainer";
 import useFilterAndSortProducts from "../../hooks/useFilterAndSortProducts";
-import SortAndFilter from "./SortAndFilter";
-import CategoryTabs from "./CategoryTabs";
+import SortAndFilter from "../UI/SortAndFilter";
+import CategoryTabs from "../UI/CategoryTabs";
 
 export default function SkincareProducts() {
     const [products, setProducts] = useState([]);
