@@ -47,6 +47,8 @@ export default function ProductDetails() {
             .get("http://localhost/project/collections/product/id=" + id)
             .then((res) => {
                 const productData = res.data.data;
+                console.log(productData);
+
                 setProduct(productData);
                 setMainCategory(productData.main_category);
                 setSubCategory(productData.sub_category);

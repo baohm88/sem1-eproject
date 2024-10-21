@@ -4,8 +4,6 @@ import classes from "./Modal.module.css";
 import { UserContext } from "../../App";
 import Button from "../UI/Button";
 import { renderAverageRatingStars } from "../../util/renderAverageRatingStars";
-import { calculateRatingSummary } from "../../util/ratingUtils";
-import { Link } from "react-router-dom";
 
 export default function Modal({ product, onClose }) {
     const { addToCart } = useContext(UserContext);
@@ -16,10 +14,10 @@ export default function Modal({ product, onClose }) {
         stock_qty,
         product_price,
         product_images,
-        product_ratings,
     } = product;
 
     const images = product_images ? product_images.split(",") : [];
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [selectedImage, setSelectedImage] = useState(images[0] || "");
 
     const [ratingSummary, setRatingSummary] = useState({
@@ -30,16 +28,7 @@ export default function Modal({ product, onClose }) {
 
     useEffect(() => {
         if (product?.product_ratings) {
-            // const ratingsArray = product.product_ratings
-            const ratingsArray = product_ratings
-                ? product.product_ratings.split(",").map(Number)
-                : [];
-
-            const summary = calculateRatingSummary(ratingsArray);
-            console.log(summary);
-            setRatingSummary(summary);
-
-            setRatingSummary(summary);
+            calculateRatingSummary(product.product_ratings);
         }
 
         // Set the initial selected image when product_images changes
@@ -47,6 +36,28 @@ export default function Modal({ product, onClose }) {
             setSelectedImage(images[0]);
         }
     }, [product]);
+
+    const calculateRatingSummary = (ratings) => {
+        if (!ratings || ratings.length === 0) return;
+
+        let totalRatings = ratings.length;
+        let starCounts = { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 };
+        let totalStars = 0;
+
+        ratings.forEach((rating) => {
+            const starRating = rating.rating;
+            starCounts[starRating]++;
+            totalStars += starRating;
+        });
+
+        const averageRating = (totalStars / totalRatings).toFixed(1);
+
+        setRatingSummary({
+            totalRatings,
+            averageRating,
+            starCounts,
+        });
+    };
 
     const handleImageClick = (imageUrl) => {
         setSelectedImage(imageUrl);
@@ -69,7 +80,7 @@ export default function Modal({ product, onClose }) {
                     &times;
                 </button>
 
-                {/* <div className={classes["product-details-container"]}>
+                <div className={classes["product-details-container"]}>
                     <div className={classes["product-details"]}>
                         <div className={classes["product-images-container"]}>
                             <div className={classes["product-images"]}>
@@ -137,85 +148,7 @@ export default function Modal({ product, onClose }) {
                             >
                                 Add to Cart
                             </Button>
-
-                            <p className={classes.product_link}>
-                                <Link to={"/products/" + product.product_id}>
-                                    View Product Details
-                                </Link>
-                            </p>
                         </div>
-                    </div>
-                </div> */}
-                <div className={classes["product-details"]}>
-                    <div className={classes["product-images-container"]}>
-                        <div className={classes["product-images"]}>
-                            {images.length > 0 ? (
-                                images.map((imageUrl, index) => (
-                                    <img
-                                        key={index}
-                                        src={imageUrl}
-                                        alt={`${product_name} ${index + 1}`}
-                                        onClick={() =>
-                                            handleImageClick(imageUrl)
-                                        }
-                                        className={
-                                            selectedImage === imageUrl
-                                                ? classes.selected
-                                                : ""
-                                        }
-                                    />
-                                ))
-                            ) : (
-                                <p>No images available</p>
-                            )}
-                        </div>
-                        <div className={classes["current-image-container"]}>
-                            <img
-                                src={selectedImage}
-                                alt={product_name}
-                                className={classes["product-image"]}
-                            />
-                        </div>
-                    </div>
-
-                    <div className={classes["product-info-container"]}>
-                        <h1>{product_name}</h1>
-
-                        <div
-                            className={
-                                classes["average-rating-stars-container"]
-                            }
-                        >
-                            <span>
-                                {renderAverageRatingStars(
-                                    ratingSummary.averageRating
-                                )}
-                            </span>
-                            <span>{ratingSummary.averageRating} </span>
-                            <span> | {ratingSummary.totalRatings} reviews</span>
-                        </div>
-
-                        <p className={classes.product_description}>
-                            {product_description}
-                        </p>
-                        <p className={classes.available}>
-                            Qty available: {stock_qty}
-                        </p>
-                        <h4 className={classes.price}>
-                            Price: {formatter.format(product_price)}
-                        </h4>
-                        <Button
-                            className="full-width-button"
-                            onClick={handleAddToCart}
-                        >
-                            Add to Cart
-                        </Button>
-
-                        <p className={classes.product_link}>
-                            <Link to={"/products/" + product.product_id}>
-                                View Product Details
-                            </Link>
-                        </p>
                     </div>
                 </div>
             </div>

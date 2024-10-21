@@ -73,6 +73,7 @@ export default function SkincareProducts() {
         setSelectedRange(true);
         setPriceRange(newRange);
     };
+    console.log(products);
 
     return (
         <>
