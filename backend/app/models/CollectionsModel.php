@@ -9,10 +9,11 @@ class CollectionsModel extends BaseController
 
     public function getProductRatingsById($product_id)
     {
-        $sql  = "SELECT pr.*, u.username FROM ProductRating pr 
+        $sql  = "SELECT pr.*, u.username, u.user_image FROM ProductRating pr 
                 JOIN users u ON u.user_id = pr.user_id 
                 WHERE pr.product_id = :product_id
                 ORDER BY pr.review_date DESC";
+
         $stmt = $this->__conn->prepare($sql);
         $stmt->bindParam(":product_id", $product_id, PDO::PARAM_INT);
         $stmt->execute();
@@ -21,10 +22,15 @@ class CollectionsModel extends BaseController
 
     public function getAllProducts()
     {
-        $sql  = "SELECT p.*, GROUP_CONCAT(pi.image_url) as product_images 
-        FROM Products AS p 
-        LEFT JOIN ProductImages AS pi 
-        ON p.product_id = pi.product_id GROUP BY p.product_id";
+        $sql  = "SELECT p.*, GROUP_CONCAT(pi.image_url) AS product_images,
+                    (
+                        SELECT GROUP_CONCAT(pr.rating)
+                        FROM ProductRating AS pr
+                        WHERE pr.product_id = p.product_id
+                    ) AS product_ratings
+                FROM Products AS p
+                LEFT JOIN ProductImages AS pi ON p.product_id = pi.product_id
+                GROUP BY p.product_id";
 
         $stmt = $this->__conn->prepare($sql);
         $stmt->execute();
@@ -52,10 +58,16 @@ class CollectionsModel extends BaseController
 
     public function getCollectionProducts($category, $max_price = null, $min_price = null, $order_by = null, $offset = null, $desc = null)
     {
-        $sql  = "SELECT p.*, GROUP_CONCAT(pi.image_url) as product_images FROM Products AS p 
+        $sql  = "SELECT p.*, GROUP_CONCAT(pi.image_url) AS product_images,
+                    (
+                        SELECT GROUP_CONCAT(pr.rating)
+                        FROM ProductRating AS pr
+                        WHERE pr.product_id = p.product_id
+                    ) AS product_ratings
+                FROM Products AS p 
                 LEFT JOIN ProductImages AS pi ON p.product_id = pi.product_id 
                 WHERE p.main_category = :main_category
-                GROUP BY p.product_id";
+                GROUP BY p.product_id;";
         $params = [];
         if ($max_price !== null && $min_price !== null) {
             $sql .=  " AND price BETWEEN :min_price AND :max_price";
