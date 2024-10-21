@@ -89,7 +89,7 @@ export default function MakeupProducts() {
             <div className="total-products">
                 <h5>{filteredProducts.length} products</h5>
             </div>
-            <ProductsContainer products={filteredProducts} />
+            <ProductsContainer products={filteredProducts} itemsPerPage={8} />
         </>
     );
 }

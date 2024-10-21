@@ -75,7 +75,7 @@ export default function SearchResults() {
                 <h5>{filteredProducts.length} products</h5>
             </div>
 
-            <ProductsContainer products={filteredProducts} />
+            <ProductsContainer products={filteredProducts} itemsPerPage={8} />
         </>
     );
 }

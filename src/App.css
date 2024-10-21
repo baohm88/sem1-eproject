@@ -183,20 +183,22 @@ a:hover {
 
 .completed {
     background-color: var(--successColor);
+    color: var(--lightColor);
 }
 .pending {
-    background-color: rgb(255, 101, 5);
+    background-color: yellow;
 }
 .cancelled {
     background-color: var(--dangerColor);
+    color: var(--lightColor);
 }
 
 .completed,
 .cancelled,
 .pending {
-    color: var(--lightColor);
     padding: 0.2rem 0.5rem;
     border-radius: 5px;
+    min-width: 10rem;
 }
 
 table {
@@ -204,6 +206,7 @@ table {
     border-collapse: collapse;
     font-size: 1rem;
     margin-top: 1rem;
+    overflow-x: auto;
 }
 
 thead {
@@ -344,7 +347,7 @@ td span.danger {
         width: 100%;
     }
 
-    table,
+    /* table,
     thead,
     tbody,
     th,
@@ -376,7 +379,7 @@ td span.danger {
         left: 10px;
         font-weight: bold;
         text-transform: uppercase;
-    }
+    } */
 
     .orders-container h1 {
         font-size: 1.5rem;
