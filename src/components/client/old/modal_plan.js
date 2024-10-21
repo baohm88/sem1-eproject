@@ -1,15 +1,15 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
-import { UserContext } from "../../App";
-import { formatter } from "../../util/formatter";
-import Button from "../UI/Button";
-import ProductRatings from "./ProductRatings";
-import RatingSummary from "./RatingSummary";
-import WriteReviewModal from "./WriteReviewModal";
-import RelatedProducts from "./RelatedProducts";
+import { UserContext } from "../../../App";
+import { formatter } from "../../../util/formatter";
+import Button from "../../UI/Button";
+import ProductRatings from "../ProductRatings";
+import RatingSummary from "../RatingSummary";
+import WriteReviewModal from "../WriteReviewModal";
+import RelatedProducts from "../RelatedProducts";
 import classes from "./ProductDetails.module.css";
-import { renderAverageRatingStars } from "../../util/renderAverageRatingStars";
+import { renderAverageRatingStars } from "../../../util/renderAverageRatingStars";
 
 export default function ProductDetails() {
     const [product, setProduct] = useState("");

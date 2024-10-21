@@ -1,0 +1,15 @@
+.filters,
+.total-products {
+    display: flex;
+    gap: 1rem;
+    max-width: 1264px;
+    width: 100%;
+    margin: 1rem auto;
+}
+
+.select {
+    background-color: #a6212b;
+    color: white;
+    padding: 3px;
+    border-radius: 5px;
+}

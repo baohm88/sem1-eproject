@@ -1,0 +1,29 @@
+.tabs-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 2rem auto;
+}
+
+.tabs-container button {
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    color: #333;
+    transition: background-color 0.3s ease;
+}
+
+.tabs-container button:hover {
+    background-color: #f5f5f5;
+}
+
+.tabs-container button:focus {
+    outline: none;
+}
+
+.tabs-container button:active {
+    background-color: #ddd;
+}

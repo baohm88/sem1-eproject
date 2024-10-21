@@ -1,9 +1,9 @@
 import React, { useContext, useState } from "react";
-import { formatter } from "../../util/formatter";
+import { formatter } from "../../../util/formatter";
 import { IoChevronBackOutline, IoChevronForward } from "react-icons/io5";
 import classes from "./Modal.module.css";
-import { UserContext } from "../../App";
-import Button from "../UI/Button";
+import { UserContext } from "../../../App";
+import Button from "../../UI/Button";
 
 export default function Modal({ product, onClose }) {
     const { addToCart } = useContext(UserContext); // Destructure addToCart from context
