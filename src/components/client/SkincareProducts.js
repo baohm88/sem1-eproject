@@ -10,7 +10,7 @@ import CategoryTabs from "../UI/CategoryTabs";
 export default function SkincareProducts() {
     const [products, setProducts] = useState([]);
     const [sortOption, setSortOption] = useState("");
-    const [priceRange, setPriceRange] = useState([0, 200]);
+    const [priceRange, setPriceRange] = useState([0, 500]);
     const location = useLocation();
 
     // Fetch skincare products from the database
@@ -80,7 +80,7 @@ export default function SkincareProducts() {
                     setSortOption={setSortOption}
                     priceRange={priceRange}
                     setPriceRange={setPriceRange}
-                    maxPrice={200}
+                    maxPrice={500}
                 />
             </div>
 
@@ -88,7 +88,7 @@ export default function SkincareProducts() {
                 <h5>{filteredProducts.length} products</h5>
             </div>
 
-            <ProductsContainer products={filteredProducts} />
+            <ProductsContainer products={filteredProducts} itemsPerPage={8} />
         </>
     );
 }

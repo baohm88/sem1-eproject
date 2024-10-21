@@ -10,9 +10,10 @@ import WriteReviewModal from "./WriteReviewModal";
 import RelatedProducts from "./RelatedProducts";
 import classes from "./ProductDetails.module.css";
 import { renderAverageRatingStars } from "../../util/renderAverageRatingStars";
+import { calculateRatingSummary } from "../../util/ratingUtils";
 
 export default function ProductDetails() {
-    const [product, setProduct] = useState("");
+    const [product, setProduct] = useState({});
     const [loading, setLoading] = useState(true);
     const [ratingSummary, setRatingSummary] = useState({
         totalRatings: 0,
@@ -26,6 +27,7 @@ export default function ProductDetails() {
         product_price,
         product_images,
         product_ratings,
+        benefits,
     } = product;
 
     // State for modal visibility, rating, and review
@@ -47,12 +49,19 @@ export default function ProductDetails() {
             .get("http://localhost/project/collections/product/id=" + id)
             .then((res) => {
                 const productData = res.data.data;
-                console.log(productData);
 
                 setProduct(productData);
                 setMainCategory(productData.main_category);
                 setSubCategory(productData.sub_category);
-                calculateRatingSummary(productData.product_ratings);
+
+                // Use the utility function to calculate rating summary
+                const ratingSummaryData = calculateRatingSummary(
+                    productData.product_ratings.map(
+                        (rating) => rating.rating || []
+                    )
+                );
+                setRatingSummary(ratingSummaryData);
+
                 setLoading(false); // Loading complete
 
                 if (productData.product_name) {
@@ -72,28 +81,6 @@ export default function ProductDetails() {
     const handleAddToCart = () => {
         addToCart(product);
         alert(product.product_name + " has been added to cart!");
-    };
-
-    const calculateRatingSummary = (ratings) => {
-        if (!ratings || ratings.length === 0) return;
-
-        let totalRatings = ratings.length;
-        let starCounts = { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 };
-        let totalStars = 0;
-
-        ratings.forEach((rating) => {
-            const starRating = rating.rating;
-            starCounts[starRating]++;
-            totalStars += starRating;
-        });
-
-        const averageRating = (totalStars / totalRatings).toFixed(1); // Calculate average rating
-
-        setRatingSummary({
-            totalRatings,
-            averageRating,
-            starCounts,
-        });
     };
 
     const openModal = () => setIsModalOpen(true);
@@ -130,6 +117,7 @@ export default function ProductDetails() {
                 alert("Failed to submit the review. Please try again.");
             });
     };
+
     const handleImageClick = (imageUrl) => {
         setSelectedImage(imageUrl);
     };
@@ -193,6 +181,18 @@ export default function ProductDetails() {
                     <p className={classes.product_description}>
                         {product_description}
                     </p>
+
+                    {benefits.length > 0 && (
+                        <div className={classes.benefitsContainer}>
+                            <h3>Benefits</h3>
+                            <ul className={classes.benefits}>
+                                {benefits.split(";").map((benefit, index) => (
+                                    <li key={index}>{benefit}</li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
+
                     <p className={classes.available}>
                         {" "}
                         Qty available: {stock_qty}

@@ -10,7 +10,7 @@ const SortAndFilter = ({
     setSortOption,
     priceRange,
     setPriceRange,
-    maxPrice = 200,
+    maxPrice = 500,
 }) => {
     const [sliderIsVisible, setSliderIsVisible] = useState(false);
     const [selectedRange, setSelectedRange] = useState(false);

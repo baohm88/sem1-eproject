@@ -24,6 +24,7 @@ header {
 
 main {
     padding-top: 140px;
+    padding-bottom: 3rem;
 }
 
 .orders-container,
@@ -332,6 +333,10 @@ td span.danger {
 @media (max-width: 768px) {
     .row-flex-between {
         flex-direction: column;
+    }
+
+    .products-container {
+        gap: 0px;
     }
 
     .average-rating-stars-container,

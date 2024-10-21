@@ -3,7 +3,7 @@ import { UserContext } from "../../App";
 import { formatter } from "../../util/formatter";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import classes from "./Cart.module.css"; // Importing CSS Module
+import classes from "./Cart.module.css"; 
 import Button from "../UI/Button";
 
 export default function Cart() {

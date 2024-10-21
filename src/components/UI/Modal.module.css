@@ -134,6 +134,10 @@
     padding: 1rem 0;
 }
 
+.product-info-container {
+    text-align: left;
+}
+
 .product_description,
 .available,
 .price {

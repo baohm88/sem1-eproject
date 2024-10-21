@@ -183,6 +183,7 @@
 .empty-cart p {
     font-size: 1.4rem;
     color: #555;
+    padding: 2rem 0;
 }
 
 .empty-cart .button {

@@ -9,7 +9,7 @@ import SortAndFilter from "../UI/SortAndFilter";
 export default function SearchResults() {
     const [products, setProducts] = useState([]);
     const [sortOption, setSortOption] = useState("");
-    const [priceRange, setPriceRange] = useState([0, 200]);
+    const [priceRange, setPriceRange] = useState([0, 500]);
     const location = useLocation();
 
     // Fetch all products from the database
@@ -68,7 +68,7 @@ export default function SearchResults() {
                     setSortOption={setSortOption}
                     priceRange={priceRange}
                     setPriceRange={setPriceRange}
-                    maxPrice={200}
+                    maxPrice={500}
                 />
             </div>
             <div className="total-products">

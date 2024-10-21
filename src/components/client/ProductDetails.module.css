@@ -93,6 +93,15 @@
     margin-bottom: 20px;
 }
 
+.benefitsContainer {
+    padding: 1rem 0;
+}
+
+.benefits {
+    padding-left: 2rem;
+    margin-bottom: 1rem;
+}
+
 /* MOBILE */
 @media screen and (max-width: 1000px) {
     .current-image-container {

@@ -1,4 +1,3 @@
-
 export const calculateRatingSummary = (ratings) => {
     if (!ratings || ratings.length === 0) return;
 
