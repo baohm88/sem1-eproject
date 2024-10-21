@@ -84,10 +84,6 @@ export default function SkincareProducts() {
                 />
             </div>
 
-            <div className={classes["total-products"]}>
-                <h5>{filteredProducts.length} products</h5>
-            </div>
-
             <ProductsContainer products={filteredProducts} />
         </>
     );

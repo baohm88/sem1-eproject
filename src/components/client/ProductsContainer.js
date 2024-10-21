@@ -27,6 +27,9 @@ const ProductsContainer = ({ products, itemsPerPage = 4 }) => {
 
     return (
         <>
+            <div className="total-products">
+                <h5>{products.length} products</h5>
+            </div>
             <div className="products-container">
                 {currentProducts.map((product) => (
                     <ProductItem

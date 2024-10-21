@@ -27,7 +27,8 @@ main {
 }
 
 .orders-container,
-.order-container {
+.order-container,
+.total-products {
     max-width: 1264px;
     width: 100%;
     margin: 2rem auto;
@@ -271,7 +272,6 @@ td span.danger {
 .rating-comment {
     padding-top: 1rem;
 }
-
 
 @media screen and (max-width: 1023px) {
     main {
