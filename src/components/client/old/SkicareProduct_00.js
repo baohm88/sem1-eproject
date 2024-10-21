@@ -2,14 +2,14 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
-import { formatter } from "../../util/formatter";
-import Modal from "./Modal";
+import { formatter } from "../../../util/formatter";
+import Modal from "../Modal";
 
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import classes from "./SkincareProducts.module.css";
-import ProductItem from "./ProductItem";
-import Pagination from "../UI/Pagination";
+import ProductItem from "../ProductItem";
+import Pagination from "../../UI/Pagination";
 
 export default function SkincareProducts() {
     const [products, setProducts] = useState([]);
@@ -221,7 +221,7 @@ export default function SkincareProducts() {
                                     setSelectedRange(false);
                                 }}
                             >
-                                X 
+                                X
                             </span>{" "}
                             {formatter.format(priceRange[0])} -{" "}
                             {formatter.format(priceRange[1])}

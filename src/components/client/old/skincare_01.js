@@ -1,33 +1,45 @@
 import axios from "axios";
 import { useEffect, useState, useMemo } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
-import { formatter } from "../../util/formatter";
-import Modal from "./Modal";
+import { formatter } from "../../../util/formatter";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import classes from "./SkincareProducts.module.css";
-import ProductsContainer from "./ProductsContainer"; // Import ProductsContainer
-import Pagination from "../UI/Pagination";
+import ProductsContainer from "../ProductsContainer";
 
-export default function SearchResults() {
+export default function SkincareProducts() {
     const [products, setProducts] = useState([]);
-    const [selectedProduct, setSelectedProduct] = useState(null); // Modal state
     const [sortOption, setSortOption] = useState("");
     const [selectedRange, setSelectedRange] = useState(false);
     const [priceRange, setPriceRange] = useState([0, 200]);
     const [sliderIsVisible, setSliderIsVisible] = useState(false);
-    const [currentPage, setCurrentPage] = useState(1);
-
     const location = useLocation();
+    const navigate = useNavigate();
 
-    const productsPerPage = 4;
-
-    // Fetch all products from the database
+    // Fetch skincare products from the database
     useEffect(() => {
-        axios
-            .get("http://localhost/project/collections/all")
-            .then((res) => setProducts(res.data.data));
+        let isMounted = true; // Flag to track if component is mounted
+
+        const fetchProducts = async () => {
+            try {
+                const res = await axios.get(
+                    "http://localhost/project/collections/skincare"
+                );
+                if (isMounted) {
+                    setProducts(res.data.data);
+                }
+            } catch (error) {
+                console.error("Error fetching products:", error);
+                // Optionally, you could set an error state here
+            }
+        };
+
+        fetchProducts();
+
+        return () => {
+            isMounted = false; // Cleanup function
+        };
     }, []);
 
     // Parse URL parameters
@@ -38,18 +50,6 @@ export default function SearchResults() {
             searchText: params.get("q") || "",
         };
     }, [location.search]);
-
-    // Update document title when the search text or category changes
-    useEffect(() => {
-        const { searchText, category } = queryParams;
-        if (searchText) {
-            document.title = `Search Results for '${searchText}'`;
-        } else if (category) {
-            document.title = `Category: ${category}`;
-        } else {
-            document.title = "All Products";
-        }
-    }, [queryParams]);
 
     // Filtered products based on category, search text, and price range
     const filteredProducts = useMemo(() => {
@@ -108,12 +108,13 @@ export default function SearchResults() {
         return filtered;
     }, [products, queryParams, sortOption, priceRange]);
 
-    // Pagination logic
-    const currentProducts = useMemo(() => {
-        const indexOfLastProduct = currentPage * productsPerPage;
-        const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-        return filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
-    }, [filteredProducts, currentPage]);
+    // Update category in the URL
+    function updateCategoryInURL(category) {
+        navigate({
+            pathname: "/skincare",
+            search: `?category=${category}`,
+        });
+    }
 
     // Handle price range change
     const handlePriceRangeChange = (newRange) => {
@@ -124,12 +125,35 @@ export default function SearchResults() {
     return (
         <>
             <div className={classes.center}>
-                {/* Display Search Text */}
-                {queryParams.searchText ? (
-                    <h1>Search results for '{queryParams.searchText}'</h1>
-                ) : (
-                    <h1>All Products</h1>
-                )}
+                <h1>SKINCARE</h1>
+                <p>
+                    From daily rituals to targeted anti-aging care, discover the
+                    best in plant-based skincare, powered by nature's most
+                    effective ingredients.
+                </p>
+            </div>
+
+            {/* Category Tabs */}
+            <div className={classes["tabs-container"]}>
+                {["Face", "Body", "Sun", "Men"].map((category) => (
+                    <button
+                        key={category}
+                        onClick={() => updateCategoryInURL(category)}
+                        className={
+                            queryParams.category === category
+                                ? classes.active
+                                : ""
+                        }
+                    >
+                        {category}
+                    </button>
+                ))}
+                <button
+                    onClick={() => navigate("/skincare")}
+                    className={!queryParams.category ? classes.active : ""}
+                >
+                    View All
+                </button>
             </div>
 
             {/* Sorting and Filtering */}
@@ -166,7 +190,7 @@ export default function SearchResults() {
                         <Slider
                             range
                             min={0}
-                            max={200} // Update based on actual max price
+                            max={200} // Set to the actual maximum price if needed
                             value={priceRange}
                             onChange={handlePriceRangeChange}
                             step={5}
@@ -195,29 +219,7 @@ export default function SearchResults() {
             </div>
 
             {/* Products Container with Pagination */}
-            <ProductsContainer
-                products={currentProducts} // Pass current products to ProductsContainer
-                openModal={setSelectedProduct} // Pass function to open modal
-            />
-
-            {/* Pagination */}
-            {filteredProducts.length > 0 && (
-                <Pagination
-                    currentPage={currentPage}
-                    totalPages={Math.ceil(
-                        filteredProducts.length / productsPerPage
-                    )}
-                    paginate={setCurrentPage}
-                />
-            )}
-
-            {/* Modal */}
-            {selectedProduct && (
-                <Modal
-                    product={selectedProduct}
-                    onClose={() => setSelectedProduct(null)}
-                />
-            )}
+            <ProductsContainer products={filteredProducts} />
         </>
     );
 }

@@ -67,7 +67,7 @@ export default function UserOrders() {
                                 <td>{order.order_date}</td>
                                 <td>{formatter.format(order.order_value)}</td>
                                 <td>
-                                    <span className="danger">
+                                    <span className={order.status}>
                                         {order.status}
                                     </span>
                                 </td>

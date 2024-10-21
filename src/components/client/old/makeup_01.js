@@ -2,13 +2,13 @@ import axios from "axios";
 import { useEffect, useState, useMemo } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
-import { formatter } from "../../util/formatter";
-import Modal from "./Modal";
+import { formatter } from "../../../util/formatter";
+import Modal from "../Modal";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import classes from "./SkincareProducts.module.css";
-import ProductItem from "./ProductItem";
-import Pagination from "../UI/Pagination";
+import ProductItem from "../ProductItem";
+import Pagination from "../../UI/Pagination";
 
 export default function MakeupProducts() {
     const [products, setProducts] = useState([]);

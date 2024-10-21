@@ -1,24 +1,24 @@
 .product-card {
-    position: relative; /* Đặt vị trí tương đối để chứa phần tử con có vị trí tuyệt đối (như huy hiệu Best Seller) */
-    display: flex; /* Sử dụng flexbox để dễ dàng căn giữa nội dung bên trong */
-    flex-direction: column; /* Xếp các phần tử bên trong theo chiều dọc (hình ảnh, tiêu đề, giá) */
-    align-items: center; /* Căn giữa nội dung bên trong theo chiều ngang */
-    justify-content: space-between; /* Tạo khoảng cách hợp lý giữa các thành phần bên trong */
-    border: 1px solid #e1e1e1; /* Đặt viền mỏng màu xám nhạt xung quanh thẻ sản phẩm */
-    border-radius: 5px; /* Làm tròn các góc thẻ sản phẩm */
-    padding: 15px; /* Tạo khoảng cách bên trong thẻ sản phẩm */
-    background-color: #fff; /* Màu nền trắng */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Hiệu ứng chuyển động khi hover (thẻ sản phẩm nhô lên) */
-    text-align: center; /* Căn giữa nội dung văn bản trong thẻ */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #e1e1e1;
+    border-radius: 5px;
+    padding: 1rem;
+    background-color: #fff;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
     max-width: 16rem;
-    height: 100%; /* Đảm bảo tất cả các thẻ sản phẩm có cùng chiều cao */
+    height: 100%;
     min-width: 10rem;
     width: 100%;
 }
 
 .product-card:hover {
-    transform: translateY(-5px); /* Thẻ sẽ nhô lên 5px khi hover */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Tạo đổ bóng nhẹ khi hover, giúp sản phẩm nổi bật */
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .product-card a {
@@ -26,10 +26,10 @@
 }
 
 .product-image {
-    width: 100%; /* Đảm bảo hình ảnh chiếm toàn bộ chiều ngang của thẻ */
-    height: auto; /* Chiều cao sẽ tự động điều chỉnh theo tỷ lệ của ảnh */
-    margin-bottom: 15px; /* Tạo khoảng cách 15px bên dưới hình ảnh */
-    object-fit: contain; /* Đảm bảo ảnh không bị méo, giữ nguyên tỷ lệ */
+    width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+    object-fit: contain;
 }
 
 .product-title {
@@ -38,14 +38,14 @@
     margin: 10px 0;
     font-weight: 500;
     height: 50px;
-    display: flex; /* Sử dụng flex để căn giữa nội dung theo chiều ngang và dọc */
-    align-items: center; /* Căn giữa tiêu đề theo chiều dọc */
-    justify-content: center; /* Căn giữa tiêu đề theo chiều ngang */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .product-price {
-    font-size: 18px; /* Kích thước font chữ cho giá sản phẩm là 18px */
-    color: #000; /* Màu chữ đen cho giá sản phẩm */
-    font-weight: bold; /* In đậm giá sản phẩm */
-    margin-bottom: 15px; /* Tạo khoảng cách 15px bên dưới giá sản phẩm */
+    font-size: 18px;
+    color: #000;
+    font-weight: bold;
+    margin-bottom: 15px;
 }

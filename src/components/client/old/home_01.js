@@ -1,13 +1,13 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { formatter } from "../../util/formatter";
+import { formatter } from "../../../util/formatter";
 import { IoChevronBackOutline, IoChevronForward } from "react-icons/io5";
-import Modal from "./Modal"; // Import the Modal component
+import Modal from "../Modal"; // Import the Modal component
 
 import classes from "./Home.module.css";
-import Button from "../UI/Button";
-import ProductItem from "./ProductItem";
+import Button from "../../UI/Button";
+import ProductItem from "../ProductItem";
 
 export default function Home() {
     const [products, setProducts] = useState([]);

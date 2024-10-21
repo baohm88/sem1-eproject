@@ -2,13 +2,13 @@ import axios from "axios";
 import { useEffect, useState, useMemo } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
-import { formatter } from "../../util/formatter";
-import Modal from "./Modal";
+import { formatter } from "../../../util/formatter";
+import Modal from "../Modal";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import classes from "./SkincareProducts.module.css";
-import ProductItem from "./ProductItem";
-import Pagination from "../UI/Pagination";
+import ProductItem from "../ProductItem";
+import Pagination from "../../UI/Pagination";
 
 export default function MakeupProducts() {
     const [products, setProducts] = useState([]);
@@ -131,16 +131,36 @@ export default function MakeupProducts() {
 
             {/* Category Tabs */}
             <div className={classes["tabs-container"]}>
-                <button onClick={() => updateCategoryInURL("Face")}>
+                <button
+                    className={
+                        queryParams.category === "Face" ? classes.active : ""
+                    }
+                    onClick={() => updateCategoryInURL("Face")}
+                >
                     Face
                 </button>
-                <button onClick={() => updateCategoryInURL("Eyes")}>
+                <button
+                    className={
+                        queryParams.category === "Eyes" ? classes.active : ""
+                    }
+                    onClick={() => updateCategoryInURL("Eyes")}
+                >
                     Eyes
                 </button>
-                <button onClick={() => updateCategoryInURL("Lips")}>
+                <button
+                    className={
+                        queryParams.category === "Lips" ? classes.active : ""
+                    }
+                    onClick={() => updateCategoryInURL("Lips")}
+                >
                     Lips
                 </button>
-                <button onClick={() => navigate("/makeup")}>View All</button>
+                <button
+                    className={!queryParams.category ? classes.active : ""}
+                    onClick={() => navigate("/makeup")}
+                >
+                    View All
+                </button>
             </div>
 
             {/* Sorting and Filtering */}

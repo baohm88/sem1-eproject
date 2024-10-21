@@ -1,12 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { UserContext } from "../../App";
-import { formatter } from "../../util/formatter";
-import Button from "../UI/Button";
-import ProductRatings from "./ProductRatings";
-import RatingSummary from "./RatingSummary";
-import WriteReviewModal from "./WriteReviewModal"; // Import the WriteReviewModal component
+import { UserContext } from "../../../App";
+import { formatter } from "../../../util/formatter";
+import Button from "../../UI/Button";
+import ProductRatings from "../ProductRatings";
+import RatingSummary from "../RatingSummary";
+import WriteReviewModal from "../WriteReviewModal"; // Import the WriteReviewModal component
 
 export default function ProductDetails() {
     const [product, setProduct] = useState("");

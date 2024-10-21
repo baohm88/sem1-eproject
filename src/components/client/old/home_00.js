@@ -1,9 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { formatter } from "../../util/formatter";
+import { formatter } from "../../../util/formatter";
 import { IoChevronBackOutline, IoChevronForward } from "react-icons/io5";
-import Modal from "./Modal"; // Import the Modal component
+import Modal from "../Modal"; // Import the Modal component
 
 import Slider from "rc-slider"; // Import rc-slider
 import "rc-slider/assets/index.css"; // Import rc-slider styles

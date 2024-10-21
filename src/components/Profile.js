@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { UserContext } from "../App";
-import { FaUnlock, FaUserGear, FaUserMinus } from "react-icons/fa6";
+import { FaUnlock, FaUserGear } from "react-icons/fa6";
 import Button from "./UI/Button";
 import classes from "./Profile.module.css"; // Import the CSS module for styling
 

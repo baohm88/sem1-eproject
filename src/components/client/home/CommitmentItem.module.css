@@ -1,29 +1,26 @@
 .commitment-item {
-    max-width: 200px; /* Chiều rộng tối đa */
-    text-align: center; /* Căn giữa nội dung */
-    background-color: transparent; /* Nền trong suốt */
-    border: none; /* Loại bỏ đường viền button */
-    cursor: pointer; /* Thêm con trỏ tay khi hover */
-    padding: 20px; /* Khoảng cách trong cho button */
-    transition: transform 0.3s ease; /* Hiệu ứng khi hover */
+    max-width: 200px;
+    text-align: center;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 20px;
+    transition: transform 0.3s ease;
     width: 100%;
 }
 
-/* Phong cách khi hover vào button */
 .commitment-button:hover {
-    transform: scale(1.05); /* Tăng nhẹ kích thước khi hover */
+    transform: scale(1.05);
 }
 
-/* Hình ảnh đại diện cho cam kết */
 .commitment-button img {
-    max-width: 100%; /* Đảm bảo hình ảnh không vượt quá chiều rộng khối */
-    height: auto; /* Giữ nguyên tỷ lệ hình ảnh */
-    margin-bottom: 20px; /* Khoảng cách dưới hình ảnh */
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
 }
 
-/* Tiêu đề cam kết */
 .commitment-button h3 {
-    font-size: 1.1rem; /* Kích thước chữ vừa phải */
-    font-weight: bold; /* Chữ đậm */
-    color: #444; /* Màu xám đậm cho tiêu đề */
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #444;
 }

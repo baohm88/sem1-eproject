@@ -1,8 +1,7 @@
 import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { UserContext } from "../../App";
-import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 import { formatter } from "../../util/formatter";
 import Button from "../UI/Button";
 import ProductRatings from "./ProductRatings";
@@ -10,6 +9,7 @@ import RatingSummary from "./RatingSummary";
 import WriteReviewModal from "./WriteReviewModal";
 import RelatedProducts from "./RelatedProducts";
 import classes from "./ProductDetails.module.css";
+import { renderAverageRatingStars } from "../../util/renderAverageRatingStars";
 
 export default function ProductDetails() {
     const [product, setProduct] = useState("");
@@ -92,30 +92,6 @@ export default function ProductDetails() {
             averageRating,
             starCounts,
         });
-    };
-
-    // Function to render the average rating using stars
-    const renderAverageRatingStars = (averageRating) => {
-        const fullStars = Math.floor(averageRating); // Full stars
-        const hasHalfStar = averageRating - fullStars >= 0.5; // Half star if remainder is 0.5 or more
-        const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0); // Remaining empty stars
-
-        return (
-            <span className="average-rating-stars">
-                {/* Full Stars */}
-                {Array.from({ length: fullStars }, (_, index) => (
-                    <FaStar key={"full-" + index} color={"#A6212B"} />
-                ))}
-
-                {/* Half Star */}
-                {hasHalfStar && <FaStarHalfAlt color={"#A6212B"} />}
-
-                {/* Empty Stars */}
-                {Array.from({ length: emptyStars }, (_, index) => (
-                    <FaStar key={"empty-" + index} color={"#e4e5e9"} />
-                ))}
-            </span>
-        );
     };
 
     const openModal = () => setIsModalOpen(true);
@@ -255,9 +231,18 @@ export default function ProductDetails() {
                             ratingSummary={ratingSummary}
                             renderAverageRatingStars={renderAverageRatingStars}
                         />
-                        <Button className="button" onClick={openModal}>
-                            Write a review
-                        </Button>
+                        {user ? (
+                            <Button className="button" onClick={openModal}>
+                                Write a review
+                            </Button>
+                        ) : (
+                            <p>
+                                <Link to={"/login"}>
+                                    <Button className="button">Login</Button>{" "}
+                                </Link>{" "}
+                                to write a review
+                            </p>
+                        )}
                         <ProductRatings ratings={product_ratings} />
                     </>
                 )}

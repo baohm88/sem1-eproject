@@ -2,15 +2,15 @@ import axios from "axios";
 import { useEffect, useState, useMemo } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
-import { formatter } from "../../util/formatter";
-import Modal from "./Modal";
+import { formatter } from "../../../util/formatter";
+import Modal from "../Modal";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import classes from "./SkincareProducts.module.css";
-import ProductItem from "./ProductItem";
-import Pagination from "../UI/Pagination";
+import ProductItem from "../ProductItem";
+import Pagination from "../../UI/Pagination";
 
-export default function MakeupProducts() {
+export default function SkincareProducts() {
     const [products, setProducts] = useState([]);
     const [selectedProduct, setSelectedProduct] = useState(null); // Modal state
     const [sortOption, setSortOption] = useState("");
@@ -24,10 +24,10 @@ export default function MakeupProducts() {
 
     const productsPerPage = 4;
 
-    // Fetch makeup products from the database
+    // Fetch skincare products from the database
     useEffect(() => {
         axios
-            .get("http://localhost/project/collections/makeup")
+            .get("http://localhost/project/collections/skincare")
             .then((res) => setProducts(res.data.data));
     }, []);
 
@@ -105,12 +105,12 @@ export default function MakeupProducts() {
     }, [filteredProducts, currentPage]);
 
     // Update category in the URL
-    const updateCategoryInURL = (category) => {
+    function updateCategoryInURL(category) {
         navigate({
-            pathname: "/makeup",
+            pathname: "/skincare",
             search: `?category=${category}`,
         });
-    };
+    }
 
     // Handle price range change
     const handlePriceRangeChange = (newRange) => {
@@ -121,51 +121,30 @@ export default function MakeupProducts() {
     return (
         <>
             <div className={classes.center}>
-                <h1>MAKEUP</h1>
+                <h1>SKINCARE</h1>
                 <p>
-                    At Clarins, we believe that nature reveals our true beauty.
-                    Shop our expert selection of beauty bestsellers for face,
-                    eyes, and lips, powered by plants.
+                    From daily rituals to targeted anti-aging care, discover the
+                    best in plant-based skincare, powered by nature's most
+                    effective ingredients.
                 </p>
             </div>
 
             {/* Category Tabs */}
-            <div className={classes["tabs-container"]}>
-                <button
-                    className={
-                        queryParams.category === "Face" ? classes.active : ""
-                    }
-                    onClick={() => updateCategoryInURL("Face")}
-                >
+            <div className={classes.tabsContainer}>
+                <button onClick={() => updateCategoryInURL("Face")}>
                     Face
                 </button>
-                <button
-                    className={
-                        queryParams.category === "Eyes" ? classes.active : ""
-                    }
-                    onClick={() => updateCategoryInURL("Eyes")}
-                >
-                    Eyes
+                <button onClick={() => updateCategoryInURL("Body")}>
+                    Body
                 </button>
-                <button
-                    className={
-                        queryParams.category === "Lips" ? classes.active : ""
-                    }
-                    onClick={() => updateCategoryInURL("Lips")}
-                >
-                    Lips
-                </button>
-                <button
-                    className={!queryParams.category ? classes.active : ""}
-                    onClick={() => navigate("/makeup")}
-                >
-                    View All
-                </button>
+                <button onClick={() => updateCategoryInURL("Sun")}>Sun</button>
+                <button onClick={() => updateCategoryInURL("Men")}>Men</button>
+                <button onClick={() => navigate("/skincare")}>View All</button>
             </div>
 
             {/* Sorting and Filtering */}
             <div className={classes.filters}>
-                <div className={classes["sort-options"]}>
+                <div className={classes.sortOptions}>
                     <label htmlFor="sort">
                         <strong>Sort by: </strong>
                     </label>
@@ -188,7 +167,7 @@ export default function MakeupProducts() {
                 <div>
                     <h4
                         onClick={() => setSliderIsVisible((prev) => !prev)}
-                        className={classes["filter-options"]}
+                        className={classes.filterOptions}
                     >
                         Price{" "}
                         {sliderIsVisible ? <FaCaretUp /> : <FaCaretDown />}
@@ -221,12 +200,12 @@ export default function MakeupProducts() {
             </div>
 
             {/* Total Products Count */}
-            <div className={classes["total-products"]}>
+            <div className={classes.totalProducts}>
                 <h5>{filteredProducts.length} products</h5>
             </div>
 
             {/* Product Grid */}
-            <div className={classes["products-container"]}>
+            <div className={classes.productsContainer}>
                 {currentProducts.map((product) => (
                     <ProductItem
                         key={product.product_id}

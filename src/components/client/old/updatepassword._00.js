@@ -1,12 +1,12 @@
 import React, { useContext, useState } from "react";
-import { UserContext } from "../../App";
-import { isEmpty, isEqualsToOtherValue } from "../../util/validation";
+import { UserContext } from "../../../App";
+import { isEmpty, isEqualsToOtherValue } from "../../../util/validation";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 
 import classes from "../UserForm.module.css";
-import Input from "../UI/Input";
-import Button from "../UI/Button";
+import Input from "../../UI/Input";
+import Button from "../../UI/Button";
 export default function UpdatePassword() {
     const { user } = useContext(UserContext);
     const [oldPasswordError, setOldPasswordError] = useState();

@@ -9,6 +9,7 @@
     --darkColor: black;
     --lightColor: white;
     --dangerColor: red;
+    --successColor: green;
 }
 
 header {
@@ -44,7 +45,6 @@ a:hover {
     padding: 3px;
 }
 
-/* SIDEBAR STARTS */
 #mySideBar {
     display: flex;
     flex-direction: column;
@@ -60,18 +60,16 @@ a:hover {
     font-size: larger;
 }
 
-/* ERROR-MESSAGE STARTS */
 .error-message {
     color: var(--dangerColor);
     text-align: center;
     font-weight: bold;
     margin: 1rem;
 }
-/* ERROR-MESSAGE ENDS */
 
 .nav-link a {
     text-decoration: none;
-    color: #4a4a4a; /* Dark gray color */
+    color: #4a4a4a;
     padding: 5px 10px;
     font-weight: bold;
     white-space: nowrap;
@@ -87,32 +85,18 @@ a:hover {
     color: #b51828;
 }
 
-/* products-container */
-
 .products-container {
-    display: flex; /* Sử dụng grid layout để xếp các sản phẩm theo lưới */
+    display: flex;
     justify-content: center;
     gap: 20px;
     padding: 0 10px;
-    align-items: center; /* Đảm bảo các thẻ sản phẩm được căn giữa theo chiều ngang */
+    align-items: center;
     max-width: 1264px;
     width: 100%;
     margin: 2rem auto;
     flex-wrap: wrap;
 }
 
-/* MOBILE */
-@media screen and (max-width: 1023px) {
-    main {
-        width: 100vw;
-    }
-
-    #cart {
-        flex-direction: column;
-    }
-}
-
-/* Rating summary */
 .rating-summary {
     padding: 20px;
     border: 1px solid #ddd;
@@ -126,7 +110,6 @@ a:hover {
     margin-bottom: 20px;
 }
 
-/* Parent Flex Container */
 .row-flex-between {
     display: flex;
     justify-content: space-between;
@@ -135,21 +118,18 @@ a:hover {
     flex-wrap: wrap;
 }
 
-/* Child Flex Items */
 .average-rating-stars-container,
 .star-rows-container {
-    flex: 1; /* Both take equal space */
+    flex: 1;
     min-width: 250px;
 }
 
-/* Flexbox Alignment for Star Rows */
 .star-rows-container {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-/* Star Row Styling */
 .star-row {
     display: flex;
     justify-content: space-between;
@@ -181,42 +161,6 @@ a:hover {
     font-size: 14px;
 }
 
-/* Mobile Responsive Adjustments */
-@media (max-width: 768px) {
-    .row-flex-between {
-        flex-direction: column; /* Stack elements on small screens */
-    }
-
-    .average-rating-stars-container,
-    .star-rows-container {
-        width: 100%; /* Full width on small screens */
-    }
-}
-
-@media (max-width: 480px) {
-    .center {
-        font-size: 18px; /* Smaller font for small screens */
-    }
-
-    .average-rating-stars-container {
-        font-size: 14px;
-        gap: 3px;
-    }
-
-    .star-row {
-        gap: 5px;
-    }
-
-    .star-label {
-        font-size: 12px;
-    }
-
-    .star-percentage {
-        font-size: 12px;
-    }
-}
-
-/* userorders */
 .orders-container {
     max-width: 1200px;
     width: 100%;
@@ -232,6 +176,24 @@ a:hover {
     font-size: 2rem;
     margin-bottom: 1.5rem;
     color: #a6212b;
+}
+
+.completed {
+    background-color: var(--successColor);
+}
+.pending {
+    background-color: rgb(255, 101, 5);
+}
+.cancelled {
+    background-color: var(--dangerColor);
+}
+
+.completed,
+.cancelled,
+.pending {
+    color: var(--lightColor);
+    padding: 0.2rem 0.5rem;
+    border-radius: 5px;
 }
 
 table {
@@ -254,7 +216,6 @@ td {
 }
 
 th {
-    /* font-size: 1.2rem; */
     text-transform: uppercase;
 }
 
@@ -290,8 +251,47 @@ td span.danger {
     color: #a6212b;
 }
 
-/* Responsive Styles */
+.ratings-container {
+    margin: 1rem auto;
+}
+
+.rating-card {
+    padding: 1rem 0;
+    border-bottom: 1px solid rgb(195, 192, 192);
+    display: flex;
+    gap: 2rem;
+}
+
+.rating-card img {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+}
+
+.rating-comment {
+    padding-top: 1rem;
+}
+
+@media screen and (max-width: 1023px) {
+    main {
+        width: 100vw;
+    }
+
+    #cart {
+        flex-direction: column;
+    }
+}
+
 @media (max-width: 768px) {
+    .row-flex-between {
+        flex-direction: column;
+    }
+
+    .average-rating-stars-container,
+    .star-rows-container {
+        width: 100%;
+    }
+
     table,
     thead,
     tbody,
@@ -328,5 +328,28 @@ td span.danger {
 
     .orders-container h1 {
         font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .center {
+        font-size: 18px;
+    }
+
+    .average-rating-stars-container {
+        font-size: 14px;
+        gap: 3px;
+    }
+
+    .star-row {
+        gap: 5px;
+    }
+
+    .star-label {
+        font-size: 12px;
+    }
+
+    .star-percentage {
+        font-size: 12px;
     }
 }

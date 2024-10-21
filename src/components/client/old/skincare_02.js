@@ -5,8 +5,8 @@ import { FaCaretDown, FaCaretUp } from "react-icons/fa";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import classes from "./SkincareProducts.module.css";
-import ProductsContainer from "./ProductsContainer";
-import useFilterAndSortProducts from "../../hooks/useFilterAndSortProducts";
+import ProductsContainer from "../ProductsContainer";
+import useFilterAndSortProducts from "../../../hooks/useFilterAndSortProducts";
 
 export default function SkincareProducts() {
     const [products, setProducts] = useState([]);

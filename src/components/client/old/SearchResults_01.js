@@ -2,15 +2,15 @@ import axios from "axios";
 import { useEffect, useState, useMemo } from "react";
 import { useLocation } from "react-router-dom";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
-import { formatter } from "../../util/formatter";
-import Modal from "./Modal";
+import { formatter } from "../../../util/formatter";
+import Modal from "../Modal";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import classes from "./SkincareProducts.module.css";
-import ProductItem from "./ProductItem";
-import Pagination from "../UI/Pagination";
+import ProductsContainer from "../ProductsContainer"; // Import ProductsContainer
+import Pagination from "../../UI/Pagination";
 
-export default function SkincareProducts() {
+export default function SearchResults() {
     const [products, setProducts] = useState([]);
     const [selectedProduct, setSelectedProduct] = useState(null); // Modal state
     const [sortOption, setSortOption] = useState("");
@@ -23,7 +23,7 @@ export default function SkincareProducts() {
 
     const productsPerPage = 4;
 
-    // Fetch skincare products from the database
+    // Fetch all products from the database
     useEffect(() => {
         axios
             .get("http://localhost/project/collections/all")
@@ -166,7 +166,7 @@ export default function SkincareProducts() {
                         <Slider
                             range
                             min={0}
-                            max={200}
+                            max={200} // Update based on actual max price
                             value={priceRange}
                             onChange={handlePriceRangeChange}
                             step={5}
@@ -176,7 +176,7 @@ export default function SkincareProducts() {
                         <p className={classes.selectedRange}>
                             <span
                                 onClick={() => {
-                                    setPriceRange([0, 200]);
+                                    setPriceRange([0, 200]); // Reset to default
                                     setSelectedRange(false);
                                 }}
                             >
@@ -194,16 +194,11 @@ export default function SkincareProducts() {
                 <h5>{filteredProducts.length} products</h5>
             </div>
 
-            {/* Product Grid */}
-            <div className={classes["products-container"]}>
-                {currentProducts.map((product) => (
-                    <ProductItem
-                        key={product.product_id}
-                        product={product}
-                        openModal={() => setSelectedProduct(product)}
-                    />
-                ))}
-            </div>
+            {/* Products Container with Pagination */}
+            <ProductsContainer
+                products={currentProducts} // Pass current products to ProductsContainer
+                openModal={setSelectedProduct} // Pass function to open modal
+            />
 
             {/* Pagination */}
             {filteredProducts.length > 0 && (

@@ -1,7 +1,7 @@
 import React from "react";
 import classes from "./ProductTabs.module.css";
 import ProductTab from "./ProductTab";
-import ProductList from "./ProductList";
+import ProductsContainer from "../ProductsContainer";
 
 const ProductTabs = ({
     activeTab,
@@ -9,7 +9,6 @@ const ProductTabs = ({
     forYouProducts,
     newProducts,
     giftProducts,
-    openModal,
 }) => {
     return (
         <div className={classes["beauty-must-haves"]}>
@@ -18,13 +17,13 @@ const ProductTabs = ({
             <ProductTab activeTab={activeTab} handleTabClick={handleTabClick} />
 
             {activeTab === "just-for-you" && (
-                <ProductList products={forYouProducts} openModal={openModal} />
+                <ProductsContainer products={forYouProducts} />
             )}
             {activeTab === "whats-new" && (
-                <ProductList products={newProducts} openModal={openModal} />
+                <ProductsContainer products={newProducts} />
             )}
             {activeTab === "online-exclusives" && (
-                <ProductList products={giftProducts} openModal={openModal} />
+                <ProductsContainer products={giftProducts} />
             )}
         </div>
     );

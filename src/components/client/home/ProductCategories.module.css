@@ -5,12 +5,12 @@
 
 .product-categories {
     display: flex;
-    justify-content: space-between; /* Phân bố đều các phần tử */
-    gap: 20px; /* Khoảng cách giữa các phần tử */
+    justify-content: space-between;
+    gap: 20px;
     padding: 20px;
-    max-width: 1200px; /* Đặt chiều rộng tối đa cho container */
-    margin: 0 auto; /* Căn giữa container */
-    flex-wrap: wrap; /* Cho phép các phần tử xuống dòng khi không đủ không gian */
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-wrap: wrap;
     margin-top: 100px;
 }
 
@@ -28,11 +28,11 @@
 .category2,
 .category3,
 .category4 {
-    flex: 1; /* Các phần tử sẽ giãn đều ra không gian */
+    flex: 1;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Căn giữa nội dung theo trục ngang */
-    max-width: 300px; /* Đặt chiều rộng tối đa cho mỗi phần tử */
+    align-items: center;
+    max-width: 300px;
     padding: 10px;
     border-radius: 5px;
 }
@@ -40,25 +40,19 @@
 .category1:hover,
 .category2:hover {
     background-color: #ffffff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Hiệu ứng đổ bóng khi di chuột qua sản phẩm */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .category-image {
     align-items: center;
-    width: 90%; /* Hình ảnh chiếm toàn bộ chiều rộng của phần tử */
-    height: auto; /* Giữ nguyên tỷ lệ hình ảnh */
-    max-width: 300px; /* Đặt chiều rộng tối đa của hình ảnh */
-    padding: 10px; /* Thêm khoảng cách bên trong */
-    border-radius: 10px; /* Bo tròn các góc viền */
-    max-height: 100%; /* Make sure the image doesn’t exceed the container’s height */
-    object-fit: contain; /* This ensures the image retains its aspect ratio */
+    width: 90%;
+    height: auto;
+    max-width: 300px;
+    padding: 10px;
+    border-radius: 10px;
+    max-height: 100%;
+    object-fit: contain;
 }
-
-/* h3 {
-    font-size: 18px;
-    margin-top: 15px;
-    font-weight: bold;
-} */
 
 .shop-now {
     text-transform: uppercase;
@@ -70,8 +64,8 @@
 
 @media (max-width: 1026px) {
     .product-categories {
-        flex-wrap: wrap; /* Cho phép xuống dòng */
-        justify-content: space-between; /* Phân bố đều khoảng cách giữa các phần tử */
+        flex-wrap: wrap;
+        justify-content: space-between;
     }
 
     .category1,
@@ -79,55 +73,47 @@
     .category3,
     .category4 {
         transform: none;
-        flex-basis: calc(
-            50% - 10px
-        ); /* Mỗi phần tử chiếm 50% chiều rộng trừ đi khoảng cách */
-        max-width: none; /* Xóa bỏ giới hạn chiều rộng */
+        flex-basis: calc(50% - 10px);
+        max-width: none;
     }
 
     .category {
-        flex-basis: calc(
-            50% - 10px
-        ); /* Mỗi phần tử chiếm 50% chiều rộng trừ đi khoảng cách */
-        max-width: none; /* Xóa bỏ giới hạn chiều rộng */
+        flex-basis: calc(50% - 10px);
+        max-width: none;
     }
 
     .category-image {
-        max-width: 100%; /* Hình ảnh sẽ chiếm toàn bộ chiều rộng trong phần tử */
+        max-width: 100%;
     }
 }
 
 @media (max-width: 768px) {
     .product-categories {
-        flex-wrap: wrap; /* Cho phép xuống dòng */
-        justify-content: space-between; /* Phân bố đều khoảng cách giữa các phần tử */
+        flex-wrap: wrap;
+        justify-content: space-between;
     }
-    
+
     .category1,
     .category2,
     .category3,
     .category4 {
         transform: none;
-        flex-basis: calc(
-            50% - 10px
-        ); /* Mỗi phần tử chiếm 50% chiều rộng trừ đi khoảng cách */
-        max-width: none; /* Xóa bỏ giới hạn chiều rộng */
+        flex-basis: calc(50% - 10px);
+        max-width: none;
     }
 
     .category {
-        flex-basis: calc(
-            50% - 10px
-        ); /* Mỗi phần tử chiếm 50% chiều rộng trừ đi khoảng cách */
-        max-width: none; /* Xóa bỏ giới hạn chiều rộng */
+        flex-basis: calc(50% - 10px);
+        max-width: none;
     }
 
     .category-image {
-        max-width: 100%; /* Hình ảnh sẽ chiếm toàn bộ chiều rộng trong phần tử */
+        max-width: 100%;
     }
 }
 
 @media (max-width: 480px) {
     .category {
-        flex-basis: 100%; /* Trên màn hình rất nhỏ, phần tử sẽ chiếm 100% chiều rộng */
+        flex-basis: 100%;
     }
 }
