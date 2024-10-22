@@ -49,8 +49,10 @@ function App() {
     }, []);
 
     function handleLogOut() {
-        setUser(null);
-        navigate("/");
+        if (window.confirm("Are you sure you want to log out?")) {
+            setUser(null);
+            navigate("/");
+        }
     }
 
     // Function to add a product to the cart

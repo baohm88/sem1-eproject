@@ -99,22 +99,38 @@ export default function Footer() {
                     <h4>SERVICES</h4>
                     <ul>
                         <li>
-                            <a href="https://www.clarinsusa.com/en/live-consultation/">
+                            <a
+                                href="https://www.clarinsusa.com/en/live-consultation/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
                                 Live Consultation
                             </a>
                         </li>
                         <li>
-                            <a href="https://www.clarinsusa.com/en/rewards/">
+                            <a
+                                href="https://www.clarinsusa.com/en/rewards/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
                                 Club Clarins Loyalty Program
                             </a>
                         </li>
                         <li>
-                            <a href="https://www.clarinsusa.com/en/subscription-service/">
+                            <a
+                                href="https://www.clarinsusa.com/en/subscription-service/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
                                 Subscription Service
                             </a>
                         </li>
                         <li>
-                            <a href="https://www.clarinsusa.com/en/faq-help/?question=e-gift-certificates">
+                            <a
+                                href="https://www.clarinsusa.com/en/faq-help/?question=e-gift-certificates"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
                                 Clarins Gift Cards
                             </a>
                         </li>
@@ -133,22 +149,38 @@ export default function Footer() {
                     <h4>ABOUT CLARINS</h4>
                     <ul>
                         <li>
-                            <a href="https://www.groupeclarins.com/">
+                            <a
+                                href="https://www.groupeclarins.com/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
                                 About Clarins Group
                             </a>
                         </li>
                         <li>
-                            <a href="https://www.clarinsusa.com/en/explore-clarins-story/Responsible-beauty-innovation.html">
+                            <a
+                                href="https://www.clarinsusa.com/en/explore-clarins-story/Responsible-beauty-innovation.html"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
                                 Our Story/Commitment
                             </a>
                         </li>
                         <li>
-                            <a href="https://workforcenow.adp.com/mascsr/default/mdf/recruitment/recruitment.html?cid=ead7c146-d98d-4ef9-8cc4-cb33c711ace8&ccId=19000101_000001&type=MP&lang=en_US">
+                            <a
+                                href="https://workforcenow.adp.com/mascsr/default/mdf/recruitment/recruitment.html?cid=ead7c146-d98d-4ef9-8cc4-cb33c711ace8&ccId=19000101_000001&type=MP&lang=en_US"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
                                 Careers
                             </a>
                         </li>
                         <li>
-                            <a href="http://www.opmpros.com/host/clarins/affiliate/Become_Affiliate_CLARINSUS.html">
+                            <a
+                                href="http://www.opmpros.com/host/clarins/affiliate/Become_Affiliate_CLARINSUS.html"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
                                 Affiliate Program
                             </a>
                         </li>
@@ -158,18 +190,34 @@ export default function Footer() {
                 <div className={classes["footer-social"]}>
                     <h4>FOLLOW US</h4>
                     <div className={classes["social-icons"]}>
-                        <a href="https://www.facebook.com">
+                        <a
+                            href="https://www.facebook.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
                             <FaFacebookSquare size="30px" />
                         </a>
-                        <a href="https://www.youtube.com">
+                        <a
+                            href="https://www.youtube.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
                             <FaYoutubeSquare size="30px" />{" "}
                             {/* Sử dụng icon YouTube */}
                         </a>
-                        <a href="https://www.instagram.com">
+                        <a
+                            href="https://www.instagram.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
                             <FaInstagramSquare size="30px" />{" "}
                             {/* Sử dụng icon YouTube */}
                         </a>
-                        <a href="https://www.x.com">
+                        <a
+                            href="https://www.x.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
                             <FaTwitterSquare size="30px" />{" "}
                             {/* Sử dụng icon YouTube */}
                         </a>
@@ -186,30 +234,50 @@ export default function Footer() {
             <div className={classes["footer-legal"]}>
                 <ul>
                     <li>
-                        <a>Copyright © Clarins</a>
+                        Copyright © Clarins
                     </li>
                     <li>
-                        <a href="https://www.clarinsusa.com/en/terms.html">
+                        <a
+                            href="https://www.clarinsusa.com/en/terms.html"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
                             Terms & Conditions
                         </a>
                     </li>
                     <li>
-                        <a href="https://www.clarinsusa.com/en/privacy-policy.html">
+                        <a
+                            href="https://www.clarinsusa.com/en/privacy-policy.html"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
                             Privacy Policy
                         </a>
                     </li>
                     <li>
-                        <a href="https://www.clarinsusa.com/en/accessibility-statement.html">
+                        <a
+                            href="https://www.clarinsusa.com/en/accessibility-statement.html"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
                             Accessibility Statement
                         </a>
                     </li>
                     <li>
-                        <a href="https://www.cigna.com/legal/compliance/machine-readable-files">
+                        <a
+                            href="https://www.cigna.com/legal/compliance/machine-readable-files"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
                             Information on Transparency
                         </a>
                     </li>
                     <li>
-                        <a href="https://www.clarinsusa.com/en/sitemap.html">
+                        <a
+                            href="https://www.clarinsusa.com/en/sitemap.html"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
                             Site Map
                         </a>
                     </li>

@@ -9,36 +9,46 @@ const skincareSubCategories = ["Face", "Body", "Sun", "Men"];
 const ProfilePage = () => {
     const { user, handleLogOut } = useContext(UserContext);
     const navigate = useNavigate();
-    user.full_name = `${user.first_name} ${user.last_name}`; // Use template literals
+    const full_name = `${user.first_name} ${user.last_name}`; // Use template literals
+    const randomSubCategory =
+        skincareSubCategories[
+            Math.floor(Math.random() * skincareSubCategories.length)
+        ];
 
     // Redirect to login page if no user is logged in
     useEffect(() => {
         if (!user) {
             navigate("/login"); // Navigate to login if user is not set
         }
-        document.title = `${user.full_name}'s Profile`; // Update page title
-    }, [user, navigate]);
+        document.title = `${full_name}'s Profile`; // Update page title
+    }, [user, navigate, full_name]);
 
     // Show a loading message if user is not yet available
     if (!user) {
         return <p className={classes.loading}>Loading user data...</p>;
     }
 
-    console.log("User data: ", user);
-
     return (
         <div className={classes["profile-page"]}>
             <div className={classes["sidebar"]}>
                 <div className={classes["profile-card"]}>
                     <h3>Hi {user.first_name}</h3>
-                    <a href="https://www.clarinsusa.com/en/address-list">
+                    <a
+                        href="https://www.clarinsusa.com/en/address-list"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
                         PROFILE & PREFERENCES
                     </a>
                     <div className={classes["tier-card"]}>
                         <span>Tier: Like</span>
                         <h2>50</h2>
                         <p>points available</p>
-                        <a href="https://www.clarinsusa.com/en/earn-points">
+                        <a
+                            href="https://www.clarinsusa.com/en/earn-points"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
                             HOW TO EARN POINTS
                         </a>
                     </div>
@@ -51,7 +61,11 @@ const ProfilePage = () => {
                             <Link to={"/user/orders"}>Order history</Link>
                         </li>
                         <li>
-                            <a href="https://www.clarinsusa.com/en/manage-subscription">
+                            <a
+                                href="https://www.clarinsusa.com/en/manage-subscription"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
                                 Subscription
                             </a>
                         </li>
@@ -59,7 +73,11 @@ const ProfilePage = () => {
                     <h4>OFFERS</h4>
                     <ul>
                         <li>
-                            <a href="https://www.clarinsusa.com/on/demandware.store/Sites-clarinsus-Site/en_US/Account-ShowPersonalizedOffers">
+                            <a
+                                href="https://www.clarinsusa.com/on/demandware.store/Sites-clarinsus-Site/en_US/Account-ShowPersonalizedOffers"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
                                 My offers
                             </a>
                         </li>
@@ -68,12 +86,20 @@ const ProfilePage = () => {
                     <h4>SERVICES</h4>
                     <ul>
                         <li>
-                            <a href="https://www.clarinsusa.com/on/demandware.store/Sites-clarinsus-Site/en_US/Account-ShowServicesPage">
+                            <a
+                                href="https://www.clarinsusa.com/on/demandware.store/Sites-clarinsus-Site/en_US/Account-ShowServicesPage"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
                                 Clarins services
                             </a>
                         </li>
                         <li>
-                            <a href="https://www.clarinsusa.com/on/demandware.store/Sites-clarinsus-Site/en_US/GiftCertificate-AccountCheckBalance">
+                            <a
+                                href="https://www.clarinsusa.com/on/demandware.store/Sites-clarinsus-Site/en_US/GiftCertificate-AccountCheckBalance"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
                                 Check gift card balance
                             </a>
                         </li>
@@ -95,31 +121,33 @@ const ProfilePage = () => {
                         <h3>Personal information & preferences</h3>
                         <div className={classes["info-card"]}>
                             <p>
-                                <strong>Name:</strong>{" "}
-                                <span>{user.full_name}</span>
+                                <strong>Name: &nbsp;</strong>{" "}
+                                <span>{full_name}</span>
                             </p>
                             <p>
-                                <strong>Email:</strong>{" "}
-                                <span>{user.email}</span>
+                                <strong>Email: &nbsp;</strong>{" "}
+                                <span>{user.email ?? "Not Provided"}</span>
                             </p>
                             <p>
-                                <strong>Birthday:</strong>
-                                <span>{user.dob}</span>
+                                <strong>Birthday: &nbsp;</strong>{" "}
+                                <span>{user.dob ?? "Not Provided"}</span>
                             </p>
                             <p>
-                                <strong>Phone:</strong> -{" "}
-                                <span>{user.phone}</span>
+                                <strong>Phone: &nbsp;</strong>{" "}
+                                <span>{user.phone ?? "Not Provided"}</span>
                             </p>
                             <p>
-                                <strong>Password:</strong>{" "}
+                                <strong>Password:&nbsp;</strong>{" "}
                                 <span>************</span>
                             </p>
                             <p>
-                                <strong>Communication preferences:</strong>{" "}
+                                <strong>
+                                    Communication preferences:&nbsp;
+                                </strong>
                                 <span>Email</span>
                             </p>
                             <p>
-                                <strong>Loyalty Status:</strong>
+                                <strong>Loyalty Status:&nbsp;</strong>
                                 <span> Member</span>
                             </p>
                             <Link
@@ -148,7 +176,11 @@ const ProfilePage = () => {
                                     <button
                                         className={classes["discover-button"]}
                                     >
-                                        <a href="https://www.clarinsusa.com/en/live-consultation/">
+                                        <a
+                                            href="https://www.clarinsusa.com/en/live-consultation/"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
                                             Discover
                                         </a>
                                     </button>
@@ -170,7 +202,11 @@ const ProfilePage = () => {
                                     <button
                                         className={classes["discover-button"]}
                                     >
-                                        <a href="https://www.clarinsusa.com/en/autoreplenishment-service.html">
+                                        <a
+                                            href="https://www.clarinsusa.com/en/autoreplenishment-service.html"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
                                             Discover
                                         </a>
                                     </button>
@@ -183,13 +219,7 @@ const ProfilePage = () => {
                 <RelatedProducts
                     productId={1}
                     mainCategory="Skincare"
-                    subCategory={
-                        skincareSubCategories[
-                            Math.floor(
-                                Math.random() * skincareSubCategories.length
-                            )
-                        ]
-                    }
+                    subCategory={randomSubCategory}
                 />
             </div>
         </div>
