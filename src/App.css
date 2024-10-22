@@ -25,6 +25,8 @@ header {
 main {
     padding-top: 140px;
     padding-bottom: 3rem;
+    max-width: 1264px;
+    margin: 0 auto;
 }
 
 .orders-container,
@@ -325,7 +327,7 @@ td span.danger {
 
 @media screen and (max-width: 1023px) {
     main {
-        width: 100vw;
+        width: 100%;
     }
 
     #cart {

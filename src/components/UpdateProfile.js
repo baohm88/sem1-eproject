@@ -2,13 +2,12 @@ import { useContext, useEffect, useState } from "react";
 import Input from "./UI/Input";
 import { hasMinLength, isEmail, isEmpty } from "../util/validation.js";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { UserContext } from "../App.js";
-import CryptoJS from "crypto-js";
-import { upload } from "@testing-library/user-event/dist/upload.js";
 import classes from "./UserForm.module.css";
 import Button from "./UI/Button.js";
-export default function Register() {
+
+export default function UpdateProfile() {
     const [firstNameError, setFirstNameError] = useState();
     const [lastNameError, setLastNameError] = useState();
     const [emailError, setEmailError] = useState();
@@ -20,7 +19,7 @@ export default function Register() {
     const [serverError, setServerError] = useState();
     const [imageFile, setImageFile] = useState(null);
     const [imageURL, setImageURL] = useState("");
-    const [publicId, setPublicId] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
 
     const { user, setUser } = useContext(UserContext);
     const navigate = useNavigate();
@@ -28,9 +27,6 @@ export default function Register() {
     //useEffect to set imageURL
     useEffect(() => {
         setImageURL(user.user_image);
-        const image_publicId = user.user_image.split("/").pop().split(".")[0];
-        console.log(image_publicId);
-        setPublicId(image_publicId);
     }, [user]);
 
     function handleImageChange(event) {
@@ -40,13 +36,19 @@ export default function Register() {
             return;
         }
 
-        const fileReader = new FileReader();
+        if (!file.type.startsWith("image/")) {
+            setImageError("Please select a valid image file.");
+            return;
+        }
 
+        // For image preview, use FileReader to convert the image into base64
+        const fileReader = new FileReader();
         fileReader.onload = () => {
-            setImageFile(fileReader.result);
+            setImageFile(fileReader.result); 
+            setImageURL(fileReader.result); 
         };
 
-        fileReader.readAsDataURL(file);
+        fileReader.readAsDataURL(file); // Convert to base64 for preview
     }
 
     const handleUploadImage = async () => {
@@ -66,9 +68,7 @@ export default function Register() {
             );
 
             const imageUrl = response.data.secure_url;
-            console.log("Image Uploaded:", response.data.secure_url);
             setImageURL(imageUrl);
-            setPublicId(response.data.public_id);
             return imageUrl; // Return the image URL for use in handleSubmit
         } catch (error) {
             console.error("Error uploading the image:", error);
@@ -77,6 +77,7 @@ export default function Register() {
 
     async function handleSubmit(e) {
         e.preventDefault();
+        setIsLoading(true);
 
         const fd = new FormData(e.target);
         const userData = Object.fromEntries(fd.entries());
@@ -85,69 +86,68 @@ export default function Register() {
         if (isEmpty(userData.first_name)) {
             setFirstNameError("First name is required");
             document.getElementById("firstName").focus();
+            setIsLoading(false);
             return;
         }
-        setFirstNameError(false);
-
-        if (isEmpty(userData.first_name)) {
-            setFirstNameError("First name is required");
-            document.getElementById("firstName").focus();
-            return;
-        }
-        setFirstNameError(false);
+        setFirstNameError(null);
 
         if (isEmpty(userData.last_name)) {
             setLastNameError("Last name is required");
             document.getElementById("lastName").focus();
+            setIsLoading(false);
             return;
         }
-        setLastNameError(false);
+        setLastNameError(null);
 
         if (isEmpty(userData.email) || !isEmail(userData.email)) {
             setEmailError("Please enter a valid email");
             document.getElementById("email").focus();
+            setIsLoading(false);
             return;
         }
-        setEmailError(false);
+        setEmailError(null);
 
         if (isEmpty(userData.username)) {
             setUsernameError("Last name is required");
             document.getElementById("username").focus();
+            setIsLoading(false);
             return;
         }
-        setUsernameError(false);
+        setUsernameError(null);
 
         if (isEmpty(userData.dob)) {
             setDobError("Date of birth is required");
             document.getElementById("dob").focus();
+            setIsLoading(false);
             return;
         }
-        setDobError(false);
+        setDobError(null);
 
         if (isEmpty(userData.phone) || !hasMinLength(userData.phone, 9)) {
             setPhoneError("Please enter a valid phone number");
             document.getElementById("phone").focus();
+            setIsLoading(false);
             return;
         }
-        setPhoneError(false);
+        setPhoneError(null);
 
         if (isEmpty(userData.address)) {
             setAddressError("Address is required");
             document.getElementById("address").focus();
+            setIsLoading(false);
             return;
         }
-        setAddressError(false);
-
-        if (!imageFile) {
-            setImageError("Image is required");
-            document.getElementById("image").focus();
-            return;
-        }
-        setImageError(false);
+        setAddressError(null);
 
         try {
-            const uploadedImageUrl = await handleUploadImage(); // Wait for the image to be uploaded
-            userData.user_image = uploadedImageUrl; // Set the uploaded image URL to userData
+            let uploadedImageUrl = user.user_image; // Default to the existing image URL
+
+            // Only upload the image if a new file was selected
+            if (imageFile) {
+                uploadedImageUrl = await handleUploadImage();
+            }
+
+            userData.user_image = uploadedImageUrl;
 
             const response = await axios.post(
                 "http://localhost/project/user/profile",
@@ -169,7 +169,10 @@ export default function Register() {
         } catch (error) {
             console.error("Register request failed:", error);
         }
+        setIsLoading(false);
     }
+
+    console.log(user);
 
     return (
         <>
@@ -259,7 +262,7 @@ export default function Register() {
                         defaultValue={user.address ? user.address : ""}
                     />
                     <Input
-                        label="Image*"
+                        label="Image"
                         id="image"
                         type="file"
                         accept="image/*"
@@ -269,14 +272,11 @@ export default function Register() {
                     />
                 </div>
 
-                {!imageFile && <p>No image picked yet.</p>}
-                {imageFile && (
-                    <img
-                        src={imageFile}
-                        alt={`${user.full_name}`}
-                        style={{ width: "200px" }}
-                    />
-                )}
+                <img
+                    src={imageFile ? imageFile : imageURL || user.user_image}
+                    alt={user.full_name}
+                    style={{ width: "200px" }}
+                />
 
                 <p className={classes["form-actions"]}>
                     <Button
@@ -285,7 +285,9 @@ export default function Register() {
                     >
                         Cancel
                     </Button>
-                    <Button className="button">Register</Button>
+                    <Button className="button" disabled={isLoading}>
+                        Save Changes
+                    </Button>
                 </p>
             </form>
         </>

@@ -6,8 +6,6 @@
     --dangerColor: red;
 }
 
-
-
 .top-nav {
     display: flex;
     justify-content: space-between;
@@ -28,21 +26,21 @@
     cursor: pointer;
 }
 
-/* menu icon */
 .menu-icon {
     margin: 3px;
     border-radius: 5px;
 }
+
 .menu-icon:hover {
     background-color: antiquewhite;
 }
 
-/* Search bar container */
 .search-bar {
     display: flex;
     align-items: center;
-    width: 250px; /* Adjust width as per your design */
+    width: 250px;
 }
+
 .search-bar input {
     margin: 0;
 }
@@ -56,7 +54,6 @@
     width: 100%;
 }
 
-/* Input for search */
 .searchInput {
     width: 100%;
     padding: 8px;
@@ -80,18 +77,16 @@
     color: #555;
 }
 
-/* Centering the logo */
 .logo {
-    max-width: 150px; /* Adjust logo size */
+    max-width: 150px;
     margin: 0 auto;
 }
 
-/* Bottom navigation bar */
 .bottom-nav {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 50px; 
+    gap: 50px;
     padding: 10px 0;
     width: 100%;
     font-size: 0.9rem;
@@ -124,12 +119,10 @@
     align-items: center;
 }
 
-/* BOTTOM-NAV STARTS */
 .bottom-nav {
     width: 60vw;
     margin: 0 auto;
 }
-/* BOTTOM-NAV ENDS */
 
 .sidebar-header {
     background-color: var(--primaryColor);
@@ -175,62 +168,54 @@
     color: black;
 }
 
-/* SIDEBAR ENDS */
-
-/* Container for the shopping bag icon and badge */
 .nav-icons {
-    position: relative; /* Allows positioning of the badge relative to the icon */
+    position: relative;
 }
 
-/* Badge for showing total quantity */
 .nav-icons .badge {
     position: absolute;
-    top: -1rem; /* Adjusts the vertical position of the badge */
-    right: -5px; /* Adjusts the horizontal position of the badge */
-    background-color: #a6212b; /* Red background for the badge */
-    color: white; /* White text for the number */
-    border-radius: 50%; /* Makes the badge a circle */
-    padding: 2px; /* Adds some padding for the badge */
-    font-size: 12px; /* Smaller font size for the number */
-    min-width: 1rem; /* Minimum width to ensure the badge is round */
-    height: 1rem; /* Fixed height for the badge */
+    top: -1rem;
+    right: -5px;
+    background-color: #a6212b;
+    color: white;
+    border-radius: 50%;
+    padding: 2px;
+    font-size: 12px;
+    min-width: 1rem;
+    height: 1rem;
     display: flex;
     justify-content: center;
-    align-items: center; /* Centers the number inside the badge */
-    font-weight: bold; /* Bold text for better visibility */
+    align-items: center;
+    font-weight: bold;
 }
 
 .nav-icons .badge:hover {
     background-color: #cc0020;
 }
 
-/* Smaller checkmark icon positioned on top of the person icon */
 .checkmarkIcon {
-    position: absolute; /* Absolutely position the checkmark */
-    top: -1rem; /* Adjust to position it correctly above the icon */
-    right: -5px; /* Adjust to position it correctly */
-    width: 1rem; /* Size of the checkmark */
-    height: 1rem; /* Maintain aspect ratio */
-    color: green; /* Set the color of the checkmark */
+    position: absolute;
+    top: -1rem;
+    right: -5px;
+    width: 1rem;
+    height: 1rem;
+    color: green;
 }
 
-/* Add similar styles for the red dot when not logged in if necessary */
 .redDot {
-    position: absolute; /* Absolutely position the checkmark */
-    top: -1rem; /* Adjust to position it correctly above the icon */
-    right: -5px; /* Adjust to position it correctly */
-    width: 1rem; /* Size of the checkmark */
-    height: 1rem; /* Maintain aspect ratio */
-    color: red; /* Set the color of the checkmark */
+    position: absolute;
+    top: -1rem;
+    right: -5px;
+    width: 1rem;
+    height: 1rem;
+    color: red;
 }
 
-/* Dropdown container */
 .dropdown {
     position: relative;
     display: inline-block;
 }
 
-/* Dropdown content - hidden by default */
 .dropdown-content-account {
     display: none;
     position: absolute;
@@ -244,25 +229,21 @@
     right: 0;
 }
 
-/* Links inside the dropdown */
 .dropdown-content-account a,
 .dropdown-content-account span {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
-    /* display: block; */
     display: flex;
     align-items: center;
     white-space: nowrap;
     cursor: pointer;
 }
 
-/* Show dropdown on hover */
 .dropdown:hover .dropdown-content-account {
     display: block;
 }
 
-/* Hover effect for dropdown links */
 .dropdown-content-account a:hover,
 .dropdown-content-account span:hover {
     color: #a6212b;
@@ -279,7 +260,7 @@
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
     background-color: rgb(243, 241, 240);
     z-index: 1;
-    width: 360px; /* Adjust width as needed */
+    width: 360px;
     right: 0;
     border-radius: 8px;
     padding: 1rem;
@@ -303,6 +284,7 @@
     align-items: center;
     margin-bottom: 10px;
 }
+
 .cart-item-image {
     width: 50px;
     height: 50px;
@@ -329,11 +311,7 @@
     padding: 1rem 0;
 }
 
-/* MOBILE */
 @media screen and (max-width: 1023px) {
-    main {
-        width: 100vw;
-    }
     .search-bar,
     .bottom-nav {
         display: none;
