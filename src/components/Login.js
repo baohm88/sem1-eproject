@@ -37,6 +37,7 @@ export default function Login() {
                 // Set user in the context
                 setUser(user);
                 setError(false);
+                alert("Welcome, " + user.first_name);
 
                 // Save the user object to localStorage as a JSON string
                 localStorage.setItem("user", JSON.stringify(user));
@@ -48,7 +49,6 @@ export default function Login() {
                     navigate("/");
                 }
             } else {
-                console.log(resData.message);
                 setError(resData.message);
             }
         } catch (error) {

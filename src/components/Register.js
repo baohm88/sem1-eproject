@@ -27,7 +27,6 @@ export default function Register() {
     const [imageFile, setImageFile] = useState(null);
     const [imageURL, setImageURL] = useState("");
     const [publicId, setPublicId] = useState("");
-    console.log(publicId);
 
     const navigate = useNavigate();
     document.title = "Registration";
@@ -51,9 +50,6 @@ export default function Register() {
                 formData
             );
 
-            console.log(response);
-
-            console.log("Image Uploaded:", response.data.secure_url);
             setImageURL(response.data.secure_url);
             setPublicId(response.data.public_id);
         } catch (error) {
@@ -188,7 +184,6 @@ export default function Register() {
 
         delete userData.password2;
         userData.user_image = imageURL;
-        console.log(userData);
 
         try {
             const response = await axios.post(
@@ -196,14 +191,13 @@ export default function Register() {
                 userData,
                 {
                     headers: {
-                        "Content-Type": "application/json", // Sending data as JSON
+                        "Content-Type": "application/json",
                     },
                 }
             );
 
-            console.log(response);
-
             if (response.data.type === "success") {
+                alert(response.data.message);
                 navigate("/login");
             } else {
                 console.log("Registration failed: ", response.data.message);
@@ -320,17 +314,25 @@ export default function Register() {
                 </div>
 
                 {imageFile && !imageURL ? (
-                    <button type="button" onClick={handleUpload}>
+                    <Button
+                        className="button"
+                        type="button"
+                        onClick={handleUpload}
+                    >
                         Upload Image
-                    </button>
+                    </Button>
                 ) : (
                     ""
                 )}
 
                 {imageURL && (
-                    <button type="button" onClick={handleDelete}>
+                    <Button
+                        className="warning-button"
+                        type="button"
+                        onClick={handleDelete}
+                    >
                         Delete Image
-                    </button>
+                    </Button>
                 )}
 
                 {imageURL && (

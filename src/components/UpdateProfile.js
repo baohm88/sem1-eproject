@@ -44,8 +44,8 @@ export default function UpdateProfile() {
         // For image preview, use FileReader to convert the image into base64
         const fileReader = new FileReader();
         fileReader.onload = () => {
-            setImageFile(fileReader.result); 
-            setImageURL(fileReader.result); 
+            setImageFile(fileReader.result);
+            setImageURL(fileReader.result);
         };
 
         fileReader.readAsDataURL(file); // Convert to base64 for preview
@@ -160,6 +160,7 @@ export default function UpdateProfile() {
             );
 
             if (response.data.type === "success") {
+                alert(response.data.message);
                 setUser(userData);
                 navigate("/profile");
             } else {
@@ -171,8 +172,6 @@ export default function UpdateProfile() {
         }
         setIsLoading(false);
     }
-
-    console.log(user);
 
     return (
         <>

@@ -36,7 +36,6 @@ export default function Modal({ product, onClose }) {
                 : [];
 
             const summary = calculateRatingSummary(ratingsArray);
-            console.log(summary);
             setRatingSummary(summary);
 
             setRatingSummary(summary);

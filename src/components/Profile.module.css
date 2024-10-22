@@ -1,6 +1,8 @@
 .profile-page {
     display: flex;
     padding: 20px;
+    max-width: 1264px;
+    margin: 0 auto;
 }
 
 /* Sidebar container */
@@ -196,6 +198,7 @@
     background-color: #fdf7f2;
     padding: 20px;
     font-size: 14px;
+    margin-top: 0.5rem;
 }
 
 /* Edit button */

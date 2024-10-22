@@ -3,7 +3,7 @@ import { UserContext } from "../../App";
 import { formatter } from "../../util/formatter";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import classes from "./Cart.module.css"; 
+import classes from "./Cart.module.css";
 import Button from "../UI/Button";
 
 export default function Cart() {
@@ -43,8 +43,6 @@ export default function Cart() {
                 `http://localhost/project/user/orders/user_id=${user.user_id}`,
                 orderData
             );
-
-            console.log(response.data);
 
             if (response.data.type === "success") {
                 alert("Order created successfully!");
