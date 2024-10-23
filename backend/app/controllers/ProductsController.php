@@ -28,6 +28,7 @@ class ProductsController extends BaseController
             $this->FactoryMessage("error", $e->getMessage());
         }
     }
+    
     public function rating()
     {
         // $instanceBaseModel          = $this->initModel("BaseModel", $this->__conn);

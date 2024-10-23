@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 21, 2024 at 02:09 PM
+-- Generation Time: Oct 23, 2024 at 09:54 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -48,7 +48,9 @@ INSERT INTO `orderitems` (`order_id`, `product_id`, `product_name`, `product_pri
 (261, 9, 'Joli Rouge Satin Lipstick', 37.000000000, 1),
 (262, 1, 'Hydrating Gentle Foaming Face Cleanser for Normal to Dry Skin', 31.000000000, 9),
 (262, 2, 'Dry Touch Facial Sunscreen - Broad Spectrum SPF 50+', 40.000000000, 1),
-(263, 5, 'UV Plus SPF 50 Anti Pollution Face Sunscreen', 46.000000000, 6);
+(263, 5, 'UV Plus SPF 50 Anti Pollution Face Sunscreen', 46.000000000, 6),
+(264, 1, 'Hydrating Gentle Foaming Face Cleanser for Normal to Dry Skin', 31.000000000, 1),
+(265, 2, 'Dry Touch Facial Sunscreen - Broad Spectrum SPF 50+', 40.000000000, 8);
 
 -- --------------------------------------------------------
 
@@ -73,7 +75,8 @@ INSERT INTO `orders` (`order_id`, `user_id`, `order_value`, `order_date`, `statu
 (254, 121, 461.000000000, '2024-10-12', 'completed'),
 (261, 121, 37.000000000, '2024-10-17', 'pending'),
 (262, 121, 319.000000000, '2024-10-19', 'cancelled'),
-(263, 121, 276.000000000, '2024-10-19', 'pending');
+(263, 121, 276.000000000, '2024-10-19', 'pending'),
+(265, 121, 320.000000000, '2024-10-22', 'pending');
 
 -- --------------------------------------------------------
 
@@ -357,7 +360,7 @@ CREATE TABLE `productrating` (
   `rating_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `review_date` date NOT NULL,
+  `review_date` date NOT NULL DEFAULT current_timestamp(),
   `rating` int(11) NOT NULL,
   `rating_comment` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -397,8 +400,8 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`product_id`, `product_name`, `product_description`, `benefits`, `product_price`, `stock_qty`, `main_category`, `sub_category`, `date_listed`, `is_active`, `note`) VALUES
-(1, 'Hydrating Gentle Foaming Face Cleanser for Normal to Dry Skin', 'Moisture-rich, gentle foaming cleanser for normal to dry skin types removes makeup, impurities + boosts hydration for a soft and supple complexion.', 'Gently dissolves makeup, impurities + pollutants; Soothes + softens dry skin; Reinforces skin\'s hydration', 31.000000000, 90, 'Skincare', 'Body', '1974-05-07', 1, 'new'),
-(2, 'Dry Touch Facial Sunscreen - Broad Spectrum SPF 50+', 'A lightweight, dry-touch Broad Spectrum SPF 50+ sunscreen for face that works to filter out UVA/UVB rays, while moisturizing and soothing skin.', 'Broad Spectrum SPF 50+ UVA/UVB sun care/protection; Soothes, softens, hydrates; Antioxidant-rich formula, fights free radicals; Supports skin firmness + elasticity; Dry-touch cream; Lightweight, velvety finish; No white cast or sticky residue', 40.000000000, 122, 'Skincare', 'Sun', '2024-01-12', 1, 'for-you'),
+(1, 'Hydrating Gentle Foaming Face Cleanser for Normal to Dry Skin', 'Moisture-rich, gentle foaming cleanser for normal to dry skin types removes makeup, impurities + boosts hydration for a soft and supple complexion.', 'Gently dissolves makeup, impurities + pollutants; Soothes + softens dry skin; Reinforces skin\'s hydration', 31.000000000, 89, 'Skincare', 'Body', '1974-05-07', 1, 'new'),
+(2, 'Dry Touch Facial Sunscreen - Broad Spectrum SPF 50+', 'A lightweight, dry-touch Broad Spectrum SPF 50+ sunscreen for face that works to filter out UVA/UVB rays, while moisturizing and soothing skin.', 'Broad Spectrum SPF 50+ UVA/UVB sun care/protection; Soothes, softens, hydrates; Antioxidant-rich formula, fights free radicals; Supports skin firmness + elasticity; Dry-touch cream; Lightweight, velvety finish; No white cast or sticky residue', 40.000000000, 114, 'Skincare', 'Sun', '2024-01-12', 1, 'for-you'),
 (3, 'ClarinsMen Smooth Shave Foaming Gel', 'Creamy mousse shave gel delivers a comfortable shave, while soothing and moisturizing the skin.', 'Soothes, softens, and moisturizes; Energizes the skin; Conditions beard hair; Helps prevent, razor burn, ingrown hairs, and irritation', 25.000000000, 99, 'Skincare', 'Men', '1976-08-31', 1, 'gift'),
 (4, 'Blue Orchid Face Treatment Oil', 'Hydrating face oil formulated with 100% plant extracts to help restore radiance, tone and vitality.', 'Gently dissolves makeup, impurities + pollutants; Soothes + softens dry skin; Reinforces skin\'s hydration1', 67.000000000, 90, 'Skincare', 'Face', '2009-04-21', 1, 'new'),
 (5, 'UV Plus SPF 50 Anti Pollution Face Sunscreen', 'Daily, oil-free multi-protection UV sunscreen with broad spectrum SPF 50.', 'Helps protect and lock out sunburn damaging UVA/UVB rays; Fights free radicals; Clarins’ plant-based Anti-Pollution Complex helps protect skin from indoor and outdoor pollutants', 46.000000000, 24, 'Skincare', 'Face', '2011-05-16', 1, 'for-you'),
@@ -488,8 +491,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `username`, `password`, `email`, `is_admin`, `is_active`, `first_name`, `last_name`, `dob`, `phone`, `address`, `user_image`) VALUES
-(121, 'bao', '$2y$10$ouBhbdtkf8vHYPU9X6LmxOt9VFGfo4pS0DHngrPZmC9Qs3ar0HdZa', 'baohm88@hotmail.com', 1, 1, 'Bao edited', 'Ha', '2020-01-01', '0988666281', 'Al Ruwais', 'https://res.cloudinary.com/dppk10edk/image/upload/v1729339582/kumpqiddsmty7jijzeb2.jpg'),
-(122, 'admin', '$2y$10$RjTF8VkMryp5ymIp1NJp9uMywKSnfo9RwTx.UbbqDyOE8BrhBn8UO', 'admin@gmail.com', 0, 1, 'admin', 'admin', '2020-01-01', '123456789', 'Hanoi', 'https://res.cloudinary.com/dppk10edk/image/upload/v1728749101/my_avatar_jhnlkj.avif'),
+(121, 'bao', '$2y$10$ouBhbdtkf8vHYPU9X6LmxOt9VFGfo4pS0DHngrPZmC9Qs3ar0HdZa', 'baohm88@hotmail.com', 0, 1, 'Bao', 'Ha', '2020-01-01', '0988666281', 'Al Ruwais', 'https://res.cloudinary.com/dppk10edk/image/upload/v1729588412/vzdcg8lscz9j7gpuwqlf.jpg'),
+(122, 'admin', '$2y$10$RjTF8VkMryp5ymIp1NJp9uMywKSnfo9RwTx.UbbqDyOE8BrhBn8UO', 'admin@gmail.com', 1, 1, 'admin', 'admin', '2020-01-01', '123456789', 'Hanoi', 'https://res.cloudinary.com/dppk10edk/image/upload/v1728749101/my_avatar_jhnlkj.avif'),
 (123, 'quan', '$2y$10$K7MgSzx0cCKhTOzgVXItI.RV5ICt15mu63oezCjxC7p0LGRtxdxwO', 'quan@gmail.clm', 0, 1, 'quan', 'Doan', '2024-10-01', '123456789', 'Hanoi', 'https://res.cloudinary.com/dppk10edk/image/upload/v1729339741/my_avatar_lef43t.avif');
 
 --
@@ -540,7 +543,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=264;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=266;
 
 --
 -- AUTO_INCREMENT for table `productimages`
@@ -552,7 +555,7 @@ ALTER TABLE `productimages`
 -- AUTO_INCREMENT for table `productrating`
 --
 ALTER TABLE `productrating`
-  MODIFY `rating_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=301;
+  MODIFY `rating_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=329;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -564,7 +567,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
