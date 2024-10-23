@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { UserContext } from "../../App";
+import { UserContext } from "../../context/UserProvider";
 import axios from "axios";
 import { formatter } from "../../util/formatter";
 import { FaEye } from "react-icons/fa";

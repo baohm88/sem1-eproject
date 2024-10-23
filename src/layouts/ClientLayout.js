@@ -17,7 +17,7 @@ import { TfiClose } from "react-icons/tfi";
 import { GiHeartBeats } from "react-icons/gi";
 import { BsCartCheck } from "react-icons/bs";
 import { useContext, useState, useEffect, useRef } from "react";
-import { UserContext } from "../App";
+import { UserContext } from "../context/UserProvider";
 import Button from "../components/UI/Button";
 import { formatter } from "../util/formatter";
 

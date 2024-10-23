@@ -3,7 +3,7 @@ import Input from "./UI/Input";
 import { hasMinLength, isEmail, isEmpty } from "../util/validation.js";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "../App.js";
+import { UserContext } from "../context/UserProvider.js";
 import classes from "./UserForm.module.css";
 import Button from "./UI/Button.js";
 

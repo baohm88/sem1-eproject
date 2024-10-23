@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
-import { UserContext } from "../../App";
+import { UserContext } from "../../context/UserProvider";
 import { formatter } from "../../util/formatter";
 import Button from "../UI/Button";
 import ProductRatings from "./ProductRatings";

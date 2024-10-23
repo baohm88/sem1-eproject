@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { UserContext } from "../../App";
+import { UserContext } from "../../context/UserProvider";
 import { formatter } from "../../util/formatter";
 import axios from "axios";
 import { Link } from "react-router-dom";

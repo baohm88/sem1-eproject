@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { UserContext } from "../App";
+import { UserContext } from "../context/UserProvider";
 import classes from "./UserForm.module.css";
 import Input from "./UI/Input";
 import Button from "./UI/Button";

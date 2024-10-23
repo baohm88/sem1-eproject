@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { formatter } from "../../util/formatter";
 import classes from "./Modal.module.css";
-import { UserContext } from "../../App";
+import { UserContext } from "../../context/UserProvider";
 import Button from "./Button";
 import { renderAverageRatingStars } from "../../util/renderAverageRatingStars";
 import { calculateRatingSummary } from "../../util/ratingUtils";

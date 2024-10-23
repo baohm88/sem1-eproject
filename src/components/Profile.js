@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import classes from "./Profile.module.css";
-import { UserContext } from "../App";
+import { UserContext } from "../context/UserProvider";
 import { Link, useNavigate } from "react-router-dom";
 import RelatedProducts from "./client/RelatedProducts";
 
